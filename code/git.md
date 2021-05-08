@@ -77,15 +77,12 @@ Windows
 取消本地目录下关联的远程库：```git remote remove origin```
 
 ```
-git init               
-git add .              
-git commit -m "My first commit operation"  
-# 添加远程仓库地址，保存在origin变量中
-git remote add origin git@github.com:tomding/888.git   
-# 用命令git clone克隆一个本地库：
-git clone git@github.com:git名/库名.git  
- # 按照前一条命令中origin给定的github地址推送到github仓库的master分支
-git push origin master    
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:dingtom/note.git
+git push -u origin main   
 ```
 
 
