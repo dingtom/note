@@ -1,3 +1,4 @@
+[TOC]
 # 安装 
 ## win
 >https://dev.mysql.com/downloads/mysql/
