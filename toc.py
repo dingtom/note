@@ -1,5 +1,5 @@
 import sys
-
+import os
 
 headline_dic={'#':0,'##':1,'###':2,'####':3,'#####':4,'######':5}
 suojin={0:-1,1:-1,2:-1,3:-1,4:-1,5:-1,6:-1}
@@ -61,15 +61,16 @@ def detectHeadLines(f):
             
             
     return insert_str+org_str
-
-    
+ 
     
 if __name__=='__main__':
-
-    filename = sys.argv[1]
+    dirname = sys.argv[1]
+    if not os.path.exists(os.path.join('./blog', dirname)):
+        os.makedirs(os.path.join('./blog', dirname))
+    filename = sys.argv[2]
     #print(filename)
-    f = open(filename,'r',encoding='utf-8')
+    f = open(os.path.join(dirname, filename),'r',encoding='utf-8')
     insert_str=detectHeadLines(f)
     f.close()
-    with open('{}_with_toc.md'.format(filename[:filename.find('.')]),'w',encoding='utf-8') as f:
+    with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
         f.write(insert_str)
