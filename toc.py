@@ -69,8 +69,12 @@ if __name__=='__main__':
         os.makedirs(os.path.join('./blog', dirname))
     filename = sys.argv[2]
     #print(filename)
-    f = open(os.path.join(dirname, filename),'r',encoding='utf-8')
+    f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
     insert_str=detectHeadLines(f)
     f.close()
     with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
         f.write(insert_str)
+    os.system('git status')
+    os.system('git add .')
+    os.system('git commit -m %date:~0,8%modify{}'.format(filename))
+    os.system('git push')
