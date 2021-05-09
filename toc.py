@@ -89,7 +89,7 @@ if __name__=='__main__':
     if comment == 0:
         os.system('git commit -m %date:~0,8%_%time:~0,8%__{}'.format(comment))
     else:
-        os.system('git commit -m %date:~0,8%_%time:~0,8%__modify{}'.format(filename))
+        os.system('git commit -m %date:~0,8%_%time:~0,8%__modify__{}'.format(filename))
     os.system('git push')
 
     # # 所有文章生成TOC
