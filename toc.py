@@ -68,6 +68,7 @@ if __name__=='__main__':
     if not os.path.exists(os.path.join('./blog', dirname)):
         os.makedirs(os.path.join('./blog', dirname))
     filename = sys.argv[2]
+
     #print(filename)
     f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
     insert_str=detectHeadLines(f)
@@ -76,5 +77,9 @@ if __name__=='__main__':
         f.write(insert_str)
     os.system('git status')
     os.system('git add .')
-    os.system('git commit -m %date:~0,8%modify{}'.format(filename))
+    try:
+        comment = sys.argv[3]
+        os.system(comment)
+    except:
+        os.system('git commit -m %date:~0,8%__modify{}'.format(filename))
     os.system('git push')
