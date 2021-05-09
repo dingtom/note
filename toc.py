@@ -77,13 +77,15 @@ if __name__=='__main__':
     filename = sys.argv[2]
 
     #print(filename)
-    f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
-    insert_str=detectHeadLines(f)
-    f.close()
-    with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
+    d_file = os.path.join('./draft/'+dirname, filename)
+    with open(d_file,'r',encoding='utf-8') as f:
+        insert_str=detectHeadLines(f)
+    b_file = './blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')]))
+    with open(b_file,'w',encoding='utf-8') as f:
         f.write(insert_str)
     os.system('git status')
-    os.system('git add .')
+    os.system('git add {}'.format(d_file))
+    os.system('git add {}'.format(b_file))
     
     comment = sys.argv[3]
     if comment == 0:
@@ -91,6 +93,8 @@ if __name__=='__main__':
     else:
         os.system('git commit -m %date:~0,8%_%time:~0,8%__modify__{}'.format(filename))
     os.system('git push')
+    os.system('*'*20)
+    os.system('git status')
 
     # # 所有文章生成TOC
     # f_list = []
