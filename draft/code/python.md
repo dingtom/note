@@ -223,7 +223,17 @@ def info(cls):
 
 
 # 文件操作
+**目录下所以有文件路径**
+```
+result = []
+    for root, subdir, files in os.walk('./draft'):
+        for f in files:
+            path = os.path.join(root, f)
+            result.append(path)
+```
+
 ## os.walk()
+
 ```
  for root, dirs, files in os.walk('.'):  
         print(root) #当前目录路径  

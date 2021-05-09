@@ -66,23 +66,55 @@ def detectHeadLines(f):
     
 if __name__=='__main__':
 
-    dirname = sys.argv[1]
-    if not os.path.exists(os.path.join('./blog', dirname)):
-        os.makedirs(os.path.join('./blog', dirname))
-    filename = sys.argv[2]
+    # dirname = sys.argv[1]
+    # if not os.path.exists(os.path.join('./blog', dirname)):
+    #     os.makedirs(os.path.join('./blog', dirname))
+    # filename = sys.argv[2]
 
-    #print(filename)
-    f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
-    insert_str=detectHeadLines(f)
-    f.close()
-    with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
-        f.write(insert_str)
-    os.system('git status')
-    os.system('git add .')
+    # #print(filename)
+    # f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
+    # insert_str=detectHeadLines(f)
+    # f.close()
+    # with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
+    #     f.write(insert_str)
+    # os.system('git status')
+    # os.system('git add .')
     
-    comment = sys.argv[3]
-    if comment:
-        os.system('git commit -m %date:~0,14%__{}'.format(comment))
-    else:
-        os.system('git commit -m %date:~0,14%__modify{}'.format(filename))
-    os.system('git push')
+    # comment = sys.argv[3]
+    # if comment:
+    #     os.system('git commit -m %date:~0,8%_%time:~0,8%__{}'.format(comment))
+    # else:
+    #     os.system('git commit -m %date:~0,8%_%time:~0,8%__modify{}'.format(filename))
+    # os.system('git push')
+
+    # 所有文章生成TOC
+    result = []
+    for root, subdir, files in os.walk('./draft'):
+        for f in files:
+            path = os.path.join(root, f)
+            result.append(path)
+    print(result)
+
+
+
+
+    # dirname = sys.argv[1]
+    # if not os.path.exists(os.path.join('./blog', dirname)):
+    #     os.makedirs(os.path.join('./blog', dirname))
+    # filename = sys.argv[2]
+
+    # #print(filename)
+    # f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
+    # insert_str=detectHeadLines(f)
+    # f.close()
+    # with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
+    #     f.write(insert_str)
+    # os.system('git status')
+    # os.system('git add .')
+    
+    # comment = sys.argv[3]
+    # if comment:
+    #     os.system('git commit -m %date:~0,8%_%time:~0,8%__{}'.format(comment))
+    # else:
+    #     os.system('git commit -m %date:~0,8%_%time:~0,8%__modify{}'.format(filename))
+    # os.system('git push')
