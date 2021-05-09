@@ -1,5 +1,6 @@
 import sys
 import os
+import argparse
 
 headline_dic={'#':0,'##':1,'###':2,'####':3,'#####':4,'######':5}
 suojin={0:-1,1:-1,2:-1,3:-1,4:-1,5:-1,6:-1}
@@ -64,6 +65,7 @@ def detectHeadLines(f):
  
     
 if __name__=='__main__':
+
     dirname = sys.argv[1]
     if not os.path.exists(os.path.join('./blog', dirname)):
         os.makedirs(os.path.join('./blog', dirname))
