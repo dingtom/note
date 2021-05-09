@@ -80,6 +80,8 @@ if __name__=='__main__':
     try:
         comment = sys.argv[3]
         os.system(comment)
+        print('aaaaaaaaaaaa')
     except:
-        os.system('git commit -m %date:~0,8%__modify{}'.format(filename))
+        print('222222222222222')
+        os.system('git commit -m %date:~0,14%__modify{}'.format(filename))
     os.system('git push')
