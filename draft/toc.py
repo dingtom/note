@@ -86,7 +86,7 @@ if __name__=='__main__':
     os.system('git add .')
     
     comment = sys.argv[3]
-    if comment:
+    if comment == 0:
         os.system('git commit -m %date:~0,8%_%time:~0,8%__{}'.format(comment))
     else:
         os.system('git commit -m %date:~0,8%_%time:~0,8%__modify{}'.format(filename))
