@@ -77,11 +77,10 @@ if __name__=='__main__':
         f.write(insert_str)
     os.system('git status')
     os.system('git add .')
-    try:
-        comment = sys.argv[3]
-        os.system(comment)
-        print('aaaaaaaaaaaa')
-    except:
-        print('222222222222222')
+    
+    comment = sys.argv[3]
+    if comment:
+        os.system('git commit -m %date:~0,14%__{}'.format(comment))
+    else:
         os.system('git commit -m %date:~0,14%__modify{}'.format(filename))
     os.system('git push')
