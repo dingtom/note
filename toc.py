@@ -71,16 +71,16 @@ def detectHeadLines(f):
 if __name__=='__main__':
 
     dirname = sys.argv[1]
-    if not os.path.exists(os.path.join('../blog', dirname)):
-        os.makedirs(os.path.join('../blog', dirname))
+    if not os.path.exists(os.path.join('./blog', dirname)):
+        os.makedirs(os.path.join('./blog', dirname))
         
     filename = sys.argv[2]
 
     #print(filename)
-    f = open(os.path.join('../draft/'+dirname, filename),'r',encoding='utf-8')
+    f = open(os.path.join('./draft/'+dirname, filename),'r',encoding='utf-8')
     insert_str=detectHeadLines(f)
     f.close()
-    with open(r'../blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
+    with open(r'./blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
         f.write(insert_str)
     os.system('git status')
     os.system('git add .')
