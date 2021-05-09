@@ -73,6 +73,7 @@ if __name__=='__main__':
     dirname = sys.argv[1]
     if not os.path.exists(os.path.join('../blog', dirname)):
         os.makedirs(os.path.join('../blog', dirname))
+        
     filename = sys.argv[2]
 
     #print(filename)
