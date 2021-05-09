@@ -33,10 +33,10 @@
 	- [DISTINCT 唯一](#head33)
 	- [排序： order by ](#head34)
 - [连接查询（多表查询）JOIN  ON](#head35)
-	- [内连接查询INNER JOIN：只保留两张表中完全匹配的结果集](#head36)
-	- [左连接查询LEFT JOIN：返回左表所有的行，即使在右表中没有匹配的记录。](#head37)
-	- [右连接RIGHT JOIN：返回右表所有的行，即使在左表中没有匹配的记录。](#head38)
-	- [全连接查询：FULL JOIN ,返回左表和右表中所有的行。](#head39)
+	- [ 内连接查询](#head36)
+	- [ 左连接查询](#head37)
+	- [ 右连接](#head38)
+	- [ 全连接查询](#head39)
 - [UNION ](#head40)
 	- [JOIN vs UNION](#head41)
 	- [ 应用场景](#head42)
@@ -58,6 +58,9 @@
 - [ fetchmany(size)：接收size条返回结果行。如果size的值大于返回的结果行的数量，则会返回cursor.arraysize条数据；](#head58)
 - [ fetchall()：接收全部的返回结果行；](#head59)
 	- [ 滑动窗口函数](#head60)
+		- [ Preceding](#head61)
+		- [ Following](#head62)
+		- [ preceding跟following相结合](#head63)
 [TOC]
 # <span id="head1">安装 </span>
 ## <span id="head2"> win</span>
@@ -391,8 +394,6 @@ SELECT ADDDATE("2017-06-15", INTERVAL 10 DAY);
 
 
 
-# from > where > group（含聚合）> having > order > select
-
 ## 分组查询：group by 
 **group by 后可加聚合函数，where 后不能加聚合函数**
 
@@ -442,8 +443,10 @@ RIGHT [OUTER] JOIN 产生表B的完全集，而A表中匹配的则有值，没�
 ![](https://upload-images.jianshu.io/upload_images/18339009-93ca0a681c0411c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-315255693cbe1041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+## <span id="head36"> 内连接查询</span>
 
-## <span id="head36">内连接查询INNER JOIN：只保留两张表中完全匹配的结果集</span>
+**INNER JOIN：只保留两张表中完全匹配的结果集**
+
 ```
 SELECT p.LastName, p.FirstName, o.OrderNo
 FROM Persons p
@@ -453,7 +456,10 @@ ORDER BY p.LastName
 ```
 ![](https://upload-images.jianshu.io/upload_images/18339009-798cff79aafdee78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-## <span id="head37">左连接查询LEFT JOIN：返回左表所有的行，即使在右表中没有匹配的记录。</span>
+## <span id="head37"> 左连接查询</span>
+
+**LEFT JOIN：返回左表所有的行，即使在右表中没有匹配的记录。**
+
 ```
 SELECT p.LastName, p.FirstName, o.OrderNo
 FROM Persons p
@@ -462,7 +468,10 @@ ON p.Id_P=o.Id_P
 ORDER BY p.LastName
 ```
 ![](https://upload-images.jianshu.io/upload_images/18339009-7951f83402cc6026.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-## <span id="head38">右连接RIGHT JOIN：返回右表所有的行，即使在左表中没有匹配的记录。</span>
+## <span id="head38"> 右连接</span>
+
+**RIGHT JOIN：返回右表所有的行，即使在左表中没有匹配的记录。**
+
 ```
 SELECT p.LastName, p.FirstName, o.OrderNo
 FROM Persons p
@@ -472,7 +481,10 @@ ORDER BY p.LastName
 ```
 ![](https://upload-images.jianshu.io/upload_images/18339009-fd7eaa8cc12522ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-## <span id="head39">全连接查询：FULL JOIN ,返回左表和右表中所有的行。</span>
+## <span id="head39"> 全连接查询</span>
+
+**FULL JOIN ,返回左表和右表中所有的行。**
+
 ```
 SELECT p.LastName, p.FirstName, o.OrderNo
 FROM Persons p
@@ -492,12 +504,15 @@ ORDER BY p.LastName
 
 ## <span id="head41">JOIN vs UNION</span>
 JOIN 中连接表的列可能不同，但在 UNION 中，**所有查询的列数和列顺序必须相同。**
-**UNION 将查询之后的行放在一起（垂直放置），但 JOIN 将查询之后的列放在一起（水平放置），**
+
+**UNION 将查询之后的行放在一起（垂直放置），但 JOIN 将查询之后的列放在一起（水平放置）**
+
 ## <span id="head42"> 应用场景</span>
 **在一个查询中从不同的表返回结构数据。**
 **对一个表执行多个查询，按一个查询返回数据。
 组合查询**
-```
+
+```python
 SELECT cust_name, cust_contact, cust_email
 FROM customers
 WHERE cust_state IN ('IL', 'IN', 'MI')
@@ -516,6 +531,7 @@ WHERE cust_name = 'Fun4All';
 ## <span id="head44"> 查看当前的用户</span>
 ```USE mysql;```
 ```SELECT * FROM user;```
+
 ## <span id="head45"> 修改密码</span>
 @前用户名@后地址（ % 代表可以任意ip访问）
 ```LTER USER "root"@"localhost" IDENTIFIED  BY "root";```
@@ -555,7 +571,7 @@ WHERE cust_name = 'Fun4All';
 一定要使用try…except…语句，因为万一没插入成功，其余代码都无法执行。当语句执行不成功，
 我们就db.rollback()回滚到操作之前的状态；当语句执行成功，我们就db.commit()提交事务。
 
-```
+```python
 import pymysql 
 # <span id="head49"> 使用pymysql连接上mysql数据库服务器，创建了一个数据库对象；</span>
 db=pymysql.connect(host='localhost',user='root', password='',
@@ -614,7 +630,8 @@ display(df2)
 主键： primary key （非空+唯一）
  自增长： auto_increment
 ```
-######外键： foreign key   约束两种表
+###### 外键： foreign key   约束两种表
+
 ```
 CONSTRAINT emlyee_dept_fk 
 FOREIGN KEY(deptId) 
@@ -634,7 +651,7 @@ DROP FOREIGN KEY fk_class_id;
 ```
 注意：删除外键约束并没有删除外键这一列。删除列是通过DROP COLUMN ...实现的。
 
-######UPDATE ：级联修改
+###### UPDATE ：级联修改
 外键名称                  外键               参考表(参考字段)
  注意：
             1）被约束的表称为副表，约束别人的表称为主表，外键设置在副表上的！！！
@@ -729,15 +746,16 @@ CREATE TRIGGER tri_empDel AFTER DELETE ON employee FOR EACH ROW    -- 当往员�
 
 # 窗口函数
 **应用：1、topN问题或者组内排序问题2、连续登录问题**
-**窗口函数原则上只能写在select子句中**
+**!!!!!!!!!!!!!窗口函数原则上只能写在select子句中**
 
-## 窗口函数order by与group by的区别：
+## 窗口函数order by与group by的区别
 窗口函数中的order by只是决定着**窗口里的数据的排序方式**，普通的order by决定**查询出的数据以什么样的方式整体排序**；
 
 窗口函数可以在保留原表中的全部数据之后，对某些字段做分组排序或者计算，而group by只能保留与分组字段聚合的结果；
 
+## 执行顺序
+
 在加入窗口函数的基础上SQL的执行顺序也会发生变化，具体的执行顺序如下（window就是窗口函数）
-**from > where > group（含聚合）> having >select > order > limit**
 ![](https://upload-images.jianshu.io/upload_images/18339009-cd689024f076a36a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![专用窗口函数例如rank、row_number、lag和lead等，在窗口函数中有静态函数和动态函数的分类](https://upload-images.jianshu.io/upload_images/18339009-fbbe65cca6ca527b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -750,7 +768,6 @@ CREATE TRIGGER tri_empDel AFTER DELETE ON employee FOR EACH ROW    -- 当往员�
 ![](https://upload-images.jianshu.io/upload_images/18339009-95bdd2e203a8310e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 从上面的例子可以看出，在没有partition by 的情况下，是把整个表作为一个大的窗口，SUM（）相当于向下累加，AVG（）相当于求从第一行到当前行的平均值，**其他的聚合函数均是如此**。
 
-
 注意点：
 1 、在使用专用的窗口函数时，例如rank、lag等，rank（）括号里是不需要指定任何字段的，直接空着就可以；
 2 、在使用聚合函数做窗口函数时，SUM（）括号里必须有字段，得指定对哪些字段执行聚合的操作。在学习的初期很容易弄混，不同函数括号里是否需写相应的字段名；
@@ -758,15 +775,19 @@ CREATE TRIGGER tri_empDel AFTER DELETE ON employee FOR EACH ROW    -- 当往员�
 
 ## <span id="head60"> 滑动窗口函数</span>
 
+### <span id="head61"> Preceding</span>
 
-**Preceding**
 ![](https://upload-images.jianshu.io/upload_images/18339009-5f33b14e770215a7?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-c048cc9e17b7073b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-Rows 2 preceding 中文的意思是之前的两行，preceding可以把它理解为不含当前行情况下截止到之前几行。根据上图可以看出在每一行，都会求出当前行附近的3行(当前行+附近2行)数据的平均值，这种方法也叫作**移动平均**。
-**Following**
+Rows 2 preceding 中文的意思是之前的两行，preceding可以把它理解为不含当前行情况下截止到之前几行。根据上图可以看出在每一行，都会求出**当前行附近的3行(当前行+附近2行)数据的平均值**，这种方法也叫作**移动平均**。
+
+### <span id="head62"> Following</span>
+
 Rows 2 following 中文意思是之后的两行，跟preceding正好相反，Preceding是向前，following是向后。
 ![](https://upload-images.jianshu.io/upload_images/18339009-93d5c51eb26202a6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-**preceding跟following相结合**
+
+### <span id="head63"> preceding跟following相结合</span>
+
 ![](https://upload-images.jianshu.io/upload_images/18339009-4b2be94447f8744d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-85623bf00d8f8866?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
