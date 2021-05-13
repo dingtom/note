@@ -98,10 +98,10 @@ if __name__=='__main__':
 
     # 所有文章生成TOC
     f_list = []
-    for root, subdir, files in os.walk('../draft'):
+    for root, subdir, files in os.walk('draft'):
         for f_name in files:
             f_list.append(os.path.join(root, f_name))
-
+    print(os.listdir('draft'))
     f_list.pop(0) # 弹出toc.py
 
     for file in f_list:
