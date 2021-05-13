@@ -1,6 +1,11 @@
+
+
+
+
 BERT的全称是: Bidirectional Encoder Representations from Transformers, 如果翻译过来也就是**双向transformer编码表达**, 我们在上节课解读了transformer的编码器, 编码器输出的隐藏层就是自然语言序列的数学表达, 那么双向是什么意思呢? 我们来看一下下面这张图.
 ![](https://upload-images.jianshu.io/upload_images/18339009-d494ae2ffab85cb8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 上图中$E_i$是指的单个字或词, $T_i$指的是最终计算得出的**隐藏层**, 还记得我们在Transformer(一)中讲到的注意力矩阵和注意力加权, 经过这样的操作之后, 序列里面的每一个字, **都含有这个字前面的信息和后面的信息**, 这就是**双向**的理解, 在这里, 一句话中每一个字, 经过注意力机制和加权之后, **当前这个字等于用这句话中其他所有字重新表达了一遍**, 每个字含有了这句话中所有成分的信息.
+
 # 语言模型
 什么是语言模型, 其实用一个公式就可以表示$P(c_{1},\ldots ,c_{m})$, 假设我们有一句话, $c_{1}到c_{m}$是这句话里的$m$个字, 而语言模型就是求的是这句话出现的概率是多少.   
 
