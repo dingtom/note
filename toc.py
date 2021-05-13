@@ -70,49 +70,49 @@ def detectHeadLines(f):
     
 if __name__=='__main__':
 
-    dirname = sys.argv[1]
-    if not os.path.exists(os.path.join('./blog', dirname)):
-        os.makedirs(os.path.join('./blog', dirname))
+    # dirname = sys.argv[1]
+    # if not os.path.exists(os.path.join('./blog', dirname)):
+    #     os.makedirs(os.path.join('./blog', dirname))
         
-    filename = sys.argv[2]
+    # filename = sys.argv[2]
 
-    #print(filename)
-    d_file = os.path.join('./draft/'+dirname, filename)
-    with open(d_file,'r',encoding='utf-8') as f:
-        insert_str=detectHeadLines(f)
-    b_file = './blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')]))
-    with open(b_file,'w',encoding='utf-8') as f:
-        f.write(insert_str)
-    os.system('git status')
-    os.system('git add {}'.format(d_file))
-    os.system('git add {}'.format(b_file))
+    # #print(filename)
+    # d_file = os.path.join('./draft/'+dirname, filename)
+    # with open(d_file,'r',encoding='utf-8') as f:
+    #     insert_str=detectHeadLines(f)
+    # b_file = './blog/{}.md'.format(os.path.join(dirname, filename[:filename.find('.')]))
+    # with open(b_file,'w',encoding='utf-8') as f:
+    #     f.write(insert_str)
+    # os.system('git status')
+    # os.system('git add {}'.format(d_file))
+    # os.system('git add {}'.format(b_file))
     
-    comment = sys.argv[3]
-    if comment == 0:
-        os.system('git commit -m %date:~0,8%_%time:~0,8%__{}'.format(comment))
-    else:
-        os.system('git commit -m %date:~0,8%_%time:~0,8%__modify__{}'.format(filename))
-    os.system('git push')
-    os.system('*'*20)
-    os.system('git status')
+    # comment = sys.argv[3]
+    # if comment == 0:
+    #     os.system('git commit -m %date:~0,8%_%time:~0,8%__{}'.format(comment))
+    # else:
+    #     os.system('git commit -m %date:~0,8%_%time:~0,8%__modify__{}'.format(filename))
+    # os.system('git push')
+    # os.system('*'*20)
+    # os.system('git status')
 
-    # # 所有文章生成TOC
-    # f_list = []
-    # for root, subdir, files in os.walk('../draft'):
-    #     for f_name in files:
-    #         f_list.append(os.path.join(root, f_name))
+    # 所有文章生成TOC
+    f_list = []
+    for root, subdir, files in os.walk('../draft'):
+        for f_name in files:
+            f_list.append(os.path.join(root, f_name))
 
-    # f_list.pop(0) # 弹出toc.py
+    f_list.pop(0) # 弹出toc.py
 
-    # for file in f_list:
-    #     dirname, filename = os.path.split(file)
+    for file in f_list:
+        dirname, filename = os.path.split(file)
     
-    #     #print(filename)
-    #     with open(os.path.join(dirname, filename),'r',encoding='utf-8') as f:
-    #         insert_str=detectHeadLines(f)
+        #print(filename)
+        with open(os.path.join(dirname, filename),'r',encoding='utf-8') as f:
+            insert_str=detectHeadLines(f)
         
-    #     dirname = dirname.replace('draft', 'blog')
-    #     if not os.path.exists(dirname):
-    #         os.makedirs(dirname)
-    #     with open(r'{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
-    #         f.write(insert_str)
+        dirname = dirname.replace('draft', 'blog')
+        if not os.path.exists(dirname):
+            os.makedirs(dirname)
+        with open(r'{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
+            f.write(insert_str)
