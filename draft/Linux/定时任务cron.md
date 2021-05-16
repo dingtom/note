@@ -1,3 +1,7 @@
+
+
+# 安装
+
 ``` sudo apt-get install cron```
 
 ```service cron start```  启动服务
@@ -43,4 +47,8 @@ python脚本需要指定python 环境，不要有输出
 
 
 
+```shell
+30  7 * * * zut_csi pkill -f ...csi/anaconda3/lib/jupyter
+04  0  * * * zut_csi cd ./anaconda3/lib;bash run.sh
+```
 

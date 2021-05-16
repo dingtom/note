@@ -534,7 +534,8 @@ WHERE cust_name = 'Fun4All';
 
 ## <span id="head45"> 修改密码</span>
 @前用户名@后地址（ % 代表可以任意ip访问）
-```LTER USER "root"@"localhost" IDENTIFIED  BY "root";```
+```mysql ALTER USER "root"@"localhost" IDENTIFIED  BY "root";```
+
 ## 创建新用户
 ```CREATE USER 'new_user'@'%' IDENTIFIED BY 'passwd';```
 ## <span id="head46"> 给用户赋权限</span>

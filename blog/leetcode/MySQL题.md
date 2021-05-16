@@ -10,7 +10,12 @@
 	- [ [汇总各个部门当前员工的title类型的分配数目，即结果给出部门编号dept_no、dept_name、其部门下所有的员工的title以及该类型title对应的数目count，结果按照dept_no升序排](https://www.nowcoder.com/practice/4bcb6a7d3e39423291d2f7bdbbff87f8?tpId=82&tqId=29778&rp=1&ru=%2Fta%2Fsql&qru=%2Fta%2Fsql%2Fquestion-ranking&tab=answerKey)](#head10)
 	- [ 复购率](#head11)
 	- [ SQL取出所有用户对商品的行为特征](#head12)
+
+
+
+
 # <span id="head1"> 数据库事务ACID四大特性</span>
+
 “一致性”为最终目标，其他特性都是为达到这个目标而采取的措施和手段。
 
 - 原子性：事务中包括的所有操作要么都做，要么都不做
@@ -170,16 +175,50 @@ on t1.userid=t2.userid and t1.pt=date_sub(t2.pt, interval 1 month)
 group by t1.pt;
 ```
 
+
+
+
+
 ## <span id="head12"> SQL取出所有用户对商品的行为特征</span>
+
  请用一句SQL取出所有用户对商品的行为特征，特征分为已购买、购买未收藏、收藏未购买、收藏且购买（输出结果如下表）
+
 >![订单事务表orders](https://upload-images.jianshu.io/upload_images/18339009-7831de101e45b22f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![收藏事务表favorites](https://upload-images.jianshu.io/upload_images/18339009-ab2ca246d7e0337b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ```case when pay time is not null then 1 else 0 end```
 
-![](https://upload-images.jianshu.io/upload_images/18339009-051a4e910cd3305c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```sql
+(select a.user_id,a.item_id, 
+(CASE when a.item_id is not null then 1 else 0 end) as '已购买',
+(CASE when a.item_id is not null and b.item_id is null then 1 else 0 end) as '购买未收藏',
+(CASE when a.item_id is not null and b.item_id is not null then 1 else 0 end) as '收藏且购买',
+(CASE when a.item_id is null and b.item_id is not null then 1 else 0 end) as '收藏未购买'
+from orders a 
+left join favorites b 
+on a.user_id  = b.user_id and a.item_id = b.item_id )
+union
+(select b.user_id,b.item_id, 
+(CASE when a.item_id is not null then 1 else 0 end) as '已购买',
+(CASE when a.item_id is not null and b.item_id is null then 1 else 0 end) as '购买未收藏',
+(CASE when a.item_id is not null and b.item_id is not null then 1 else 0 end) as '收藏且购买',
+(CASE when a.item_id is null and b.item_id is not null then 1 else 0 end) as '收藏未购买'
+from orders a 
+right join favorites b 
+on a.user_id  = b.user_id and a.item_id = b.item_id ); 
+```
 
-## 有一张学生成绩表sc（sno 学号，class 课程，score 成绩），请查询出每个学生的英语、数学的成绩（行转列，一个学生只有一行记录）。
+![left join favorites](https://img-blog.csdnimg.cn/20210411004513446.png)
+
+left join favorites
+
+![](https://i.loli.net/2021/05/14/D9gmnJFCNa8EosM.png)
+
+![](https://i.loli.net/2021/05/14/x8R5CY2QWdbaotn.png)
+
+![](https://i.loli.net/2021/05/14/EgBVdvmcrkPAzlK.png)
+
+## 有一张学生成绩表sc（sno 学号，class 课程，score 成绩），请查询出每个学生的英语、数学的成绩（行转列，一个学生只有一行记录）
 
 ```if(class='english',score,0)```
 ```in('english','math')```
@@ -210,25 +249,20 @@ where 排名<=2;
 
 >![](https://upload-images.jianshu.io/upload_images/18339009-dbfb648c3f8026d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 >![](https://upload-images.jianshu.io/upload_images/18339009-e8ee880d3d447c6b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
->第二步，用user_id和辅助列作为分组依据，分到一组的就是连续登录的用户。在每一组中最小的日期就是最早的登陆日期，最大的日期就是最近的登陆日期，对每个组内的用户进行计数就是用户连续登录的天数。
-![](https://upload-images.jianshu.io/upload_images/18339009-29ca17ec06cbc202.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](https://upload-images.jianshu.io/upload_images/18339009-663d74d2e2a7a2c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-```sql
-select b.user_id, max(b.date) as 最近登录日期, min(b.date) as 最早登陆日期, count(b.date) as 登陆次数
-from (select a.user_id, a.date, a.排序, date_sub(a.date, interval a.排序 day) as 辅助
-     from (select distinct user_id, date(login_time) as date, row_number() over (partition by user_id order bylogin_time)  as 排序 form user_login) as a) as b
-group by b.user_id,  b.辅助
-```
+>第二步，用user_id和辅助列作为分组依据，分到一组的就是连续登录的用户。在每一组中最小的日期就是最早的登陆日期，最大的日期就是最近的登陆日期，对每个组内的用户进行计数,就是用户连续登录的天数。
+>![](https://upload-images.jianshu.io/upload_images/18339009-29ca17ec06cbc202.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+>![](https://upload-images.jianshu.io/upload_images/18339009-663d74d2e2a7a2c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
->求解连续登录五天的用户
-第一步，用lead函数进行窗口偏移，查找每个用户5天后的登陆日期是多少，如果是空值，说明他没有登录。运行的代码为
-![](https://upload-images.jianshu.io/upload_images/18339009-f9e15d92b0b016a8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-在lead函数里，为何偏移行数的参数设置为4而不是5呢，这是因为求解的是连续登录5天的用户，包括当前行在内一共是5行，所以应该向下偏移4行。运行的结果如下：
-![](https://upload-images.jianshu.io/upload_images/18339009-3dfad55da90d5528?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-第二步，用datediff函数计算 （日期-第五次登陆日期）+1是否等于5，等于5证明用户是连续5天登录的，为空值或者大于5都不是5天连续登陆的用户。
-第三步，用where设定条件，差值=5筛选连续登录的用户。
-![](https://upload-images.jianshu.io/upload_images/18339009-13b2e5abdf484efe?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-用lead函数求解连续登录的问题还有一个好处就是当表中的数据不在同一个月份时也可以完美的解决，不用再考虑月份带来的影响。
+>## 求解连续登录五天的用户
+>
+>第一步，用lead函数进行窗口偏移，查找每个用户5天后的登陆日期是多少，如果是空值，说明他没有登录。运行的代码为
+>![](https://upload-images.jianshu.io/upload_images/18339009-f9e15d92b0b016a8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+>在lead函数里，为何偏移行数的参数设置为4而不是5呢，这是因为求解的是连续登录5天的用户，包括当前行在内一共是5行，所以应该向下偏移4行。运行的结果如下：
+>![](https://upload-images.jianshu.io/upload_images/18339009-3dfad55da90d5528?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+>第二步，用datediff函数计算 （日期-第五次登陆日期）+1是否等于5，等于5证明用户是连续5天登录的，为空值或者大于5都不是5天连续登陆的用户。
+>第三步，用where设定条件，差值=5筛选连续登录的用户。
+>![](https://upload-images.jianshu.io/upload_images/18339009-13b2e5abdf484efe?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+>用lead函数求解连续登录的问题还有一个好处就是当表中的数据不在同一个月份时也可以完美的解决，不用再考虑月份带来的影响。
 
 ---
 ## 2018年9月1日当天，总在线时长超过20分钟以上的用户的付费总金额

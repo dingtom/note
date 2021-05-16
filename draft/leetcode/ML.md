@@ -135,155 +135,37 @@ $Y=f(X)/P(Y|X)) $
 $ P(y|x) = \frac{P(x, y)}{P(x)}$
 分别计算$P(y|x)$，选择三类中最大的$P(y|x)$作为样本的分类。
 常见生成式模型有：**隐马尔可夫模型HMM、朴素贝叶斯模型、高斯混合模型GMM、LDA等；**
-- 不管是生成式模型还是判别式模型，它们~~最终的判断依据都是条件概率$P(y|x)$~~，但是**生成式模型先计算了联合概率$P(y，x)$，再由贝叶斯公式计算得到条件概率。**因此，生成式模型可以体现更多数据本身的分布信息，其普适性更广。判别式模型更直接，目标性更强。
+
+- 不管是生成式模型还是判别式模型，它们**最终的判断依据都是条件概率$P(y|x)$**，但是**生成式模型先计算了联合概率$P(y，x)$，再由贝叶斯公式计算得到条件概率。**因此，生成式模型可以体现更多数据本身的分布信息，其普适性更广。判别式模型更直接，目标性更强。
 
 - 判别模型简单，准确率更高，不能反映训练数据本身的特性
-- 由~~生成式模型可以产生判别式模型~~，但是由判别式模式没法形成生成式模型，~~当存在“隐变量”时，只能使用生成模型~~（隐变量：当我们找不到引起某一现象的原因时，就把这个在起作用，但无法确定的因素，叫“隐变量)
-
-# 决策树的常用算法有那些，这些算法有什么区别？
-常用的有:ID3,C4.5,CART三种算法
-
-区别:
-1) 纯度量化指标不同.ID3-->信息增益,C4.5-->信息增益率,CART-->基尼系数
-2) 数据处理能力不同. ID3-->离散数据,C4.5,CART--->连续数据离散化,剪枝操作
-3)要求的树的类型不同.ID3和C4.5可以是多叉树,CART只能是二叉树.
+- 由**生成式模型可以产生判别式模型**，但是由判别式模式没法形成生成式模型，**当存在“隐变量”时，只能使用生成模型**（隐变量：当我们找不到引起某一现象的原因时，就把这个在起作用，但无法确定的因素，叫“隐变量)
 
 
-# rf和lr对比 ， 其他的算法懂嘛
-
-# 归一化有用吗
-
-
-
-（扒，谈到了3中分析的角度，分别适用于什么情况）
-
-# 数据不同类型怎么处理？
-
-# 数据波动大怎么处理？
-
-# lr加正则项？
-
-# lr和线性回归的异同
-
-# lr的优劣（为什么在金融领域常用）
-
-# hivesql是否了解
-
-# 如何衡量分类结果的合理性？
-
-# 淘宝可以改进的需求？
-
-# 双十一活动效果分析的核心指标？提供补贴或者活动形式的建议？
-
-# sql题：连续两次下单时间间隔小于一天的用户count
-
-# 会用Excel？最常用什么函数？
 
 # 介绍svm，介绍xgb
 
-# 如何建模的，如何做的策略
+
 
 # 从统计谈到了机器学习，从机器学习聊到了nlp的attention
 
+
+
 # 讲一下核方法
+
+
 
 # 讲一下svm推倒
 
 
 
-#
-
-# 一道sql题，关于用户多次发起订单的情况取最近的一次以及相关的信息
-
-# rank() 和 dense rank（）区别
-
-# 一个场景关于用户是否会愿意使用拼车这个功能，选用什么方法做预测哪些用户会使用拼车
-
-# 关于上面方法的使用的优劣讨论
-
-# 成交额下降怎么分析
-
 # AB测试，统计学相关 ,假设检验
 
-#
 
-# 决策树和随机森林比较
-
-# 关于剪枝
-
-# 一个场景关于成单率的分析，成单率低是由什么原因导致的
-
-# 如何量化一些指标做分析
-
-# 网易严选8.8数据分析
-
-1、严选为提升销售额和用户体验开通花呗免息活动
-
-（1）如何设置分期门槛（如满多少免息）、期数（如三期、六期等），说说思路和原因。
-
-（2）如何评估活动的效果，考虑哪些指标。
-
-2、（1）云音乐推出年卡活动，两种方式：年卡买一年送一年；年卡买一年送两年的会员权益。如何评价哪种方式好。
-
-（2）云音乐和严选开展联合会员活动，买黑胶vip送严选pro会员，如何评价活动的成本效益。
-
-二、SQL（30*2）
-
-1、商品表goods(id,name,weight)，交易表（id,goods_id,count）。求销售数量>20，重量<50的商品id，重量，销售总数。
-
-2、云音乐：关注表（user_id,follower_id）,音乐喜爱表（user_id,music_id），音乐表(music_id,music_name), 为user_id=1的用户推荐其关注者喜爱的音乐名称（不重复），不要推荐自己本身喜欢的，音乐按id升序排列。
-
-[复制代码](#)
-
-<pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="" cid="n102" mdtype="fences" style="box-sizing: border-box; overflow: visible; font-family: var(--monospace); font-size: 0.9em; display: block; break-inside: avoid; text-align: left; white-space: normal; background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: rgb(248, 248, 248); position: relative !important; border: 1px solid rgb(231, 234, 237); border-radius: 3px; padding: 8px 4px 6px; margin-bottom: 15px; margin-top: 15px; width: inherit; color: rgb(51, 51, 51); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">`select distinct c.id,c.name,c.weight,c.total from``(select b.id,b.name,b.weight,sum(count) over (partition by id) as total from ``(select g.id,g.name,g.weight,t.count from goods g left join trans t on g.id = t.goods_id)``as b) as c where c.weight < 50 and c.total > 20`</pre>
-
-[复制代码](#)
-
-<pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="" cid="n104" mdtype="fences" style="box-sizing: border-box; overflow: visible; font-family: var(--monospace); font-size: 0.9em; display: block; break-inside: avoid; text-align: left; white-space: normal; background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: rgb(248, 248, 248); position: relative !important; border: 1px solid rgb(231, 234, 237); border-radius: 3px; padding: 8px 4px 6px; margin-bottom: 15px; margin-top: 15px; width: inherit; color: rgb(51, 51, 51); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">`select music_name from``(select f.user_id,f.follwer_id,mm.music_id,nn.id,nn.music_name from follow f ``left join music_likes1 mm on f.follwer_id = mm.user_id LEFT JOIN ``music nn on nn.id = mm.music_id where f.user_id = 1 ) as p ``where music_id not in (select music_id from music_likes1 where user_id = 1) ``order by music_id asc`</pre>
-
-\1\. 面试官自我介绍
-
-\2\. 面试官介绍总的面试结构：一共四次
-
-\3\. 面试开始：（问题顺序我可能记的不清楚了）
-
-① 自我介绍
-
-② 面试官追问：想知道我本科和研究生GPA、专业排名、自己认为在横向中的位置
-
-③ 追问：简历中的某次竞赛获奖经历（介绍竞赛项目内容、含金量、分工、评委评价、其他同届获奖作品介绍）
-
-④ 追问：有没有其他专利、学术论文发表
-
-⑤ 具体聊研究生期间的研究方向和项目经历。（项目的复盘，项目架构和逻辑，深挖数据来源、分析过程中研究方法的选择标准、项目中的局限性、反思和优化空间）【这部分占时最长】
-
-⑥ 实习经历+过程中遇到的困难，如果类似问题再发生，会如何去做？
-
-⑧ 提问：认为很有成就的事情。
-
-⑨ 提问：说一件一直在坚持的事情。
-
-\4\. 面试主要部分结束，轮到我提问，我问了如下两个问题：
-
-① 面试官对我今天的表现，有什么评价。（这部分面试官讲了很多，表示同期面试的背景很强的人很多，我从简历上并不是很占优势；并指出我讲自己简历的过程中需要注意逻辑，之后ta还给用高德产品给我做了示范。）
-
-② 岗位的具体工作，今后可能负责到的产品设计和优化的场景。
 
 # 解释Markov Chain（简历写了学过随机过程）
 
-# SQL各种join的区别（感觉很多面试关于SQL可能都会问）
 
-# 如何评判模型指标，除了准确率，
-
-因为简历有Kaggle机器学习竞赛的经历，所以问说这个的主题是什么，然后为什么选择这些模型
-
-# 解释XGBoost相对于GBDT有什么优点
-
-# 如何处理缺失值
-
-# 实习)监控指标包括哪一些，为什么监控指标要这样设置，如何进行监控；
-
-# 成本和营销费用怎么关联；
 
 # 深拷贝和浅拷贝的区别
 

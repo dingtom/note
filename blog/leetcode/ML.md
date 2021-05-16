@@ -13,45 +13,14 @@
 - [ 什么是判别式模型和生成式模型](#head13)
 	- [判别式模型 (Discriminative Model)：](#head14)
 	- [生成式模型 (Generative Model)：](#head15)
-- [ 决策树的常用算法有那些，这些算法有什么区别？](#head16)
-- [rf和lr对比 ， 其他的算法懂嘛](#head17)
-- [ 归一化有用吗](#head18)
-- [ 数据不同类型怎么处理？](#head19)
-- [ 数据波动大怎么处理？](#head20)
-- [ lr加正则项？](#head21)
-- [ lr和线性回归的异同](#head22)
-- [ lr的优劣（为什么在金融领域常用）](#head23)
-- [ hivesql是否了解](#head24)
-- [ 如何衡量分类结果的合理性？](#head25)
-- [ 淘宝可以改进的需求？](#head26)
-- [ 双十一活动效果分析的核心指标？提供补贴或者活动形式的建议？](#head27)
-- [ sql题：连续两次下单时间间隔小于一天的用户count](#head28)
-- [ 会用Excel？最常用什么函数？](#head29)
-- [ 介绍svm，介绍xgb](#head30)
-- [ 如何建模的，如何做的策略](#head31)
-- [ 从统计谈到了机器学习，从机器学习聊到了nlp的attention](#head32)
-- [ 讲一下核方法](#head33)
-- [ 讲一下svm推倒](#head34)
-- [ 一道sql题，关于用户多次发起订单的情况取最近的一次以及相关的信息](#head35)
-- [rank() 和 dense rank（）区别](#head36)
-- [ 一个场景关于用户是否会愿意使用拼车这个功能，选用什么方法做预测哪些用户会使用拼车](#head37)
-- [ 关于上面方法的使用的优劣讨论](#head38)
-- [ 成交额下降怎么分析](#head39)
-- [AB测试，统计学相关 ,假设检验](#head40)
-- [ 决策树和随机森林比较](#head41)
-- [ 关于剪枝](#head42)
-- [ 一个场景关于成单率的分析，成单率低是由什么原因导致的](#head43)
-- [ 如何量化一些指标做分析](#head44)
-- [ 网易严选8.8数据分析](#head45)
-- [解释Markov Chain（简历写了学过随机过程）](#head46)
-- [ SQL各种join的区别（感觉很多面试关于SQL可能都会问）](#head47)
-- [ 如何评判模型指标，除了准确率，](#head48)
-- [ 解释XGBoost相对于GBDT有什么优点](#head49)
-- [ 如何处理缺失值](#head50)
-- [ 实习)监控指标包括哪一些，为什么监控指标要这样设置，如何进行监控；](#head51)
-- [ 成本和营销费用怎么关联；](#head52)
-- [ 深拷贝和浅拷贝的区别](#head53)
-- [ 列表和元组的区别](#head54)
+- [ 介绍svm，介绍xgb](#head16)
+- [ 从统计谈到了机器学习，从机器学习聊到了nlp的attention](#head17)
+- [ 讲一下核方法](#head18)
+- [ 讲一下svm推倒](#head19)
+- [AB测试，统计学相关 ,假设检验](#head20)
+- [解释Markov Chain（简历写了学过随机过程）](#head21)
+- [ 深拷贝和浅拷贝的区别](#head22)
+- [ 列表和元组的区别](#head23)
 ![](https://upload-images.jianshu.io/upload_images/18339009-06d5ce952a0eb80b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-fde0401c30936d0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-ef63be85b387ddf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -189,157 +158,39 @@ $Y=f(X)/P(Y|X)) $
 $ P(y|x) = \frac{P(x, y)}{P(x)}$
 分别计算$P(y|x)$，选择三类中最大的$P(y|x)$作为样本的分类。
 常见生成式模型有：**隐马尔可夫模型HMM、朴素贝叶斯模型、高斯混合模型GMM、LDA等；**
-- 不管是生成式模型还是判别式模型，它们~~最终的判断依据都是条件概率$P(y|x)$~~，但是**生成式模型先计算了联合概率$P(y，x)$，再由贝叶斯公式计算得到条件概率。**因此，生成式模型可以体现更多数据本身的分布信息，其普适性更广。判别式模型更直接，目标性更强。
+
+- 不管是生成式模型还是判别式模型，它们**最终的判断依据都是条件概率$P(y|x)$**，但是**生成式模型先计算了联合概率$P(y，x)$，再由贝叶斯公式计算得到条件概率。**因此，生成式模型可以体现更多数据本身的分布信息，其普适性更广。判别式模型更直接，目标性更强。
 
 - 判别模型简单，准确率更高，不能反映训练数据本身的特性
-- 由~~生成式模型可以产生判别式模型~~，但是由判别式模式没法形成生成式模型，~~当存在“隐变量”时，只能使用生成模型~~（隐变量：当我们找不到引起某一现象的原因时，就把这个在起作用，但无法确定的因素，叫“隐变量)
+- 由**生成式模型可以产生判别式模型**，但是由判别式模式没法形成生成式模型，**当存在“隐变量”时，只能使用生成模型**（隐变量：当我们找不到引起某一现象的原因时，就把这个在起作用，但无法确定的因素，叫“隐变量)
 
-# <span id="head16"> 决策树的常用算法有那些，这些算法有什么区别？</span>
-常用的有:ID3,C4.5,CART三种算法
 
-区别:
-1) 纯度量化指标不同.ID3-->信息增益,C4.5-->信息增益率,CART-->基尼系数
-2) 数据处理能力不同. ID3-->离散数据,C4.5,CART--->连续数据离散化,剪枝操作
-3)要求的树的类型不同.ID3和C4.5可以是多叉树,CART只能是二叉树.
 
+# <span id="head16"> 介绍svm，介绍xgb</span>
 
-# <span id="head17">rf和lr对比 ， 其他的算法懂嘛</span>
 
-# <span id="head18"> 归一化有用吗</span>
 
+# <span id="head17"> 从统计谈到了机器学习，从机器学习聊到了nlp的attention</span>
 
 
-（扒，谈到了3中分析的角度，分别适用于什么情况）
 
-# <span id="head19"> 数据不同类型怎么处理？</span>
+# <span id="head18"> 讲一下核方法</span>
 
-# <span id="head20"> 数据波动大怎么处理？</span>
 
-# <span id="head21"> lr加正则项？</span>
 
-# <span id="head22"> lr和线性回归的异同</span>
+# <span id="head19"> 讲一下svm推倒</span>
 
-# <span id="head23"> lr的优劣（为什么在金融领域常用）</span>
 
-# <span id="head24"> hivesql是否了解</span>
 
-# <span id="head25"> 如何衡量分类结果的合理性？</span>
+# <span id="head20">AB测试，统计学相关 ,假设检验</span>
 
-# <span id="head26"> 淘宝可以改进的需求？</span>
 
-# <span id="head27"> 双十一活动效果分析的核心指标？提供补贴或者活动形式的建议？</span>
 
-# <span id="head28"> sql题：连续两次下单时间间隔小于一天的用户count</span>
+# <span id="head21">解释Markov Chain（简历写了学过随机过程）</span>
 
-# <span id="head29"> 会用Excel？最常用什么函数？</span>
 
-# <span id="head30"> 介绍svm，介绍xgb</span>
 
-# <span id="head31"> 如何建模的，如何做的策略</span>
-
-# <span id="head32"> 从统计谈到了机器学习，从机器学习聊到了nlp的attention</span>
-
-# <span id="head33"> 讲一下核方法</span>
-
-# <span id="head34"> 讲一下svm推倒</span>
-
-
-
-#
-
-# <span id="head35"> 一道sql题，关于用户多次发起订单的情况取最近的一次以及相关的信息</span>
-
-# <span id="head36">rank() 和 dense rank（）区别</span>
-
-# <span id="head37"> 一个场景关于用户是否会愿意使用拼车这个功能，选用什么方法做预测哪些用户会使用拼车</span>
-
-# <span id="head38"> 关于上面方法的使用的优劣讨论</span>
-
-# <span id="head39"> 成交额下降怎么分析</span>
-
-# <span id="head40">AB测试，统计学相关 ,假设检验</span>
-
-#
-
-# <span id="head41"> 决策树和随机森林比较</span>
-
-# <span id="head42"> 关于剪枝</span>
-
-# <span id="head43"> 一个场景关于成单率的分析，成单率低是由什么原因导致的</span>
-
-# <span id="head44"> 如何量化一些指标做分析</span>
-
-# <span id="head45"> 网易严选8.8数据分析</span>
-
-1、严选为提升销售额和用户体验开通花呗免息活动
-
-（1）如何设置分期门槛（如满多少免息）、期数（如三期、六期等），说说思路和原因。
-
-（2）如何评估活动的效果，考虑哪些指标。
-
-2、（1）云音乐推出年卡活动，两种方式：年卡买一年送一年；年卡买一年送两年的会员权益。如何评价哪种方式好。
-
-（2）云音乐和严选开展联合会员活动，买黑胶vip送严选pro会员，如何评价活动的成本效益。
-
-二、SQL（30*2）
-
-1、商品表goods(id,name,weight)，交易表（id,goods_id,count）。求销售数量>20，重量<50的商品id，重量，销售总数。
-
-2、云音乐：关注表（user_id,follower_id）,音乐喜爱表（user_id,music_id），音乐表(music_id,music_name), 为user_id=1的用户推荐其关注者喜爱的音乐名称（不重复），不要推荐自己本身喜欢的，音乐按id升序排列。
-
-[复制代码](#)
-
-<pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="" cid="n102" mdtype="fences" style="box-sizing: border-box; overflow: visible; font-family: var(--monospace); font-size: 0.9em; display: block; break-inside: avoid; text-align: left; white-space: normal; background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: rgb(248, 248, 248); position: relative !important; border: 1px solid rgb(231, 234, 237); border-radius: 3px; padding: 8px 4px 6px; margin-bottom: 15px; margin-top: 15px; width: inherit; color: rgb(51, 51, 51); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">`select distinct c.id,c.name,c.weight,c.total from``(select b.id,b.name,b.weight,sum(count) over (partition by id) as total from ``(select g.id,g.name,g.weight,t.count from goods g left join trans t on g.id = t.goods_id)``as b) as c where c.weight < 50 and c.total > 20`</pre>
-
-[复制代码](#)
-
-<pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="" cid="n104" mdtype="fences" style="box-sizing: border-box; overflow: visible; font-family: var(--monospace); font-size: 0.9em; display: block; break-inside: avoid; text-align: left; white-space: normal; background-image: inherit; background-position: inherit; background-size: inherit; background-repeat: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: rgb(248, 248, 248); position: relative !important; border: 1px solid rgb(231, 234, 237); border-radius: 3px; padding: 8px 4px 6px; margin-bottom: 15px; margin-top: 15px; width: inherit; color: rgb(51, 51, 51); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">`select music_name from``(select f.user_id,f.follwer_id,mm.music_id,nn.id,nn.music_name from follow f ``left join music_likes1 mm on f.follwer_id = mm.user_id LEFT JOIN ``music nn on nn.id = mm.music_id where f.user_id = 1 ) as p ``where music_id not in (select music_id from music_likes1 where user_id = 1) ``order by music_id asc`</pre>
-
-\1\. 面试官自我介绍
-
-\2\. 面试官介绍总的面试结构：一共四次
-
-\3\. 面试开始：（问题顺序我可能记的不清楚了）
-
-① 自我介绍
-
-② 面试官追问：想知道我本科和研究生GPA、专业排名、自己认为在横向中的位置
-
-③ 追问：简历中的某次竞赛获奖经历（介绍竞赛项目内容、含金量、分工、评委评价、其他同届获奖作品介绍）
-
-④ 追问：有没有其他专利、学术论文发表
-
-⑤ 具体聊研究生期间的研究方向和项目经历。（项目的复盘，项目架构和逻辑，深挖数据来源、分析过程中研究方法的选择标准、项目中的局限性、反思和优化空间）【这部分占时最长】
-
-⑥ 实习经历+过程中遇到的困难，如果类似问题再发生，会如何去做？
-
-⑧ 提问：认为很有成就的事情。
-
-⑨ 提问：说一件一直在坚持的事情。
-
-\4\. 面试主要部分结束，轮到我提问，我问了如下两个问题：
-
-① 面试官对我今天的表现，有什么评价。（这部分面试官讲了很多，表示同期面试的背景很强的人很多，我从简历上并不是很占优势；并指出我讲自己简历的过程中需要注意逻辑，之后ta还给用高德产品给我做了示范。）
-
-② 岗位的具体工作，今后可能负责到的产品设计和优化的场景。
-
-# <span id="head46">解释Markov Chain（简历写了学过随机过程）</span>
-
-# <span id="head47"> SQL各种join的区别（感觉很多面试关于SQL可能都会问）</span>
-
-# <span id="head48"> 如何评判模型指标，除了准确率，</span>
-
-因为简历有Kaggle机器学习竞赛的经历，所以问说这个的主题是什么，然后为什么选择这些模型
-
-# <span id="head49"> 解释XGBoost相对于GBDT有什么优点</span>
-
-# <span id="head50"> 如何处理缺失值</span>
-
-# <span id="head51"> 实习)监控指标包括哪一些，为什么监控指标要这样设置，如何进行监控；</span>
-
-# <span id="head52"> 成本和营销费用怎么关联；</span>
-
-# <span id="head53"> 深拷贝和浅拷贝的区别</span>
+# <span id="head22"> 深拷贝和浅拷贝的区别</span>
 
 可变对象：可以修改的对象，包括列表、字典、集合
 
@@ -351,7 +202,7 @@ copy浅拷贝：值相等，地址不相等
 
 deepcopy深拷贝：值相等，地址不相等
 
-# <span id="head54"> 列表和元组的区别</span>
+# <span id="head23"> 列表和元组的区别</span>
 
 1.  列表是动态数组，它们可变且可以重设长度（改变其内部元素的个数）。
 
