@@ -62,7 +62,7 @@
 
 ```KMeans(n_clusters=8, init='k-means++', n_init=10, max_iter=300, tol=0.0001, precompute_distances='auto', verbose=0, random_state=None, copy_x=True, n_jobs=1, algorithm='auto')```
 
-- n_clusters: 即 K 值，一般需要多试一些 K 值来保证更好的聚类效果。
+- n_clusters: 即 K 值，一般需要**多试一些 K 值来保证更好的聚类效果**。
 - max_iter：最大迭代次数
 - n_init：初始化中心点的运算次数，默认是 10。运行 n_init 次, 取其中最好的作为初始的中心点。如果 K 值比较大的时候，你可以适当增大 n_init 这个值；
 - init：即初始值选择的方式，默认k-means++ ，你也可以自己指定中心点

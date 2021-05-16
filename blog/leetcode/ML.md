@@ -21,6 +21,7 @@
 - [解释Markov Chain（简历写了学过随机过程）](#head21)
 - [ 深拷贝和浅拷贝的区别](#head22)
 - [ 列表和元组的区别](#head23)
+- [ 有哪些改善模型的思路](#head24)
 ![](https://upload-images.jianshu.io/upload_images/18339009-06d5ce952a0eb80b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-fde0401c30936d0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-ef63be85b387ddf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -229,3 +230,21 @@ stdev 标准差（standard deviation）variance方差
 异常值检测：
 
 ![image](https://upload-images.jianshu.io/upload_images/18339009-2f06030e973d5a3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# <span id="head24"> 有哪些改善模型的思路</span>
+
+1. **数据角度 **
+
+   增强数据集。无论是有监督还是无监督学习，数据永远是最重要的驱动力。更多的类型数据对良好的模型能带来更好的稳定性和对未知数据的可预见性。对模型来说，“看到过的总比没看到的更具有判别的信心”。
+
+2. **模型角度**
+
+   模型的容限能力决定着模型可优化的空间。在数据量充足的前提下，对同类型的模型，增大模型规模来提升容限无疑是最直接和有效的手段。
+
+3. **调参优化角度**
+
+   如果你知道模型的性能为什么不再提高了，那已经向提升性能跨出了一大步。 超参数调整本身是一个比较大的问题。一般可以包含模型初始化的配置，优化算法的选取、学习率的策略以及如何配置正则和损失函数等等。
+
+4. **训练角度**
+
+   在越大规模的数据集或者模型上，诚然一个好的优化算法总能加速收敛。但你在未探索到模型的上限之前，永远不知道训练多久算训练完成。所以在改善模型上充分训练永远是最必要的过程。充分训练的含义不仅仅只是增大训练轮数。有效的学习率衰减和正则同样是充分训练中非常必要的手段。

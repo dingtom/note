@@ -18,6 +18,10 @@
 - [print(quantization_errors.shape)  (405,)](#head18)
 - [ 计算一个多维数组的任意百分比分位数](#head19)
 - [print(error_treshold) 0.3417397144318405  超过该值的即为异常](#head20)
+
+
+
+
 ![](https://upload-images.jianshu.io/upload_images/18339009-135ea1f9251fdb66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 自组织映射（Self Organizing Map，SOM）。**蓝色斑点是训练数据的分布**，而**小白色斑点是从该分布中抽取得到的当前训练数据**。首先（左图）**SOM节点被任意地定位在数据空间中**。我们选择**最接近训练数据的节点作为获胜节点**（用黄色突出显示）。**它被移向训练数据，包括（在较小的范围内）其网格上的相邻节点**。经过多次迭代后，网格趋于接近数据分布（右图）。
@@ -71,9 +75,7 @@ SOM网络的另一个特点是，学习率和邻域范围随着迭代次数会�
 
 
 # <span id="head4"> 优缺点</span>
-与传统的模式聚类方法相比，它能够保持拓扑结构不变，所形成的聚类中心能映射到一个曲面或平面上。
-
-
+能够保持拓扑结构不变，泛化能力好、抗噪音能力强
 
 # <span id="head5"> [MiniSom](https://github.com/JustGlowing/minisom)</span>
 

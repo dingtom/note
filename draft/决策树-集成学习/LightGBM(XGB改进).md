@@ -81,41 +81,47 @@ LightGBM 原生支持类别特征，采用 many-vs-many 的切分方式将类别
 
 # 与 XGBoost 的对比
 
-## 内存更小
-- XGBoost 使用预排序后**需要记录特征值及其对应样本的统计值的索引**，而 LightGBM 使用了**直方图算法将特征值转变为 bin 值，且不需要记录特征到样本的索引**，将空间复杂度从 O(2*#data) 降低为 O(#bin) ，极大的减少了内存消耗；
-- LightGBM 采用了直方图算法**将存储特征值转变为存储 bin 值**，降低了内存消耗；
-- LightGBM 在训练过程中采用**互斥特征捆绑算法减少了特征数量**，降低了内存消耗。
-## 速度更快
-- LightGBM 采用了直方图算法**将遍历样本转变为遍历直方图**，极大的降低了时间复杂度；
-- LightGBM 在训练过程中采用**单边梯度算法过滤掉梯度小的样本**，减少了大量的计算；
-- LightGBM 采用了**基于 Leaf-wise 算法的增长策略构建树，减少了很多不必要的计算量**；
-- LightGBM 采用**优化后的特征并行、数据并行方法加速计算**，当数据量非常大的时候还可以采用投票并行的策略；
-- LightGBM 对**缓存也进行了优化，增加了 Cache hit 的命中率**。
+1. XGBoost 使用预排序后**需要记录特征值及其对应样本的统计值的索引**，而 LightGBM 使用了**直方图算法将特征值转变为 bin 值，且不需要记录特征到样本的索引**，将空间复杂度从 O(2*#data) 降低为 O(#bin) ，极大的减少了内存消耗；
+
+2. LightGBM 采用了直方图算法**将存储特征值转变为存储 bin 值**，更高（效率）更快（速度）更低（内存占用）更泛化（分箱与之后的不精确分割也起到了一定防止过拟合的作用）；
+
+3. LightGBM 在训练过程中采用**互斥特征捆绑算法减少了特征数量**，降低了内存消耗。
+
+4. LightGBM 在训练过程中采用**单边梯度算法过滤掉梯度小的样本**，减少了大量的计算；
+
+5. LightGBM 采用了**基于 Leaf-wise 算法的增长策略构建树，减少了很多不必要的计算量**；
+
+   > xgb是level-wise，lgb是leaf-wise，level-wise指在树分裂的过程中，同一层的非叶子节点，只要继续分裂能够产生正的增益就继续分裂下去，而leaf-wise更苛刻一点，同一层的非叶子节点，仅仅选择分裂增益最大的叶子节点进行分裂。
+
+6. LightGBM 采用**优化后的特征并行、数据并行方法加速计算**，当数据量非常大的时候还可以采用投票并行的策略；
+
+7. LightGBM 对**缓存也进行了优化，增加了 Cache hit 的命中率**。
 
 
 
+**缺点：**直方图较为粗糙，会损失一定精度，但是在gbm的框架下，基学习器的精度损失可以通过引入更多的tree来弥补。
 
+# 代码
 
-
-# [sklearn参数](https://blog.csdn.net/hnlylnjyp/article/details/90382417)
+## [sklearn参数](https://blog.csdn.net/hnlylnjyp/article/details/90382417)
 https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html
-# [LightGBM参数](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst)
-## 针对leaf-wise树的参数优化
+## [LightGBM参数](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst)
+### 针对leaf-wise树的参数优化
 - num_leaves:控制了叶节点的数目。它是控制树模型复杂度的主要参数。如果是level-wise，则该参数为，其中depth为树的深度。但是当叶子数量相同时，leaf-wise的树要远远深过level-wise树，非常容易导致过拟合。因此应该让num_leaves小于。在leaf-wise树中，并不存在depth的概念。因为不存在一个从leaves到depth的合理映射。
 - min_data_in_leaf: 每个叶节点的最少样本数量。它是处理leaf-wise树的过拟合的重要参数。将它设为较大的值，可以避免生成一个过深的树。但是也可能导致欠拟合。
 - max_depth：控制了树的最大深度。该参数可以显式的限制树的深度。
-## 针对更快的训练速度
+### 针对更快的训练速度
 - 设置 bagging_fraction 和 bagging_freq 参数来使用 bagging 方法
  -设置 feature_fraction 参数来使用特征的子抽样
 - 使用较小的 max_bin
 - 使用 save_binary 在未来的学习过程对数据加载进行加速
-## 获得更好的准确率
+### 获得更好的准确率
 - 使用较大的 max_bin （学习速度可能变慢）
 - 使用较小的 learning_rate 和较大的 num_iterations
 - 使用较大的 num_leaves （可能导致过拟合）
 - 使用更大的训练数据
 - 尝试DART
-## 缓解过拟合
+### 缓解过拟合
 - 使用较小的 max_bin， 分桶粗一些
 - 使用较小的 num_leaves   不要在单棵树分的太细
 - 使用 lambda_l1, lambda_l2 和 min_gain_to_split 来使用正则
