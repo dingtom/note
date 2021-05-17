@@ -99,13 +99,20 @@ LightGBM 原生支持类别特征，采用 many-vs-many 的切分方式将类别
 
 
 
-**缺点：**直方图较为粗糙，会损失一定精度，但是在gbm的框架下，基学习器的精度损失可以通过引入更多的tree来弥补。
+**缺点**：直方图较为粗糙，会损失一定精度，但是在gbm的框架下，基学习器的精度损失可以通过引入更多的tree来弥补。
 
 # 代码
 
-## [sklearn参数](https://blog.csdn.net/hnlylnjyp/article/details/90382417)
+## sklearn参数
+
+https://blog.csdn.net/hnlylnjyp/article/details/90382417
+
+## LightGBM参数
+
 https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html
-## [LightGBM参数](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst)
+
+https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst
+
 ### 针对leaf-wise树的参数优化
 - num_leaves:控制了叶节点的数目。它是控制树模型复杂度的主要参数。如果是level-wise，则该参数为，其中depth为树的深度。但是当叶子数量相同时，leaf-wise的树要远远深过level-wise树，非常容易导致过拟合。因此应该让num_leaves小于。在leaf-wise树中，并不存在depth的概念。因为不存在一个从leaves到depth的合理映射。
 - min_data_in_leaf: 每个叶节点的最少样本数量。它是处理leaf-wise树的过拟合的重要参数。将它设为较大的值，可以避免生成一个过深的树。但是也可能导致欠拟合。
