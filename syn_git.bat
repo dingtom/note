@@ -5,7 +5,8 @@ python toc.py
                     ::C:\Users\liang\Desktop> 就是echo off 命令的回显%
 git status
 git add .
-git commit -m %date:~0,8%
+git commit -m %date:~0,4%%date:~5,2%%date:~8,2%0%time:~1,1%%time:~3,2%%time:~6,2%
+::%date:~0,8%
                   ::%time:~0,8%
 git push
 pause
