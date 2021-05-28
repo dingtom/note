@@ -16,12 +16,20 @@
 - [ 宏平均（Macro-averaging）和微平均（Micro-averaging）：](#head16)
 	- [Multi-class classification](#head17)
 - [8.混淆矩阵confusion matrix：](#head18)
+
+
+
+
+
+
 ![](https://upload-images.jianshu.io/upload_images/18339009-61f9cf3c7b3600d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 # <span id="head1"> 回归</span>
 ## <span id="head2">RMSE（Root Mean Square Error）均方根误差</span>
-衡量观测值与真实值之间的偏差。常用来作为机器学习模型预测结果衡量的标准。~~如果存在个别偏离程度非常大的离群点（ Outlier）时，即使离群点数量非常少，也会让RMSE指标变得很差。~~
+衡量观测值与真实值之间的偏差。常用来作为机器学习模型预测结果衡量的标准。**如果存在个别偏离程度非常大的离群点（ Outlier）时，即使离群点数量非常少，也会让RMSE指标变得很差。**
  $RMSE = \sqrt{\frac{1}{m} 
  \sum_{i=1}^{m}(\hat{y_i}-y_i)^2} $ 
+
 ## <span id="head3">MSE（Mean Square Error）均方误差</span>
 通过平方的形式便于求导，所以常被用作线性回归的损失函数。
 $MSE = \frac{1}{m} 
@@ -249,14 +257,17 @@ plot_pdf(y_pred, y_test, 'Keras')
 # <span id="head16"> 宏平均（Macro-averaging）和微平均（Micro-averaging）：</span>
 
 用途：用于多个类别的分类
-宏平均：是先对每一个类统计指标值，然后在对所有类求算术平均值。
+宏平均：先计算每一类的F1，然后3类求平均。
 
-微平均：是对数据集中的每一个实例不分类别进行统计建立全局混淆矩阵，然后计算相应指标。
+微平均：先计算出所有类别总共的TP，FP和FN，然后按公式求。
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-f1c02a2540993c29.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-4ab30c4df81575e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+![](https://i.loli.net/2021/05/18/wUd9HlnC1jNpfim.png)
+
 ## <span id="head17">Multi-class classification</span>
+
 ```
 
 from sklearn.datasets import make_classification
@@ -392,7 +403,7 @@ plt.show()
 
 # <span id="head18">8.混淆矩阵confusion matrix：</span>
 
-![混淆矩阵的每一列代表了~~预测类别~~每一行代表了数据的~~真实类别~~](https://upload-images.jianshu.io/upload_images/18339009-5e76761a1c380552.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![混淆矩阵的每一列代表了**预测类别**每一行代表了数据的**真实类别**](https://upload-images.jianshu.io/upload_images/18339009-5e76761a1c380552.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-8a1b811436e18079?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 

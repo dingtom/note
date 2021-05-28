@@ -22,9 +22,8 @@
 		- [ 针对更快的训练速度](#head22)
 		- [ 获得更好的准确率](#head23)
 		- [ 缓解过拟合](#head24)
-	- [ LightGBM的调参过程和RF、GBDT等类似，其基本流程如下：](#head25)
-	- [ sklearn接口形式的Lightgbm](#head26)
-	- [ 在Linux下很方便的就可以开启GPU训练。可以优先选用从pip安装，如果失败再从源码安装。](#head27)
+	- [ LightGBM的调参基本流程](#head25)
+	- [ sklearn例子](#head26)
 # <span id="head1"> 数学原理</span>
 ## <span id="head2"> 单边梯度抽样算法</span>
 GBDT 算法的梯度大小可以反应样本的权重，梯度越小说明模型拟合的越好，**单边梯度抽样算法（Gradient-based One-Side Sampling, GOSS）利用这一信息对样本进行抽样，减少了大量梯度小的样本，在接下来的计算锅中只需关注梯度高的样本，极大的减少了计算量**。
@@ -66,10 +65,16 @@ EFB 算法利用特征和特征间的关系构造一个加权无向图，并将�
 ## <span id="head10">带深度限制的 Leaf-wise 算法</span>
 在建树的过程中有两种策略：
 - Level-wise：基于层进行生长，直到达到停止条件；
+
+  XGBoost 采用 Level-wise 的增长策略，**方便并行计算每一层的分裂节点**，提高了训练速度，但同时也因为节点增益过小增加了很多不必要的分裂，增加了计算量；
+
 - Leaf-wise：每次分裂增益最大的叶子节点，直到达到停止条件。
 
-XGBoost 采用 Level-wise 的增长策略，方便并行计算每一层的分裂节点，提高了训练速度，但同时也因为节点增益过小增加了很多不必要的分裂，增加了计算量；LightGBM 采用 **Leaf-wise 的增长策略减少了计算量，配合最大深度的限制防止过拟合，由于每次都需要计算增益最大的节点，所以无法并行分裂**。
-![](https://upload-images.jianshu.io/upload_images/18339009-9a46bf032cbe8e13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+  LightGBM 采用 **Leaf-wise 的增长策略减少了计算量，配合最大深度的限制防止过拟合，由于每次都需要计算增益最大的节点，所以无法并行分裂**。
+
+  > xgb是level-wise，lgb是leaf-wise，level-wise指在树分裂的过程中，同一层的非叶子节点，只要继续分裂能够产生正的增益就继续分裂下去，而leaf-wise更苛刻一点，同一层的非叶子节点，仅仅选择分裂增益最大的叶子节点进行分裂。
+
+  ![](https://upload-images.jianshu.io/upload_images/18339009-9a46bf032cbe8e13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## <span id="head11"> 类别特征最优分割</span>
 大部分的机器学习算法都不能直接支持类别特征，一般都会对类别特征进行编码，然后再输入到模型中。常见的处理类别特征的方法为 one-hot 编码，但我们知道对于决策树来说并不推荐使用 one-hot 编码：
@@ -118,8 +123,6 @@ LightGBM 原生支持类别特征，采用 many-vs-many 的切分方式将类别
 
 5. LightGBM 采用了**基于 Leaf-wise 算法的增长策略构建树，减少了很多不必要的计算量**；
 
-   > xgb是level-wise，lgb是leaf-wise，level-wise指在树分裂的过程中，同一层的非叶子节点，只要继续分裂能够产生正的增益就继续分裂下去，而leaf-wise更苛刻一点，同一层的非叶子节点，仅仅选择分裂增益最大的叶子节点进行分裂。
-
 6. LightGBM 采用**优化后的特征并行、数据并行方法加速计算**，当数据量非常大的时候还可以采用投票并行的策略；
 
 7. LightGBM 对**缓存也进行了优化，增加了 Cache hit 的命中率**。
@@ -162,8 +165,10 @@ https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst
 - 尝试 max_depth 来避免生成过深的树
 - 使用 min_data_in_leaf 和 min_sum_hessian_in_leaf， 确保叶子节点有足够多的数据
 
+## <span id="head25"> LightGBM的调参基本流程</span>
 
-## <span id="head25"> LightGBM的调参过程和RF、GBDT等类似，其基本流程如下：</span>
+过程和RF、GBDT等类似
+
 首先选择较高的学习率，设置lr=0.1，这样是为了加快收敛的速度。然后对决策树基本参数调参；正则化参数调参；最后降低学习率，这里是为了最后提高准确率
 
 原生形式使用lightgbm
@@ -293,7 +298,7 @@ print("acc:",metrics.accuracy_score(y_test,y_pre))
 print("auc:",metrics.roc_auc_score(y_test,y_pre))
 ```
 
-## <span id="head26"> sklearn接口形式的Lightgbm</span>
+## <span id="head26"> sklearn例子</span>
 ```
 from sklearn.model_selection import GridSearchCV
 # 加载数据
@@ -326,11 +331,10 @@ gbm.fit(X_train, y_train)
 print('Best parameters found by grid search are:', gbm.best_params_)
 ```
 
-
-## <span id="head27"> 在Linux下很方便的就可以开启GPU训练。可以优先选用从pip安装，如果失败再从源码安装。</span>
+**在Linux下很方便的就可以开启GPU训练。可以优先选用从pip安装，如果失败再从源码安装。**
 
 安装方法：从源码安装
-```
+```python
 git clone --recursive https://github.com/microsoft/LightGBM ; 
 cd LightGBM
 mkdir build ; cd build

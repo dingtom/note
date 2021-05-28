@@ -99,7 +99,10 @@ apk路径则可以直接将apk文件拖进cmd窗口，记得加空格。
 -k 卸载应用但保留数据和缓冲 
 ![image.png](https://upload-images.jianshu.io/upload_images/18339009-f19e1b8d313ae484.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+```adb shell pm uninstall --user 0 com.miui.systemAdSolution```
+
 ###### 删除系统应用：
+
 ```adb remount ```（重新挂载系统分区，使系统分区重新可写）。
 有些设备并不能直接adb remount，必须要先以root身份进入，先执行```adb root```，在执行adb remount
 ```adb shell```
