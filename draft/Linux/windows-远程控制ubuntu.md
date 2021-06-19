@@ -11,9 +11,12 @@ Ubuntu主机没有开启SSH服务，需要开启openssh-server：
 ```rz```把Windows的文件上传到linux服务器上
 ```sz```下载
 
-#### 
+# Screen
+
 解决ssh进行远程连接的时候，有时候如果不小心断了连接之后，正在进行的任务就会被杀死
+
 ```sudo apt install screen```
+
 ```
 screen -S yourname -> 新建一个叫yourname的session
 screen -ls         -> 列出当前所有的session

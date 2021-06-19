@@ -12,21 +12,22 @@ ubuntu安装 Docker 的时候需在管理员的账号下操作。
 
 #### 创建一个新的容器并运行一个命令：run
 https://www.runoob.com/docker/docker-run-command.html
+
 ```docker run -d(后台运行不阻塞shell） -p 80:80（指定容器端口映射，内部：外部） <mirror name>:<version>```
+
+```sudo docker run -it 76c152fbfd03 /bin/bash```
 
 >- -d：后台运行容器
 >- -h: 指定容器的hostname；
->  -p：主机端口号:容器端口号```容器内外端口映射
->  --name name：指定容器名称
->  -v <外部 dir>:< 内部 dir>：目录映射1
->  <mirror name>:<version>：指定映像版本
->  -it：在容器启动后直接进入，-i：交互式操作，一个是 -t 终端  后面加/bin/bash
->  --link：将另一个容器映射到本容器，进行通信
->  --restart=always：因某种错误而停止运行时，能够自动重启
->
->`--rm`：这个参数是说容器退出后随之将其删除
->
->`bash`：放在镜像名后的是 **命令**，这里我们希望有个交互式 Shell，因此用的是 `bash`。
+> - -p：主机端口号:容器端口号```容器内外端口映射
+> -  --name name：指定容器名称
+> -  -v <外部 dir>:< 内部 dir>：目录映射1
+> -  <mirror name>:<version>：指定映像版本
+> -  -it：在容器启动后直接进入，-i：交互式操作，一个是 -t 终端  后面加/bin/bash
+> -  --link：将另一个容器映射到本容器，进行通信
+> -  --restart=always：因某种错误而停止运行时，能够自动重启
+>- --rm`：这个参数是说容器退出后随之将其删除`
+>- /bin/bash`：放在镜像名后的是 **命令**，这里我们希望有个交互式 Shell，因此用的是 `bash。
 >
 >
 
@@ -34,12 +35,14 @@ https://www.runoob.com/docker/docker-run-command.html
 https://www.runoob.com/docker/docker-start-stop-restart-command.html
 #### 杀掉容器：kill
 https://www.runoob.com/docker/docker-kill-command.html
+
 快速停止容器
 
 
 
 #### 删除容器：rm
 https://www.runoob.com/docker/docker-rm-command.html
+
 ```docker rm -f container_id```
 
 如果容器还在运行，则会删除失败，应先结束掉容器：
@@ -48,6 +51,7 @@ https://www.runoob.com/docker/docker-rm-command.html
 
 #### 暂停/恢复容器中进程：pause/unpause
 https://www.runoob.com/docker/docker-pause-unpause-command.html
+
 如果只是希望容器暂停工作一段时间，比如对容器的文件系统大打个快照，或者 docker host 需要使用 CPU，这是可以执行 docker pause 将其暂停。处于暂停状态的容器不会占用 CPU，直到通过 docker unpause 恢复运行。
 
 #### 创建容器：create
@@ -57,6 +61,7 @@ https://www.runoob.com/docker/docker-create-command.html
 
 #### 进入容器：exec
 https://www.runoob.com/docker/docker-exec-command.html
+
 ```docker exec -it container_id bash```
 
 
@@ -65,6 +70,7 @@ https://www.runoob.com/docker/docker-exec-command.html
 
 #### 查看正在运行的容器：ps
 https://www.runoob.com/docker/docker-ps-command.html
+
 ```docker ps```
 
 #### inspect
@@ -87,8 +93,10 @@ https://www.runoob.com/docker/docker-port-command.html
 ### 容器rootfs命令
 
 #### 从容器创建一个新的镜像：commit
-https://www.runoob.com/docker/docker-commit-command.html)
+https://www.runoob.com/docker/docker-commit-command.html
+
 ```docker commit container_id  mirror_name```我们修改过后的容器保存成镜像，重新运行，它可以保持这个变化
+
 >-a :提交的镜像作者；
 -c :使用Dockerfile指令来创建镜像；
 -m :提交时的说明文字；
@@ -106,6 +114,7 @@ https://www.runoob.com/docker/docker-diff-command.html
 https://www.runoob.com/docker/docker-login-command.html
 #### 拉取或者更新镜像：pull
 https://www.runoob.com/docker/docker-pull-command.html
+
 ```docker pull nginx（等效于nginx:latest）```
 
 #### push
@@ -142,6 +151,7 @@ docker tag registry.cn-shanghai.aliyuncs.com/test/pytorch:myversion my_tmp_versi
 
 #### 使用Dockerfile构建镜像：build
 https://www.runoob.com/docker/docker-build-command.html
+
 ```docker build -t mirror_name 存放Dockerfile的文件夹```
 
 注意一般文件名命名为Dockerfile 无后缀名，如果命名为其他名字，构建时需要额外指定文件名
@@ -222,6 +232,8 @@ CMD ["sh", "run.sh"]
 https://www.runoob.com/docker/docker-history-command.html
 #### 镜像保存为tar：save
 https://www.runoob.com/docker/docker-save-command.html
+
+=
 
 ```docker save mirror_name > .tar```
 #### 从tar加载镜像：load
