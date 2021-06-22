@@ -2,20 +2,30 @@
 - [ 添加文件到Git仓库： ](#head2)
 - [ 随时掌握工作区的状态，使用git status命令。](#head3)
 - [ 在版本的历史之间穿梭](#head4)
-- [ 把当前工作现场“储藏”起来，等以后恢复现场后继续工作](#head5)
-- [ rebase把本地未push的分叉提交历史整理成直线；](#head6)
-- [ 打标签](#head7)
-- [ 忽略文件](#head8)
-	- [ 删除track的文件](#head9)
-- [ 命令简写](#head10)
-- [ 搭建一台Git服务器作为私有仓库使用。](#head11)
+	- [ 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步](#head5)
+	- [ 从版本库中删除该文件](#head6)
+- [ 第1步：创建SSH Key：   ](#head7)
+- [ 把当前工作现场“储藏”起来，等以后恢复现场后继续工作](#head8)
+- [ rebase把本地未push的分叉提交历史整理成直线；](#head9)
+- [ 打标签](#head10)
+- [ 忽略文件](#head11)
+	- [ 删除track的文件](#head12)
+- [ 命令简写](#head13)
+- [ 搭建一台Git服务器作为私有仓库使用。](#head14)
+
+
 # <span id="head1"> 安装Git </span>
+
 Linux
+
 ```  sudo apt-get install git```
+
 Windows
+
  [下载安装程序](https://git-scm.com/downloads)，（网速慢的同学请移步[国内镜像]((https://npm.taobao.org/mirrors/git-for-windows/)
 )）
 安装完成后，在开始菜单里找到“Git”->“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！ 
+
 ###### 还需要最后一步设置，在命令行输入自报家门： 
 ```
  git config --global user.name "dingto" 
@@ -23,8 +33,9 @@ Windows
 ```
 # Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。 
 **Git管理的是修改，而不是文件**
-  ######工作区（Working Directory） 
+  ###### 工作区（Working Directory） 
   就是你在电脑里能看到的目录，比如我的learngit文件夹就是一个**工作区**： 
+
  ###### 版本库（Repository） 
   工作区有一个隐藏目录.git，这个不算工作区，而是Git的**版本库**。 
 
@@ -32,12 +43,19 @@ Windows
 还有Git为我们自动创建的**第一个分支master，以及指向master的一个指针叫HEAD** 
 
 # 创建一个版本库 
+
 ```git init xx```
+
 # <span id="head2"> 添加文件到Git仓库： </span>
 第一步是用git add把文件添加进去，实际上就是把文件修改**添加到暂存区**
+
 ```git add xx```  / ```git add .```
+
   第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
+
 ```git commit -m "xx"```
+
+
 
 # <span id="head3"> 随时掌握工作区的状态，使用git status命令。</span>
 如果```git status```告诉你有文件被修改过，
@@ -46,11 +64,14 @@ Windows
 
 # <span id="head4"> 在版本的历史之间穿梭</span>
 
-*   穿梭前，用```git log```可以查看提交历史，以便确定要回退到哪个版本。
-*   要重返未来，用```git reflog```查看命令历史，以便确定要回到未来的哪个版本
-  如果嫌输出信息太多，加上--pretty=oneline
-```git log --graph --pretty=oneline --abbrev-commit  ```
-``` git reset --hard HEAD^  ```HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
+* 穿梭前，用```git log```可以查看提交历史，以便确定要回退到哪个版本。
+
+* 要重返未来，用```git reflog```查看命令历史，以便确定要回到未来的哪个版本
+    如果嫌输出信息太多，加上--pretty=oneline
+
+  ```git log --graph --pretty=oneline --abbrev-commit  ```
+
+  ``` git reset --hard HEAD^  ```HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
 
 ```git reset --hard commit_id```穿梭
 
@@ -58,11 +79,13 @@ Windows
 # 直接丢弃工作区的修改
 ```git checkout -- file```
 
- ######当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步
+
+
+###### <span id="head5"> 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步</span>
 第一步用命令```git reset HEAD <file>```，就回到了场景1，
 第二步按场景1操作。 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。  
 
-######从版本库中删除该文件
+###### <span id="head6"> 从版本库中删除该文件</span>
 用命令```git rm```删掉，并且```git commit ``` 
 
 另一种情况是删错了，因为版本库里还有    
@@ -74,14 +97,19 @@ Windows
 
 
 #  本地Git仓库和GitHub仓库
-   第1步：创建SSH Key：   
+##### <span id="head7"> 第1步：创建SSH Key：   </span>
+
 ```ssh-keygen -t rsa -C "2524370217@qq.com" ```
-在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
-   第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：   
-   然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：   
-首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：  
+
+在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
+
+##### 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：   
+
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：   
+首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：  
 在本地关联的就是我的远程库```git remote add origin git@github.com:git名/库名.git   ```
-   把本地库的所有内容推送到远程库上： ```git push -u origin master```由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+把本地库的所有内容推送到远程库上： ```git push -u origin master```由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
 
  从现在起，只要本地作了提交，就可以通过命令：``` git push origin master     ```同步到远程仓库
 
@@ -112,6 +140,7 @@ git push -u origin main
 
   删除分支：```git branch -d 分支名     ```
  如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。   
+
   ### 当Git无法自动合并分支
 必须首先解决冲突。解决冲突后，再提交，合并完成。    
 
@@ -120,7 +149,7 @@ git push -u origin main
    用```git log --graph```命令可以看到分支合并图。    
 
 
-# <span id="head5"> 把当前工作现场“储藏”起来，等以后恢复现场后继续工作</span>
+# <span id="head8"> 把当前工作现场“储藏”起来，等以后恢复现场后继续工作</span>
  ```git stash ```
 
 ```git stash list```看刚才的工作现场
@@ -153,7 +182,7 @@ git push -u origin main
 如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令``` git branch --set-upstream-to=origin/dev dev```
 
 
-# <span id="head6"> rebase把本地未push的分叉提交历史整理成直线；</span>
+# <span id="head9"> rebase把本地未push的分叉提交历史整理成直线；</span>
 
 
 - rebase之前需要经master分支拉到最新
@@ -164,7 +193,7 @@ git push -u origin main
 
 - 执行git rebase master，有冲突就解决冲突，解决后直接git add . 再git - rebase --continue即可
 
-# <span id="head7"> 打标签</span>
+# <span id="head10"> 打标签</span>
 首先，切换到需要打标签的分支上,敲命令```git tag <name>```就可以打一个新标签
 查看所有标签:```git tag```
 
@@ -185,14 +214,14 @@ git push -u origin main
 如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：```git tag -d v0.9```然后，从远程删除。删除命令也是push，但是格式如下：```git push origin :refs/tags/v0.9```
 要看看是否真的从远程库删除了标签，可以登陆GitHub查看。
 
-# <span id="head8"> 忽略文件</span>
+# <span id="head11"> 忽略文件</span>
 ```touch .gitignore```
 
 所有配置文件可以直接在线浏览：[https://github.com/github/gitignore](https://github.com/github/gitignore)
 
 ```.gitignore```只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。所以一定要养成在项目开始就创建.gitignore文件的习惯。
 
-##### <span id="head9"> 删除track的文件</span>
+##### <span id="head12"> 删除track的文件</span>
 - 把文件移走
 - git rm 文件
 - git commit  -m "删除不需要的文件"
@@ -222,7 +251,7 @@ tmp/*.txt：只忽略tmp目录下的.txt文件
 **/foo：可以忽略/foo, a/foo, a/b/foo等
 ```
 
-# <span id="head10"> 命令简写</span>
+# <span id="head13"> 命令简写</span>
 很多人都用co表示checkout，ci表示commit，br表示branch：
 
 ```git config --global alias.co checkout```
@@ -248,7 +277,7 @@ co = checkout ci = commit br = branch st = status [user] name = Your Name email 
 配置别名也可以直接修改这个文件，如果改错了，可以删掉文件重新通过命令配置。
 
 
-# <span id="head11"> 搭建一台Git服务器作为私有仓库使用。</span>
+# <span id="head14"> 搭建一台Git服务器作为私有仓库使用。</span>
 推荐用Ubuntu或Debian，这样，通过几条简单的apt命令就可以完成安装。假设你已经有sudo权限的用户账号，下面，正式开始安装。
 第一步，安装git：
 ````sudo apt-get install git```
