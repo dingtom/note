@@ -21,7 +21,7 @@ for(i=0;i<35;i++){
     log(i)
     swipe(300,1000,800,1000,100)
     if(textContains('明日').exists()){
-        log('mingitanzailai')
+        log('明天再来')
         back();
         break;
         customSleep(getRandom(2,4));
@@ -46,7 +46,7 @@ swipe(300,1000,800,1000,100)
 var kw = ["去浏览","去变美","去搜索","去观看","去完成","去逛逛"];
 while(true){
     var flag=false  //
-    log('!!!!!开始循环')
+    log('开始找任务')
     for(i=0;i<kw.length;i++){ //！！！！！！！！！！！！！！数组从0开始
         log(i, kw[i])
         if(textContains(kw[i]).exists()){
@@ -70,6 +70,17 @@ function clickByTextName(textName){
     customSleep(getRandom(19,21));
     ifSign();
     backByFinish();
+    // 关掉签到打开的弹窗
+    var tc=['离开','收下','再来', '晚点']
+    for(i=0;i<tc.length;i++){
+        customSleep(getRandom(2,4));
+        if(textContains(tc[i]).exists()){
+            log('出现啦'+tc[i])
+            textContains(tc[i]).findOne().click();
+            customSleep(getRandom(1,2));
+        }
+    }
+    customSleep(getRandom(2,4));
 }
 //    体眠函数
 function customSleep(time){
@@ -115,17 +126,6 @@ function ifSign(){
     if(flag){
         log("    去签到");
         customSleep(getRandom(3,4)); //弹窗出现的较晚
-        // 关掉签到打开的弹窗
-        var tc=['离开','收下','再来']
-        for(i=0;i<tc.length;i++){
-            log('11111111111111111', i, tc[i])
-            customSleep(getRandom(2,4));
-            if(textContains(tc[i]).exists()){
-                log('出现啦'+tc[i])
-                textContains(tc[i]).findOne().click();
-                customSleep(getRandom(1,2));
-            }
-    }
     }
 
 }
