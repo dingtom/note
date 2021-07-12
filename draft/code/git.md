@@ -1,5 +1,20 @@
 
 
+**Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。 Git管理的是修改，而不是文件**
+
+![](https://i.loli.net/2021/06/23/fPtkTSNQoch6sd1.png)
+
+  ##### 工作区（Working Directory） 
+
+  就是你在电脑里能看到的目录，比如我的learngit文件夹就是一个**工作区**： 
+
+ ##### 版本库（Repository） 
+
+  工作区有一个隐藏目录.git，这个不算工作区，而是Git的**版本库**。 
+
+  Git的版本库里存了很多东西，其中最重要的就是称为**stage（或者叫index）的暂存区**，
+还有Git为我们自动创建的**第一个分支master，以及指向master的一个指针叫HEAD** 
+
 # 安装Git 
 
 Linux
@@ -12,21 +27,16 @@ Windows
 )）
 安装完成后，在开始菜单里找到“Git”->“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！ 
 
-###### 还需要最后一步设置，在命令行输入自报家门： 
-```
- git config --global user.name "dingto" 
- git config --global user.email "2524370217@" 
-```
-# Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。 
-**Git管理的是修改，而不是文件**
-  ###### 工作区（Working Directory） 
-  就是你在电脑里能看到的目录，比如我的learngit文件夹就是一个**工作区**： 
+ **！！！如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。**
 
- ###### 版本库（Repository） 
-  工作区有一个隐藏目录.git，这个不算工作区，而是Git的**版本库**。 
 
-  Git的版本库里存了很多东西，其中最重要的就是称为**stage（或者叫index）的暂存区**，
-还有Git为我们自动创建的**第一个分支master，以及指向master的一个指针叫HEAD** 
+
+ **还需要最后一步设置，在命令行输入自报家门：** 
+
+```
+ git config --global user.name "dingtom" 
+ git config --global user.email "2524370217@qq.com" 
+```
 
 # 创建一个版本库 
 
@@ -41,9 +51,7 @@ Windows
 
 ```git commit -m "xx"```
 
-
-
-# 随时掌握工作区的状态，使用git status命令。
+# 工作区的状态git status
 如果```git status```告诉你有文件被修改过，
 
 用```git diff```未commit前可看修改内容。
@@ -56,50 +64,68 @@ Windows
     如果嫌输出信息太多，加上--pretty=oneline
 
   ```git log --graph --pretty=oneline --abbrev-commit  ```
+- 穿梭
+  
+  ``` git reset --hard HEAD^  ```
+  
+  HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
 
-  ``` git reset --hard HEAD^  ```HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
-
-```git reset --hard commit_id```穿梭
-
-
-# 直接丢弃工作区的修改
-```git checkout -- file```
-
+​        ```git reset --hard commit_id```
 
 
- ###### 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步
-第一步用命令```git reset HEAD <file>```，就回到了场景1，
+# 丢弃工作区的修改
+```git checkout -- xx```
+
+`--`很重要，没有`--`，就变成了“切换到另一个分支”的命令
+
+##### 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步
+第一步用命令```git reset HEAD xx```，就回到了场景1，用`HEAD`时，表示最新的版本。
 第二步按场景1操作。 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。  
 
-###### 从版本库中删除该文件
-用命令```git rm```删掉，并且```git commit ``` 
+##### 从版本库中删除该文件
+删错了，因为版本库里还有   
 
-另一种情况是删错了，因为版本库里还有    
-``` git checkout filename ```其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。   
+``` git checkout -- filename ```
 
-当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了, 可以使用```git rm``` 
+当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了
+
+```git rm``` 
+
 当我们需要删除暂存区或分支上的文件, 但本地又需要使用, 只是不希望这个文件被版本控制, 可以使用
+
 ```git rm --cached```
 
 
 #  本地Git仓库和GitHub仓库
 #####  第1步：创建SSH Key：   
 
-```ssh-keygen -t rsa -C "2524370217@qq.com" ```
+```ssh-keygen -t rsa -C "2524370217@qq.com" ```
 
 在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
 
 ##### 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：   
 
 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：   
+
 首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：  
-在本地关联的就是我的远程库```git remote add origin git@github.com:git名/库名.git   ```
 
-把本地库的所有内容推送到远程库上： ```git push -u origin master```由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+在本地关联的就是我的远程库：
 
- 从现在起，只要本地作了提交，就可以通过命令：``` git push origin master     ```同步到远程仓库
+```git remote add origin git@github.com:git名/库名.git   ```
 
-取消本地目录下关联的远程库：```git remote remove origin```
+把本地库的所有内容推送到远程库上：
+
+ ```git push -u origin master```
+
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+ 从现在起，只要本地作了提交，同步到远程仓库通过命令：
+
+``` git push origin master     ```
+
+取消本地目录下关联的远程库：
+
+```git remote remove origin```
 
 ```
 git init
@@ -152,7 +178,8 @@ git push -u origin main
 
 
 # 推送分支
-当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。      
+当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。      
+
 查看远程库的信息，```git remote -v```
 
 推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：```git push origin master ```       
