@@ -14,12 +14,15 @@ def send_an_email(email_content): # email_content是一个字符串
     mail_auth_code = '9f8f7149d10d0b1f'
     mail_sender = mail_user # 用mail_user 作为发送人
     mail_receivers = ['2524370217@qq.com']
+    
     message = MIMEMultipart()
     message['From'] = Header(mail_sender)  # 寄件人
     message['Subject'] = Header("主题名字")
     message.attach(MIMEText(asctime(), 'plain', 'utf-8'))
+    # message.attach(MIMEText('<html><h1>你好<h1></html>', 'html', 'utf-8'))
     message.attach(MIMEText(email_content, 'plain', 'utf-8'))
     print("message is {}".format(message.as_string())) # debug用
+    
     smtpObj = smtplib.SMTP(mail_host)
     # smtpObj.set_debuglevel(1) # 同样是debug用的
     smtpObj.login(mail_user, mail_auth_code) # 登陆
