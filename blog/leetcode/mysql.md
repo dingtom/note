@@ -57,10 +57,11 @@
 - [ fetchone()：返回一条结果行；](#head57)
 - [ fetchmany(size)：接收size条返回结果行。如果size的值大于返回的结果行的数量，则会返回cursor.arraysize条数据；](#head58)
 - [ fetchall()：接收全部的返回结果行；](#head59)
-	- [ 滑动窗口函数](#head60)
-		- [ Preceding](#head61)
-		- [ Following](#head62)
-		- [ preceding跟following相结合](#head63)
+- [ 关闭数据库连接](#head60)
+	- [ 滑动窗口函数](#head61)
+		- [ Preceding](#head62)
+		- [ Following](#head63)
+		- [ preceding跟following相结合](#head64)
 [TOC]
 # <span id="head1">安装 </span>
 ## <span id="head2"> win</span>
@@ -96,7 +97,8 @@ default-character-set=utf8
 port=3306
 default-character-set=utf8
 ```
-管理员权限下运行cmd
+**管理员权限**下运行cmd
+
 ```
 mysqld -install
 # 执行初始化代码（会在根目录创建data文件夹，并创建root用户）
@@ -612,6 +614,9 @@ cursor.execute(sql)
 # <span id="head59"> fetchall()：接收全部的返回结果行；</span>
 data = cursor.fetchone()
 print(data)
+#关闭游标
+cursor.close()    
+# <span id="head60"> 关闭数据库连接</span>
 db.close()
 ```
 # 使用pandas
@@ -774,20 +779,20 @@ CREATE TRIGGER tri_empDel AFTER DELETE ON employee FOR EACH ROW    -- 当往员�
 2 、在使用聚合函数做窗口函数时，SUM（）括号里必须有字段，得指定对哪些字段执行聚合的操作。在学习的初期很容易弄混，不同函数括号里是否需写相应的字段名；
 
 
-## <span id="head60"> 滑动窗口函数</span>
+## <span id="head61"> 滑动窗口函数</span>
 
-### <span id="head61"> Preceding</span>
+### <span id="head62"> Preceding</span>
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-5f33b14e770215a7?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-c048cc9e17b7073b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 Rows 2 preceding 中文的意思是之前的两行，preceding可以把它理解为不含当前行情况下截止到之前几行。根据上图可以看出在每一行，都会求出**当前行附近的3行(当前行+附近2行)数据的平均值**，这种方法也叫作**移动平均**。
 
-### <span id="head62"> Following</span>
+### <span id="head63"> Following</span>
 
 Rows 2 following 中文意思是之后的两行，跟preceding正好相反，Preceding是向前，following是向后。
 ![](https://upload-images.jianshu.io/upload_images/18339009-93d5c51eb26202a6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### <span id="head63"> preceding跟following相结合</span>
+### <span id="head64"> preceding跟following相结合</span>
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-4b2be94447f8744d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-85623bf00d8f8866?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

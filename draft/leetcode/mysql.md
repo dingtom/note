@@ -33,7 +33,8 @@ default-character-set=utf8
 port=3306
 default-character-set=utf8
 ```
-管理员权限下运行cmd
+**管理员权限**下运行cmd
+
 ```
 mysqld -install
 # 执行初始化代码（会在根目录创建data文件夹，并创建root用户）
@@ -549,6 +550,9 @@ cursor.execute(sql)
 # fetchall()：接收全部的返回结果行；
 data = cursor.fetchone()
 print(data)
+#关闭游标
+cursor.close()    
+# 关闭数据库连接
 db.close()
 ```
 # 使用pandas
