@@ -1,13 +1,4 @@
 - [ 安装Git ](#head1)
-- [ 添加文件到Git仓库： ](#head2)
-- [ 工作区的状态git status](#head3)
-- [ 在版本的历史之间穿梭](#head4)
-- [ 丢弃工作区的修改](#head5)
-	- [ 第1步：创建SSH Key：   ](#head6)
-- [ 分支管理](#head7)
-- [ 推送分支](#head8)
-- [显示过去5次提交 git log -5 --pretty --oneline](#head9)
-- [ 修改提交注释](#head10)
 
 
 **Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。 Git管理的是修改，而不是文件**
@@ -25,6 +16,12 @@
   Git的版本库里存了很多东西，其中最重要的就是称为**stage（或者叫index）的暂存区**，
 还有Git为我们自动创建的**第一个分支master，以及指向master的一个指针叫HEAD** 
 
+
+
+第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区
+
+第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
+
 # <span id="head1"> 安装Git </span>
 
 Linux
@@ -41,34 +38,29 @@ Windows
 
 
 
- **还需要最后一步设置，在命令行输入自报家门：** 
+#  自报家门
 
 ```
  git config --global user.name "dingtom" 
  git config --global user.email "2524370217@qq.com" 
 ```
-
 # 创建一个版本库 
+```
+git init xx
+第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区
+git add xx/ git add .
+第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
+git commit -m "xx"
+```
 
-```git init xx```
-
-# <span id="head2"> 添加文件到Git仓库： </span>
-第一步是用git add把文件添加进去，实际上就是把文件修改**添加到暂存区**
-
-```git add xx```  / ```git add .```
-
-  第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
-
-```git commit -m "xx"```
-
-# <span id="head3"> 工作区的状态git status</span>
+# 工作区的状态
 如果```git status```告诉你有文件被修改过，
 
 用```git diff```未commit前可看修改内容。
 
-# <span id="head4"> 在版本的历史之间穿梭</span>
+# 在版本的历史之间穿梭
 
-* 穿梭前，用```git log```可以查看提交历史，以便确定要回退到哪个版本。
+* 穿梭前，用```git log```可以查看提交历史，以便确定要回退到哪个版本。退出查看按q
 
 * 要重返未来，用```git reflog```查看命令历史，以便确定要回到未来的哪个版本
     如果嫌输出信息太多，加上--pretty=oneline
@@ -83,98 +75,135 @@ Windows
 ​        ```git reset --hard commit_id```
 
 
-# <span id="head5"> 丢弃工作区的修改</span>
-```git checkout -- xx```
+# 丢弃工作区的修改
+```
+git checkout -- xx
 
-`--`很重要，没有`--`，就变成了“切换到另一个分支”的命令
+--很重要，没有--，就变成了“切换到另一个分支”的命令
+```
 
-##### 当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步
-第一步用命令```git reset HEAD xx```，就回到了场景1，用`HEAD`时，表示最新的版本。
-第二步按场景1操作。 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。  
+**当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改**
 
-##### 从版本库中删除该文件
+分两步
+
+```
+第一步用命令git reset HEAD xx，就回到了场景1，用HEAD时，表示最新的版本。
+
+第二步按场景1操作。 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。 
+```
+
+**从版本库中删除该文件**
+
+```
 删错了，因为版本库里还有   
-
-``` git checkout -- filename ```
-
+git checkout -- filename 
 当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了
-
-```git rm``` 
-
+git rm 
 当我们需要删除暂存区或分支上的文件, 但本地又需要使用, 只是不希望这个文件被版本控制, 可以使用
+git rm --cached
+```
 
-```git rm --cached```
 
 
-#  本地Git仓库和GitHub仓库
-##### <span id="head6"> 第1步：创建SSH Key：   </span>
 
-```ssh-keygen -t rsa -C "2524370217@qq.com" ```
+#  本地仓库推送到远程仓库
+```
+第1步：创建SSH Key：   
+ssh-keygen -t rsa -C "2524370217@qq.com"
 
 在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
 
-##### 第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：   
-
-然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：   
-
+第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘id_rsa.pub文件的内容：   
 首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：  
-
 在本地关联的就是我的远程库：
+git remote add origin git@github.com:git名/库名.git   
 
-```git remote add origin git@github.com:git名/库名.git   ```
+把本地库的master分支内容推送到远程库上：
+git push -u origin master
 
-把本地库的所有内容推送到远程库上：
-
- ```git push -u origin master```
-
-由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
-
- 从现在起，只要本地作了提交，同步到远程仓库通过命令：
-
-``` git push origin master     ```
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。从现在起，只要本地作了提交，同步到远程仓库通过命令：
+git push  
+```
 
 取消本地目录下关联的远程库：
 
-```git remote remove origin```
-
 ```
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin git@github.com:dingtom/note.git
-git push -u origin main   
+git remote remove origin
 ```
 
+当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。      
 
-# <span id="head7"> 分支管理</span>
+```
+查看远程库的信息，
+git remote -v
 
-  查看分支：```git branch     ```
+推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上
+git push origin master       
+新分支推送到远程
+git push -u origin dev        
 
-  创建分支：```git branch 分支名   ```  
 
-  切换分支：```git checkout 分支名     ```
+多人协作的工作模式通常是这样
+现在我们的小伙伴要在dev分支上做开发，就必须把远程的origin的dev分支到本地来，于是可以使用命令创建本地dev分支：
+git checkout –b dev origin/dev
 
-  创建+切换分支：```git checkout -b 分支名     ```
+推送： 
+git push  origin dev        
 
-  合并某分支到当前分支：```git merge --no-ff -m "merge with no-ff" dev```
-```git merge 分支名    ``` 
+如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+如果合并有冲突，则解决冲突，并在本地提交； 没有冲突或者解决掉冲突后，再用push推送就能成功！ 
 
-  删除分支：```git branch -d 分支名     ```
- 如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。   
+如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令
+git branch --set-upstream-to=origin/dev dev
+```
 
-  ### 当Git无法自动合并分支
+
+
+
+# 分支管理
+
+```
+查看分支：
+git branch    
+创建分支：
+git branch 分支名  
+切换分支：
+git checkout 分支名   
+创建+切换分支：
+git checkout -b 分支名  
+
+合并某分支到当前分支：
+git merge --no-ff -m "merge with no-ff" dev
+git merge 分支名   
+
+删除分支：
+git branch -d 分支名     
+丢弃一个没有被合并过的分支，强行删除。
+git branch -D 分支名 
+
+```
+
+
+  ## 无法自动合并分支
 必须首先解决冲突。解决冲突后，再提交，合并完成。    
 
-   解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。    
+解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。    
 
    用```git log --graph```命令可以看到分支合并图。    
 
+# 把当前工作现场“储藏”起来
 
-# 把当前工作现场“储藏”起来，等以后恢复现场后继续工作
- ```git stash ```
+等以后恢复现场后继续工作
 
-```git stash list```看刚才的工作现场
+```
+git stash
+
+查看刚才的工作现场
+git stash list
+```
+
+
 
  工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：   
 
@@ -185,24 +214,6 @@ git push -u origin main
 修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；     
 
 当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。     
-
-
-# <span id="head8"> 推送分支</span>
-当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。      
-
-查看远程库的信息，```git remote -v```
-
-推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上：```git push origin master ```       
-
- 多人协作的工作模式通常是这样
-现在我们的小伙伴要在dev分支上做开发，就必须把远程的origin的dev分支到本地来，于是可以使用命令创建本地dev分支：
-```git checkout –b dev origin/dev```
-
-推送： ```git push origin dev ```       
-
- 如果推送失败，则因为远程分支比你的本地更新，需要先用```git pull```试图合并；
- 如果合并有冲突，则解决冲突，并在本地提交； 没有冲突或者解决掉冲突后，再用push推送就能成功！ 
-如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令``` git branch --set-upstream-to=origin/dev dev```
 
 
 # rebase把本地未push的分叉提交历史整理成直线；
@@ -254,8 +265,8 @@ git push -u origin main
 文件被.gitignore忽略了：可以用-f强制添加到Git：```git add -f App.class```
 
 或者你发现，可能是.gitignore写得有问题，需要找出来到底哪个规则写错了，可以用git check-ignore命令检查：
-```git check-ignore -v App.class ```
-```.gitignore:3:*.class App.class```
+​```git check-ignore -v App.class ```
+​```.gitignore:3:*.class App.class```
 Git会告诉我们，.gitignore的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。
 ```
 glob模式
@@ -278,8 +289,8 @@ tmp/*.txt：只忽略tmp目录下的.txt文件
 很多人都用co表示checkout，ci表示commit，br表示branch：
 
 ```git config --global alias.co checkout```
-```git config --global alias.ci commit```
-```git config --global alias.br branch```
+​```git config --global alias.ci commit```
+​```git config --global alias.br branch```
 
 --global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
 
@@ -303,16 +314,16 @@ co = checkout ci = commit br = branch st = status [user] name = Your Name email 
 # 搭建一台Git服务器作为私有仓库使用。
 推荐用Ubuntu或Debian，这样，通过几条简单的apt命令就可以完成安装。假设你已经有sudo权限的用户账号，下面，正式开始安装。
 第一步，安装git：
-````sudo apt-get install git```
+​````sudo apt-get install git```
 第二步，创建一个git用户，用来运行git服务：
-```sudo adduser git```
+​```sudo adduser git```
 第三步，创建证书登录：
 收集所有需要登录的用户的公钥，就是他们自己的id_rsa.pub文件，把所有公钥导入到/home/git/.ssh/authorized_keys文件里，一行一个。
 第四步，初始化Git仓库：
 先选定一个目录作为Git仓库，假定是/srv/sample.git，在/srv目录下输入命令：
-```sudo git init --bare sample.git```
+​```sudo git init --bare sample.git```
 Git就会创建一个裸仓库，裸仓库没有工作区，因为服务器上的Git仓库纯粹是为了共享，所以不让用户直接登录到服务器上去改工作区，并且服务器上的Git仓库通常都以.git结尾。然后，把owner改为git：
-```sudo chown -R git:git sample.git```
+​```sudo chown -R git:git sample.git```
 第五步，禁用shell登录：
 出于安全考虑，第二步创建的git用户不允许登录shell，这可以通过编辑/etc/passwd文件完成。找到类似下面的一行：
 git:x:1001:1001:,,,:/home/git:/bin/bash
@@ -321,7 +332,7 @@ git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
 这样，git用户可以正常通过ssh使用git，但无法登录shell，因为我们为git用户指定的git-shell每次一登录就自动退出。
 第六步，克隆远程仓库：
 现在，可以通过git clone命令克隆远程仓库了，在各自的电脑上运行：
-```git clone git@server:/srv/sample.git Cloning into 'sample'... warning: You appear to have cloned an empty repository.```
+​```git clone git@server:/srv/sample.git Cloning into 'sample'... warning: You appear to have cloned an empty repository.```
 剩下的推送就简单了。
 
 管理公钥
@@ -487,7 +498,7 @@ name=your name
 
 #显示指定文件相关的每一次diff  git log -p filename
 
-# <span id="head9">显示过去5次提交 git log -5 --pretty --oneline</span>
+# 显示过去5次提交 git log -5 --pretty --oneline
 
 #显示所有提交过的用户,按提交次数排序 git shortlog -sn
 
@@ -561,5 +572,6 @@ name=your name
 
 #生成一个可共发布的压缩包 git archive
 
-# <span id="head10"> 修改提交注释</span>
+# 修改提交注释
 git commit -v --amend
+
