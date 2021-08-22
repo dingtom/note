@@ -29,6 +29,7 @@
 	- [ 使用多线程提升IO密集任务效率](#head29)
 	- [ 可变数据类型和不可变数据类型](#head30)
 	- [深拷贝和浅拷贝的区别 ](#head31)
+- [bytes 和 str 的互相转换](#head32)
 Python是解释型语言，Python运行前不需要编译。动态类型的，这意味着你不需要在声明变量时指定类型
 
 - == 比较值，is比较ID(内存地址）
@@ -479,3 +480,12 @@ c = a[:]
 c[0] = 11
 print(a)    #  [9, 2, 3]  拷贝
 ```
+
+
+
+
+
+# <span id="head32">bytes 和 str 的互相转换</span>
+str.encode('utf-8')
+bytes.decode('utf-8')
+

@@ -448,3 +448,12 @@ c = a[:]
 c[0] = 11
 print(a)    #  [9, 2, 3]  拷贝
 ```
+
+
+
+
+
+# bytes 和 str 的互相转换
+str.encode('utf-8')
+bytes.decode('utf-8')
+

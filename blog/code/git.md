@@ -255,7 +255,8 @@ git stash list
 
 ```.gitignore```只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。所以一定要养成在项目开始就创建.gitignore文件的习惯。
 
-##### 删除track的文件
+**删除track的文件**
+
 - 把文件移走
 - git rm 文件
 - git commit  -m "删除不需要的文件"
