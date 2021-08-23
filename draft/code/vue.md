@@ -62,7 +62,7 @@ cnpm install vue -g
 安装vue命令行工具，即vue-cli 脚手架
 
 ```
-cnpm install vue-cli -g
+cnpm install @vue-cli -g
 ```
 
 

@@ -180,6 +180,8 @@ git merge 分支名   
 git branch -d 分支名     
 丢弃一个没有被合并过的分支，强行删除。
 git branch -D 分支名 
+删除远程分支: 
+git push origin --delete [branchname]
 
 ```
 
