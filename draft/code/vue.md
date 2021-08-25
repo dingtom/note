@@ -824,9 +824,18 @@ import * from './info.js'
 
 webpack就是一个模块化的打包工具，所以它支持我们代码中写模块化，可以对模块化的代码进行处理。
 
+## webpack.config.js
+
 另外，如果在处理完所有模块之间的关系后，使用webpack的指令将多个js打包到一个js文件中，引入时就变得非常方便了。
 
 ```
+// main.js
+// 2.使用ES6的模块化的规范
+import {name} from "./info";
+console.log(name);
+// info.js
+export const name = 'why';
+// webpack 打包
 webpack src/main.js dist/bundle.js
 // 写上入口和出口作为参数
 ```
@@ -850,7 +859,11 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     // path通常是绝对路径
     filename: 'bundle.js'
+    // 默认情况下，webpack会将生成的路径直接返回给使用者
+但是，我们整个程序是打包在dist文件夹下的，所以这里我们需要在路径下再添加一个dist/,后面url的东西会自动加上这个path
+    publicPath: 'dist/'
   },
+  // npm run test 的映射脚本，会优先在本地找依赖而不是全局依赖
   module: {
     rules: [
       {  
@@ -859,9 +872,42 @@ module.exports = {
         // style-loader负责将样式添加到DOM中
         // 使用多个loader时, 是从右向左
         use: [ 'style-loader', 'css-loader' ]
-      }
+      },{
+        test: /\.less$/,
+        use: [{ loader: "style-loader", // creates style nodes from JS strings
+        }, { loader: "css-loader" // translates CSS into CommonJS
+        }, { loader: "less-loader", // compiles Less to CSS
+        }]
+      }，
+      --------------
+      test: /\.(png|jpg|gif|jpeg)$/,
+        use: [{ loader: 'url-loader',
+            options: {
+              // 当加载的图片, 小于limit时, 会将图片编译成base64字符串形式.
+              // 当加载的图片, 大于limit时, 需要使用file-loader模块进行加载.
+              limit: 13000,
+              // 修改文件名称，webpack自动生成32位hash值图片名。img：文件要打包到的文件夹。name：获取图片原来的名字，放在该位置。hash:8：为了防止图片名称冲突，依然使用hash，但是我们只保留8位。ext：使用图片原来的扩展名
+              name: 'img/[name].[hash:8].[ext]'
+         -------ES6语法转成ES5
+        test: /\.js$/,
+        // exclude: 排除
+        // include: 包含
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+              // 安装的和推荐的不一样这里也不一样
+            presets: ['es2015']
+        ------------ .vue文件封装处理
+        test: /\.vue$/,
+        use: ['vue-loader']
     ]
-  }    
+  }
+  resolve: {
+  // alias: 别名 指定版本
+   extensions: ['.js', '.css', '.vue'],
+   alias: { 'vue$': 'vue/dist/vue.esm.js' }
+  }
 }
 ```
 
@@ -875,14 +921,16 @@ npm i webpack3.6.0 -S
 ```
 
 每次执行都敲这么一长串有没有觉得不方便呢？我们**可以在package.json的scripts中定义自己的执行脚本**。
-package.json中的scripts的脚本在执行时，会按照一定的顺序寻找命令对应的位置。首先，会寻找本地的node_modules/.bin路径中对应的命令。如果没有找到，会去全局的环境变量中寻找。
+package.json中的**scripts的脚本在执行时，会按照一定的顺序寻找命令对应的位置。首先，会寻找本地的node_modules/.bin路径中对应的命令。**如果没有找到，会去全局的环境变量中寻找。
 
 ```
 npm run build
 
 "scripts": {
-	"serve": "vue-cli-service serve",
+	"build": "webpack",
 ```
+
+## loader
 
 webpack会自动处理js之间相关的依赖。但是，在开发中我们不仅仅有基本的js代码处理，我们也需要加载css、图片，也包括一些高级的将ES6转成ES5代码，将TypeScript转成ES5代码，将scss、less转成css，将.jsx、.vue文件转成js文件等等。对于webpack本身的能力来说，对于这些转化是不支持的。那怎么办呢？给webpack扩展对应的loader就可以啦。
 
@@ -890,19 +938,158 @@ loader使用过程：
 步骤一：通过npm安装需要使用的loader
 步骤二：在webpack.config.js中的modules关键字下进行配置
 
+```
+npm i -S style-loader
+npm i -s css-loader
+```
 
+![image-20210823232042692](C:\Users\WenChao Ding\AppData\Roaming\Typora\typora-user-images\image-20210823232042692.png)
+
+
+
+## ES6语法处理
+
+阅读webpack打包的js文件，发现写的ES6语法并没有转成ES5，那么就意味着可能一些对ES6还不支持的浏览器没有办法很好的运行我们的代码。
+
+在前面我们说过，如果希望**将ES6的语法转成ES5，那么就需要使用babel。**
+
+```
+npm install --save-dev babel-loader@7 babel-core babel-preset-es2015
+```
+
+## 引入vue.js
+
+```
+npm i -S vue
+```
+
+  1. runtime-only代码中，不可以有任何的 template(上面的resolve可以解决)
+
+2. runtime-compllek代码中，可以有 template.因为有 compilers可以用于编译 Template
+
+   如果在之后的开发中，你依然使用template，就需要选择Runtime-Compiler。如果你之后的开发中，使用的是.vue文件夹开发，那么可以选择Runtime-only
+
+   ![image.png](https://pic.rmb.bdstatic.com/bjh/1220e0dbeb35366fd081e6e85a6e6686.jpeg)
+
+   ```
+   // runtime-compiler(v1)
+   // template -> ast -> render -> vdom -> UI
+   
+   // runtime-only(v2)(1.性能更高 2.下面的代码量更少)
+   // render -> vdom -> UI
+   ```
+
+   ![image.png](https://pic.rmb.bdstatic.com/bjh/59de652714cce4da068cc8e127876e62.jpeg)
+
+el用于指定Vue要管理的DOM，可以帮助解析其中的指令、事件监听等等。而如果Vue实例中同时指定了template，那么template模板的内容会替换掉挂载的对应el的模板。
+
+## .vue文件封装处理
+
+```
+npm install vue-loader vue-template-compiler --save-dev
+```
+
+## plugin
+
+plugin是插件的意思，通常是用于对某个现有的架构进行扩展。webpack中的插件，就是对webpack现有功能的各种扩展，比如打包优化，文件压缩等等。
+**loader和plugin区别**
+loader主要用于转换某些类型的模块，它是一个转换器。
+plugin是插件，它是对webpack本身的扩展，是一个扩展器。
+
+**plugin的使用过程：**
+步骤一：通过npm安装需要使用的plugins(某些webpack已经内置的插件不需要安装)
+步骤二：在webpack.config.js中的plugins中配置插件。
+
+```css
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin')
+
+plugins: [
+      new webpack.BannerPlugin('最终版权归aaa所有'),
+      new HtmlWebpackPlugin({
+          // 这里的template表示根据什么模板来生成index.html
+          // 另外，我们需要删除之前在output中添加的publicPath属性,否则插入的script标签中的src可能会有问题
+
+        template: 'index.html'
+      }),
+      new UglifyjsWebpackPlugin()
+  ],
+devServer: {
+    contentBase: './dist',
+    inline: true
+  }
+```
+
+添加版权的Plugin。该插件名字叫BannerPlugin，属于webpack自带的插件。
+
+打包html的plugin。自动生成一个index.html文件(可以指定模板来生成)。将打包的js文件，自动通过script标签插入到body中
+
+```
+npm install html-webpack-plugin --save-dev
+```
+
+js压缩的Plugin
+
+在项目发布之前，我们必然需要对js等文件进行压缩处理
+
+```
+npm install uglifyjs-webpack-plugin@1.1.1 --save-dev
+```
+
+## 配置分离
+
+生产、开发配置分离
+
+```
+npm i -S webpack-merge
+```
+
+
+
+![image.png](https://pic.rmb.bdstatic.com/bjh/bf3ec132d98d303ac41d6883aa01d94f.jpeg)
+
+```css
+package.js
+ "scripts": {
+    "build": "webpack --config ./build/prod.config.js",
+    "dev": "webpack-dev-server --open --config ./build/dev.config.js"
+  },
+```
 
 
 
 # Vue Cli
 
+安装Vue脚手架npm install -g @vue/cli
+
+Vue CLI2初始化项目vue init webpack my-project
+Vue CLI3初始化项目vue create my-project
+
+vue-cli 3 是基于 webpack 4 打造，vue-cli 2 还是 webapck 3
+vue-cli 3 的设计原则是“0配置”，移除的配置文件根目录下的，build和config等目录
+vue-cli 3 提供了 vue ui 命令，提供了可视化配置，更加人性化
+移除了static文件夹，新增了public文件夹，并且index.html移动到public中。该文件夹原封不动到dist
 
 
 
+![image.png](https://pic.rmb.bdstatic.com/bjh/fbb1be351f5ed8a707a6dca05563d792.jpeg)
+
+![image.png](https://pic.rmb.bdstatic.com/bjh/0d951a5aa62806520dd146c256a00ac0.jpeg)
+
+.vuerc删除默认配置
+
+![image.png](https://pic.rmb.bdstatic.com/bjh/e486f22edbd62be7d80df481f73b71d0.jpeg)
+
+![image.png](https://pic.rmb.bdstatic.com/bjh/63aeda8b8a83c939368259e947ebc440.jpeg)
+
+vue.config.js中的配置和node_modules默认配置合并作为webpack的配置
 
 
 
+![image.png](https://pic.rmb.bdstatic.com/bjh/9d44b55729ebce364bdc59892efd6917.jpeg)
 
+![image.png](https://pic.rmb.bdstatic.com/bjh/dd2c6780f194c4a6773e11355bf7a3e8.jpeg)
 
 # vue-router
 
@@ -1615,6 +1802,63 @@ main.js文件，导入store对象，并且放在new Vue中。这样，在其他V
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/63aeda8b8a83c939368259e947ebc440.jpeg)
 
+```css
+<!-- <h3>当前最新的count值为：{{$store.state.count}}</h3> -->
+{{$store.getters.showNum}}
+
+btnHandler2() {
+	// commit 的作用，就是调用 某个 mutation 函数
+	this.$store.commit('addN', 3)
+},
+
+// 异步地让 count 自增 +1
+btnHandler3() {
+	// 这里的 dispatch 函数，专门用来触发 action
+	this.$store.dispatch('addNAsync', 5)
+}
+
+
+// main.js
+import store from './store'
+new Vue({
+  store,
+  render: h => h(App)
+}).$mount('#app')
+
+
+// store.js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+    count: 0
+  },
+  // 只有 mutations 中定义的函数，才有权利修改 state 中的数据
+  mutations: {
+    addN(state, step) {
+      state.count += step
+    }
+  },
+  actions: {
+    addNAsync(context, step) {
+      setTimeout(() => {
+        // 在 actions 中，不能直接修改 state 中的数据；
+        // 必须通过 context.commit() 触发某个 mutation 才行
+        context.commit('addN', step)
+      }, 1000)
+    }
+  },
+  getters: {
+    showNum(state) {
+      return '当前最新的数量是【' + state.count + '】'
+    }
+  }
+})
+```
+
 
 
 # axios
@@ -1873,9 +2117,22 @@ module.exports = {
 }
 ```
 
-## lessloader
+## less-loader
+
+```
+npm i -S less-loader less
+```
 
 TypeError: this.getOptions is not a function  at Object.lessLoader 在vue项目中less报错问题解决
 
 less版本问题，卸载重新安装指定版本号cnpm install less@3.9.0 -D
 cnpm install less-loader@5.0.0 -D
+
+### url-loader
+
+```
+npm i -S url-loader  file-loader
+```
+
+图片处理，我们使用url-loader来处理，大于8kb的图片，会通过file-loader进行处理
+
