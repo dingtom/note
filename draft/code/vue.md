@@ -943,7 +943,7 @@ npm i -S style-loader
 npm i -s css-loader
 ```
 
-![image-20210823232042692](C:\Users\WenChao Ding\AppData\Roaming\Typora\typora-user-images\image-20210823232042692.png)
+![quicker_6641193d-0133-426a-8604-869cf115c0fd.png](https://i.loli.net/2021/08/26/pAYfPo1gK8U4B9l.png)
 
 
 
@@ -1605,14 +1605,11 @@ Promise.reject()：将数据包装成Promise对象，并且在内部回调reject
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/004c99089e2fc2b520020d56110ffb3b.jpeg)
 
-**Promise是怎么知道第一个函数什么时候结束的？ 然后再开始执行下一个？**
-我们调用了一个resolve()函数，这句代码非常的关键。这其实就是在通知Promise，当前这个函数结束啦，你可以开始执行下一个。 这时Promise就会去执行then里面的函数了。
+**Promise是怎么知道第一个函数什么时候结束的？ 然后再开始执行下一个？**我们调用了一个resolve()函数，这句代码非常的关键。这其实就是在通知Promise，当前这个函数结束啦，你可以开始执行下一个。 这时Promise就会去执行then里面的函数了。
 
 **那如果我有ajaxA、ajaxB、ajaxC三个异步任务，想按照先A后B再C的顺序执行，像这样写行吗？**
 
-new Promise(A).then(B); 这句话表示， 只能保证A和B的顺序
-
-一旦A执行完，B开始后，这次承诺也就兑现了，Promise对象也就失效了
+new Promise(A).then(B); 这句话表示， 只能保证A和B的顺序，一旦A执行完，B开始后，这次承诺也就兑现了，Promise对象也就失效了
 
 ```css
 new Promise(函数1(resolve){
@@ -1708,11 +1705,8 @@ request("ajaxA")
 !!!!!!!!如果我能像使用同步代码那样, 使用Promise就好了于是, async \ await出现了
 
 ```css
-
-
 async function load(){
         //请求失败后的处理, 可以使用try-catch来进行
-
     //注意当一个函数被async修饰以后, 它的返回值会被自动处理成Promise对象
     await request("ajaxA");         
     //那么这里就是在等待ajaxA请求的完成
@@ -1720,8 +1714,6 @@ async function load(){
     await request("ajaxC");         
     //后一个请求需要前一个请求的结果怎么办呢?    request("ajaxB", data1);
     //await不仅等待Promise完成, 而且还拿到了resolve方法的参数
-
-    
     await request("ajaxD");
 }
 
@@ -1753,6 +1745,8 @@ Vuex 也集成到 Vue 的官方调试工具 devtools extension，提供了诸如
 ## 单/界面的状态管理
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/18d90940b7f793dd934133d6d9d19514.jpeg)
+
+当我们使用devtools时, 可以devtools可以帮助我们捕捉mutation的快照。但是如果是异步操作, 那么devtools将不能很好的追踪这个操作什么时候会被完成.
 
 Vue已经帮我们做好了单个界面的状态管理，但是如果是多个界面呢？
 
@@ -1800,8 +1794,6 @@ main.js文件，导入store对象，并且放在new Vue中。这样，在其他V
 - 所以Vuex也使用了单一状态树来管理应用层级的全部状态。
 - 单一状态树能够让我们最直接的方式找到某个状态的片段，而且在之后的维护和调试过程中，也可以非常方便的管理和维护。
 
-![image.png](https://pic.rmb.bdstatic.com/bjh/63aeda8b8a83c939368259e947ebc440.jpeg)
-
 ```css
 <!-- <h3>当前最新的count值为：{{$store.state.count}}</h3> -->
 {{$store.getters.showNum}}
@@ -1837,6 +1829,7 @@ export default new Vuex.Store({
     count: 0
   },
   // 只有 mutations 中定义的函数，才有权利修改 state 中的数据
+    // 参数被称为是mutation的载荷(Payload)
   mutations: {
     addN(state, step) {
       state.count += step
@@ -1860,6 +1853,44 @@ export default new Vuex.Store({
 ```
 
 
+
+Vuex的store中的state是响应式的, 当state中的数据发生改变时, Vue组件会自动更新.这就要求我们必须遵守一些Vuex对应的规则:提前在store中初始化好所需的属性.
+当给state中的对象添加新属性时, 使用下面的方式:
+
+- 方式一: 使用Vue.set(obj, 'newProp', 123)
+- 方式二: 用新对象给旧对象重新赋值
+
+当我们的项目增大时, Vuex管理的状态越来越多, 需要更新状态的情况越来越多, 那么意味着Mutation中的方法越来越多. 一种很常见的方案就是使用**常量**替代Mutation事件的类型.我们可以将这些常量放在一个单独的文件中, 方便管理以及让整个app所有的事件类型一目了然.
+
+![quicker_469eaaf7-e750-4bec-af44-b4cce7859203.png](https://i.loli.net/2021/08/26/7vEhnDzu4rsBITa.png)
+
+希望在Vuex中进行一些异步操作, 比如网络请求, 必然是异步的. 这个时候怎么处理呢?
+Action类似于Mutation, 但是是用来代替Mutation进行异步操作的.context是和store对象具有相同方法和属性的对象.也就是说, 我们可以通过context去进行commit相关的操作, 也可以获取context.state等.。但是注意, 这里它们并不是同一个对象
+
+
+
+在Vue组件中, 如果我们调用action中的方法, 那么就需要使用dispatch，
+
+![quicker_fc798e70-cd2d-45ee-8e52-24d41b34e5b5.png](https://i.loli.net/2021/08/26/1V4eFiBOoYUjmQ2.png)
+
+
+
+在Action中, 我们可以将异步操作放在一个Promise中, 并且在成功或者失败后, 调用对应的resolve或reject.
+
+![quicker_ba4a4baa-51ed-4fbd-8f91-e71ba8cd3437.png](https://i.loli.net/2021/08/26/gXxyzY9bVtaT8QZ.png)
+
+当应用变得非常复杂时,store对象就有可能变得相当臃肿.为了解决这个问题, Vuex允许我们将store分割成模块(Module), 而每个模块拥有自己的state、mutation、action、getters等
+
+mutation和getters接收的第一个参数是局部状态对象。虽然, 我们的doubleCount和increment都是定义在对象内部的.
+但是在调用的时候, 依然是通过this.$store来直接调用的.
+
+![quicker_0e3d2f58-d3ba-4548-9a89-be3923771e1c.png](https://i.loli.net/2021/08/26/PuzGYKSW9Ve3oCl.png)
+
+
+
+
+
+![quicker_fd25da4c-33d8-4e70-bef8-a9e34270cf2c.png](https://i.loli.net/2021/08/26/WhxT8YNXF3ryb2V.png)
 
 # axios
 
