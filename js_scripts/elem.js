@@ -1,7 +1,7 @@
 auto();  //确保打开无障碍
 console.show();
 
-setScreenMetrics(1080,2400);
+// setScreenMetrics(1080,2400);
 console.log('打开饿了么');
 launchApp("饿了么");
 customSleep(getRandom(2,4));
@@ -12,16 +12,19 @@ if(textContains('去使用').exists()){
     customSleep(getRandom(2,4));
 }
 //_____________________________________看视频
-text('真香').findOne().click();
+console.log('开始看视频啦');
+// text('真香').findOne().click();
+click(418,2197)
+
 customSleep(getRandom(2,4));
-click(300,1000)
-console.log('看视频');
+console.log('点进全屏播放视频');
+click(500,1500)
 for(i=0;i<35;i++){ 
     customSleep(getRandom(10,30));
-    log(i)
+    log('已经看了', i, '个')
     swipe(300,1000,800,1000,100)
     if(textContains('明日').exists()){
-        log('明天再来')
+        log('出现了明天再来，退出看视频了')
         back();
         break;
         customSleep(getRandom(2,4));
@@ -34,12 +37,13 @@ for(i=0;i<35;i++){
 
 //---------------------------------------浏览任务
 console.log('点击我的');
-id("home_bottom_tab_4_text").findOne().click();
+// text("我的").findOne().click();
+click(950,2197)
 customSleep(getRandom(2,4));
 console.log("点击赚吃货豆")
 click(300,1000)
 //className('android.view.ViewGroup').depth(15).drawingOrder(1).findOne().click();
-customSleep(getRandom(3,4));
+customSleep(getRandom(7, 8));
 //console.log(text("赚吃货豆").exists());
 //click("跳过广告")
 swipe(300,1000,800,1000,100)
@@ -107,7 +111,7 @@ function backByFinish(){
     }
     log("返回上层");
     back();
-    customSleep(getRandom(4,5));
+    customSleep(getRandom(2, 3));
 }
 // 判断是否有签到
 function ifSign(){
