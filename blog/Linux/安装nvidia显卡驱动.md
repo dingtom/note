@@ -2,15 +2,20 @@
 	- [ 查看cuda版本](#head2)
 - [ 安装cudnn](#head3)
 查看显卡型号
+
 ```lsb_release -a```
 
 更新PCI ID数据库
+
 ```update-pciids```
 ```lspci | grep -i nvidia```
 
 驱动安装
-```wget https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run```
+
+```wget https://us.download.nvidia.com/XFree86/Linux-x86_64/455.23.04/NVIDIA-Linux-x86_64-455.23.04.run```。
+
 查看TMPDIR目录是否报错
+
 ```echo $TMPDIR```
 
 安装驱动
@@ -18,6 +23,7 @@
 ```sudo bash NVIDIA-Linux-x86_64-455.23.04.run```
 
 禁用nouveau
+
 ```lsmod | grep nouveau```
 
 ```vim /etc/modprobe.d/blacklist.conf```添加
@@ -28,7 +34,9 @@
 ```sudo reboot now```
 
 查看显卡信息
+
 ```nvidia-smi```
+
 # <span id="head1"> 安装cuda</span>
 [driver_version and cuda_version](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
 
