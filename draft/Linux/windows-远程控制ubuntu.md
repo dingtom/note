@@ -64,3 +64,9 @@ screen -wipe      ->清除Dead会话
 ```sudo apt install -f```
 安装下好的deb包
 ```  sudo dpkg -i teamviewer_13.1.8286_amd64.deb```
+
+
+
+
+
+```sudo /usr/local/sunlogin/bin/sunloginclient```
