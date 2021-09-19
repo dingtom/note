@@ -386,15 +386,16 @@ import multiprocessing
 def muchjob(x):
     time.sleep(5)
     return(x**2)
-# 多进程任务
-pool = multiprocessing.Pool(processes=4)
-result= []
-for i in range(8):
-    result.append(pool.apply_async(muchjob, (i,)))
-pool.close()
-pool.join()
-ans = [res.get() for res in result]
-print(ans)
+if __name__ == '__main__':
+    # 多进程任务
+    pool = multiprocessing.Pool(processes=4)
+    result= []
+    for i in range(8):
+        result.append(pool.apply_async(muchjob, (i,)))
+    pool.close()
+    pool.join()
+    ans = [res.get() for res in result]
+    print(ans)
 ```
 ## 使用多线程提升IO密集任务效率
 ```

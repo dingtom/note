@@ -274,7 +274,15 @@ singleParam => { statements }
 
 # let/var
 
+```
+// ES5中的var是没有块级作用域的(if/for)
+// ES6中的let是由块级作用的(if/for)
+```
+
 我们可以将let看成更完美的var。有if/for的块级作用域。
+
+JS中使用var来声明一个变量时, 变量的作用域主要是和函数的定义有关.
+针对于其他块定义来说是没有作用域的，比如if/for等，这在我们开发中往往会引起一些问题。
 
 # const
 
