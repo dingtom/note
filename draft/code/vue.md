@@ -737,6 +737,63 @@ $refs和ref指令通常是一起使用的。**首先，我们通过ref给某一�
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/d1243a35c70c8701b4e6eeb494623b18.jpeg)
 
+## 兄弟组件通信
+
+```js
+// bus.js
+import Vue from 'vue';
+const bus = new Vue();
+export default bus;
+
+// a.vue
+import bus from '@/utils/bus';
+bus.$emit('timeStartEnd', this.meetingForm.timeStart, this.meetingForm.timeEnd);
+
+// b.vue  
+import bus from '@/utils/bus';    
+
+bus.$off('timeStartEnd').$on('timeStartEnd', (timeStart, timeEnd) => {
+        this.timeMeetEnd = timeEnd,
+        this.timeMeetStart = timeStart
+    });
+
+beforeDestroy() {
+    bus.$off('timeStartEnd');
+},    
+```
+
+
+
+vue路由切换
+
+new_beforeCreate->new_created->new_beforeMounted->lod_beforeDestroy->old_desotroyd->new_mounted
+
+```js
+// bus.js
+import Vue from 'vue';
+const bus = new Vue();
+export default bus;
+
+// a.vue
+import bus from '@/utils/bus';
+beforeDestroy() {
+bus.$emit('timeStartEnd', this.meetingForm.timeStart, this.meetingForm.timeEnd);
+},
+// b.vue  
+import bus from '@/utils/bus';    
+created() {
+    bus.$off('timeStartEnd').$on('timeStartEnd', (timeStart, timeEnd) => {
+        this.timeMeetEnd = timeEnd,
+        this.timeMeetStart = timeStart
+    });
+},
+beforeDestroy() {
+    bus.$off('timeStartEnd');
+},    
+```
+
+
+
 ## slot
 
 **组件的插槽也是为了让我们封装的组件更加具有扩展性。让使用者可以决定组件内部的一些内容到底展示什么。**

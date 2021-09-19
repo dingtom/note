@@ -31,62 +31,63 @@
 	- [ 父子组件的访问方式](#head31)
 		- [ \$children](#head32)
 		- [ $parent](#head33)
-	- [ slot](#head34)
-		- [ 使用slot](#head35)
-		- [ 具名插槽](#head36)
-		- [ 作用域插槽slot-scope](#head37)
-- [ 模块化](#head38)
-- [ Webpack](#head39)
-	- [ webpack.config.js](#head40)
-	- [ loader](#head41)
-	- [ ES6语法处理](#head42)
-	- [ 引入vue.js](#head43)
-	- [ .vue文件封装处理](#head44)
-	- [ plugin](#head45)
-	- [ 配置分离](#head46)
-- [Vue Cli](#head47)
-- [ vue-router](#head48)
-	- [ URL的hash](#head49)
-	- [ HTML5的history模式：pushState](#head50)
-		- [history.pushState(data, title, url)      ](#head51)
-		- [ history.replaceState()](#head52)
-		- [ history.go()](#head53)
-	- [ vue-router](#head54)
-	- [ 例子](#head55)
-	- [ router-link/view组件](#head56)
-	- [ linkActiveClass](#head57)
-	- [ 路由代码跳转](#head58)
-	- [ 动态路由](#head59)
-	- [ 懒加载](#head60)
-	- [ \$router和\$route](#head61)
-	- [ 嵌套路由](#head62)
-		- [ 嵌套默认路径](#head63)
-	- [ 传递参数](#head64)
-		- [ params的类型:](#head65)
-		- [ query的类型:](#head66)
-	- [ 导航守卫](#head67)
-	- [ keep-alive遇见vue-router](#head68)
-- [ Promise](#head69)
-	- [ Promise三种状态](#head70)
-	- [ Promise链式调用](#head71)
-	- [async \ await](#head72)
-- [ Vuex](#head73)
-	- [ 单/界面的状态管理](#head74)
-	- [ State单一状态树](#head75)
-- [ axios](#head76)
-	- [ axios使用](#head77)
-	- [ axios+vue](#head78)
-	- [ 发送并发请求](#head79)
-	- [ 全局配置](#head80)
-	- [ axios的实例](#head81)
-	- [ axios封装](#head82)
-	- [ 拦截器](#head83)
-- [ 过滤器](#head84)
-- [ npm](#head85)
-	- [ sass](#head86)
-	- [ eslint](#head87)
-	- [ less-loader](#head88)
-		- [ url-loader](#head89)
+	- [ 兄弟组件通信](#head34)
+	- [ slot](#head35)
+		- [ 使用slot](#head36)
+		- [ 具名插槽](#head37)
+		- [ 作用域插槽slot-scope](#head38)
+- [ 模块化](#head39)
+- [ Webpack](#head40)
+	- [ webpack.config.js](#head41)
+	- [ loader](#head42)
+	- [ ES6语法处理](#head43)
+	- [ 引入vue.js](#head44)
+	- [ .vue文件封装处理](#head45)
+	- [ plugin](#head46)
+	- [ 配置分离](#head47)
+- [Vue Cli](#head48)
+- [ vue-router](#head49)
+	- [ URL的hash](#head50)
+	- [ HTML5的history模式：pushState](#head51)
+		- [history.pushState(data, title, url)      ](#head52)
+		- [ history.replaceState()](#head53)
+		- [ history.go()](#head54)
+	- [ vue-router](#head55)
+	- [ 例子](#head56)
+	- [ router-link/view组件](#head57)
+	- [ linkActiveClass](#head58)
+	- [ 路由代码跳转](#head59)
+	- [ 动态路由](#head60)
+	- [ 懒加载](#head61)
+	- [ \$router和\$route](#head62)
+	- [ 嵌套路由](#head63)
+		- [ 嵌套默认路径](#head64)
+	- [ 传递参数](#head65)
+		- [ params的类型:](#head66)
+		- [ query的类型:](#head67)
+	- [ 导航守卫](#head68)
+	- [ keep-alive遇见vue-router](#head69)
+- [ Promise](#head70)
+	- [ Promise三种状态](#head71)
+	- [ Promise链式调用](#head72)
+	- [async \ await](#head73)
+- [ Vuex](#head74)
+	- [ 单/界面的状态管理](#head75)
+	- [ State单一状态树](#head76)
+- [ axios](#head77)
+	- [ axios使用](#head78)
+	- [ axios+vue](#head79)
+	- [ 发送并发请求](#head80)
+	- [ 全局配置](#head81)
+	- [ axios的实例](#head82)
+	- [ axios封装](#head83)
+	- [ 拦截器](#head84)
+- [ 过滤器](#head85)
+- [ npm](#head86)
+	- [ sass](#head87)
+	- [ eslint](#head88)
+	- [ less-loader](#head89)
+		- [ url-loader](#head90)
 
 # <span id="head1"> 下载Node.js并安装</span>
 
@@ -826,7 +827,64 @@ $refs和ref指令通常是一起使用的。**首先，我们通过ref给某一�
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/d1243a35c70c8701b4e6eeb494623b18.jpeg)
 
-## <span id="head34"> slot</span>
+## <span id="head34"> 兄弟组件通信</span>
+
+```js
+// bus.js
+import Vue from 'vue';
+const bus = new Vue();
+export default bus;
+
+// a.vue
+import bus from '@/utils/bus';
+bus.$emit('timeStartEnd', this.meetingForm.timeStart, this.meetingForm.timeEnd);
+
+// b.vue  
+import bus from '@/utils/bus';    
+
+bus.$off('timeStartEnd').$on('timeStartEnd', (timeStart, timeEnd) => {
+        this.timeMeetEnd = timeEnd,
+        this.timeMeetStart = timeStart
+    });
+
+beforeDestroy() {
+    bus.$off('timeStartEnd');
+},    
+```
+
+
+
+vue路由切换
+
+new_beforeCreate->new_created->new_beforeMounted->lod_beforeDestroy->old_desotroyd->new_mounted
+
+```js
+// bus.js
+import Vue from 'vue';
+const bus = new Vue();
+export default bus;
+
+// a.vue
+import bus from '@/utils/bus';
+beforeDestroy() {
+bus.$emit('timeStartEnd', this.meetingForm.timeStart, this.meetingForm.timeEnd);
+},
+// b.vue  
+import bus from '@/utils/bus';    
+created() {
+    bus.$off('timeStartEnd').$on('timeStartEnd', (timeStart, timeEnd) => {
+        this.timeMeetEnd = timeEnd,
+        this.timeMeetStart = timeStart
+    });
+},
+beforeDestroy() {
+    bus.$off('timeStartEnd');
+},    
+```
+
+
+
+## <span id="head35"> slot</span>
 
 **组件的插槽也是为了让我们封装的组件更加具有扩展性。让使用者可以决定组件内部的一些内容到底展示什么。**
 
@@ -834,7 +892,7 @@ $refs和ref指令通常是一起使用的。**首先，我们通过ref给某一�
 
 最好的封装方式就是将共性抽取到组件中，将不同暴露为插槽。一旦我们预留了插槽，就可以让使用者根据自己的需求，决定插槽中插入什么内容。是搜索框，还是文字，还是菜单。由调用者自己来决定。
 
-### <span id="head35"> 使用slot</span>
+### <span id="head36"> 使用slot</span>
 
 在子组件中，使用特殊的元素<slot>就可以**为子组件开启一个插槽。该插槽插入什么内容取决于父组件如何使用**。
 
@@ -842,7 +900,7 @@ $refs和ref指令通常是一起使用的。**首先，我们通过ref给某一�
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/e247a2b0c67e430ca7e1007d27144bf4.jpeg)
 
-### <span id="head36"> 具名插槽</span>
+### <span id="head37"> 具名插槽</span>
 
 当子组件的功能复杂时，子组件的插槽可能并非是一个。这个时候，我们就需要给插槽起一个名字。只要给slot元素一个name属性即可```<slot name='myslot'></slot>```
 
@@ -850,7 +908,7 @@ $refs和ref指令通常是一起使用的。**首先，我们通过ref给某一�
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/29bb716cbd8fdf910e0fefb8a8cd7385.jpeg)
 
-### <span id="head37"> 作用域插槽slot-scope</span>
+### <span id="head38"> 作用域插槽slot-scope</span>
 
 
 **父组件替换插槽的标签**，**但是内容由子组件来提供**。
@@ -865,7 +923,7 @@ $refs和ref指令通常是一起使用的。**首先，我们通过ref给某一�
 
 
 
-# <span id="head38"> 模块化</span>
+# <span id="head39"> 模块化</span>
 
 export指令用于导出变量，也可以输出函数或者输出类
 
@@ -909,11 +967,11 @@ import { name, age } from './info.js'
 import * from './info.js'
 ```
 
-# <span id="head39"> Webpack</span>
+# <span id="head40"> Webpack</span>
 
 webpack就是一个模块化的打包工具，所以它支持我们代码中写模块化，可以对模块化的代码进行处理。
 
-## <span id="head40"> webpack.config.js</span>
+## <span id="head41"> webpack.config.js</span>
 
 另外，如果在处理完所有模块之间的关系后，使用webpack的指令将多个js打包到一个js文件中，引入时就变得非常方便了。
 
@@ -1019,7 +1077,7 @@ npm run build
 	"build": "webpack",
 ```
 
-## <span id="head41"> loader</span>
+## <span id="head42"> loader</span>
 
 webpack会自动处理js之间相关的依赖。但是，在开发中我们不仅仅有基本的js代码处理，我们也需要加载css、图片，也包括一些高级的将ES6转成ES5代码，将TypeScript转成ES5代码，将scss、less转成css，将.jsx、.vue文件转成js文件等等。对于webpack本身的能力来说，对于这些转化是不支持的。那怎么办呢？给webpack扩展对应的loader就可以啦。
 
@@ -1036,7 +1094,7 @@ npm i -s css-loader
 
 
 
-## <span id="head42"> ES6语法处理</span>
+## <span id="head43"> ES6语法处理</span>
 
 阅读webpack打包的js文件，发现写的ES6语法并没有转成ES5，那么就意味着可能一些对ES6还不支持的浏览器没有办法很好的运行我们的代码。
 
@@ -1046,7 +1104,7 @@ npm i -s css-loader
 npm install --save-dev babel-loader@7 babel-core babel-preset-es2015
 ```
 
-## <span id="head43"> 引入vue.js</span>
+## <span id="head44"> 引入vue.js</span>
 
 ```
 npm i -S vue
@@ -1072,13 +1130,13 @@ npm i -S vue
 
 el用于指定Vue要管理的DOM，可以帮助解析其中的指令、事件监听等等。而如果Vue实例中同时指定了template，那么template模板的内容会替换掉挂载的对应el的模板。
 
-## <span id="head44"> .vue文件封装处理</span>
+## <span id="head45"> .vue文件封装处理</span>
 
 ```
 npm install vue-loader vue-template-compiler --save-dev
 ```
 
-## <span id="head45"> plugin</span>
+## <span id="head46"> plugin</span>
 
 plugin是插件的意思，通常是用于对某个现有的架构进行扩展。webpack中的插件，就是对webpack现有功能的各种扩展，比如打包优化，文件压缩等等。
 **loader和plugin区别**
@@ -1126,7 +1184,7 @@ js压缩的Plugin
 npm install uglifyjs-webpack-plugin@1.1.1 --save-dev
 ```
 
-## <span id="head46"> 配置分离</span>
+## <span id="head47"> 配置分离</span>
 
 生产、开发配置分离
 
@@ -1148,7 +1206,7 @@ package.js
 
 
 
-# <span id="head47">Vue Cli</span>
+# <span id="head48">Vue Cli</span>
 
 安装Vue脚手架npm install -g @vue/cli
 
@@ -1180,11 +1238,11 @@ vue.config.js中的配置和node_modules默认配置合并作为webpack的配置
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/dd2c6780f194c4a6773e11355bf7a3e8.jpeg)
 
-# <span id="head48"> vue-router</span>
+# <span id="head49"> vue-router</span>
 
 改变URL，但是页面不进行整体的刷新。
 
-## <span id="head49"> URL的hash</span>
+## <span id="head50"> URL的hash</span>
 
 URL的hash也就是锚点(#), 本质上是改变window.location的href属性.
 
@@ -1192,11 +1250,11 @@ URL的hash也就是锚点(#), 本质上是改变window.location的href属性.
 
 ![quicker_069f91fd-1016-4cf3-9a9b-23fe0517526e.png](https://i.loli.net/2021/07/22/xn8gklJR9jNHyLc.png)
 
-## <span id="head50"> HTML5的history模式：pushState</span>
+## <span id="head51"> HTML5的history模式：pushState</span>
 
 history接口是HTML5新增的, 它有五种模式改变URL而不刷新页面.
 
-### <span id="head51">history.pushState(data, title, url)      </span>
+### <span id="head52">history.pushState(data, title, url)      </span>
 
 ​     压栈可以返回
 
@@ -1206,13 +1264,13 @@ history.back() 出栈返回到/foo
 
 
 
-### <span id="head52"> history.replaceState()</span>
+### <span id="head53"> history.replaceState()</span>
 
 不能返回
 
 ![quicker_015aa8ab-0723-4e10-a881-5fa319d62d09.png](https://i.loli.net/2021/07/22/Jiu6QvIjF1T3yLU.png)
 
-### <span id="head53"> history.go()</span>
+### <span id="head54"> history.go()</span>
 
 相当于history.back
 
@@ -1224,7 +1282,7 @@ history.forward() 则等价于 history.go(1)
 
 等同于浏览器界面的前进后退。
 
-## <span id="head54"> vue-router</span>
+## <span id="head55"> vue-router</span>
 
 步骤一: 安装vue-router
 npm install vue-router --save
@@ -1247,7 +1305,7 @@ npm install vue-router --save
 
 
 
-## <span id="head55"> 例子</span>
+## <span id="head56"> 例子</span>
 
 src/router/index.js  1.创建router实例           4.配置组件和路径的映射关系
 
@@ -1431,7 +1489,7 @@ export default {
 
 
 
-## <span id="head56"> router-link/view组件</span>
+## <span id="head57"> router-link/view组件</span>
 
 ![quicker_692d4b88-a5c3-489f-9416-522ae23e0681.png](https://i.loli.net/2021/07/22/8Jsq2cAk1MaN3ew.png)
 
@@ -1448,17 +1506,17 @@ active-class: 当<router-link>对应的路由匹配成功时, 会自动给当前
 
 ​	![quicker_deabb020-fffb-4d63-8bea-470698c54f55.png](https://i.loli.net/2021/07/22/fbBFv1JYaNqMC6S.png)
 
-## <span id="head57"> linkActiveClass</span>
+## <span id="head58"> linkActiveClass</span>
 
 exact-active-class类似于active-class, 只是在精准匹配下（路由活跃后）才会出现的class.
 
 ![quicker_5351ab94-46a2-46db-8d47-0838cedd8303.png](https://i.loli.net/2021/07/22/mvy38KEHIxsntVF.png)
 
-## <span id="head58"> 路由代码跳转</span>
+## <span id="head59"> 路由代码跳转</span>
 
 ![quicker_3676c09a-585d-45f0-92a3-667b60260587.png](https://i.loli.net/2021/07/22/mJEZv2adVU6lTh1.png)
 
-## <span id="head59"> 动态路由</span>
+## <span id="head60"> 动态路由</span>
 
 
 
@@ -1492,7 +1550,7 @@ App.vue
 
 
 
-## <span id="head60"> 懒加载</span>
+## <span id="head61"> 懒加载</span>
 
 路由中通常会定义很多不同的页面.这个页面最后被打包在哪里呢? 一般情况下, 是放在一个js文件中.但是, 页面这么多放在一个js文件中, 必然会造成这个页面非常的大.如果我们一次性从服务器请求下来这个页面, 可能需要花费一定的时间, 甚至用户的电脑上还出现了短暂空白的情况.
 
@@ -1524,14 +1582,14 @@ const Home = () => import('../components/Home.vue')
 
 
 
-## <span id="head61"> \$router和\$route</span>
+## <span id="head62"> \$router和\$route</span>
 
 ```
 $router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
 $route为当前router跳转对象里面可以获取name、path、query、params等 
 ```
 
-## <span id="head62"> 嵌套路由</span>
+## <span id="head63"> 嵌套路由</span>
 
 比如在home页面中, 我们希望通过/home/news和/home/message访问一些内容.
 
@@ -1544,22 +1602,22 @@ $route为当前router跳转对象里面可以获取name、path、query、params�
 
 ![image-20210722142703876](C:\Users\WenChao Ding\AppData\Roaming\Typora\typora-user-images\image-20210722142703876.png)
 
-### <span id="head63"> 嵌套默认路径</span>
+### <span id="head64"> 嵌套默认路径</span>
 
 默认显示message
 
 ![quicker_c3e5becd-b1c5-4eb2-b425-d981c093a0d8.png](https://i.loli.net/2021/07/22/LZHVu2R4PbD9aNF.png)
 
-## <span id="head64"> 传递参数</span>
+## <span id="head65"> 传递参数</span>
 
 点击我的，跳转到我的详情，传入的userid
 
-### <span id="head65"> params的类型:</span>
+### <span id="head66"> params的类型:</span>
 
 配置路由格式: /router/:id
 传递的方式: 在path后面跟上对应的值（to:）传递后形成的路径: /router/123, /router/abc
 
-### <span id="head66"> query的类型:</span>
+### <span id="head67"> query的类型:</span>
 
 配置路由格式: /router, 也就是普通配置
 传递的方式: 对象中使用query的key作为传递方式
@@ -1573,7 +1631,7 @@ $route为当前router跳转对象里面可以获取name、path、query、params�
 
 ![quicker_800ffb95-2933-4cfa-9de9-35008b22e580.png](https://i.loli.net/2021/07/22/73GeAxobJUs6MHy.png)
 
-## <span id="head67"> 导航守卫</span>
+## <span id="head68"> 导航守卫</span>
 
 
 
@@ -1606,7 +1664,7 @@ next: 调用该方法后, 才能进入下一个钩子.
 
 [官网进行学习](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html)
 
-## <span id="head68"> keep-alive遇见vue-router</span>
+## <span id="head69"> keep-alive遇见vue-router</span>
 
 keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。它们有两个非常重要的属性:
 
@@ -1639,7 +1697,7 @@ router-view 也是一个组件，如果直接被包在 keep-alive 里面，所�
 
 
 
-# <span id="head69"> Promise</span>
+# <span id="head70"> Promise</span>
 
 Promise是异步编程的一种解决方案。
 
@@ -1674,7 +1732,7 @@ Promise是异步编程的一种解决方案。
   **如果是成功的，那么通常我们会调用resolve(messsage)，这个时候，我们后续的then会被回调。**
   **如果是失败的，那么通常我们会调用reject(error)，这个时候，我们后续的catch会被回调。** 
 
-## <span id="head70"> Promise三种状态</span>
+## <span id="head71"> Promise三种状态</span>
 
 当我们开发中有异步操作时, 就可以给异步操作包装一个Promise
 异步操作之后会有三种状态我们一起来看一下这三种状态:
@@ -1685,7 +1743,7 @@ Promise是异步编程的一种解决方案。
 
 ![](https://pic.rmb.bdstatic.com/bjh/49d0311697473b5a0b524466dee11213.jpeg)
 
-## <span id="head71"> Promise链式调用</span>
+## <span id="head72"> Promise链式调用</span>
 
 我们在看Promise的流程图时，发现无论是then还是catch都可以返回一个Promise对象。
 所以，我们的代码其实是可以进行链式调用的：这里我们直接通过Promise包装了一下新的数据，将Promise对象返回了
@@ -1740,7 +1798,7 @@ Promise.race([new Promise(A), new Promise(B), new Promise(C)])
 
 
 
-## <span id="head72">async \ await</span>
+## <span id="head73">async \ await</span>
 
 ```css
 //假设有4个异步方法要按顺序调用
@@ -1815,7 +1873,7 @@ load()这个函数已经不再是普通函数, 它出现了await这样"阻塞式
 
 
 
-# <span id="head73"> Vuex</span>
+# <span id="head74"> Vuex</span>
 
 官方解释：Vuex 是一个专为 Vue.js 应用程序开发的**状态管理模式**。
 它采用 **集中式存储管理** 应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
@@ -1831,7 +1889,7 @@ Vuex 也集成到 Vue 的官方调试工具 devtools extension，提供了诸如
 如果你做过大型开放，你一定遇到过多个状态，在多个界面间的共享问题。
 比如商品的收藏、购物车中的物品等等。这些状态信息，我们都可以放在统一的地方，对它进行保存和管理，而且它们还是响应式的
 
-## <span id="head74"> 单/界面的状态管理</span>
+## <span id="head75"> 单/界面的状态管理</span>
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/18d90940b7f793dd934133d6d9d19514.jpeg)
 
@@ -1869,7 +1927,7 @@ main.js文件，导入store对象，并且放在new Vue中。这样，在其他V
 
 
 
-## <span id="head75"> State单一状态树</span>
+## <span id="head76"> State单一状态树</span>
 
 **Vuex提出使用单一状态树, 什么是单一状态树呢？**
 英文名称是Single Source of Truth，也可以翻译成单一数据源。
@@ -1981,7 +2039,7 @@ mutation和getters接收的第一个参数是局部状态对象。虽然, 我们
 
 ![quicker_fd25da4c-33d8-4e70-bef8-a9e34270cf2c.png](https://i.loli.net/2021/08/26/WhxT8YNXF3ryb2V.png)
 
-# <span id="head76"> axios</span>
+# <span id="head77"> axios</span>
 
 功能特点:
 在浏览器中发送 XMLHttpRequests 请求、在 node.js 中发送 http请求、支持 Promise API、拦截请求和响应、转换请求和响应数据
@@ -2015,7 +2073,7 @@ axios回调函数中this指向改变了，需要额外的保存一份
 
 ```
 
-## <span id="head77"> axios使用</span>
+## <span id="head78"> axios使用</span>
 
 ```css
 <body>
@@ -2061,7 +2119,7 @@ axios回调函数中this指向改变了，需要额外的保存一份
 
 ```
 
-## <span id="head78"> axios+vue</span>
+## <span id="head79"> axios+vue</span>
 
 ```css
 <body>
@@ -2106,13 +2164,13 @@ axios回调函数中this指向改变了，需要额外的保存一份
 </body>
 ```
 
-## <span id="head79"> 发送并发请求</span>
+## <span id="head80"> 发送并发请求</span>
 
 使用axios.all, 可以放入多个请求的数组.axios.all([]) 返回的结果是一个数组，使用 axios.spread 可将数组 [res1,res2] 展开为 res1, res2
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/a11cfe6390cc9327018ae17ef8ff8807.jpeg)
 
-## <span id="head80"> 全局配置</span>
+## <span id="head81"> 全局配置</span>
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/206b3d86e7e9783b266245ed986a05ba.jpeg)
 
@@ -2134,7 +2192,7 @@ axios回调函数中this指向改变了，需要额外的保存一份
 **身份验证信息** auth: { uname: '', pwd: '12'},
 **响应的数据格式 json / blob /document /arraybuffer / text / stream** responseType: 'json',
 
-## <span id="head81"> axios的实例</span>
+## <span id="head82"> axios的实例</span>
 
 为什么要创建axios的实例呢?
 
@@ -2144,11 +2202,11 @@ axios回调函数中this指向改变了，需要额外的保存一份
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/48de66afd1c9fecb9b575a537e4eb561.jpeg)
 
-## <span id="head82"> axios封装</span>
+## <span id="head83"> axios封装</span>
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/fff9e15d7124e9eb1dd059caa0efb4f7.jpeg)
 
-## <span id="head83"> 拦截器</span>
+## <span id="head84"> 拦截器</span>
 
 axios提供了拦截器，用于我们在发送每次请求或者得到相应后，进行对应的处理。
 
@@ -2174,7 +2232,7 @@ axios提供了拦截器，用于我们在发送每次请求或者得到相应后
 
 
 
-# <span id="head84"> 过滤器</span>
+# <span id="head85"> 过滤器</span>
 
 价格数字保留两位小数，前面加￥
 
@@ -2186,7 +2244,7 @@ return '¥' + price.toFixed(2)
 }
 ```
 
-# <span id="head85"> npm</span>
+# <span id="head86"> npm</span>
 
 ```
 --save || -S // 运行依赖（发布）
@@ -2207,7 +2265,7 @@ npm install moduleName -g
 
 不会修改package.json文件。
 
-## <span id="head86"> sass</span>
+## <span id="head87"> sass</span>
 
 安装
 
@@ -2221,7 +2279,7 @@ cnpm i -D sass
 <style lang="scss" scoped></style>
 ```
 
-## <span id="head87"> eslint</span>
+## <span id="head88"> eslint</span>
 
 根目录创建 **vue.config.js** 文件
 
@@ -2237,7 +2295,7 @@ module.exports = {
 }
 ```
 
-## <span id="head88"> less-loader</span>
+## <span id="head89"> less-loader</span>
 
 ```
 npm i -S less-loader less
@@ -2248,7 +2306,7 @@ TypeError: this.getOptions is not a function  at Object.lessLoader 在vue项目�
 less版本问题，卸载重新安装指定版本号cnpm install less@3.9.0 -D
 cnpm install less-loader@5.0.0 -D
 
-### <span id="head89"> url-loader</span>
+### <span id="head90"> url-loader</span>
 
 ```
 npm i -S url-loader  file-loader
