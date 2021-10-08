@@ -379,8 +379,6 @@ Python中函数参数是**引用传递**（注意不是值传递）。对于不�
 
 ## 使用多进程提升cpu密集任务效率
 ```
-%%time
-
 import time
 import multiprocessing
 def muchjob(x):
@@ -388,7 +386,7 @@ def muchjob(x):
     return(x**2)
 if __name__ == '__main__':
     # 多进程任务
-    pool = multiprocessing.Pool(processes=4)
+    pool = multiprocessing.Pool(processes=8)
     result= []
     for i in range(8):
         result.append(pool.apply_async(muchjob, (i,)))
@@ -399,8 +397,6 @@ if __name__ == '__main__':
 ```
 ## 使用多线程提升IO密集任务效率
 ```
-%%time
-
 import threading
 def writefile(i):
     a = [x**2 for x in range(i)]

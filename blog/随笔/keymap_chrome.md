@@ -7,3 +7,4 @@ chrome:
 【Alt+Tab】窗口之间切换。
 【Ctrl+Shift+Delete】即可调出清除缓存窗口。
 一个标签页切换多层历史记录【Alt】组合左右方向键。
+

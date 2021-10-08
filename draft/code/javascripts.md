@@ -257,7 +257,7 @@ console.log('pink老师' - 100); // NaN
 
 
 
-
+# 箭头函数
 
 ```
 (param1, param2, …, paramN) => { statements }
@@ -312,9 +312,7 @@ obj1.teset()
 
 ```css
 for (let i in this.books){
-
-​	const book= this.books[i]
-
+	const book= this.books[i]
 }
 
 for (let item of this.book){
@@ -322,7 +320,7 @@ for (let item of this.book){
 }
 ```
 
-高阶函数
+# 高阶函数
 
 ```css
 // 1.filter函数的使用
@@ -331,19 +329,57 @@ filter中的回调函数有一个要求: 必须返回一个boolean值
 // // 2.map函数的使用
 映射
 // // 3.reduce函数的使用
-对数组中所有的内容进行汇总
+对数组中所有的内容进行汇总,每次回调方法返回的值，都会传递到下次回调中
 
 
-let total = nums.filter(function (n) {
+let nums = [2, 3, 4, 100, 200, 1000];
+let total = nums.filter(n => {
   return n < 100
-}).map(function (n) {
+}).map(n => {
   return n * 2
-}).reduce(function (prevValue, n) {
-  return prevValue + n
+}).reduce( (preValue, n) => {
+  console.log('preValue, n', preValue, n)
+  return preValue + n
 }, 0)
 console.log(total);
 
-return this.books.reduce(function (preValue, book) {
-        return preValue + book.price * book.count
+    
+当前项，索引，原始数组
+.map(item=>{});    有返回值，不改变
+.forEach((item, index, input)=>())  没有return，改变原数组   
+    
+    
 ```
+
+
+
+
+
+```js
+AJAX是在不重新加载整个页面的情况下与服务器交换数据并更新部分网页内容
+XMLHttpRequest对象
+	用于在后台与服务器交換数据
+open(method, url, async)
+	规定请求的类型、URL以及是否异步处理请求
+send()
+	将请求发送到服务器
+readystate属性
+	保存Xmlhttprequest的状态。从0到4发生变
+		0:请求未初始化
+		1:服务器连接已建立
+		2:请求已接收
+		3:请求处理中
+		4:请求已完成，且响应已就绪
+onreadystatechange事件
+	每当 readystate属性改变时，就会调用该函数
+status
+	260:“OK
+	484:未找到页面
+```
+
+![quicker_0ea05483-289e-43ee-a3e0-11985fa812cb.png](https://i.loli.net/2021/09/27/cyoIP2D8ig1eMAq.png)
+
+
+
+
 

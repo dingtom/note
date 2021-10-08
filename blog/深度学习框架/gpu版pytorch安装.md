@@ -1,6 +1,8 @@
-- [ 安装cuda](#head1)
-- [ 安装pytorch](#head2)
-- [ 安装tensorflow](#head3)
+- [To remove CUDA Toolkit:](#head1)
+- [To remove NVIDIA Drivers:](#head2)
+- [ 安装cudnn](#head3)
+- [ 安装pytorch](#head4)
+- [ 安装tensorflow](#head5)
 查看显卡型号
 
 ```lspci | grep -i nvidia```
@@ -9,7 +11,7 @@
 
 # 驱动安装
 
-[NVIDIA 驱动程序下载](https://www.nvidia.cn/Download/index.aspx?lang=cn)
+[NVIDIA 驱动程序下载]([官方 GeForce 驱动程序 | NVIDIA](https://www.nvidia.cn/geforce/drivers/))
 
 
 
@@ -28,23 +30,32 @@
 命令行界面
 Ctrl+Alt+F1
 
-```sudo apt-get --purge remove nvidia*```
-
-```sudo apt autoremove```
-
-To remove CUDA Toolkit:
-```sudo apt-get --purge remove "*cublas*" "cuda*"```
-To remove NVIDIA Drivers:
-
-```sudo apt-get --purge remove "*nvidia*"
-
+```shell
+sudo apt-get --purge remove nvidia*
+sudo apt autoremove
+# <span id="head1">To remove CUDA Toolkit:</span>
+sudo apt-get --purge remove "*cublas*" "cuda*"
+# <span id="head2">To remove NVIDIA Drivers:</span>
+sudo apt-get --purge remove "*nvidia*"
 ```
 
-# <span id="head1"> 安装cuda</span>
+# 安装cuda
 
 [驱动和cuda对应版本](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
 
 [cuda_download](https://developer.nvidia.com/cuda-toolkit-archive)
+
+```shell
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/11.1.0/local_installers/cuda-repo-ubuntu2004-11-1-local_11.1.0-455.23.05-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2004-11-1-local_11.1.0-455.23.05-1_amd64.deb
+sudo apt-key add /var/cuda-repo-ubuntu2004-11-1-local/7fa2af80.pub
+sudo apt-get update
+sudo apt-get -y install cuda
+```
+
+
 
 **查看cuda版本**
 
@@ -67,21 +78,23 @@ conda 安装cuda
 
 
 
-# 安装cudnn
+# <span id="head3"> 安装cudnn</span>
 
 [cuda和cudnn对应版本](https://developer.nvidia.com/cudnn)
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-532f67fce582eae0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 [cudnn_download]((https://developer.nvidia.com/rdp/cudnn-archive#a-collapse742-10))
-```tar -xvf cudnn-8.0-linux-x64-v5.1.tgz```
 
 安装cuDNN比较简单，解压后把相应的文件拷贝到对应的CUDA目录下即可
 
-```sudo cp cuda/include/cudnn.h /usr/local/cuda/include/```
-```sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/```
-```sudo chmod a+r /usr/local/cuda/include/cudnn.h```
-```sudo chmod a+r /usr/local/cuda/lib64/libcudnn*```
+```shell
+tar -xvf cudnn-8.0-linux-x64-v5.1.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include/
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/
+sudo chmod a+r /usr/local/cuda/include/cudnn.h
+sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+```
 
 conda安装cudnn
 
@@ -115,7 +128,7 @@ conda安装cudnn
 ```source ~/.bashrc```
 
  关闭终端，然后再重启一个新的终端
-# <span id="head2"> 安装pytorch</span>
+# <span id="head4"> 安装pytorch</span>
 ```conda create -n pytorch```
 
 
@@ -129,17 +142,17 @@ conda安装cudnn
 
 添加Anaconda的清华镜像
 
-```conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/```
+```shell
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
 
-```conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 
-```conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 
-```conda config --set show_channel_urls yes```
+conda config --set show_channel_urls yes
+```
 
-[pytorch安装命令
-
-[](https://pytorch.org/)
+[pytorch安装命令](https://pytorch.org/)
 ```conda install pytorch torchvision cudatoolkit=10.1```
 
 
@@ -152,7 +165,7 @@ print(torch.cuda.is_available())
 [手动下载安装具体步骤](https://codingchaozhang.blog.csdn.net/article/details/99688839?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
 
 
-# <span id="head3"> 安装tensorflow</span>
+# <span id="head5"> 安装tensorflow</span>
 
 1、创建虚拟环境：
 conda create -n tensorflow

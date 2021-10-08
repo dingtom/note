@@ -1,7 +1,9 @@
 - [ 语法](#head1)
-- [ let/var](#head2)
-- [ const](#head3)
-- [ 对象增强写法](#head4)
+- [ 箭头函数](#head2)
+- [ let/var](#head3)
+- [ const](#head4)
+- [ 对象增强写法](#head5)
+- [ 高阶函数](#head6)
 
 
 # <span id="head1"> 语法</span>
@@ -261,7 +263,7 @@ console.log('pink老师' - 100); // NaN
 
 
 
-
+# <span id="head2"> 箭头函数</span>
 
 ```
 (param1, param2, …, paramN) => { statements }
@@ -276,11 +278,19 @@ singleParam => { statements }
 () => { statements }
 ```
 
-# <span id="head2"> let/var</span>
+# <span id="head3"> let/var</span>
+
+```
+// ES5中的var是没有块级作用域的(if/for)
+// ES6中的let是由块级作用的(if/for)
+```
 
 我们可以将let看成更完美的var。有if/for的块级作用域。
 
-# <span id="head3"> const</span>
+JS中使用var来声明一个变量时, 变量的作用域主要是和函数的定义有关.
+针对于其他块定义来说是没有作用域的，比如if/for等，这在我们开发中往往会引起一些问题。
+
+# <span id="head4"> const</span>
 
 将某个变量修饰为常量, 不可以再次赋值。来保证数据的安全性.
 
@@ -288,7 +298,7 @@ singleParam => { statements }
 
 创建时就要赋值，常量（变量保存的是内存地址，地址不能改内容可以）的含义是指向的对象不能修改，但是可以修改对象内部属性
 
-# <span id="head4"> 对象增强写法</span>
+# <span id="head5"> 对象增强写法</span>
 
 ```
 let a=1
@@ -308,9 +318,7 @@ obj1.teset()
 
 ```css
 for (let i in this.books){
-
-​	const book= this.books[i]
-
+	const book= this.books[i]
 }
 
 for (let item of this.book){
@@ -318,7 +326,7 @@ for (let item of this.book){
 }
 ```
 
-高阶函数
+# <span id="head6"> 高阶函数</span>
 
 ```css
 // 1.filter函数的使用
@@ -327,19 +335,57 @@ filter中的回调函数有一个要求: 必须返回一个boolean值
 // // 2.map函数的使用
 映射
 // // 3.reduce函数的使用
-对数组中所有的内容进行汇总
+对数组中所有的内容进行汇总,每次回调方法返回的值，都会传递到下次回调中
 
 
-let total = nums.filter(function (n) {
+let nums = [2, 3, 4, 100, 200, 1000];
+let total = nums.filter(n => {
   return n < 100
-}).map(function (n) {
+}).map(n => {
   return n * 2
-}).reduce(function (prevValue, n) {
-  return prevValue + n
+}).reduce( (preValue, n) => {
+  console.log('preValue, n', preValue, n)
+  return preValue + n
 }, 0)
 console.log(total);
 
-return this.books.reduce(function (preValue, book) {
-        return preValue + book.price * book.count
+    
+当前项，索引，原始数组
+.map(item=>{});    有返回值，不改变
+.forEach((item, index, input)=>())  没有return，改变原数组   
+    
+    
 ```
+
+
+
+
+
+```js
+AJAX是在不重新加载整个页面的情况下与服务器交换数据并更新部分网页内容
+XMLHttpRequest对象
+	用于在后台与服务器交換数据
+open(method, url, async)
+	规定请求的类型、URL以及是否异步处理请求
+send()
+	将请求发送到服务器
+readystate属性
+	保存Xmlhttprequest的状态。从0到4发生变
+		0:请求未初始化
+		1:服务器连接已建立
+		2:请求已接收
+		3:请求处理中
+		4:请求已完成，且响应已就绪
+onreadystatechange事件
+	每当 readystate属性改变时，就会调用该函数
+status
+	260:“OK
+	484:未找到页面
+```
+
+![quicker_0ea05483-289e-43ee-a3e0-11985fa812cb.png](https://i.loli.net/2021/09/27/cyoIP2D8ig1eMAq.png)
+
+
+
+
 

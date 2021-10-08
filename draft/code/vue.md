@@ -1184,6 +1184,10 @@ history.back() 出栈返回到/foo
 
 相当于history.back
 
+```
+this.$router.go(-1) //返回上一层
+```
+
 ![quicker_e11b3c67-62a4-4c57-85cf-4310dc2ec5a2.png](https://i.loli.net/2021/07/22/yU2knxbjS8Ct7Yc.png)
 
 因为 history.back() 等价于 history.go(-1)
