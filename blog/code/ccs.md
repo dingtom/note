@@ -2,84 +2,85 @@
 - [ css基础选择器](#head2)
 	- [ 标签选择器：](#head3)
 	- [ 通配符选择器：](#head4)
-	- [ 选择器总结](#head5)
-		- [ ![基础选择器总结.png](https://i.loli.net/2021/07/12/H5zkcC6NgxqtVvp.png)](#head6)
-- [ css字体:](#head7)
-	- [字体大小： font-size: 20px; ](#head8)
-	- [字体粗细：font-weight: bold; ](#head9)
-	- [文本的风格 font-style: normal/italic;](#head10)
-	- [文本颜色：color: red;](#head11)
-	- [文本对齐：text-align: center/left/right;](#head12)
-	- [ 修饰文本：text-decoration：underline；](#head13)
-	- [行间距：line-height: 26px;](#head14)
-- [ css样式表：](#head15)
-	- [ 行内样式表（行内式）](#head16)
-	- [ 内部样式表（嵌入式）](#head17)
-	- [ 外部样式表（链接式）](#head18)
-		- [ emmet语法](#head19)
-			- [ 1、简介](#head20)
-			- [ 2、快速生成HTML结构语法](#head21)
-			- [ 3、快速生成CSS样式语法](#head22)
-			- [ 4、快速格式化代码](#head23)
-- [ css的复合选择器](#head24)
-	- [ 1、什么是复合选择器？](#head25)
-	- [2、后代选择器 (重要）](#head26)
-	- [3、子选择器 (重要）](#head27)
-	- [4、并集选择器 (重要）](#head28)
-	- [ 5、伪类选择器](#head29)
-		- [ 6、链接伪类选择器](#head30)
-	- [7、:focus 伪类选择器](#head31)
-		- [ 复合选择器总结](#head32)
-- [ css的显示模式](#head33)
-	- [ 什么是元素的显示模式](#head34)
-	- [ 块元素](#head35)
-	- [ 行内元素](#head36)
-	- [ 行内块元素](#head37)
-	- [ 元素显示模式总结](#head38)
-	- [ 元素显示模式的转换](#head39)
-		- [ 单行文字垂直居中的代码](#head40)
-- [ css的背景](#head41)
-	- [ 背景颜色](#head42)
-	- [ 背景图片](#head43)
-	- [ 背景平铺](#head44)
-	- [ 背景图片位置](#head45)
-	- [ 背景图片固定](#head46)
-	- [ 背景样式合写](#head47)
-	- [ 背景色半透明](#head48)
-- [ css三大特性](#head49)
-	- [ 层叠性](#head50)
-	- [ 继承性](#head51)
-	- [ 优先级](#head52)
-- [ 盒子模型](#head53)
-	- [ 网页布局的本质](#head54)
-	- [盒子模型（Box Model）组成](#head55)
-	- [ 边框（border）](#head56)
-	- [ 内边距（padding）](#head57)
-	- [ 外边距（margin）](#head58)
-- [ 其他样式	](#head59)
-	- [ 1、圆角边框](#head60)
-	- [ 2、盒子阴影](#head61)
-	- [ 3、文字阴影](#head62)
-- [ 浮动](#head63)
-	- [ 1、传统网页布局的三种方式](#head64)
-	- [ 2、标准流（普通流/文档流）](#head65)
-	- [ 3、为什么需要浮动？](#head66)
-	- [ 4、什么是浮动？](#head67)
-	- [ 5、浮动特性](#head68)
-	- [ 6、浮动元素经常和标准流父级搭配使用](#head69)
-- [ 清除浮动](#head70)
-	- [ 1、为什么需要清除浮动？](#head71)
-	- [ 2、清除浮动本质](#head72)
-	- [ 3、清除浮动样式](#head73)
-	- [ 4、清除浮动的多种方式](#head74)
-		- [ 4.1、额外标签法](#head75)
-		- [4.2、父级添加 overflow 属性](#head76)
-		- [ 4.3、父级添加after伪元素](#head77)
-		- [ 4.4、父级添加双伪元素](#head78)
-- [ flex](#head79)
-- [ position](#head80)
-- [ 居中](#head81)
-- [Media Query](#head82)
+	- [ 子元素](#head5)
+	- [ 选择器总结](#head6)
+		- [ ![基础选择器总结.png](https://i.loli.net/2021/07/12/H5zkcC6NgxqtVvp.png)](#head7)
+- [ css字体:](#head8)
+	- [字体大小： font-size: 20px; ](#head9)
+	- [字体粗细：font-weight: bold; ](#head10)
+	- [文本的风格 font-style: normal/italic;](#head11)
+	- [文本颜色：color: red;](#head12)
+	- [文本对齐：text-align: center/left/right;](#head13)
+	- [ 修饰文本：text-decoration：underline；](#head14)
+	- [行间距：line-height: 26px;](#head15)
+- [ css样式表：](#head16)
+	- [ 行内样式表（行内式）](#head17)
+	- [ 内部样式表（嵌入式）](#head18)
+	- [ 外部样式表（链接式）](#head19)
+		- [ emmet语法](#head20)
+			- [ 1、简介](#head21)
+			- [ 2、快速生成HTML结构语法](#head22)
+			- [ 3、快速生成CSS样式语法](#head23)
+			- [ 4、快速格式化代码](#head24)
+- [ css的复合选择器](#head25)
+	- [ 1、什么是复合选择器？](#head26)
+	- [2、后代选择器 (重要）](#head27)
+	- [3、子选择器 (重要）](#head28)
+	- [4、并集选择器 (重要）](#head29)
+	- [ 5、伪类选择器](#head30)
+		- [ 6、链接伪类选择器](#head31)
+	- [7、:focus 伪类选择器](#head32)
+		- [ 复合选择器总结](#head33)
+- [ css的显示模式](#head34)
+	- [ 什么是元素的显示模式](#head35)
+	- [ 块元素](#head36)
+	- [ 行内元素](#head37)
+	- [ 行内块元素](#head38)
+	- [ 元素显示模式总结](#head39)
+	- [ 元素显示模式的转换](#head40)
+		- [ 单行文字垂直居中的代码](#head41)
+- [ css的背景](#head42)
+	- [ 背景颜色](#head43)
+	- [ 背景图片](#head44)
+	- [ 背景平铺](#head45)
+	- [ 背景图片位置](#head46)
+	- [ 背景图片固定](#head47)
+	- [ 背景样式合写](#head48)
+	- [ 背景色半透明](#head49)
+- [ css三大特性](#head50)
+	- [ 层叠性](#head51)
+	- [ 继承性](#head52)
+	- [ 优先级](#head53)
+- [ 盒子模型](#head54)
+	- [ 网页布局的本质](#head55)
+	- [盒子模型（Box Model）组成](#head56)
+	- [ 边框（border）](#head57)
+	- [ 内边距（padding）](#head58)
+	- [ 外边距（margin）](#head59)
+- [ 其他样式	](#head60)
+	- [ 1、圆角边框](#head61)
+	- [ 2、盒子阴影](#head62)
+	- [ 3、文字阴影](#head63)
+- [ 浮动](#head64)
+	- [ 1、传统网页布局的三种方式](#head65)
+	- [ 2、标准流（普通流/文档流）](#head66)
+	- [ 3、为什么需要浮动？](#head67)
+	- [ 4、什么是浮动？](#head68)
+	- [ 5、浮动特性](#head69)
+	- [ 6、浮动元素经常和标准流父级搭配使用](#head70)
+- [ 清除浮动](#head71)
+	- [ 1、为什么需要清除浮动？](#head72)
+	- [ 2、清除浮动本质](#head73)
+	- [ 3、清除浮动样式](#head74)
+	- [ 4、清除浮动的多种方式](#head75)
+		- [ 4.1、额外标签法](#head76)
+		- [4.2、父级添加 overflow 属性](#head77)
+		- [ 4.3、父级添加after伪元素](#head78)
+		- [ 4.4、父级添加双伪元素](#head79)
+- [ flex](#head80)
+- [ position](#head81)
+- [ 居中](#head82)
+- [Media Query](#head83)
 
 ​       CSS 是层叠样式表 ( Cascading Style Sheets ) 的简称.
 
@@ -154,22 +155,28 @@ CSS 规则由两个主要的部分构成：选择器以及一条或多条声明�
 ```
 通配符选择器不需要调用， **自动就给所有的元素使用样式**，特殊情况才使用
 
-## <span id="head5"> 选择器总结</span>
+## <span id="head5"> 子元素</span>
 
-###### <span id="head6"> ![基础选择器总结.png](https://i.loli.net/2021/07/12/H5zkcC6NgxqtVvp.png)</span>
+li:first-child: 选择li父元素的第一个li子元素
 
-# <span id="head7"> css字体:</span>
+last-child,nth-child(3),nth-last-child(3),
+
+## <span id="head6"> 选择器总结</span>
+
+###### <span id="head7"> ![基础选择器总结.png](https://i.loli.net/2021/07/12/H5zkcC6NgxqtVvp.png)</span>
+
+# <span id="head8"> css字体:</span>
 
 font-family: '微软雅黑';
 
-## <span id="head8">字体大小： font-size: 20px; </span>
+## <span id="head9">字体大小： font-size: 20px; </span>
 
 ​    1.px（像素）大小是我们网页的最常用的单位
 ​    2.谷歌浏览器默认的文字大小为16px
 ​    3.不同浏览器可能默认显示的字号大小不一致，我们尽量给一个明确值大小，不要默认大小
 ​    4.可以给 body 指定整个页面文字的大小
 
-## <span id="head9">字体粗细：font-weight: bold; </span>
+## <span id="head10">字体粗细：font-weight: bold; </span>
 
 ​	normal:默认值（不加粗的）
 ​	bold:定义粗体（加粗的）
@@ -178,22 +185,22 @@ font-family: '微软雅黑';
 1.学会让加粗标签（比如 h 和 strong 等) 不加粗，或者其他标签加粗
 2.实际开发时，我们更喜欢用数字表示粗细
 
-## <span id="head10">文本的风格 font-style: normal/italic;</span>
+## <span id="head11">文本的风格 font-style: normal/italic;</span>
 
 
  body {   font: font-style  font-weight  font-size/line-height  font-family;}
 
 使用 font 属性时，必须按上面语法格式中的顺序书写，不能更换顺序，并且各个属性间以空格隔开 不需要设置的属性可以省略（取默认值），但必须保留 font-size 和 font-family 属性，否则 font 属性将不起作用
 
-## <span id="head11">文本颜色：color: red;</span>
+## <span id="head12">文本颜色：color: red;</span>
 
 ​	预定义的颜色值red, green,blue,还有我们的御用色pink
 ​	十六进制#FF0000,#FF6600,#29D794
 ​	RGB代码rgb(255,0.0)或rgb(100%,09%,0%)
 
-## <span id="head12">文本对齐：text-align: center/left/right;</span>
+## <span id="head13">文本对齐：text-align: center/left/right;</span>
 
-## <span id="head13"> 修饰文本：text-decoration：underline；</span>
+## <span id="head14"> 修饰文本：text-decoration：underline；</span>
 
 ​	none默认。没有装饰线（最常用）
 ​	underline下划线。链接a自带下划线（常用）
@@ -203,13 +210,13 @@ font-family: '微软雅黑';
 文本缩进:text-indent：20px/2em；
 
     em 是一个相对单位，就是当前元素（font-size) 1 个文字的大小, 如果当前元素没有设置大小，则会按照父元素的 1 个文字大小。
-## <span id="head14">行间距：line-height: 26px;</span>
+## <span id="head15">行间距：line-height: 26px;</span>
 
 设置行间的距离（行高）。
 
-# <span id="head15"> css样式表：</span>
+# <span id="head16"> css样式表：</span>
 
-## <span id="head16"> 行内样式表（行内式）</span>
+## <span id="head17"> 行内样式表（行内式）</span>
 
 行内样式表（内联样式表）是在元素标签内部的 style 属性中设定 CSS 样式。适合于修改简单样式.
 
@@ -218,7 +225,7 @@ font-family: '微软雅黑';
 ​        2.可以控制当前的标签设置样式
 ​        3.由于书写繁琐，并且没有体现出结构与样式相分离的思想，所以不推荐大量使用，只有对当前元素添加简单样式的时候，可以考虑使用
 
-## <span id="head17"> 内部样式表（嵌入式）</span>
+## <span id="head18"> 内部样式表（嵌入式）</span>
 
 ​        内部样式表（内嵌样式表）是写到html页面内部. 是将所有的 CSS 代码抽取出来，单独放到一个 <style> 标签中
 ​        语法：
@@ -234,7 +241,7 @@ font-family: '微软雅黑';
 ​        2.通过此种方式，可以方便控制当前整个页面中的元素样式设置
 ​        3.代码结构清晰，但是并没有实现结构与样式完全分离
 
-## <span id="head18"> 外部样式表（链接式）</span>
+## <span id="head19"> 外部样式表（链接式）</span>
 
 ​    实际开发都是外部样式表. 适合于样式比较多的情况. 核心是:样式单独写到CSS 文件中，之后把CSS文件引入到 HTML 页面中使用.
 
@@ -243,9 +250,9 @@ font-family: '微软雅黑';
      
            <link rel="stylesheet"  href="css文件路径">
 
-### <span id="head19"> emmet语法</span>
+### <span id="head20"> emmet语法</span>
 
-###### <span id="head20"> 1、简介</span>
+###### <span id="head21"> 1、简介</span>
 
 ​		Emmet语法的前身是Zen coding,它使用缩写,来提高html/css的编写速度, Vscode内部已经集成该语法。
 
@@ -253,7 +260,7 @@ font-family: '微软雅黑';
 
 ​		快速生成CSS样式语法
 
-###### <span id="head21"> 2、快速生成HTML结构语法</span>
+###### <span id="head22"> 2、快速生成HTML结构语法</span>
 
 - 生成标签 直接**输入标签名 按tab键**即可   比如  div   然后tab 键， 就可以生成 <div></div>
 - 如果想要生成多个相同标签  加上 * 就可以了 比如   **div*3  就可以快速生成3个div**
@@ -264,7 +271,7 @@ font-family: '微软雅黑';
 - 如果想要在生成的**标签内部写内容可以用  div{文字}**  
 - ```div{$}*5       .demo$*5                 ```
 
-###### <span id="head22"> 3、快速生成CSS样式语法</span>
+###### <span id="head23"> 3、快速生成CSS样式语法</span>
 
 CSS 基本采取简写形式即可
 
@@ -272,7 +279,7 @@ CSS 基本采取简写形式即可
 
 ​		比如 lh26px   按tab  可以生成  line-height: 26px;
 
-###### <span id="head23"> 4、快速格式化代码</span>
+###### <span id="head24"> 4、快速格式化代码</span>
 
 Vscode  快速格式化代码:   shift+alt+f
 
@@ -288,14 +295,14 @@ Vscode  快速格式化代码:   shift+alt+f
 
 ​		"editor.formatOnSave": true
 
-# <span id="head24"> css的复合选择器</span>
+# <span id="head25"> css的复合选择器</span>
 
-## <span id="head25"> 1、什么是复合选择器？</span>
+## <span id="head26"> 1、什么是复合选择器？</span>
 
 ​		在 CSS 中，可以根据选择器的类型把选择器分为**基础选择器**和**复合选择器**，复合选择器是建立在基础选择器之上，对基本选择器进行组合形成的。 
 ​		常用的复合选择器包括：**后代选择器、子选择器、并集选择器、伪类选择器**等等
 
-## <span id="head26">2、后代选择器 (重要）</span>
+## <span id="head27">2、后代选择器 (重要）</span>
 
 ​		后代选择器又称为包含选择器，可以选择父元素里面子元素。
 
@@ -312,7 +319,7 @@ Vscode  快速格式化代码:   shift+alt+f
 - 元素2 可以是儿子，也可以是孙子等，只要是元素1 的后代即可
 - 元素1 和 元素2 可以是任意基础选择器
 
-## <span id="head27">3、子选择器 (重要）</span>
+## <span id="head28">3、子选择器 (重要）</span>
 
 ​		（简单理解就是选亲儿子元素）
 
@@ -328,7 +335,7 @@ Vscode  快速格式化代码:   shift+alt+f
 - 元素1 是父级，元素2 是子级，最终选择的是元素2
 - 元素2 必须是亲儿子，其孙子、重孙之类都不归他管. 你也可以叫他 亲儿子选择器
 
-## <span id="head28">4、并集选择器 (重要）</span>
+## <span id="head29">4、并集选择器 (重要）</span>
 
 ​		并集选择器可以选择多组标签, 同时为他们定义相同的样式，通常用于集体声明。并集选择器是各选择器通过英文逗号（,）连接而成，任何形式的选择器都可以作为并集选择器的一部分。
 
@@ -344,11 +351,11 @@ Vscode  快速格式化代码:   shift+alt+f
 - 逗号可以理解为和的意思
 - 并集选择器通常用于集体声明
 
-## <span id="head29"> 5、伪类选择器</span>
+## <span id="head30"> 5、伪类选择器</span>
 
 ​		伪类选择器用于**向某些选择器添加特殊的效果**，比如给链接添加特殊效果，或选择第1个，第n个元素。
 
-###### <span id="head30"> 6、链接伪类选择器</span>
+###### <span id="head31"> 6、链接伪类选择器</span>
 
 **语法：**
 
@@ -381,7 +388,7 @@ a:hover {
 
 ```
 
-## <span id="head31">7、:focus 伪类选择器</span>
+## <span id="head32">7、:focus 伪类选择器</span>
 
 ​		:focus 伪类选择器用于选取获得焦点的表单元素。焦点就是光标，一般情况 <input> 类表单元素才能获取
 
@@ -391,13 +398,13 @@ input: focus{
 }
 ```
 
-###### <span id="head32"> 复合选择器总结</span>
+###### <span id="head33"> 复合选择器总结</span>
 
 ![](https://i.loli.net/2021/07/08/xUlBFwXmCKghfo8.png)
 
-# <span id="head33"> css的显示模式</span>
+# <span id="head34"> css的显示模式</span>
 
-## <span id="head34"> 什么是元素的显示模式</span>
+## <span id="head35"> 什么是元素的显示模式</span>
 
 **定义：**
 
@@ -407,7 +414,7 @@ input: focus{
 
 ​		网页的标签非常多，在不同地方会用到不同类型的标签，了解他们的特点可以更好的布局我们的网页。
 
-## <span id="head35"> 块元素</span>
+## <span id="head36"> 块元素</span>
 
 **常见的块元素**：
 
@@ -435,7 +442,7 @@ input: focus{
 
 
 
-## <span id="head36"> 行内元素</span>
+## <span id="head37"> 行内元素</span>
 
 **常见的行内元素：**
 
@@ -463,7 +470,7 @@ input: focus{
 
 
 
-## <span id="head37"> 行内块元素</span>
+## <span id="head38"> 行内块元素</span>
 
 **常见的行内块标签**：
 
@@ -480,13 +487,13 @@ input: focus{
 - 默认宽度就是它本身内容的宽度（行内元素特点）。
 - 高度，行高、外边距以及内边距都可以控制（块级元素特点）。
 
-## <span id="head38"> 元素显示模式总结</span>
+## <span id="head39"> 元素显示模式总结</span>
 
 ![1570870718415.png](https://i.loli.net/2021/07/12/YGDSukyfRTAKCWp.png)
 
 ​		学习元素显示模式的主要目的就是分清它们各自的特点，当我们网页布局的时候，在合适的地方用合适的标签元素。
 
-## <span id="head39"> 元素显示模式的转换</span>
+## <span id="head40"> 元素显示模式的转换</span>
 
 **简单理解**: 
 
@@ -499,7 +506,7 @@ input: focus{
 - 转换为行内元素：display:inline;
 - 转换为行内块：display: inline-block;
 
-### <span id="head40"> 单行文字垂直居中的代码</span>
+### <span id="head41"> 单行文字垂直居中的代码</span>
 
 **解决方案**:    
 
@@ -522,18 +529,18 @@ input: focus{
 
 ​		如果行高大于盒子高度,则文字偏下。
 
-# <span id="head41"> css的背景</span>
+# <span id="head42"> css的背景</span>
 
 通过 CSS 背景属性，可以给页面元素添加背景样式。
 背景属性可以设置背景颜色、背景图片、背景平铺、背景图片位置、背景图像固定等。
 
-## <span id="head42"> 背景颜色</span>
+## <span id="head43"> 背景颜色</span>
 
 ​		background-color: 颜色值
 
 ​		元素背景颜色默认值是 transparent（透明）
 
-## <span id="head43"> 背景图片</span>
+## <span id="head44"> 背景图片</span>
 
 ​		background-image: url(images/logo.png)
 
@@ -543,7 +550,7 @@ input: focus{
 
 
 
-## <span id="head44"> 背景平铺</span>
+## <span id="head45"> 背景平铺</span>
 
 ```
             /* 1.背景图片不平铺 */
@@ -556,7 +563,7 @@ input: focus{
             background-repeat: repeat-y;
 ```
 
-## <span id="head45"> 背景图片位置</span>
+## <span id="head46"> 背景图片位置</span>
 
 ```
 
@@ -564,12 +571,12 @@ input: focus{
 
 ​		如果指定的两个值是精确单位和方位名词混合使用，则第一个值是 x 坐标，第二个值是 y 坐标
 
-## <span id="head46"> 背景图片固定</span>
+## <span id="head47"> 背景图片固定</span>
 
 ​	background-attachment:scroll背景图像是随对象内容滚动
 ​	background-attachment:fixed背员图像固定
 
-## <span id="head47"> 背景样式合写</span>
+## <span id="head48"> 背景样式合写</span>
 
 ```
     /* background-image: url(images/bg.jpg);
@@ -582,7 +589,7 @@ input: focus{
 
 ```
 
-## <span id="head48"> 背景色半透明</span>
+## <span id="head49"> 背景色半透明</span>
 
 ```
             background: rgba(0, 0, 0, .3);
@@ -591,9 +598,9 @@ input: focus{
 - 最后一个参数是 alpha 透明度，取值范围在 0~1之间
 - 我们习惯把 0.3 的 0 省略掉，写为 background: rgba(0, 0, 0, .3);
 
-# <span id="head49"> css三大特性</span>
+# <span id="head50"> css三大特性</span>
 
-## <span id="head50"> 层叠性</span>
+## <span id="head51"> 层叠性</span>
 
 ​		相同选择器给设置相同的样式，此时一个样式就会覆盖（层叠）另一个冲突的样式。层叠性主要解决样式冲突的问题
 
@@ -614,7 +621,7 @@ input: focus{
 
 
 
-## <span id="head51"> 继承性</span>
+## <span id="head52"> 继承性</span>
 
 ​		CSS中的继承: 子标签会继承父标签的某些样式，如文本颜色和字号。恰当地使用继承可以简化代码，降低 CSS 样式的复杂性。
 
@@ -654,7 +661,7 @@ input: focus{
 - 此时子元素的行高是：当前子元素的文字大小 * 1.5
 - body 行高 1.5  这样写法最大的优势就是里面子元素可以根据自己文字大小自动调整行高
 
-## <span id="head52"> 优先级</span>
+## <span id="head53"> 优先级</span>
 
 当同一个元素指定多个选择器，就会有优先级的产生。
 
@@ -738,9 +745,9 @@ input: focus{
 
 
 
-# <span id="head53"> 盒子模型</span>
+# <span id="head54"> 盒子模型</span>
 
-## <span id="head54"> 网页布局的本质</span>
+## <span id="head55"> 网页布局的本质</span>
 
 网页布局的核心本质： 就是利用 CSS 摆盒子。
 
@@ -752,7 +759,7 @@ input: focus{
 2. 利用 CSS 设置好盒子样式，然后摆放到相应位置。
 3. 往盒子里面装内容
 
-## <span id="head55">盒子模型（Box Model）组成</span>
+## <span id="head56">盒子模型（Box Model）组成</span>
 
 ​		盒子模型：把 HTML 页面中的布局元素看作是一个矩形的盒子，也就是一个盛装内容的容器。
 
@@ -760,7 +767,7 @@ input: focus{
 
 ![1571492536942.png](https://i.loli.net/2021/07/12/zpE6AfXL9OqdlMB.png)
 
-## <span id="head56"> 边框（border）</span>
+## <span id="head57"> 边框（border）</span>
 
 **边框的使用**
 
@@ -803,7 +810,7 @@ border-collapse 属性控制浏览器绘制表格边框的方式。它控制相�
 - 测量盒子大小的时候,不量边框。
 - 如果测量的时候包含了边框,则需要 width/height 减去边框宽度
 
-## <span id="head57"> 内边距（padding）</span>
+## <span id="head58"> 内边距（padding）</span>
 
 **内边距的使用方式**
 
@@ -827,7 +834,7 @@ padding-bottom下内边距
 - 如何盒子本身没有指定width/height属性, 则此时padding不会撑开盒子大小。
 - 保证盒子跟效果图大小保持一致，则让 width/height 减去多出来的内边距大小即可。
 
-## <span id="head58"> 外边距（margin）</span>
+## <span id="head59"> 外边距（margin）</span>
 
 **外边距的使用方式**
 
@@ -895,9 +902,9 @@ margin: 0 auto;
 
 ​		注意：行内元素为了照顾兼容性，尽量只设置左右内外边距，不要设置上下内外边距。但是转换为块级和行内块元素就可以了
 
-# <span id="head59"> 其他样式	</span>
+# <span id="head60"> 其他样式	</span>
 
-## <span id="head60"> 1、圆角边框</span>
+## <span id="head61"> 1、圆角边框</span>
 
 ```
 width: 200px;
@@ -921,7 +928,7 @@ border-top-left-radius: 20px;
 - 该属性是一个简写属性，可以跟四个值，分别代表左上角、右上角、右下角、左下角
 - 分开写：border-top-left-radius、border-top-right-radius、border-bottom-right-radius 和border-bottom-left-radius
 
-## <span id="head61"> 2、盒子阴影</span>
+## <span id="head62"> 2、盒子阴影</span>
 
 
 
@@ -934,7 +941,7 @@ box-shadow: h-shadow v-shadow blur spread color inset;
 
 ![1571541874805.png](https://i.loli.net/2021/07/13/8iOLaDFPtj4S1zh.png)
 
-## <span id="head62"> 3、文字阴影</span>
+## <span id="head63"> 3、文字阴影</span>
 
 在 CSS3 中，我们可以使用 text-shadow 属性将阴影应用于文本。
 语法：
@@ -947,9 +954,9 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 
 
-# <span id="head63"> 浮动</span>
+# <span id="head64"> 浮动</span>
 
-## <span id="head64"> 1、传统网页布局的三种方式</span>
+## <span id="head65"> 1、传统网页布局的三种方式</span>
 
 ​	CSS 提供了三种传统布局方式(简单说,就是盒子如何进行排列顺序)：
 
@@ -959,7 +966,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 注意：实际开发中，一个页面基本都包含了这三种布局方式（后面移动端学习新的布局方式） 。
 
-## <span id="head65"> 2、标准流（普通流/文档流）</span>
+## <span id="head66"> 2、标准流（普通流/文档流）</span>
 
 所谓的标准流:  就是标签按照规定好默认方式排列
 
@@ -968,7 +975,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 以上都是标准流布局，我们前面学习的就是标准流，标准流是最基本的布局方式。
 
-## <span id="head66"> 3、为什么需要浮动？</span>
+## <span id="head67"> 3、为什么需要浮动？</span>
 
 ​		总结： 有很多的布局效果，标准流没有办法完成，此时就可以利用浮动完成布局。 因为浮动可以改变元素标签默认的排列方式.
 
@@ -976,7 +983,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 ​		网页布局第一准则：**多个块级元素纵向排列找标准流，多个块级元素横向排列找浮动**。
 
-## <span id="head67"> 4、什么是浮动？</span>
+## <span id="head68"> 4、什么是浮动？</span>
 
 ​		float 属性用于创建浮动框，将其移动到一边，直到左边缘或右边缘触及包含块或另一个浮动框的边缘。
 
@@ -986,7 +993,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 float: none/left/right(默认元素不浮动，元素向左浮动，元素向右浮动)
 ```
 
-## <span id="head68"> 5、浮动特性</span>
+## <span id="head69"> 5、浮动特性</span>
 
 加了浮动之后的元素,会具有很多特性,需要我们掌握的.
 
@@ -1005,7 +1012,7 @@ float: none/left/right(默认元素不浮动，元素向左浮动，元素向右
 ​	如果块级盒子没有设置宽度，默认宽度和父级一样宽，但是添加浮动后，它的大小根据内容来決定
 ​	浮动的盒子中间是没有缝隙的，是紧挨着一起的
 
-## <span id="head69"> 6、浮动元素经常和标准流父级搭配使用</span>
+## <span id="head70"> 6、浮动元素经常和标准流父级搭配使用</span>
 
 为了约束浮动元素位置, 我们网页布局一般采取的策略是:
 
@@ -1021,15 +1028,15 @@ float: none/left/right(默认元素不浮动，元素向左浮动，元素向右
 
 **浮动的盒子只会影响浮动盒子后面的标准流**,不会影响前面的标准流.
 
-# <span id="head70"> 清除浮动</span>
+# <span id="head71"> 清除浮动</span>
 
-## <span id="head71"> 1、为什么需要清除浮动？</span>
+## <span id="head72"> 1、为什么需要清除浮动？</span>
 
 ​		由于父级盒子很多情况下，不方便给高度，但是子盒子浮动又不占有位置，最后父级盒子高度为 0 时，就会影响下面的标准流盒子。
 
 ![1571555883628.png](https://i.loli.net/2021/07/18/S3qrI2TE9oLtZJu.png)
 
-## <span id="head72"> 2、清除浮动本质</span>
+## <span id="head73"> 2、清除浮动本质</span>
 
 清除浮动的本质是清除浮动元素造成的影响：浮动的子标签无法撑开父盒子的高度
 
@@ -1039,7 +1046,7 @@ float: none/left/right(默认元素不浮动，元素向左浮动，元素向右
 - 清除浮动之后，父级就会根据浮动的子盒子自动检测高度。
 - 父级有了高度，就不会影响下面的标准流了
 
-## <span id="head73"> 3、清除浮动样式</span>
+## <span id="head74"> 3、清除浮动样式</span>
 
 ```css
 clear:属性值;
@@ -1053,9 +1060,9 @@ both同时清除左右两侧浮动的影响
 
 
 
-## <span id="head74"> 4、清除浮动的多种方式</span>
+## <span id="head75"> 4、清除浮动的多种方式</span>
 
-### <span id="head75"> 4.1、额外标签法</span>
+### <span id="head76"> 4.1、额外标签法</span>
 
 额外标签法也称为隔墙法，是 W3C 推荐的做法。
 
@@ -1073,7 +1080,7 @@ both同时清除左右两侧浮动的影响
 
 ​		注意： 要求**这个新的空标签必须是块级元素。**
 
-### <span id="head76">4.2、父级添加 overflow 属性</span>
+### <span id="head77">4.2、父级添加 overflow 属性</span>
 
 可以给父级添加 overflow 属性，将其属性值设置为 hidden、 auto 或 scroll 。
 
@@ -1087,7 +1094,7 @@ overflow:hidden | auto | scroll;
 
 注意：是给父元素添加代码
 
-### <span id="head77"> 4.3、父级添加after伪元素</span>
+### <span id="head78"> 4.3、父级添加after伪元素</span>
 
 :after 方式是额外标签法的升级版。给父元素添加：
 
@@ -1110,7 +1117,7 @@ overflow:hidden | auto | scroll;
 
 代表网站： 百度、淘宝网、网易等
 
-### <span id="head78"> 4.4、父级添加双伪元素</span>
+### <span id="head79"> 4.4、父级添加双伪元素</span>
 
 给父元素添加
 
@@ -1133,13 +1140,13 @@ overflow:hidden | auto | scroll;
 
 代表网站：小米、腾讯等
 
-# <span id="head79"> flex</span>
+# <span id="head80"> flex</span>
 
 
 
 
 
-# <span id="head80"> position</span>
+# <span id="head81"> position</span>
 
 1.     Absolute：绝对定位，是相对于最近的且不是static定位的父元素来定位
 
@@ -1224,7 +1231,7 @@ Absolution：元素会脱离文档流，定位是相对于离它最近的且不�
 
 Relative：元素仍处于文档流中，定位是相对于原本自身的位置，若没有设置宽度，则宽度为父元素的宽度，该元素的大小会影响父元素的大小。
 
-# <span id="head81"> 居中</span>
+# <span id="head82"> 居中</span>
 
 文字居中
 
@@ -1260,7 +1267,7 @@ align-items: center;/*垂直居中*/
 
 
 
-# <span id="head82">Media Query</span>
+# <span id="head83">Media Query</span>
 
 使用 @media 查询，你可以针对不同的媒体类型定义不同的样式。
 

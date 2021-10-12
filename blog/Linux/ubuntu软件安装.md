@@ -95,6 +95,9 @@ PS:如果要退出：输入
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 conda config --set show_channel_urls yes
+
+//删除清华源改回默认源
+conda config --remove-key channels
 ```
 
 安装CPU版本：

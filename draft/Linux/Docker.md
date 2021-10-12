@@ -105,6 +105,26 @@ https://www.runoob.com/docker/docker-commit-command.html
 
 #### cp
 https://www.runoob.com/docker/docker-cp-command.html
+
+```shell
+docker cp [OPTIONS] CONTAINER:SRC_PATH  DEST_PATH
+docker cp [OPTIONS] SRC_PATH  CONTAINER:DEST_PATH
+```
+
+```
+将主机/www/runoob目录拷贝到容器96f7f14e99ab的/www目录下。
+docker cp /www/runoob 96f7f14e99ab:/www/
+将主机/www/runoob目录拷贝到容器96f7f14e99ab中，目录重命名为www。
+docker cp /www/runoob 96f7f14e99ab:/www
+
+```
+
+OPTIONS说明：
+
+- **-L :**保持源目标中的链接
+
+  
+
 #### diff
 https://www.runoob.com/docker/docker-diff-command.html
 
@@ -231,14 +251,23 @@ CMD ["sh", "run.sh"]
 
 https://www.runoob.com/docker/docker-history-command.html
 #### 镜像保存为tar：save
-https://www.runoob.com/docker/docker-save-command.html
+PTIONS 说明：
 
-=
+- **-o :**输出到的文件。
 
-```docker save mirror_name > .tar```
+```
+ docker save -o my_ubuntu_v3.tar runoob/ubuntu:v3
+```
+
+```docker save mirror_name > name.tar```
+
 #### 从tar加载镜像：load
-https://www.runoob.com/docker/docker-load-command.html
-```docker load <  .tar```
+OPTIONS 说明：
+
+- **--input , -i :** 指定导入的文件，代替 STDIN。
+- **--quiet , -q :** 精简输出信息。
+
+```docker load <  name.tar```
 
 #### import
 https://www.runoob.com/docker/docker-import-command.html
@@ -263,6 +292,21 @@ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
 ```
 
+# 镜像加速
 
+对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）：
 
-<!-- more -->
+```
+{"registry-mirrors":["https://reg-mirror.qiniu.com/"]}
+```
+
+之后重新启动服务：
+
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+Windows 10
+
+setting->Docker Engine->   **https://docker.mirrors.ustc.edu.cn/**

@@ -72,6 +72,12 @@ CSS 规则由两个主要的部分构成：选择器以及一条或多条声明�
 ```
 通配符选择器不需要调用， **自动就给所有的元素使用样式**，特殊情况才使用
 
+## 子元素
+
+li:first-child: 选择li父元素的第一个li子元素
+
+last-child,nth-child(3),nth-last-child(3),
+
 ## 选择器总结
 
 ###### ![基础选择器总结.png](https://i.loli.net/2021/07/12/H5zkcC6NgxqtVvp.png)
