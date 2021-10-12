@@ -4,6 +4,7 @@ python toc.py
                     ::@的作用就是关闭紧跟其后的一条命令的回显%
                     ::C:\Users\liang\Desktop> 就是echo off 命令的回显%
 git status
+git pull
 git add .
 git commit -m %date:~0,8%_%time:~1,1%:%time:~3,2%:%time:~6,2%
 ::%date:~0,8%
