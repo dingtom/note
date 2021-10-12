@@ -237,6 +237,12 @@ https://cn.vuejs.org/v2/api/#v-on
 
  需要动态的增删class建议使用对象的方式
 
+```js
+:class="{'reasonType-tags': true, 'active': reasonTypeIndex === index}
+```
+
+
+
 ```css
 
 <!-- alt= 如果无法显示图像，浏览器将显示替代文本，就像这样： -->

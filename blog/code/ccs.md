@@ -1233,7 +1233,7 @@ display: flex;
 align-items: center;
 text-align: center;
 vertical-align: middle;这个适用于行内元素的垂直居中，块元素不可以。
-
+-----------
 hieght: 100px;  //子元素为单行文本
 lin-height: 100px
 ```
