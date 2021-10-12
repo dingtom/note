@@ -1,6 +1,4 @@
-
-
-# 语法
+# 输出
 
 **这是一个输入框**
 var age = prompt('请输入您的年龄');
@@ -12,114 +10,108 @@ console.log('我是程序员能看到的');
 **交换变量需要**temp
 
 js 的变量数据类型是只有程序在运行过程中，根据等号右边的值来确定的
+
  js是动态语言 变量的数据类型是可以变化的
 
-```
-// 3. 数字型的最大值
-console.log(Number.MAX_VALUE);
-// 4. 数字型的最小值
-console.log(Number.MIN_VALUE);
-// 5. 无穷大
-console.log(Number.MAX_VALUE * 2); // Infinity 无穷大  
-// 6. 无穷小
-console.log(-Number.MAX_VALUE * 2); // -Infinity 无穷大
-// 7. 非数字
-console.log('pink老师' - 100); // NaN
 
+
+# 字符串的拼接
+
+只要有字符串和其他类型相拼接 最终的结果是字符串类型
+
+```
+console.log('沙漠' + '骆驼'); // 字符串的 沙漠骆驼
+console.log('pink老师' + 18); // 'pink老师18'
+console.log('pink' + true); // pinktrue
+console.log(12 + 12); // 24
+console.log('12' + 12); // '1212'
+```
+
+
+
+# 获取变量类型
+
+```
 // isNaN() 这个方法用来判断非数字 
 
+var vari = undefined;
+console.log(typeof vari); // undefined
+var timer = null;
+console.log(typeof timer); // object
+```
 
- // 字符串的拼接 +  只要有字符串和其他类型相拼接 最终的结果是字符串类型
-        console.log('沙漠' + '骆驼'); // 字符串的 沙漠骆驼
-        console.log('pink老师' + 18); // 'pink老师18'
-        console.log('pink' + true); // pinktrue
-        console.log(12 + 12); // 24
-        console.log('12' + 12); // '1212'
+# 数据类型转换
+
+```
+把数字型转换为字符串型 变量.toString()
+num.toString();String(num);num + ''
+
+字符型的转换为数字型 得到是整数
+console.log(parseInt('3.94')); // 3 取整
+console.log(parseInt('120px')); // 120 会去到这个px单位
+console.log(parseInt('rem120px')); // NaN
         
-//获取变量类型
-        var vari = undefined;
-        console.log(typeof vari); // undefined
-        var timer = null;
-        console.log(typeof timer); // object
-        
-//数据类型转换
-// 1. 把数字型转换为字符串型 变量.toString()
-        var num = 10;
-        var str = num.toString();
-        // 2. 我们利用 String(变量)   
-        console.log(String(num));
-        // 3. 利用 + 拼接字符串的方法实现转换效果 隐式转换
-        console.log(num + '');
-// 1. parseInt(变量)  可以把 字符型的转换为数字型 得到是整数
-        console.log(parseInt('3.14')); // 3 取整
-        console.log(parseInt('3.94')); // 3 取整
-        console.log(parseInt('120px')); // 120 会去到这个px单位
-        console.log(parseInt('rem120px')); // NaN
-// 2. parseFloat(变量) 可以把 字符型的转换为数字型 得到是小数 浮点数
-        console.log(parseFloat('3.14')); // 3.14
-        console.log(parseFloat('120px')); // 120 会去掉这个px单位
-        console.log(parseFloat('rem120px')); // NaN
-// 3. 利用 Number(变量) 
-        var str = '123';
-        console.log(Number(str));
-        console.log(Number('12'));
-// 4. 利用了算数运算 -  *  /  隐式转换
-        console.log('12' - 0); // 12
-        console.log('123' - '120');
-        console.log('123' * 1);
-//布尔值转换
-        console.log(Boolean('')); // false
-        console.log(Boolean(0)); // false
-        console.log(Boolean(NaN)); // false
-        console.log(Boolean(null)); // false
-        console.log(Boolean(undefined)); // false
-        
-// 2. 浮点数 算数运算里面会有问题
-        console.log(0.1 + 0.2); // 0.30000000000000004
-        console.log(0.07 * 100); // 7.000000000000001
-        // 3. 我们不能直接拿着浮点数来进行相比较 是否相等
-        var num = 0.1 + 0.2;
-        console.log(num == 0.3); // false
+字符型的转换为数字型 得到是小数 浮点数
+console.log(parseFloat('3.14')); // 3.14
+console.log(Number(str));
+console.log('12' - 0); // 12
+console.log('123' - '120');
+
+
+布尔值转换
+console.log(Boolean('')); // false
+console.log(Boolean(0)); // false
+console.log(Boolean(NaN)); // false
+console.log(Boolean(null)); // false
+console.log(Boolean(undefined)); // false
         
 
-// 2. 前置递增运算符  ++ 写在变量的前面
-        var age = 10;
-        ++age; // 类似于 age = age + 1
-        console.log(age);            //11
-        // 3. 先加1  后返回值
-        var p = 10;
-        console.log(++p + 10);      //21
-        // 1. 前置自增和后置自增如果单独使用 效果是一样的
-        // 2. 后置自增 口诀：先返回原值 后自加1 
-        var age = 10;
-        console.log(age++ + 10);  //20
-        console.log(age);      //11        
+```
+
+# 前置\后置递增运算符
+
+```
+++ 写在变量的前面
+var p = 10;
+console.log(++p + 10);      //21
+
+var age = 10;
+console.log(age++ + 10);  //20
+console.log(age);      //11        
+        
+```
+
+# ==\===
+
+```
+      
         
         
-        
-        
-/1. 我们程序里面的等于符号 是 ==  默认转换数据类型 会把字符串型的数据转换为数字型 只要求值相等就可以
-        console.log(18 == '18'); // true
-        // 2. 我们程序里面有全等 一模一样  要求 两侧的值 还有 数据类型完全一致才可以 true
-        console.log(18 === 18);
-        console.log(18 === '18'); // false 
-        
-        
-// 1. 有三元运算符组成的式子我们称为三元表达式
-        // 条件表达式 ？ 表达式1 ： 表达式2
-        // 如果条件表达式结果为真 则 返回 表达式1 的值 如果条件表达式结果为假 则返回 表达式2 的值
-        var num = 10;
-        var result = num > 5 ? '是的' : '不是的'; // 我们知道表达式是有返回值的        
+我们程序里面的等于符号 是 ==  默认转换数据类型 会把字符串型的数据转换为数字型 只要求值相等就可以
+console.log(18 == '18'); // true
+我们程序里面有全等 一模一样  要求 两侧的值 还有 数据类型完全一致才可以 true
+console.log(18 === 18);
+console.log(18 === '18'); // false 
+```
+
+# 三元运算符
+
+```
+ 有三元运算符组成的式子我们称为三元表达式
+ var num = 10;
+ var result = num > 5 ? '是的' : '不是的'; // 我们知道表达式是有返回值的       
 ```
 
 
 
+#  js的作用域
 
+（es6）之前 ： 全局作用域   局部作用域 
+全局作用域： 整个script标签 或者是一个单独的js文件
 
-// 2. js的作用域（es6）之前 ： 全局作用域   局部作用域 
-        // 3. 全局作用域： 整个script标签 或者是一个单独的js文件
-        // 4. 局部作用域（函数作用域） 在函数内部就是局部作用域 这个代码的名字只在函数内部起效果和作用
-        // 作用域链  ： 内部函数访问外部函数的变量，采取的是链式查找的方式来决定取那个值   就近原则
+局部作用域（函数作用域） 在函数内部就是局部作用域 这个代码的名字只在函数内部起效果和作用
+
+ 作用域链  ： 内部函数访问外部函数的变量，采取的是链式查找的方式来决定取那个值   就近原则
 
         // var obj = {};  // 创建了一个空的对象 
         var obj = {
@@ -163,10 +155,32 @@ console.log('pink老师' - 100); // NaN
         console.log(Math.PI); // 一个属性 圆周率
         console.log(Math.max(1, 99, 3)); // 99
 
+## let/var
+
+```
+// ES5中的var是没有块级作用域的(if/for)
+// ES6中的let是由块级作用的(if/for)
+```
+
+我们可以将let看成更完美的var。有if/for的块级作用域。
+
+JS中使用var来声明一个变量时, 变量的作用域主要是和函数的定义有关.
+针对于其他块定义来说是没有作用域的，比如if/for等，这在我们开发中往往会引起一些问题。
+
+## const
+
+将某个变量修饰为常量, 不可以再次赋值。来保证数据的安全性.
+
+**建议: 在ES6开发中,优先使用const, 只有需要改变某一个标识符的时候才使用let.** 
+
+创建时就要赋值，常量（变量保存的是内存地址，地址不能改内容可以）的含义是指向的对象不能修改，但是可以修改对象内部属性
+
+# Date
+
 
 	// 1. 使用Date  如果没有参数 返回当前系统的当前时间
-	    var date = new Date();
-	    // 2. 参数常用的写法  数字型  2019, 10, 01  或者是 字符串型 '2019-10-1 8:8:8'
+	var date = new Date();
+	// 2. 参数常用的写法  数字型  2019, 10, 01  或者是 字符串型 '2019-10-1 8:8:8'
 	    var date1 = new Date(2019, 10, 1);
 	    console.log(date1); // 返回的是 11月 不是 10月 
 	    var date2 = new Date('2019-10-1 8:8:8');
@@ -191,71 +205,108 @@ console.log('pink老师' - 100); // NaN
 	    // 3. H5 新增的 获得总的毫秒数
 	    console.log(Date.now());
 	    
-	// 创建数组的两种方式
-	    var arr = [1, 2, 3];
-	    var arr1 = new Array(2, 3); // 等价于 [2,3]  这样写表示 里面有2个数组元素 是 2和3
-	     // 检测是否为数组
-	    // (1) instanceof  运算符 它可以用来检测是否为数组
-	    var arr = [];
-	    console.log(arr instanceof Array);
-	    // (2) Array.isArray(参数);  H5新增的方法  ie9以上版本支持
-	    console.log(Array.isArray(arr));
-	// 添加删除数组元素方法
-	    // 1. push() 在我们数组的末尾 添加一个或者多个数组元素   push  推
-	    console.log(arr.push(4, 'pink'));
-	    // (1) push 是可以给数组追加新的元素
-	    // (3) push完毕之后，返回的结果是 新数组的长度 
-	// 2. unshift 在我们数组的开头 添加一个或者多个数组元素
-	    console.log(arr.unshift('red', 'purple'));
-	    // (1) unshift是可以给数组前面追加新的元素
-	    // (3) unshift完毕之后，返回的结果是 新数组的长度 
-	
-	// plice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
-	arrayObject.splice(index,howmany,item1,.....,itemX)
-	
-	// 3. pop() 它可以删除数组的最后一个元素  
-	    console.log(arr.pop());
-	    console.log(arr);
-	    // (1) pop是可以删除数组的最后一个元素 记住一次只能删除一个元素
-	    // (3) pop完毕之后，返回的结果是 删除的那个元素 
-	// 4. shift() 它可以删除数组的第一个元素  
-	    console.log(arr.shift());
-	    console.log(arr);
-	    // (1) shift是可以删除数组的第一个元素 记住一次只能删除一个元素
-	    // (3) shift完毕之后，返回的结果是 删除的那个元素 
-	    // 返回数组元素索引号方法  indexOf(数组元素)  作用就是返回该数组元素的索引号 从前面开始查找
-	    // 它如果在该数组里面找不到元素，则返回的是 -1  
-	    var arr = ['red', 'green', 'pink'];
-	    console.log(arr.indexOf('blue'));
-	    // 返回数组元素索引号方法  lastIndexOf(数组元素)  作用就是返回该数组元素的索引号 从后面开始查找
-	    var arr = ['red', 'green', 'blue', 'pink', 'blue'];
-	    console.log(arr.lastIndexOf('blue')); // 4
-	    
-	    // 数组转换为字符串 
-	    // 1. toString() 将我们的数组转换为字符串
-	    var arr = [1, 2, 3];
-	    console.log(arr.toString()); // 1,2,3
-	    // 2. join(分隔符) 
-	    var arr1 = ['green', 'blue', 'pink'];
-	    console.log(arr1.join('-')); // green-blue-pink
-	    
-	    // 字符串对象  根据字符返回位置  str.indexOf('要查找的字符', [起始的位置])
-	            // 1. charAt(index) 根据位置返回字符
-		        // 字符串操作方法
-	    // 1. concat('字符串1','字符串2'....)
-	    var str = 'andy';
-	    console.log(str.concat('red'));
-	    // 2. substr('截取的起始位置', '截取几个字符');
-	    var str1 = '改革春风吹满地';
-	    console.log(str1.substr(2, 2)); // 第一个2 是索引号的2 从第几个开始  第二个2 是取几个字符
-	    // 1. 替换字符 replace('被替换的字符', '替换为的字符')  它只会替换第一个字符
-	    var str = 'andyandy';
-	    console.log(str.replace('a', 'b'));
-	    // 2. 字符转换为数组 split('分隔符')    前面我们学过 join 把数组转换为字符串
-	    var str2 = 'red, pink, blue';
-	    console.log(str2.split(','));
+	let cDate = new Date()
+	this.currentDate = new Date(cDate.getFullYear(), cDate.getMonth() + 1, cDate.getDate())
+	this.form.leavingTime=`${cDate.getFullYear()}/${cDate.getMonth()+ 2}/${cDate.getDate()}`    
 
 
+
+# 数组
+
+```
+// 创建数组的两种方式
+    var arr = [1, 2, 3];
+    var arr1 = new Array(2, 3); // 等价于 [2,3]  这样写表示 里面有2个数组元素 是 2和3
+     // 检测是否为数组
+    // (1) instanceof  运算符 它可以用来检测是否为数组
+    var arr = [];
+    console.log(arr instanceof Array);
+    // (2) Array.isArray(参数);  H5新增的方法  ie9以上版本支持
+    console.log(Array.isArray(arr));
+// 添加删除数组元素方法
+    // 1. push() 在我们数组的末尾 添加一个或者多个数组元素   push  推
+    console.log(arr.push(4, 'pink'));
+    // (1) push 是可以给数组追加新的元素
+    // (3) push完毕之后，返回的结果是 新数组的长度 
+// 2. unshift 在我们数组的开头 添加一个或者多个数组元素
+    console.log(arr.unshift('red', 'purple'));
+    // (1) unshift是可以给数组前面追加新的元素
+    // (3) unshift完毕之后，返回的结果是 新数组的长度 
+
+// plice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+arrayObject.splice(index,howmany,item1,.....,itemX)
+
+// 3. pop() 它可以删除数组的最后一个元素  
+    console.log(arr.pop());
+    console.log(arr);
+    // (1) pop是可以删除数组的最后一个元素 记住一次只能删除一个元素
+    // (3) pop完毕之后，返回的结果是 删除的那个元素 
+// 4. shift() 它可以删除数组的第一个元素  
+    console.log(arr.shift());
+    console.log(arr);
+    // (1) shift是可以删除数组的第一个元素 记住一次只能删除一个元素
+    // (3) shift完毕之后，返回的结果是 删除的那个元素 
+    // 返回数组元素索引号方法  indexOf(数组元素)  作用就是返回该数组元素的索引号 从前面开始查找
+    // 它如果在该数组里面找不到元素，则返回的是 -1  
+    var arr = ['red', 'green', 'pink'];
+    console.log(arr.indexOf('blue'));
+    // 返回数组元素索引号方法  lastIndexOf(数组元素)  作用就是返回该数组元素的索引号 从后面开始查找
+    var arr = ['red', 'green', 'blue', 'pink', 'blue'];
+    console.log(arr.lastIndexOf('blue')); // 4
+    
+    // 数组转换为字符串 
+    // 1. toString() 将我们的数组转换为字符串
+    var arr = [1, 2, 3];
+    console.log(arr.toString()); // 1,2,3
+    // 2. join(分隔符) 
+    var arr1 = ['green', 'blue', 'pink'];
+    console.log(arr1.join('-')); // green-blue-pink
+    
+    // 字符串对象  根据字符返回位置  str.indexOf('要查找的字符', [起始的位置])
+            // 1. charAt(index) 根据位置返回字符
+	        // 字符串操作方法
+    // 1. concat('字符串1','字符串2'....)
+    var str = 'andy';
+    console.log(str.concat('red'));
+    // 2. substr('截取的起始位置', '截取几个字符');
+    var str1 = '改革春风吹满地';
+    console.log(str1.substr(2, 2)); // 第一个2 是索引号的2 从第几个开始  第二个2 是取几个字符
+    // 1. 替换字符 replace('被替换的字符', '替换为的字符')  它只会替换第一个字符
+    var str = 'andyandy';
+    console.log(str.replace('a', 'b'));
+    // 2. 字符转换为数组 split('分隔符')    前面我们学过 join 把数组转换为字符串
+    var str2 = 'red, pink, blue';
+    console.log(str2.split(','));
+```
+
+
+
+## 最大\小值
+
+```
+Math.max(...[1,'2'])
+[1,'2','4',3].sort((a,b) => { return b-a })[0]  //b-a从大到小
+```
+
+
+
+
+
+# switch
+
+```js
+switch (true) {
+    case max < 4 :
+        this.handoverActiveIndex = 0;
+        break;
+    case max < 7:
+        this.handoverActiveIndex = 1;
+        break;
+    default:
+        this.handoverActiveIndex = 2;
+        break;
+}
+```
 
 # 箭头函数
 
@@ -272,43 +323,9 @@ singleParam => { statements }
 () => { statements }
 ```
 
-# let/var
 
-```
-// ES5中的var是没有块级作用域的(if/for)
-// ES6中的let是由块级作用的(if/for)
-```
-
-我们可以将let看成更完美的var。有if/for的块级作用域。
-
-JS中使用var来声明一个变量时, 变量的作用域主要是和函数的定义有关.
-针对于其他块定义来说是没有作用域的，比如if/for等，这在我们开发中往往会引起一些问题。
-
-# const
-
-将某个变量修饰为常量, 不可以再次赋值。来保证数据的安全性.
-
-**建议: 在ES6开发中,优先使用const, 只有需要改变某一个标识符的时候才使用let.** 
-
-创建时就要赋值，常量（变量保存的是内存地址，地址不能改内容可以）的含义是指向的对象不能修改，但是可以修改对象内部属性
 
 # 对象增强写法
-
-```
-let a=1
-let obj = {
-	a
-}
-console.log(obj)
-
-
-let obj1 = {
-	test(){
-		console.log('hi')
-	}
-}
-obj1.teset()
-```
 
 ```css
 for (let i in this.books){
@@ -353,7 +370,7 @@ console.log(total);
 
 
 
-
+# AJAX
 
 ```js
 AJAX是在不重新加载整个页面的情况下与服务器交换数据并更新部分网页内容
@@ -381,5 +398,10 @@ status
 
 
 
+# 正则
 
+```js
+// 邮箱
+let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
+```
 
