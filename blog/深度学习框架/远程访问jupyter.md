@@ -1,10 +1,9 @@
-- [怎样从外网也能访问到本地的Jupyter Notebook呢？](#head1)
-	- [ 下载并解压holer软件包](#head2)
-	- [获取holer access key信息](#head3)
-	- [ 启动holer服务](#head4)
-	- [ 访问映射后的公网地址](#head5)
+- [ 内网](#head1)
+# <span id="head1"> 内网</span>
+
 1.生成配置文件
-打开terminal``` jupyter notebook --generate-config```
+
+``` jupyter notebook --generate-config```
 
 2.创建远程登录密码
    ```jupyter notebook password```
@@ -26,13 +25,13 @@ c.NotebookApp.allow_remote_access = True
 5.远程登录
 输入http://服务器的 IP 地址:8888，输入密码登录。
 
-# <span id="head1">怎样从外网也能访问到本地的Jupyter Notebook呢？</span>
+# 外网访问本地的Jupyter Notebook
 
-###### <span id="head2"> 下载并解压holer软件包</span>
+**下载并解压holer软件包**
 
 Holer软件包：[holer-xxx.tar.gz](https://yq.aliyun.com/go/articleRenderRedirect?url=https%3A%2F%2Fgithub.com%2Fwisdom-projects%2Fholer%2Ftree%2Fmaster%2FBinary%2FGo)
 
-###### <span id="head3">获取holer access key信息</span>
+**获取holer access key信息**
 
 在[holer官网上](https://yq.aliyun.com/go/articleRenderRedirect?url=http%3A%2F%2Fwdom.net)申请专属的holer access key或者使用[开源社区上公开的access key信息](https://yq.aliyun.com/go/articleRenderRedirect?url=https%3A%2F%2Fgithub.com%2Fwisdom-projects%2Fholer)。
 例如申请得到的holer信息如下，这里以此holer信息为例：
@@ -48,7 +47,7 @@ Local Address : 127.0.0.1:8888
 ---------------------------------------------
 ```
 
-###### <span id="head4"> 启动holer服务</span>
+**启动holer服务**
 
 **Windows**系统平台：
 打开CMD窗口进入可执行程序所在的目录下，执行命令：
@@ -56,7 +55,7 @@ Local Address : 127.0.0.1:8888
 **Linux**或者其他系统平台：
 执行命令`nohup ./holer-xxx-xxx -k 6688daebe02846t88s166733595eee5d`
 
-###### <span id="head5"> 访问映射后的公网地址</span>
+**访问映射后的公网地址**
 
 浏览器里输入如下URL，就可在公网上也能访问到本地的Jupyter Notebook了。
 `http://holer65004.wdom.net`或者`http://holer.org:65004`
