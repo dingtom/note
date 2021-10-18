@@ -45,7 +45,7 @@ https://www.runoob.com/docker/docker-run-command.html
 
 >- -d：后台运行容器
 >- -h: 指定容器的hostname；
-> - -p：主机端口号:容器端口号，容器内外端口映射
+> - -p：主机端口号:容器端口号```容器内外端口映射
 > -  --name name：指定容器名称
 > -  -v <外部 dir>:< 内部 dir>：目录映射1
 > -  <mirror name>:<version>：指定映像版本
@@ -63,6 +63,8 @@ https://www.runoob.com/docker/docker-start-stop-restart-command.html
 https://www.runoob.com/docker/docker-kill-command.html
 
 快速停止容器
+
+
 
 #### <span id="head5"> 删除容器：rm</span>
 https://www.runoob.com/docker/docker-rm-command.html
