@@ -1,10 +1,14 @@
+- [ keymap](#head1)
+- [ 正则替换](#head2)
+- [ 注释](#head3)
+- [ 格式化](#head4)
+# <span id="head1"> keymap</span>
 
-
-1. Ctrl + .                                                        **将光标移动至当前文件中的下一个报错处或警告处**
+1. Ctrl + .                                                        将光标移动至当前文件中的下一个报错处或警告处
 
 2. Ctrl + E                                                       最近打开的文件
 
-3. Ctrl + O                                                       快**速outline**
+3. Ctrl + O                                                       快速outline
 
 4. Ctrl + L                                                        到指定的第n行
 
@@ -63,3 +67,76 @@
 30. F7	单步返回
 
 31. F8	继续
+
+32. ctr + num_- 折叠当前块
+
+33. ctr + num_* 展开
+
+
+
+# <span id="head2"> 正则替换</span>
+
+```
+id 这是学号
+
+^(.*)d.+是(.*)$
+$1 \n  hi $2
+
+i 
+  hi 学号
+  
+
+```
+
+
+
+# <span id="head3"> 注释</span>
+
+```
+函数注释
+websotrm：函数前/*** + enter
+pycharm: 函数名下""" + enter
+```
+
+
+
+# <span id="head4"> 格式化</span>
+
+webstorm 代码格式化设置与eslint standard一致
+
+```js
+Editor->CodeStyle->JavaScript
+
+**Tabs and Indent**
+
+Tab Szie/Indent/Continuation indent:全2
+
+**Spaces** 
+
+Within
+
+Object literal braces/ES6 inport/export braces:对勾
+
+**Punctuation**
+
+Don’t use always
+
+Use single quotes always
+
+Trailing comma Keep
+
+
+
+Editor->CodeStyle->HTML
+
+Tab Szie/Indent/Continuation indent:全2
+
+**Other**
+
+do not indent children of里加入script标签
+```
+
+
+
+
+

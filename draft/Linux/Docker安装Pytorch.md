@@ -10,6 +10,7 @@ ping
 exit
 
 docker cp J:\软件\linux\Anaconda3-5.3.1-Linux-x86_64.sh 2e01fd26138f:\home\
+docker cp 680b957:/home/datawhale_nlp/ J:/NEW/
 //要不安装anaconda报错
 apt-get install bzip2  
 bash Anaconda3-5.3.1-Linux-x86_64.sh
@@ -22,7 +23,6 @@ source ~/.bashrc
 
 conda create -n tomding
 source activate tomding
-
 
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
