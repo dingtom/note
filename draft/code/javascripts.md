@@ -251,6 +251,9 @@ console.log(arr.indexOf('blue'));
 // 返回数组元素索引号方法  lastIndexOf(数组元素)   从后面开始查找
 var arr = ['red', 'green', 'blue', 'pink', 'blue'];
 console.log(arr.lastIndexOf('blue')); 
+
+//数组是否包含某元素
+arr.includes(a)
 ```
 
 
@@ -447,10 +450,7 @@ filter中的回调函数有一个要求: 必须返回一个boolean值
 
 
 let nums = [2, 3, 4, 100, 200, 1000];
-let total = nums.filter(n => {
-  return n < 100
-}).map(n => {
-  return n * 2
+let total = nums.filter(n => n < 100).map(n => n * 2
 }).reduce( (preValue, n) => {
   console.log('preValue, n', preValue, n)
   return preValue + n
@@ -502,3 +502,11 @@ status
 let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
 ```
 
+
+
+# 深拷贝
+
+```
+import lodash form lodash
+lodash.cloneDeep
+```
