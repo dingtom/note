@@ -1,8 +1,45 @@
+- [ 模拟](#head1)
+	- [[134\. 加油站](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/gas-station/)](#head2)
+	- [[146\. LRU缓存机制](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lru-cache/)](#head3)
+	- [[202\. 快乐数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/happy-number/)](#head4)
+	- [[289\. 生命游戏](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/game-of-life/)](#head5)
+	- [[371\. 两整数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sum-of-two-integers/)](#head6)
+	- [[412\. Fizz Buzz](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/fizz-buzz/)](#head7)
+- [ 数组](#head8)
+	- [[376\. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)](#head9)
+- [ 二分查找](#head10)
+- [ 链表](#head11)
+	- [[24. 反转链表](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/)](#head12)
+		- [ 递归](#head13)
+		- [ 双指针](#head14)
+- [ 找出环的入口点：](#head15)
+- [ 堆栈](#head16)
+- [ 哈希、队列](#head17)
+- [ 树、线段树](#head18)
+- [ 排序、二分检索、滑动窗口](#head19)
+	- [ [376\. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)](#head20)
+- [ 动态规划](#head21)
+	- [[剑指 Offer 10- II. 青蛙跳台阶问题](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)](#head22)
+	- [[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)](#head23)
+	- [[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)](#head24)
+- [ 图论](#head25)
+- [ 数学、位运算](#head26)
+- [ 字符串](#head27)
+	- [【125\. 验证回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-palindrome/)](#head28)
+	- [[131\. 分割回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/palindrome-partitioning/)](#head29)
+	- [[139\. 单词拆分](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break/)](#head30)
+	- [[140\. 单词拆分 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break-ii/)](#head31)
+	- [[208\. 实现 Trie (前缀树)](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/implement-trie-prefix-tree/)](#head32)
+	- [[212\. 单词搜索 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-search-ii/)](#head33)
+	- [[242\. 有效的字母异位词](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-anagram/)](#head34)
+	- [[387\. 字符串中的第一个唯一字符](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/first-unique-character-in-a-string/)](#head35)
+	- [[344\. 反转字符串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-string/)](#head36)
+	- [ [3.无重复字符的最长子串长度](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)](#head37)
 [(9 封私信) 力扣（LeetCode） - 知乎 (zhihu.com)](https://www.zhihu.com/org/ling-kou-leetcode/answers/by_votes)
 
-# 模拟
+# <span id="head1"> 模拟</span>
 
-## [134\. 加油站](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/gas-station/)
+## <span id="head2">[134\. 加油站](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/gas-station/)</span>
 
 > 在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。
 > 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。
@@ -32,7 +69,7 @@ class Solution:
 
 
 
-## [146\. LRU缓存机制](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lru-cache/)
+## <span id="head3">[146\. LRU缓存机制](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lru-cache/)</span>
 
 > 设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
 > 获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。
@@ -115,7 +152,7 @@ class LRUCache:
 
 
 
-## [202\. 快乐数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/happy-number/)
+## <span id="head4">[202\. 快乐数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/happy-number/)</span>
 
 > 定义为：对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和，然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。如果 可以变为  1，那么这个数就是快乐数。
 
@@ -154,7 +191,7 @@ class Solution:
         return fast_index == 1
 ```
 
-## [289\. 生命游戏](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/game-of-life/)
+## <span id="head5">[289\. 生命游戏](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/game-of-life/)</span>
 
 > 给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：
 > 1.如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；
@@ -203,7 +240,7 @@ class Solution:
                     board[r][c] = 0
 ```
 
-## [371\. 两整数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sum-of-two-integers/)
+## <span id="head6">[371\. 两整数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sum-of-two-integers/)</span>
 
 **正数的补码就是原码，而负数的补码=原码符号位不变，其他位按位取反后+1。**
 
@@ -294,7 +331,7 @@ class Solution:
 
 ```
 
-## [412\. Fizz Buzz](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/fizz-buzz/)
+## <span id="head7">[412\. Fizz Buzz](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/fizz-buzz/)</span>
 
 > 写一个程序，输出从 1 到 n 数字的字符串表示。
 >
@@ -322,9 +359,9 @@ class Solution:
 
 
 
-# 数组
+# <span id="head8"> 数组</span>
 
-## [376\. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)
+## <span id="head9">[376\. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)</span>
 
 >- 如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为摆动序列。第一个差（如果存在的话）可能是正数或负数。少于两个元素的序列也是摆动序列。
 >- 例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和 [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
@@ -347,7 +384,7 @@ class Solution:
         return max(up, down)
 ```
 
-# 二分查找
+# <span id="head10"> 二分查找</span>
 ```
 # 返回 x 在 arr 中的索引，如果不存在返回 -1
 def binarySearch(arr, l, r, x):
@@ -395,14 +432,14 @@ else:
 
 
 
-# 链表
+# <span id="head11"> 链表</span>
 
 
 
-## [24. 反转链表](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/)
+## <span id="head12">[24. 反转链表](https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/)</span>
 
 >定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
-### 递归
+### <span id="head13"> 递归</span>
 >1. 定义递归函数功能，返回反转后头节点
 >2. 寻找结束条件，若是节点为零或者1直接返回
 >3. 寻找等价关系，reverse(head) = reverse(head.next);head.next.next=head;head.next=None
@@ -427,7 +464,7 @@ class Solution:
         head.next = None  # 把1指向None
         return new_head
 ```
-### 双指针
+### <span id="head14"> 双指针</span>
 next    -head           -pre         -head
 >![](https://upload-images.jianshu.io/upload_images/18339009-05aa21c87f811971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ```
@@ -454,7 +491,7 @@ class Solution:
 ```
 
 
-# 找出环的入口点：
+# <span id="head15"> 找出环的入口点：</span>
 
 >从上面的分析知道，当fast和slow相遇时，slow还没有走完链表
 假设fast已经在环内循环了n(1<= n)圈
@@ -478,21 +515,21 @@ $a = n * r + x$
 
 
 
-# 堆栈
+# <span id="head16"> 堆栈</span>
 
 
 
-# 哈希、队列
+# <span id="head17"> 哈希、队列</span>
 
 
 
-# 树、线段树
+# <span id="head18"> 树、线段树</span>
 
 
 
 
 
-# 排序、二分检索、滑动窗口
+# <span id="head19"> 排序、二分检索、滑动窗口</span>
 
 **排序**
 
@@ -536,7 +573,7 @@ class Solution:
 
 
 ```
-##  [376\. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)
+## <span id="head20"> [376\. 摆动序列](https://leetcode-cn.com/problems/wiggle-subsequence/)</span>
 
 >如果连续数字之间的差严格地在正数和负数之间交替，则数字序列称为摆动序列。第一个差（如果存在的话）可能是正数或负数。少于两个元素的序列也是摆动序列。
 >例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和 [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
@@ -559,11 +596,11 @@ class Solution:
 
 
 
-# 动态规划
+# <span id="head21"> 动态规划</span>
 
 **案例一、简单的一维 DP**
 
-## [剑指 Offer 10- II. 青蛙跳台阶问题](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)
+## <span id="head22">[剑指 Offer 10- II. 青蛙跳台阶问题](https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/)</span>
 
 一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
 
@@ -586,7 +623,7 @@ class Solution:
 
 **案例二：二维数组的 DP**
 
-## [62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)
+## <span id="head23">[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)</span>
 
 >一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
 >机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径？
@@ -623,7 +660,7 @@ class Solution:
         return cur[-1]
 ```
 
-## [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+## <span id="head24">[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)</span>
 
 >给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
 >说明：每次只能向下或者向右移动一步。
@@ -666,17 +703,17 @@ class Solution:
         return dp[-1]
 ```
 
-# 图论
+# <span id="head25"> 图论</span>
 
 
 
-# 数学、位运算
+# <span id="head26"> 数学、位运算</span>
 
 
 
 
 
-# 字符串
+# <span id="head27"> 字符串</span>
 
 ```
 string.capitalize() 第一个字符大写
@@ -707,7 +744,7 @@ string.title() 返回"标题化"的 string,就是说所有单词都是以大写�
 string.translate(str, del="") 根据 str 给出的表(包含 256 个字符)转换 string 的字符,要过滤掉的字符放到 del 参数中
 string.upper() 转换 string 中的小写字母为大写
 ```
-## 【125\. 验证回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-palindrome/)
+## <span id="head28">【125\. 验证回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-palindrome/)</span>
 
 >给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
 >说明：本题中，我们将空字符串定义为有效的回文串。
@@ -743,7 +780,7 @@ class Solution:
         return True
 ```
 
-## [131\. 分割回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/palindrome-partitioning/)
+## <span id="head29">[131\. 分割回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/palindrome-partitioning/)</span>
 
 >给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。
 >返回 s 所有可能的分割方案。
@@ -760,15 +797,15 @@ class Solution:
 
 
 
-## [139\. 单词拆分](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break/)
+## <span id="head30">[139\. 单词拆分](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break/)</span>
 
 
 
-## [140\. 单词拆分 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break-ii/)
+## <span id="head31">[140\. 单词拆分 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break-ii/)</span>
 
 
 
-## [208\. 实现 Trie (前缀树)](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/implement-trie-prefix-tree/)
+## <span id="head32">[208\. 实现 Trie (前缀树)](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/implement-trie-prefix-tree/)</span>
 
 >实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
 
@@ -806,7 +843,7 @@ struct TrieNode {
 
 
 
-## [212\. 单词搜索 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-search-ii/)
+## <span id="head33">[212\. 单词搜索 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-search-ii/)</span>
 
 >给定一个二维网格 board 和一个字典中的单词列表 words，找出所有同时在二维网格和字典中出现的单词。
 >单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母在一个单词中不允许被重复使用。
@@ -831,7 +868,7 @@ struct TrieNode {
 
 
 
-## [242\. 有效的字母异位词](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-anagram/)
+## <span id="head34">[242\. 有效的字母异位词](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-anagram/)</span>
 
 >给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
 >输入: s = "anagram", t = "nagaram"
@@ -875,7 +912,7 @@ class Solution:
         # all([]) ture any([]) false
         return not any(list(word_count.values()))  
 ```
-## [387\. 字符串中的第一个唯一字符](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/first-unique-character-in-a-string/)
+## <span id="head35">[387\. 字符串中的第一个唯一字符](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/first-unique-character-in-a-string/)</span>
 
 >给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
 
@@ -898,7 +935,7 @@ class Solution:
         return -1
 ```
 
-## [344\. 反转字符串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-string/)
+## <span id="head36">[344\. 反转字符串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-string/)</span>
 
 >编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
 ```
@@ -911,7 +948,7 @@ class Solution:
             r-=1
 ```
 
-## [3.无重复字符的最长子串长度](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+## <span id="head37"> [3.无重复字符的最长子串长度](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)</span>
 
 >示例 1:
 >输入: s = "abcabcbb"
