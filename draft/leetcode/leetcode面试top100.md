@@ -1,3 +1,5 @@
+
+
 [(9 封私信) 力扣（LeetCode） - 知乎 (zhihu.com)](https://www.zhihu.com/org/ling-kou-leetcode/answers/by_votes)
 
 # 模拟
@@ -11,7 +13,7 @@
 如果 sum(gas) < sum(cost) ，那么不可能环行一圈，这种情况下答案是 -1 。
 对于加油站 i ，如果 gas[i] - cost[i] < 0 ，则不可能从这个加油站出发，因为在前往 i + 1 的过程中，汽油就不够了。
 
-```
+```python
 class Solution:
     def canCompleteCircuit(self, gas, cost):
         n = len(gas)
@@ -48,7 +50,7 @@ class Solution:
 
 
 
-```
+```python
 # 双向链表
 class ListNode:
     def __init__(self, key=None, value=None):
@@ -135,7 +137,7 @@ class LRUCache:
 
 对于 3 位数的数字，它不可能大于 243。这意味着它要么被困在243 以下的循环内，要么跌到 1。4 位或 4 位以上的数字在每一步都会丢失一位，直到降到 3 位为止。所以我们知道，最坏的情况下，算法可能会在 243 以下的所有数字上循环，然后回到它已经到过的一个循环或者回到 11。但它不会无限期地进行下去，所以我们排除第三种选择。
 
-```
+```python
 # 检测单链表是否有环，用快慢指针
 class Solution:
     def get_next(self, num):
@@ -168,7 +170,7 @@ class Solution:
 
 **拓展一些复合状态使其包含之前的状态。**
 
-```
+```python
 class Solution:
     def gameOfLife(self, board: List[List[int]]) -> None:
         neighbors = [(-1, -1), (-1, 0), (-1, 1), 
@@ -247,7 +249,7 @@ class Solution:
 >    b &= 0xF # b = 0011
 > 2. 计算无符号整数相加并的到结果
 
-```
+```python
 while b:
     carry = a & b
     a ^= b
@@ -274,7 +276,7 @@ while b:
 >    2.对异或结果按位取反
 >    ```~(a ^ 0xF)```
 
-```
+```python
 # 异或  - -> 无进位加法
 # 与，向左移动一位 - - > 进位
 class Solution:
@@ -302,7 +304,7 @@ class Solution:
 > 2. 如果 n 是5的倍数，输出“Buzz”；
 >    3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。
 
-```
+```python
 class Solution:
     def fizzBuzz(self, n: int) -> List[str]:
         result_list = []
@@ -332,7 +334,7 @@ class Solution:
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-f574f7bc028536ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-```
+```python
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
         if len(nums) < 2: return len(nums)
@@ -348,7 +350,7 @@ class Solution:
 ```
 
 # 二分查找
-```
+```python
 # 返回 x 在 arr 中的索引，如果不存在返回 -1
 def binarySearch(arr, l, r, x):
     # 基本判断
@@ -408,7 +410,7 @@ else:
 >3. 寻找等价关系，reverse(head) = reverse(head.next);head.next.next=head;head.next=None
 >![](https://upload-images.jianshu.io/upload_images/18339009-3dac4084ec28a89d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-```
+```python
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -430,7 +432,8 @@ class Solution:
 ### 双指针
 next    -head           -pre         -head
 >![](https://upload-images.jianshu.io/upload_images/18339009-05aa21c87f811971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-```
+
+```python
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -510,7 +513,7 @@ $a = n * r + x$
 >![](https://upload-images.jianshu.io/upload_images/18339009-72b3b70a8a94fa31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 >![](https://upload-images.jianshu.io/upload_images/18339009-58a77e87f7373ef0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-```
+```python
 class sort_rule(str):
     def __lt__(self, y):
         return self+y > self+x
@@ -524,7 +527,7 @@ class Solution:
 *   ## [324\. 摆动排序 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/wiggle-sort-ii/)
 
 
-```
+```python
 class Solution:
     def wiggleSort(self, nums: List[int]) -> None:
         """
@@ -542,7 +545,7 @@ class Solution:
 >例如， [1,7,4,9,2,5] 是一个摆动序列，因为差值 (6,-3,5,-7,3) 是正负交替出现的。相反, [1,4,7,2,5] 和 [1,7,4,5,5] 不是摆动序列，第一个序列是因为它的前两个差值都是正数，第二个序列是因为它的最后一个差值为零。
 >给定一个整数序列，返回作为摆动序列的最长子序列的长度。 通过从原始序列中删除一些（也可以不删除）元素来获得子序列，剩下的元素保持其原始顺序。
 
-```
+```python
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
         if len(nums) < 2: return len(nums)
@@ -574,7 +577,8 @@ class Solution:
 >所有可能的跳法的，所以有 dp[n] = dp[n-1] + dp[n-2]。
 >#####(3)找出初始条件
 >数组是不允许下标为负数的，所以对于 0、1、2，我们必须要直接给出它的数值，相当于初始值，显然，dp[0] = 1，dp[1] = 1, dp[2] = 2。
-```
+
+```python
 class Solution:
     def numWays(self, n: int) -> int:
         dp = [1]*(n+1)
@@ -603,7 +607,9 @@ class Solution:
 >**步骤三、找出初始值**
 >初始值如下：dp[0] [0….n-1] = 1; 相当于最上面一行，机器人只能一直往左走
 >dp[0…m-1] [0] = 1;  相当于最左面一列，机器人只能一直往下走
-```
+
+
+```python
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         dp = [[1]*n for _ in range(m)]  # m行n列
@@ -632,7 +638,7 @@ class Solution:
 >输出：7
 >解释：因为路径 1→3→1→1→1 的总和最小。
 
-```
+```python
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
@@ -650,7 +656,7 @@ class Solution:
         return dp[-1][-1]
 ```
 优化
-```
+```python
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
         m = len(grid)
@@ -678,7 +684,7 @@ class Solution:
 
 # 字符串
 
-```
+```python
 string.capitalize() 第一个字符大写
 string.count(str, beg=0, end=len(string)) 返回 str 在 string 里面出现的次数，beg 、 end 指定范围
 string.endswith(obj, beg=0, end=len(string)) 检查字符串是否以 obj 结束
@@ -714,16 +720,20 @@ string.upper() 转换 string 中的小写字母为大写
 >输入: "A man, a plan, a canal: Panama"
 >输出: true
 
-逆字符串
-```
+- 逆字符串
+
+  去除非文字，全转成小写，和自身逆对比
+
+```python
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         alnum = ''.join(w.lower() for w in s if w.isalnum())
         return alnum == alnum[::-1]
 ```
 
-使用双指针。初始时，左右指针分别指向两侧，随后我们不断地将这两个指针相向移动，每次移动一步，并判断这两个指针指向的字符是否相同。当这两个指针相遇时，就说明是回文串。
-```
+- 使用双指针。初始时，左右指针分别指向两侧，随后我们不断地将这两个指针相向移动，每次移动一步，并判断这两个指针指向的字符是否相同。当这两个指针相遇时，就说明是回文串。
+
+```python
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         pre = 0
@@ -774,14 +784,14 @@ class Solution:
 
 Trie 是一颗非典型的多叉树模型
 一般的多叉树的结点是这样的：
-```
+```python
 struct TreeNode {
     VALUETYPE value;    //结点值
     TreeNode* children[NUM];    //指向孩子结点
 };
 ```
 而 Trie 的结点是这样的(假设只包含'a'~'z'中的字符)：
-```
+```python
 struct TrieNode {
     bool isEnd; //该结点是否是一个串的结束
     TrieNode* next[26]; //字母映射表
@@ -838,7 +848,7 @@ struct TrieNode {
 >输出: true
 
 逐个去除b里的a中字符
-```
+```python
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
@@ -854,7 +864,7 @@ class Solution:
 ```
 第一次循环哈希表记录，第二次循环删去哈希表记录，最后统计哈希表每个值是否都为0
 
-```
+```python
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
@@ -880,7 +890,7 @@ class Solution:
 >给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
 
 哈希表记录每个字符出现次数
-```
+```python
 class Solution:
     def firstUniqChar(self, s: str) -> int:
         #  count = collections.Counter(s)
@@ -901,7 +911,7 @@ class Solution:
 ## [344\. 反转字符串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-string/)
 
 >编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
-```
+```python
 # s[:]=s[::-1]
 # 双指针
  l,r=0,len(s)-1
@@ -919,7 +929,7 @@ class Solution:
 >解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
 
 使用数组作为滑动窗口
-```
+```python
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         if not s: return 0
@@ -940,7 +950,7 @@ class Solution:
 法1中容器的伸缩涉及内存分配,所以方法2换成位置指针省掉了内存分配
 
 直观的滑动窗口方法需要维护数组的增删，实际上比较耗时。使用双指针（索引），记录滑动窗口起始和结束的索引值，可以减除数组增删操作，提高效率，使用指针位移以及从原数组中截取，代替原来的窗口元素增删操作
-```
+```python
 def lengthOfLongestSubstring(self, s: str) -> int:
         # 字符串为空则返回零
         if not s: return 0
@@ -968,7 +978,7 @@ def lengthOfLongestSubstring(self, s: str) -> int:
 使用字典记录任意字符最近的索引值，**字典查询时间复杂度为O(1)，相比数组查询，效率更高**
 该算法的难点在于理解word_index[word] > ignore_end_index如果不大于说明word已经被丢弃；大于说明word未被丢弃需要，更新ignore_end_index
 
-```
+```python
     def lengthOfLongestSubstring(self, s: str) -> int:
         ignore_end_index = -1          # 指向子串左边一个字符，即丢弃的子串的尾部， 初始值为 -1，还没有开始移动
         max_len = 0          # 记录最大的长度
