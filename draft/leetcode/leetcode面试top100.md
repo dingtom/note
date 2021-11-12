@@ -1,6 +1,10 @@
 
 
-[(9 封私信) 力扣（LeetCode） - 知乎 (zhihu.com)](https://www.zhihu.com/org/ling-kou-leetcode/answers/by_votes)
+
+
+# 汇总
+
+[(10 封私信) 互联网公司最常见的面试算法题有哪些？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/24964987/answer/586425979)
 
 # 模拟
 

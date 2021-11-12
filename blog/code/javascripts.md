@@ -15,15 +15,14 @@
 - [ 字符](#head15)
 	- [ 最大、小值](#head16)
 - [ switch](#head17)
-- [ 箭头函数](#head18)
-	- [ 最大\小值](#head19)
-- [ switch](#head20)
-- [ 箭头函数](#head21)
-- [ 对象增强写法](#head22)
-- [ 高阶函数](#head23)
-- [ AJAX](#head24)
-- [ 正则](#head25)
-- [ 深拷贝](#head26)
+	- [ 最大\小值](#head18)
+- [ switch](#head19)
+- [ 箭头函数](#head20)
+- [ 对象增强写法](#head21)
+- [ 高阶函数](#head22)
+- [ AJAX](#head23)
+- [ 正则](#head24)
+- [ 深拷贝](#head25)
 # <span id="head1"> 输出</span>
 
 **这是一个输入框**
@@ -312,6 +311,8 @@ console.log(str1.substr(2, 2)); // 从第几个开始,取几个
 var str = 'andyandy';
 console.log(str.replace('a', 'b'));
 // 字符转换为数组   前面我们学过 join 把数组转换为字符串
+item.replace(RegExp('-', 'g'), '/'))
+//正则全匹配
 var str2 = 'red, pink, blue';
 console.log(str2.split(','));
 ```
@@ -338,7 +339,8 @@ switch (true) {
 }
 ```
 
-# <span id="head18"> 箭头函数</span>
+
+
 ```js
 // 创建数组的两种方式
     var arr = [1, 2, 3];
@@ -407,7 +409,7 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 
 
 
-## <span id="head19"> 最大\小值</span>
+## <span id="head18"> 最大\小值</span>
 
 ```js
 Math.max(...[1,'2'])
@@ -418,7 +420,7 @@ Math.max(...[1,'2'])
 
 
 
-# <span id="head20"> switch</span>
+# <span id="head19"> switch</span>
 
 ```js
 switch (true) {
@@ -434,7 +436,7 @@ switch (true) {
 }
 ```
 
-# <span id="head21"> 箭头函数</span>
+# <span id="head20"> 箭头函数</span>
 
 ```js
 (param1, param2, …, paramN) => { statements }
@@ -451,7 +453,7 @@ singleParam => { statements }
 
 
 
-# <span id="head22"> 对象增强写法</span>
+# <span id="head21"> 对象增强写法</span>
 
 ```css
 for (let i in this.books){
@@ -463,7 +465,7 @@ for (let item of this.book){
 }
 ```
 
-# <span id="head23"> 高阶函数</span>
+# <span id="head22"> 高阶函数</span>
 
 ```css
 // 1.filter函数的使用
@@ -493,7 +495,7 @@ console.log(total);
 
 
 
-# <span id="head24"> AJAX</span>
+# <span id="head23"> AJAX</span>
 
 ```js
 AJAX是在不重新加载整个页面的情况下与服务器交换数据并更新部分网页内容
@@ -521,7 +523,7 @@ status
 
 
 
-# <span id="head25"> 正则</span>
+# <span id="head24"> 正则</span>
 
 ```js
 // 邮箱
@@ -530,7 +532,7 @@ let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
 
 
 
-# <span id="head26"> 深拷贝</span>
+# <span id="head25"> 深拷贝</span>
 
 ```
 import lodash form lodash

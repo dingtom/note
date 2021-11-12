@@ -286,6 +286,8 @@ console.log(str1.substr(2, 2)); // 从第几个开始,取几个
 var str = 'andyandy';
 console.log(str.replace('a', 'b'));
 // 字符转换为数组   前面我们学过 join 把数组转换为字符串
+item.replace(RegExp('-', 'g'), '/'))
+//正则全匹配
 var str2 = 'red, pink, blue';
 console.log(str2.split(','));
 ```
@@ -312,7 +314,8 @@ switch (true) {
 }
 ```
 
-# 箭头函数
+
+
 ```js
 // 创建数组的两种方式
     var arr = [1, 2, 3];

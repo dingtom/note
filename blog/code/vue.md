@@ -690,146 +690,46 @@ props不支持驼峰，需要改写
 
 ### <span id="head31"> 例子</span>
 
-父子组件通信，父组件将num1、2通过props给子组件，子组件把props的数据复制一份通过input进行更改，并调用emit来修改父组件的num1、2
+父子组件通信，父组件将num1通过props给子组件，子组件把props的数据复制一份通过input进行更改，并调用emit来修改父组件的num1
 
-![image.png](https://pic.rmb.bdstatic.com/bjh/40734815e95eaaf8582ca8f7f0b6dbe9.png)
+![1635848935525](C:\Users\dingwenchao\AppData\Roaming\Typora\typora-user-images\1635848935525.png)
 
-```css
-<div id="app">
-  <cpn :pnumber1="fnumber1" :pnumber2="fnumber2" @num1change="num1change"  @num2change="num2change"/>
-</div>
-<template id="cpn">
-  <div>
-    <h2>props:{{pnumber1}}</h2><!-- props 中的数据-->
-    <h2>data:{{dnumber1}}</h2><!-- data中的数据-->
-    <input type="text" :value="dnumber1" @input="num1Input">
-    <h2>props:{{pnumber2}}</h2>
-    <h2>data:{{dnumber2}}</h2>
-    <input type="text" :value="dnumber2" @input="num2Input">
-  </div>
-</template>
 
-<script src="../js/vue.js"></script>
-<script>
-  const app = new Vue({
-    el: '#app',
-    data: {
-      fnumber1: 1,
-      fnumber2: 0
-      // fnumber 通过props传给子组件
-    },
-    methods: {
-      num1change(value) {
-        this.fnumber1 = parseFloat(value)
-        // 子组件通过emit来改变fnumber
-      },
-      num2change(value) {
-        this.fnumber2 = parseFloat(value)
-      }
-    },
-    components: {
-      cpn: {
-        template: '#cpn',
-        props: {
-          pnumber1: Number,
-          pnumber2: Number
-        },
-        data() {
-          return {
-            // 不能直接操作props中的数据，要自己复制一份通过emit操作
-            dnumber1: this.pnumber1,
-            dnumber2: this.pnumber2
-          }
-        },
-        methods: {
-          num1Input(event) {
-            // 1.将input中的value赋值到dnumber中
-            this.dnumber1 = event.target.value;
-            // 2.为了让父组件可以修改值, 发出一个事件
-            this.$emit('num1change', this.dnumber1)
-            // 3.同时修饰dnumber2的值
-            this.dnumber2 = this.dnumber1 * 100;
-            this.$emit('num2change', this.dnumber2);
-          },
-          num2Input(event) {
-            this.dnumber2 = event.target.value;
-            this.$emit('num2change', this.dnumber2)
-            // 同时修饰dnumber2的值
-            this.dnumber1 = this.dnumber2 / 100;
-            this.$emit('num1change', this.dnumber1);
-          }
-        }
-      }
-    }
-  })
-</script>
-```
 
 ### <span id="head32"> watch</span>
 
 监听属性的改变
 
-```css
-<div id="app">
-  <cpn :number1="num1"
-       :number2="num2"
-       @num1change="num1change"
-       @num2change="num2change"/>
-</div>
-<template id="cpn">
-  <div>
-    <h2>props:{{number1}}</h2>
-    <h2>data:{{dnumber1}}</h2>
-    <input type="text" v-model="dnumber1">
-    <h2>props:{{number2}}</h2>
-    <h2>data:{{dnumber2}}</h2>
-    <input type="text" v-model="dnumber2">
-  </div>
-</template>
-<script src="../js/vue.js"></script>
-<script>
-  const app = new Vue({
-    el: '#app',
-    data: {
-      num1: 1,
-      num2: 0
+```js
+// 父组件 
+父组件{{fu_a}}
+
+data() {
+    return {
+        fu_a: 1,
+    }        
+
+methods: {
+    zi_change_fu(value) {
+        this.fu_a = value
     },
-    methods: {
-      num1change(value) {
-        this.num1 = parseFloat(value)
-      },
-      num2change(value) {
-        this.num2 = parseFloat(value)
-      }
-    },
-    components: {
-      cpn: {
-        template: '#cpn',
-        props: {
-          number1: Number,
-          number2: Number,
-          name: ''
-        },
-        data() {
-          return {
-            dnumber1: this.number1,
-            dnumber2: this.number2
-          }
-        },
-        watch: {
-          dnumber1(newValue) {
-            this.dnumber2 = newValue * 100;
-            this.$emit('num1change', newValue);
-          },
-          dnumber2(newValue) {
-            this.number1 = newValue / 100;
-            this.$emit('num2change', newValue);
-          }
-        }
-      }
+
+// 子组件
+子组件输入<input type="text" v-model="zi_a">
+    
+props: {
+	fu_a: {}
+},
+data() {
+    return {
+        zi_a: this.fu_a
     }
-  })
-</script>
+},
+watch: {
+    zi_a(value) {
+        this.$emit('numChange', value)
+     }
+},    
 ```
 
 
