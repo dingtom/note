@@ -1,10 +1,13 @@
+vscode_leetcode插件java输出乱码
 
-
-
-
-
-
-
+>
+>
+>settings.json加上
+>
+>"code-runner.executorMap": {
+>        "java": "cd $dir && javac -encoding utf-8 $fileName && java $fileNameWithoutExt"
+>    },
+>"code-runner.runInTerminal": true
 
 ## [33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
@@ -18,18 +21,12 @@ class Solution {
     public int search(int[] nums, int target) {
         int n = nums.length;
         // 数组长度为0/1直接判断，否则二分查找
-        if (n == 0) {
-            return -1;
-        }
-        if (n == 1) {
-            return nums[0] == target ? 0 : -1;
-        }
+        if (n == 0) return -1;
+        if (n == 1) return nums[0] == target ? 0 : -1;
         int l = 0, r = n - 1;
         while (l <= r) {
             int mid = (l + r) / 2;
-            if (nums[mid] == target) {
-                return mid;
-            }
+            if (nums[mid] == target) return mid;
             // 首比中间小，说明左边有序
             if (nums[l] <= nums[mid]) {
                 // 如果target在左边，移动右指针向左
@@ -290,9 +287,7 @@ class Solution {
 class Solution {
     public int maximalRectangle(char[][] matrix) {
         int m = matrix.length;
-        if (m == 0) {
-            return 0;
-        }
+        if (m == 0) return 0;
         int n = matrix[0].length;
         int[][] left = new int[m][n];
 
