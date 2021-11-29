@@ -18,7 +18,7 @@
 import java.util.Stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
-public class LeetCode84 {
+public class Solution {
     public int largestRectangleArea1(int[] heights) {
         int len = heights.length;
         int maxarea = 0;
@@ -50,7 +50,7 @@ public class LeetCode84 {
         return maxarea;
     }
 
-    public int largestRectangleArea2(int[] heights) {
+    public int largestRectangleArea(int[] heights) {
         // 特殊情况判断
         int len = heights.length;
         if (len == 0) return 0;
@@ -78,12 +78,12 @@ public class LeetCode84 {
     }
 
     public static void main(String[] args) {
-        LeetCode84 solution = new LeetCode84();
+        Solution solution = new Solution();
         int[] heights = {2,1,5,6,2,3};
         int[] heights1 = {2,4};
         System.out.println(solution.largestRectangleArea1(heights));
-        System.out.println(solution.largestRectangleArea2(heights));
-        System.out.println(solution.largestRectangleArea2(heights1));
+        System.out.println(solution.largestRectangleArea(heights));
+        System.out.println(solution.largestRectangleArea(heights1));
     }
 }
 // @lc code=end

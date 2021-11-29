@@ -22,7 +22,7 @@
 // @lc code=start
 import java.util.Deque;
 import java.util.LinkedList;
-public class LeetCode85 {
+public class Solution {
     // 可转化为
     public int maximalRectangle(char[][] matrix) {
         int m = matrix.length;
@@ -69,7 +69,7 @@ public class LeetCode85 {
         return ret;
     }
     public static void main(String[] args) {
-        LeetCode85 solution = new LeetCode85();
+        Solution solution = new Solution();
         char[][] matrix1 = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
         char[][] matrix2 = {};
         char[][] matrix3 = {{'0'}};

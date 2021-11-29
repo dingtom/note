@@ -24,7 +24,7 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-public class LeetCode83 {
+public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return head;
         ListNode cur = head;
@@ -38,12 +38,12 @@ public class LeetCode83 {
         }
         return head;
     }
-//    public static void main(String[] args) {
-//        LeetCode83 solution = new LeetCode83();
-//        int[] nums1 = {2,5,6,0,0,1,2}, nums2 = {2,5,6,0,0,1,2};
-//        int target1 = 3, target2 = 0;
-//        System.out.println(solution.deleteDuplicates(nums1, target1));
-//    }
+    // public static void main(String[] args) {
+    //     Solution solution = new Solution();
+    //     int[] nums1 = {2,5,6,0,0,1,2}, nums2 = {2,5,6,0,0,1,2};
+    //     int target1 = 3, target2 = 0;
+    //     System.out.println(solution.deleteDuplicates(nums1, target1));
+    // }
 }
 // @lc code=end
 
