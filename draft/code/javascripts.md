@@ -88,6 +88,44 @@ console.log(18 === 18);
 console.log(18 === '18'); // false 
 ```
 
+# 判断类型
+
+Object.prototype.toString.call(obj)。用Object原型上的toString方法作用在传入的obj的上下文中（通过call将this指向obj）
+
+它返回[object constructorName]的字符串格式，这里的constructorName就是call参数的函数名，内置类型分为null、string、boolean、number、undefined、array、function、object、date、math
+
+利用对象的toString可以准确判断是什么类型，call()改变this指向，这里是借用Object的方法，然后有人可能会问为什么不直接用arr.toString而要借用Object的方法，
+
+因为toString为Object原型上的方法，而Array、Function都是Object的实例，实例重新改写了原型上的toString方法，不同的对象调用toString方法，调用的是改写之后的方法(转成各种类型的字符串），而不会调用Object原型上的toString()方法，因此直接调用不能判断对象类型。
+
+```js
+console.log(Object.prototype.toString.call("jerry"));//[object String]
+console.log(Object.prototype.toString.call(12));//[object Number]
+console.log(Object.prototype.toString.call(true));//[object Boolean]
+console.log(Object.prototype.toString.call(undefined));//[object Undefined]
+console.log(Object.prototype.toString.call(null));//[object Null]
+console.log(Object.prototype.toString.call({name: "jerry"}));//[object Object]
+console.log(Object.prototype.toString.call(function(){}));//[object Function]
+console.log(Object.prototype.toString.call([]));//[object Array]
+console.log(Object.prototype.toString.call(new Date));//[object Date]
+console.log(Object.prototype.toString.call(/\d/));//[object RegExp]
+console.log(Object.prototype.toString.call(new Person));//[object Object]
+```
+
+# call 及 apply
+
+当一个object没有某个方法，但是其他的有，我们可以借助call或apply用其它对象的方法来操作。猫.吃鱼.call(狗，鱼)，狗就吃到鱼了
+
+func1.call(this, arg1, arg2); 
+
+func1.apply(this, [arg1, arg2]); 
+
+用的比较多的，通过document.getElementsByTagName选择的dom 节点是一种类似array的array。它不能应用Array下的push,pop等方法。我们可以通过：
+
+var domNodes =  Array.prototype.slice.call(document.getElementsByTagName("*"));
+
+这样domNodes就可以应用Array下的所有方法了。
+
 # 三元运算符
 
 ```js
@@ -96,18 +134,9 @@ console.log(18 === '18'); // false
  var result = num > 5 ? '是的' : '不是的'; // 我们知道表达式是有返回值的       
 ```
 
-# 三元运算符
 
-```js
- 有三元运算符组成的式子我们称为三元表达式
- var num = 10;
- var result = num > 5 ? '是的' : '不是的'; // 我们知道表达式是有返回值的       
-```
 
-#  js的作用域
 
-（es6）之前 ： 全局作用域   局部作用域 
-全局作用域： 整个script标签 或者是一个单独的js文件
 
 
 #  js的作用域
@@ -298,21 +327,7 @@ Math.max(...[1,'2'])
 [1,'2','4',3].sort((a,b) => { return b-a })[0]  //b-a从大到小
 ```
 
-# switch
 
-```js
-switch (true) {
-    case max < 4 :
-        this.handoverActiveIndex = 0;
-        break;
-    case max < 7:
-        this.handoverActiveIndex = 1;
-        break;
-    default:
-        this.handoverActiveIndex = 2;
-        break;
-}
-```
 
 
 
@@ -384,7 +399,7 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 
 
 
-## 最大\小值
+# 最大\小值
 
 ```js
 Math.max(...[1,'2'])
