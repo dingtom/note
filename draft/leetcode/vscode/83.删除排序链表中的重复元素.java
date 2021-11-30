@@ -38,12 +38,6 @@ public class Solution {
         }
         return head;
     }
-    // public static void main(String[] args) {
-    //     Solution solution = new Solution();
-    //     int[] nums1 = {2,5,6,0,0,1,2}, nums2 = {2,5,6,0,0,1,2};
-    //     int target1 = 3, target2 = 0;
-    //     System.out.println(solution.deleteDuplicates(nums1, target1));
-    // }
 }
 // @lc code=end
 

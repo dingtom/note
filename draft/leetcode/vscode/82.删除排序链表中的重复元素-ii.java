@@ -24,29 +24,7 @@
 //    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 //}
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    public ListNode(int x) {
-        val = x;
-    }
-
-    public void printList(){
-        ListNode tmp=this;
-        //遍历输出 next的val
-        while(tmp!=null){
-            System.out.print(tmp.val);
-            if(tmp.next!=null) {
-                System.out.print("->");
-            }
-            tmp=tmp.next;
-        }
-        System.out.println();
-    }
-}
-
-public class LeetCode82 {
+public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return head;
         // 链表重复节点的是连续的
@@ -65,13 +43,6 @@ public class LeetCode82 {
             }
         }
         return dummy.next;
-    }
-    public static void main(String[] args) {
-        LeetCode82 solution = new LeetCode82();
-        int[] nums1 = {2,5,6,0,0,1,2}, nums2 = {2,5,6,0,0,1,2};
-        int target1 = 3, target2 = 0;
-        System.out.println(solution.search(nums1, target1));
-        System.out.println(solution.search(nums2, target2));
     }
 }
 // @lc code=end

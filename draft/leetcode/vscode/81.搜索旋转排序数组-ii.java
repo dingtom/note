@@ -22,6 +22,7 @@
 
 // @lc code=start
 public class LeetCode81 {
+    // 注意和33题的区别，未保证每个值唯一
     public boolean search(int[] nums, int target) {
         int len = nums.length;
         // 数组长度为0/1直接判断，否则二分查找

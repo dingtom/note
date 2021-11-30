@@ -19,6 +19,7 @@ import java.util.Stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
 public class Solution {
+    // 遍历柱状图，用栈记录矩形左侧索引，当遇到比栈顶元素矮的柱子，栈顶元素宽度确定
     public int largestRectangleArea1(int[] heights) {
         int len = heights.length;
         int maxarea = 0;

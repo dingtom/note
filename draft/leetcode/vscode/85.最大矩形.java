@@ -7,7 +7,7 @@
 /* 给定一个仅包含 0 和 1 、大小为 rows x cols 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
 示例 1：
 输入：matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
-输出：6
+输出：6 
 示例 2：
 输入：matrix = []
 输出：0
@@ -33,7 +33,7 @@ public class Solution {
         for (int j = 0; j < n; j++) {
             for (int i = 0; i < m; i++) {
                 if (matrix[i][j] == '1') {
-                    heights[i][j] = (i == 0 ? 0 : heights[i - 1][j]) + 1;
+                    heights[i][j] = (j == 0 ? 0 : heights[i - 1][j]) + 1;
                 }
             }
         }
@@ -56,18 +56,18 @@ public class Solution {
         }
         return area;
     }
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        char[][] matrix1 = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
-        char[][] matrix2 = {};
-        char[][] matrix3 = {{'0'}};
-        char[][] matrix4 = {{'1'}};
-
-        System.out.println(solution.maximalRectangle(matrix1));
-        System.out.println(solution.maximalRectangle(matrix2));
-        System.out.println(solution.maximalRectangle(matrix3));
-        System.out.println(solution.maximalRectangle(matrix4));
-    }
+    // public static void main(String[] args) {
+    //     Solution solution = new Solution();
+    //     char[][] matrix1 = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
+    //     char[][] matrix2 = {};
+    //     char[][] matrix3 = {{'0'}};
+    //     char[][] matrix4 = {{'1'}};
+        
+    //     System.out.println(solution.maximalRectangle(matrix1));
+    //     System.out.println(solution.maximalRectangle(matrix2));
+    //     System.out.println(solution.maximalRectangle(matrix3));
+    //     System.out.println(solution.maximalRectangle(matrix4));
+    // }
 }
 // @lc code=end
 
