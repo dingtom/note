@@ -21,7 +21,7 @@
  */
 
 // @lc code=start
-public class LeetCode81 {
+public class Solution {
     // 注意和33题的区别，未保证每个值唯一
     public boolean search(int[] nums, int target) {
         int len = nums.length;
@@ -55,7 +55,7 @@ public class LeetCode81 {
     }
 
     public static void main(String[] args) {
-        LeetCode81 solution = new LeetCode81();
+        Solution solution = new Solution();
         int[] nums1 = {2, 5, 6, 0, 0, 1, 2}, nums2 = {2, 5, 6, 0, 0, 1, 2};
         int target1 = 3, target2 = 0;
         System.out.println(solution.search(nums1, target1));

@@ -1,3 +1,7 @@
+import java.util.HashMap;
+
+import org.w3c.dom.Node;
+
 /*
  * @lc app=leetcode.cn id=138 lang=java
  *
@@ -51,7 +55,7 @@ class Solution {
     们都立刻递归地进行创建。 */
     Map<Node, Node> cachedNode = new HashMap<Node, Node>();
 
-    public Node copyRandomList(Node head) {
+    public Node copyRandomList1(Node head) {
         if (head == null) return null;
         /* 当我们拷贝完成，回溯到当前层时，我们即可完成当前节点的指针赋值。
         注意一个节点可能被多个其他节点指向，因此我们可能递归地多次尝试
@@ -66,6 +70,28 @@ class Solution {
         }
         return cachedNode.get(head);
     }
+
+    public Node copyRandomList(Node head) {
+        /* 首先遍历原链表，每遍历到一个节点，都新建一个相同val的节点，
+        然后使用HashMap存放原链表到新链表的键值对。第二次遍历时通过HashMap，
+        建立新链表节点之间的next和random关系。 */
+        if (head == null) return null;
+        Node cur = head;
+        HashMap<Node, Node> map = new HashMap<>();
+        while(cur != null) {
+            map.put(cur, new Node(cur.val));
+            cur = cur.next;
+        }
+        cur = head;
+        while(cur != null) {
+            map.get(cur).next = map.get(cur.next);
+            map.get(cur).random = map.get(cur.random);
+            cur = cur.next;
+        }
+        return map.get(head);
+    }
+
+
 }
 // @lc code=end
 
