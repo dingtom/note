@@ -25,6 +25,7 @@
  * }
  */
 public class Solution {
+    // 每个元素只出现一次
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return head;
         ListNode cur = head;

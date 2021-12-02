@@ -25,6 +25,7 @@
 //}
 
 public class Solution {
+    // 只保留不重复的
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return head;
         // 链表重复节点的是连续的
