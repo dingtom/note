@@ -36,9 +36,9 @@ public class LeetCode81 {
             if (nums[l] == nums[mid] && nums[mid] == nums[r]) {
                 ++l;
                 --r;
-            } else if (nums[l] <= nums[mid]) {    //!!!!!!!!!!!!等号
+            } else if (nums[l] <= nums[mid]) {    
                 // 如果target在左边，移动右指针向左
-                if (nums[l] <= target && target < nums[mid]) {  // ！！！！！！！！！！！等号
+                if (nums[l] <= target && target < nums[mid]) {  
                     r = mid - 1;
                 } else {
                     l = mid + 1;

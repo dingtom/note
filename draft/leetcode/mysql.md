@@ -49,6 +49,27 @@ net start mysql
 sudo apt-get install mysql-server
 #sudo apt-get install mysql-client
 ```
+**配置远程连接**
+
+```
+1.将bind-address = 127.0.0.1注释掉
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+2.登录进数据库：
+mysql -uroot -p123456
+3.然后，切换到数据库mysql。SQL如下：
+use mysql;
+4.删除匿名用户。SQL如下：
+delete from user where user='';
+5.给root授予在任意主机（%）访问任意数据库的所有权限。SQL语句如下：
+create user 'root'@'%' identified by '123456';
+grant all privileges on *.* to 'root'@'%';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456'; 
+6.退出数据库
+exit
+7.重启数据库：
+sudo service mysql restart
+```
+
 **删除 mysql**
 
 ```
