@@ -314,8 +314,11 @@ console.log(str1.substr(2, 2)); // 从第几个开始,取几个
 // 替换字符 
 var str = 'andyandy';
 console.log(str.replace('a', 'b'));
-// 字符转换为数组   前面我们学过 join 把数组转换为字符串
-item.replace(RegExp('-', 'g'), '/'))
+
+item.replace(RegExp('-', 'g'), '/'))  // g 替换所有，默认替换与i个
+.replace(/<\/?[^>]*>/g, "")  // 替换html标签
+.replace(/\s*/g, "");  // 替换非空字符
+
 //正则全匹配
 var str2 = 'red, pink, blue';
 console.log(str2.split(','));
@@ -524,7 +527,7 @@ let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
 
 # 深拷贝
 
-```
+```..
 import lodash form lodash
 lodash.cloneDeep
 ```

@@ -1174,6 +1174,43 @@ align-items: center;/*垂直居中*/
 
 
 
+# 底部固定
+
+```html
+<template>
+  <div class="content">
+    <div class="main"></div>
+    <div class="footer"></div>
+  </div>
+</template>
+
+<style scoped>
+  .content {
+    /*相对定位*/
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #F4F5F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main {
+    width: 100%;
+    height: calc(100vh - 42px);
+  }
+
+  .footer {
+    /*绝对定位*/
+    position: absolute;
+    width: 100%;
+    height: 42px;
+    bottom: 0;
+    background-color: cornflowerblue;
+  }
+</style>
+```
+
 
 
 

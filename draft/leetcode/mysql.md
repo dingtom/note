@@ -7,7 +7,7 @@
 ![](https://upload-images.jianshu.io/upload_images/18339009-6c5c4e1ade3e95ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![](https://upload-images.jianshu.io/upload_images/18339009-b6f751a6e0727c08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 新建一个my.ini 用记事本打开
-```
+```js
 [mysqld]
 # 设置mysql的安装目录
 basedir=D:\\software\\java\\mysql-5.7.28-winx64
@@ -41,9 +41,89 @@ mysqld -install
 mysqld --initialize-insecure --user=mysql
 # 启动mysql服务
 net start mysql
+# 关闭服务
+net stop mysql
 ```
 >![](https://upload-images.jianshu.io/upload_images/18339009-3b3965a4ecafa1f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 >
+
+
+##  centos
+
+```
+下载命令：
+wget https://dev.mysql.com/get/mysql80-community-release-el7-2.noarch.rpm
+用 yum 命令安装下载好的 rpm 包.
+yum -y install mysql80-community-release-el7-2.noarch.rpm
+安装 MySQL 服务器.
+yum -y install mysql-community-server
+
+启动 MySQL
+systemctl start  mysqld.service
+查看 MySQL 运行状态, Active 后面的状态代表启功服务后为 active (running), 停止后为 inactive (dead), 运行状态如图：
+systemctl status mysqld.service
+
+重新启动 Mysql 和停止 Mysql 的命令如下：
+service mysqld restart  #重新启动 Mysql
+systemctl stop mysqld.service   #停止 Mysql
+
+此时 MySQL 已经开始正常运行, 不过要想进入 MySQL 还得先找出此时 root 用户的密码, 通过如下命令可以在日志文件中找出密码： 为了加强安全性, MySQL8.0 为 root 用户随机生成了一个密码, 在 error log 中, 关于 error log 的位置, 如果安装的是 RPM 包, 则默认是/var/log/mysqld.log.  只有启动过一次 mysql 才可以查看临时密码
+使用命令:
+grep 'temporary password' /var/log/mysqld.log
+
+登录 root 用户
+mysql -u root -p
+修改密码为"123456", 注意结尾要有分号, 表示语句的结束.
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+
+MySQL 完整的初始密码规则可以通过如下命令查看：
+SHOW VARIABLES LIKE 'validate_password%'
+如果想要设置简单的密码必须要修改约束, 修改两个全局参数：
+validate_password_policy代表密码策略, 默认是 1：符合长度, 且必须含有数字, 小写或大写字母, 特殊字符. 设置为 0 判断密码的标准就基于密码的长度了. 一定要先修改两个参数再修改密码
+set global validate_password.policy=0;
+validate_password_length代表密码长度, 最小值为 4
+set global validate_password.length=4; 
+
+但此时还有一个问题, 就是因为安装了 Yum Repository, 以后每次 yum 操作都会自动更新, 如不需要更新, 可以把这个 yum 卸载掉：
+[root@localhost ~]# yum -y remove mysql80-community-release-el7-2.noarch
+
+设置表名为大小写不敏感:
+1.用root帐号登录, 使用命令
+systemctl stop mysqld.service
+停止MySQL数据库服务，修改vi /etc/my.cnf，在[mysqld]下面添加
+ lower_case_table_names=1
+这里的参数 0 表示区分大小写，1 表示不区分大小写. 2.做好数据备份，然后使用下述命令删除数据库数据(删除后, 数据库将恢复到刚安装的状态)
+rm -rf /var/lib/mysql
+3.重启数据库 ,此时数据库恢复到初始状态.
+service mysql start
+4.重复安装时的操作, 查找临时密码
+grep 'temporary password' /var/log/mysqld.log
+5.修改密码. 密码8位以上, 大小写符号数据. 如想要使用简单密码, 需按照上述安装流程中的步骤进行操作.
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '****';update user set host = "%" where user='root';
+6.刷新MySQL的系统权限相关表
+FLUSH PRIVILEGES;
+此时, MySQL的表名的大小写不再敏感.
+
+设置表名为大小写不敏感:
+1.用root帐号登录后, 使用命令
+systemctl stop mysqld.service
+停止MySQL数据库服务，修改vi /etc/my.cnf，在[mysqld]下面添加
+ lower_case_table_names=1
+这里的参数 0 表示区分大小写，1 表示不区分大小写. 2.做好数据备份，然后使用下述命令删除数据库数据(删除后, 数据库将恢复到刚安装的状态)
+rm -rf /var/lib/mysql
+3.重启数据库 ,此时数据库恢复到初始状态.
+service mysql start
+4.重复安装时的操作, 查找临时密码
+grep 'temporary password' /var/log/mysqld.log
+5.修改密码. 密码8位以上, 大小写符号数据. 如想要使用简单密码, 需按照上述安装流程中的步骤进行操作.
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '****';update user set host = "%" where user='root';
+6.刷新MySQL的系统权限相关表
+FLUSH PRIVILEGES;
+此时, MySQL的表名的大小写不再敏感.
+```
+
+
+
 ## ubuntu
 ```
 sudo apt-get install mysql-server
@@ -107,93 +187,225 @@ tcp 0 0 localhost.localdomain:mysql *:* LISTEN -
 sudo /etc/init.d/mysql restart
 ```
 
-# 增删改查数据库
+# DBMS的种类
+
+用来管理数据库的计算机系统称为数据库管理系统（Database Management System，DBMS）。
+
+DBMS 主要通过数据的保存格式（数据库的种类）来进行分类，现阶段主要有以下 5 种类型.
+
+- 层次数据库（Hierarchical Database，HDB）
+
+- 关系数据库（Relational Database，RDB）
+
+  - Oracle Database：甲骨文公司的RDBMS
+  - SQL Server：微软公司的RDBMS
+  - DB2：IBM公司的RDBMS
+  - PostgreSQL：开源的RDBMS
+  - MySQL：开源的RDBMS
+
+  如上是5种具有代表性的RDBMS，其特点是由行和列组成的二维表来管理数据，这种类型的 DBMS 称为关系数据库管理系统（Relational Database Management System，RDBMS）。
+
+- 面向对象数据库（Object Oriented Database，OODB）
+
+- XML数据库（XML Database，XMLDB）
+
+- 键值存储系统（Key-Value Store，KVS），举例：MongoDB
+
+
+
+# 基本书写规则
+
+- SQL语句要以分号（ ; ）结尾
+
+- SQL 不区分关键字的大小写，但是插入到表中的数据是区分大小写的
+
+- win 系统默认不区分表名及字段名的大小写
+
+- linux / mac 默认严格区分表名及字段名的大小写 * 本教程已统一调整表名及字段名的为小写，以方便初学者学习使用。··
+
+
+### 数据类型的指定
+
+数据库创建的表，所有的列都必须指定数据类型，每一列都不能存储与该列数据类型不符的数据。
+
+四种最基本的数据类型
+
+- INTEGER 型
+
+用来指定存储整数的列的数据类型（数字型），不能存储小数。
+
+- CHAR 型
+
+用来存储定长字符串，当列中存储的字符串长度达不到最大长度的时候，使用半角空格进行补足，由于会浪费存储空间，所以一般不使用。
+
+- VARCHAR 型
+
+用来存储可变长度字符串，定长字符串在字符数未达到最大长度时会用半角空格补足，但可变长字符串不同，即使字符数未达到最大长度，也不会用半角空格补足。
+
+- DATE 型
+
+用来指定存储日期（年月日）的列的数据类型（日期型）。
+
+### 约束的设置
+
+约束是除了数据类型之外，对列中存储的数据进行限制或者追加条件的功能。
+
+`NOT NULL`是非空约束，即该列必须输入数据。
+
+`PRIMARY KEY`是主键约束，代表该列是唯一值，可以通过该列取出特定的行的数据。
+
+
+
+# DDL
+
+DDL（Data Definition Language，数据定义语言） 用来**创建或者删除存储数据用的数据库以及数据库中的表**等对象。DDL 包含以下几种指令。
+
+- CREATE ： 创建数据库和表等对象
+- DROP ： 删除数据库和表等对象
+- ALTER ： 修改数据库和表等对象的结构
+
+
+
+
+
+
+
+
+
+# DML
+
+DML（Data Manipulation Language，数据操纵语言） 用来**查询或者变更**表中的记录。DML 包含以下几种指令。
+
+- SELECT ：查询表中的数据
+- INSERT ：向表中插入新数据
+- UPDATE ：更新表中的数据
+- DELETE ：删除表中的数据
+
+
+
+
+
+
+
+# DCL
+
+DCL（Data Control Language，数据控制语言） 用来**确认或者取消对数据库中的数据进行的变更**。除此之外，还可以对 RDBMS 的用户是否有权限操作数据库中的对象（数据库表等）进行设定。DCL 包含以下几种指令。
+
+- COMMIT ： 确认对数据库中的数据进行的变更
+- ROLLBACK ： 取消对数据库中的数据进行的变更
+- GRANT ： 赋予用户操作权限
+- REVOKE ： 取消用户的操作权限
+
+
+
+# 增删改查库
+
 ## 增加(CREATE)
-```
-create database 库名 default character utf8;
+```sql
+CREATE DATABASE < 数据库名称 > default character utf8;
 ```
 ## 删除(DROP)
-```
-drop database 库名 ;
+```sql
+DROP DATABASE 库名 ;
 ```
 ## 修改(ALTER) 
-```
-alter database 库名  default character gbk;
+```sql
+ALTER DATABASE 库名  default character gbk;
 ```
 ## 查询(SHOW)
-```
-show databases 
+```sql
+SHOW DATABASE 
 ```
 ## 选择数据库
-```
-use 库名 ;
+```sql
+USE 库名 ;
 ```
 
-# 增删改表
+# 增删改查表
 
 
 ## 新建表(CREATE) 
-```
+```sql
+CREATE TABLE < 表名 >
+( < 列名 1> < 数据类型 > < 该列所需约束 > ,
+  < 列名 2> < 数据类型 > < 该列所需约束 > ,
+  < 列名 3> < 数据类型 > < 该列所需约束 > ,
+  < 列名 4> < 数据类型 > < 该列所需约束 > ,
+  < 该表的约束 1> , < 该表的约束 2> ,……);
+  
 CREATE TABLE 表名 (
   id int(10) unsigned NOT NULL COMMENT 'Id',
   username varchar(64) NOT NULL DEFAULT 'default' COMMENT '用户名',
   password varchar(64) NOT NULL DEFAULT 'default' COMMENT '密码',
   email varchar(64) NOT NULL DEFAULT 'default' COMMENT '邮箱'
 ) COMMENT='用户表';
+
 ```
-**SELECT  INTO根据已有的表创建新表**
+**复制表**
+
+```sql
+CREATE TABLE 新表
+AS
+SELECT * FROM 旧表 
 ```
+
+**SELECT  INTO从一个表中选取数据，然后把数据插入另一个表中。**
+
+```sql
 SELECT * INTO new_表名 FROM 表名
+
+// MySQL 数据库不支持 SELECT ... INTO 语句，但支持 INSERT INTO ... SELECT 。
 ```
 ## 删除(DROP)
-```
+```sql
 DROP TABLE user;
 ```
 ## 修改表名称(ALTER  RENAME)
-``` 
+``` sql
 ALTER TABLE user RENAME user_new;
 ```
 # 增删改查字段
 
-## 添加字段(ALTER ADD)
-```
-ALTER TABLE user ADD age int(3);
+## 添加字段(ALTER ADD COLUMN)
+```sql
+ALTER TABLE user ADD COLUMN age int(3);
 ```
 
 ## 删除字段(ALTER DROP COLUMN)  
-```
+```sql
 ALTER TABLE user DROP COLUMN age;
 ```
 ## 修改字段类型(ALTER MODIFY)
-```
+```sql
 ALTER TABLE user MODIFY 字段名 新的字段类型;
 ```
 mysql 设置字段 not null 变成可以null
-```
+
+```sql
 ALTER TABLE 表名 MODIFY 字段名 VARCHAR(20) DEFAULT NULL
 ```
 ## 修改字段名称(ALTER CHANGE)
-``` 
+``` sql
 ALTER TABLE user CHANGE 旧字段名 新字段名 字段类型;
 ```
 
 ## 显示表字段信息
-```
+```sql
 DESC user;
 ```
 
 # 管理数据
 ## 添加主键(ALTER ADD PRIMARY KEY)
-```
+```sql
 ALTER TABLE user ADD PRIMARY KEY (id);
 ```
 **删除主键**(ALTER DROP PRIMARY KEY)
 
-```
+```sql
 ALTER TABLE user DROP PRIMARY KEY;
 ```
 查询表的大小：
-```
+```sql
 use information_schema;  
 select data_length,index_length 
 from tables 
@@ -202,15 +414,27 @@ where table_schema=库 and table_name = 表 ;
 
 ## 添加数据(INSERT INTO)
 插入完整的行
-```
+```sql
 INSERT INTO user VALUES (10, 'root', 'root', 'xxxx@163.com');
+
+-- 多行INSERT （ DB2、SQL、SQL Server、 PostgreSQL 和 MySQL多行插入）
+INSERT INTO productins VALUES ('0002', '打孔器', '办公用品', 500, 320, '2009-09-11'),
+                              ('0003', '运动T恤', '衣服', 4000, 2800, NULL),
+                              ('0004', '菜刀', '厨房用具', 3000, 2800, '2009-09-20');  
+-- Oracle中的多行INSERT
+INSERT ALL INTO productins VALUES ('0002', '打孔器', '办公用品', 500, 320, '2009-09-11')
+           INTO productins VALUES ('0003', '运动T恤', '衣服', 4000, 2800, NULL)
+           INTO productins VALUES ('0004', '菜刀', '厨房用具', 3000, 2800, '2009-09-20')
+SELECT * FROM DUAL;  
+-- DUAL是Oracle特有（安装时的必选项）的一种临时表A。因此“SELECT *FROM DUAL” 部分也只是临时性的，并没有实际意义。  
 ```
 插入行的一部分
-```
+```sql
 INSERT INTO user(username, password, email) VALUES ('admin', 'admin', 'xxxx@163.com');
 ```
 **插入查询出来的数据**
-```
+
+```sql
 INSERT INTO user(字段) SELECT 字段 FROM account;
 ```
 ## 删除(DELETE FROM)
@@ -235,26 +459,32 @@ TRUNCATE TABLE user;
 如果是整理表内部的碎片，可以用truncate跟上reuse stroage，再重新导入/插入数据。
 
 ## 修改(UPDATE SET)
-``` 
+``` sql
 UPDATE user
 SET username='robot', password='robot'
 WHERE username = 'root';
+
+-- 合并后的写法
+UPDATE product
+   SET sale_price = sale_price * 10,
+       purchase_price = purchase_price / 2
+ WHERE product_type = '厨房用具';  
 ```
 ## 查询
 所有字段：
-``` 
+``` sql
 select * from 表;
 ```
 指定字段：
-``` 
+``` sql
 select 字段 from 表;
 ```
 指定别名： 
-```
+```sql
 select 字段1 as 别名 from 表;
 ```
 合并列：
-``` 
+``` sql
 select (字段1+字段2) as “和” from 表;
 ```
 去重： 

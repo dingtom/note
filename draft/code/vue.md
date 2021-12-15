@@ -2145,12 +2145,12 @@ cnpm i -D sass
 
 ## eslint
 
-根目录创建 **vue.config.js** 文件
+取消eslint检查， 根目录创建 **vue.config.js** 文件
 
 ```
 module.exports = {
-  lintOnSave: false,
-  devServer: {
+  lintOnSave: false,  // ！！！
+  devServer: {  //  ？？？
     overlay: {
       warnings: true,
       errors: true

@@ -44,29 +44,31 @@
 
 22. home /end                                                    行首/尾
 
-23. ctr + home /end                                           首/尾行
+23. shift + home/end                                          选中光标到行尾的内容
+
+24. ctr + home /end                                           首/尾行
 
     --------------------------------------------------
 
-24. Ctrl + Shift + R    打开资源（不只是用来寻找Java文件）
+25. Ctrl + Shift + R    打开资源（不只是用来寻找Java文件）
 
-25. Ctrl + Shift + T    打开类型
+26. Ctrl + Shift + T    打开类型
 
-26. ctrl+shift+alt+N	通过一个字符快速查找位置
+27. ctrl+shift+alt+N	通过一个字符快速查找位置
 
-27. alt+F1	查找代码在其他界面模块的位置，颇为有用
+28. alt+F1	查找代码在其他界面模块的位置，颇为有用
 
-28. F5	单步跳入
+29. F5	单步跳入
 
-29. F6	单步跳过
+30. F6	单步跳过
 
-30. F7	单步返回
+31. F7	单步返回
 
-31. F8	继续
+32. F8	继续
 
-32. ctr + num_- 折叠当前块
+33. ctr + num_- 折叠当前块
 
-33. ctr + num_* 展开
+34. ctr + num_* 展开
 
 
 
@@ -90,7 +92,7 @@ i
 
 ```
 函数注释
-websotrm：函数前/*** + enter
+websotrm：函数前/** + enter
 pycharm: 函数名下""" + enter
 ```
 
@@ -130,6 +132,35 @@ Tab Szie/Indent/Continuation indent:全2
 **Other**
 
 do not indent children of里加入script标签
+```
+
+# Live Template
+
+```js
+类注释 Editor->File and Code Templates->Class
+/**
+ * $description
+ * @author dingwenchao
+ * @date ${YEAR}.${MONTH}.${DAY} ${TIME}
+ */
+ 
+方法注释 Editor->Live Templates-> + -> Templates Group -> + ->Live Templates
+Abbreviation: * 
+Template text:
+*
+ * $description$
+ * @author dingwenchao
+ * @date $date$
+ * @param $params$ 
+ * @return $return$
+ */
+ 
+ name           expression    defalut value
+ description    complete()
+ date           				date()
+ params							methodParameters()
+ return         				methodReturnType()
+ 
 ```
 
 
