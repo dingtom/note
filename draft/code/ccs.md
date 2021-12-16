@@ -268,6 +268,10 @@ Vscode  快速格式化代码:   shift+alt+f
 - 逗号可以理解为和的意思
 - 并集选择器通常用于集体声明
 
+
+
+
+
 ## 5、伪类选择器
 
 ​		伪类选择器用于**向某些选择器添加特殊的效果**，比如给链接添加特殊效果，或选择第1个，第n个元素。
@@ -318,6 +322,21 @@ input: focus{
 ###### 复合选择器总结
 
 ![](https://i.loli.net/2021/07/08/xUlBFwXmCKghfo8.png)
+
+## 模糊选择
+
+```html
+// class 属性值包含 "test" 的所有 div 元素
+div[class*="test"]
+.show-grid下的class属性值包含 "test" 
+.show-grid [class*="test"]
+// class属性值以 "test" 开头 
+div[class^="test"]
+// class属性值以 "test" 结尾
+div[class$="test"]
+```
+
+
 
 # css的显示模式
 
@@ -1156,7 +1175,7 @@ Relative：元素仍处于文档流中，定位是相对于原本自身的位置
 display: flex;
 align-items: center;
 text-align: center;
-vertical-align: middle;这个适用于行内元素的垂直居中，块元素不可以。
+vertical-align: middle;这个适用于行内元素的垂直居中，块元素不可以。不起作用设置‘行高’
 -----------
 hieght: 100px;  //子元素为单行文本
 lin-height: 100px
@@ -1230,3 +1249,50 @@ align-items: center;/*垂直居中*/
 @media screen and ( max-width: 980px 
 ```
 
+
+
+# content 
+
+```html
+// 每个链接后的括号内加上网址（href 属性）：
+a:after {
+  content: " (" attr(href) ")";
+}
+<p><a href="https://www.runoob.com">菜鸟教程</a> - 免费的编程学习网站。</p>
+
+// 加上字符
+content; '\e63a'
+font-family: "iconfont"!important
+```
+
+# box-sizing
+
+ 元素的总高度和宽度包含内边距和边框(padding 与 border) :
+
+```html
+box-sizing: content-box (默认)高度和宽度只应用于元素的内容
+box-sizing: border-box:高度和宽度应用于元素的所有部分: 内容、内边距和边框
+
+```
+
+# opacity 
+
+设置一个div元素的透明度级别
+
+
+
+
+# backface-visibility:hidden
+
+隐藏旋转 div 元素的背面
+
+# transform 
+
+旋转 div 元素
+
+```html
+matrix(n,n,n,n,n,n)	定义 2D 转换，使用六个值的矩阵。
+
+
+
+```
