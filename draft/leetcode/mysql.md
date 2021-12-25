@@ -216,15 +216,13 @@ DBMS 主要通过数据的保存格式（数据库的种类）来进行分类，
 # 基本书写规则
 
 - SQL语句要以分号（ ; ）结尾
-
 - SQL 不区分关键字的大小写，但是插入到表中的数据是区分大小写的
-
 - win 系统默认不区分表名及字段名的大小写
+- linux / mac 默认严格区分表名及字段名的大小写 * 本教程已统一调整表名及字段名的为小写，以方便初学者学习使用。
+- 注释是SQL语句中用来标识说明或者注意事项的部分。分为1行注释"-- "和多行注释两种"/* */"。
 
-- linux / mac 默认严格区分表名及字段名的大小写 * 本教程已统一调整表名及字段名的为小写，以方便初学者学习使用。··
 
-
-### 数据类型的指定
+## 数据类型的指定
 
 数据库创建的表，所有的列都必须指定数据类型，每一列都不能存储与该列数据类型不符的数据。
 
@@ -246,7 +244,7 @@ DBMS 主要通过数据的保存格式（数据库的种类）来进行分类，
 
 用来指定存储日期（年月日）的列的数据类型（日期型）。
 
-### 约束的设置
+## 约束的设置
 
 约束是除了数据类型之外，对列中存储的数据进行限制或者追加条件的功能。
 
@@ -254,9 +252,12 @@ DBMS 主要通过数据的保存格式（数据库的种类）来进行分类，
 
 `PRIMARY KEY`是主键约束，代表该列是唯一值，可以通过该列取出特定的行的数据。
 
+## 执行顺序
 
+在加入窗口函数的基础上SQL的执行顺序也会发生变化，具体的执行顺序如下（window就是窗口函数）
+![](https://upload-images.jianshu.io/upload_images/18339009-cd689024f076a36a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-# DDL
+## DDL
 
 DDL（Data Definition Language，数据定义语言） 用来**创建或者删除存储数据用的数据库以及数据库中的表**等对象。DDL 包含以下几种指令。
 
@@ -264,15 +265,7 @@ DDL（Data Definition Language，数据定义语言） 用来**创建或者删�
 - DROP ： 删除数据库和表等对象
 - ALTER ： 修改数据库和表等对象的结构
 
-
-
-
-
-
-
-
-
-# DML
+## DML
 
 DML（Data Manipulation Language，数据操纵语言） 用来**查询或者变更**表中的记录。DML 包含以下几种指令。
 
@@ -281,13 +274,7 @@ DML（Data Manipulation Language，数据操纵语言） 用来**查询或者变
 - UPDATE ：更新表中的数据
 - DELETE ：删除表中的数据
 
-
-
-
-
-
-
-# DCL
+## DCL
 
 DCL（Data Control Language，数据控制语言） 用来**确认或者取消对数据库中的数据进行的变更**。除此之外，还可以对 RDBMS 的用户是否有权限操作数据库中的对象（数据库表等）进行设定。DCL 包含以下几种指令。
 
@@ -349,14 +336,10 @@ AS
 SELECT * FROM 旧表 
 ```
 
-**SELECT  INTO从一个表中选取数据，然后把数据插入另一个表中。**
-
-```sql
-SELECT * INTO new_表名 FROM 表名
-
-// MySQL 数据库不支持 SELECT ... INTO 语句，但支持 INSERT INTO ... SELECT 。
-```
 ## 删除(DROP)
+
+ALTER TABLE 语句和 DROP TABLE 语句一样，执行之后无法恢复。
+
 ```sql
 DROP TABLE user;
 ```
@@ -437,26 +420,39 @@ INSERT INTO user(username, password, email) VALUES ('admin', 'admin', 'xxxx@163.
 ```sql
 INSERT INTO user(字段) SELECT 字段 FROM account;
 ```
+```sql
+SELECT * INTO new_表名 FROM 表名
+
+// MySQL 数据库不支持 SELECT ... INTO 语句，但支持 INSERT INTO ... SELECT 。
+INSERT INTO p1  SELECT * FROM product;
+```
+
 ## 删除(DELETE FROM)
 ### DELETE FROM
 1)可以**带条件删除**2）只能删除表的数据，**不能删除表的约束**3)删除的数据**可以回滚（事务）**
-```
+```sql
 DELETE FROM user WHERE username='robot';
 ```
 ### truncate
-1）不能带条件删除 2）即可以删除表的数据，也可以删除表的约束 3）不能回滚
-```
+1）不能带条件删除 2）可以删除表的数据，也可以删除表的约束 3）不能回滚
+
+```sql
 TRUNCATE TABLE user;
 ```
 
 >总结：
-1、在速度上，一般来说，drop> truncate > delete。
-2、在使用drop和truncate时一定要注意，虽然可以恢复，但为了减少麻烦，还是要慎重。
-3、如果想删除部分数据用delete，注意带上where子句，回滚段要足够大；
-如果想**删除表**，当然用drop； 
-如果想**保留表而将所有数据删除**，如果**和事务无关**，用truncate即可；
-如果**和事务有关，或者想触发trigger**，还是用delete；
-如果是整理表内部的碎片，可以用truncate跟上reuse stroage，再重新导入/插入数据。
+>1、在速度上，一般来说，drop> truncate > delete。
+>2、在使用drop和truncate时一定要注意，虽然可以恢复，但为了减少麻烦，还是要慎重。
+>3、如果想删除部分数据用delete，注意带上where子句，回滚段要足够大；
+>如果想**删除表**，当然用drop； 
+>如果想**保留表而将所有数据删除**，如果**和事务无关**，用truncate即可；
+>如果**和事务有关，或者想触发trigger**，还是用delete；
+>如果是整理表内部的碎片，可以用truncate跟上reuse stroage，再重新导入/插入数据。
+>
+
+希望删除表结构时，用 drop;
+希望保留表结构，但要删除所有记录时， 用 truncate;
+希望保留表结构，但要删除部分记录时， 用 delete。
 
 ## 修改(UPDATE SET)
 ``` sql
@@ -488,7 +484,7 @@ select 字段1 as 别名 from 表;
 select (字段1+字段2) as “和” from 表;
 ```
 去重： 
-```
+```sql
 select distinct 字段 from 表;
 ```
 
@@ -498,7 +494,8 @@ select distinct 字段 from 表;
 **and、 or、in、not  in** 
 
 ```select * from 表 where 条件1 and/or 条件2```
-```IN ("A", "B", "C")```
+```IN ("A", "B", "C")```     ––使用IN 和 NOT IN 时是无法选取出NULL数据的。
+
 ## 比较
 
  **> 、 <  、>= 、 <= 、 =、  !=、 <>、 between  and** 
@@ -511,22 +508,43 @@ select distinct 字段 from 表;
 
 ```SELECT * FROM student WHERE NAME LIKE '李%';```
 
-#  判断
+## 谓词
+
+返回值为真值的函数。包括`TRUE / FALSE / UNKNOWN`。
+
+谓词主要有以下几个：
+
+- LIKE
+
+- BETWEEN
+
+- IS NULL、IS NOT NULL  
+
+  **NULL 只能使用 IS NULL 和 IS NOT NULL 来进行判断。**
+
+- IN
+
+- EXISTS
+
+  谓词的作用就是 **“判断是否存在满足某种条件的记录”**。如果存在这样的记录就返回真（TRUE），如果不存在就返回假（FALSE）。
+
+##  判断
 
 **case when 条件 then 真的操作 else 假的操作 end**
 
 **if(条件, 真的操作, 假的操作)**
 
-```
-SELECT role,
-case when building is not null 
-THEN "1" else "0" end
-as Wheater
-FROM employees
-GROUP BY role,Wheater;
+```sql
+CASE WHEN product_type = '衣服' THEN CONCAT('A ： ',product_type)
+ WHEN product_type = '办公用品'  THEN CONCAT('B ： ',product_type)
+ WHEN product_type = '厨房用具'  THEN CONCAT('C ： ',product_type)
+ ELSE NULL
+END
 ```
 
 ## 聚合函数： 
+聚合函数的使用前提是结果集已经确定，而WHERE还处于确定结果集的过程中，所以相互矛盾会引发错误。 如果**想指定条件，可以在SELECT，HAVING（下面马上会讲）以及ORDER BY子句中使用聚合函数。**
+
 ```sum()、avg() 、 max()  、min() 、 count()```
 
 **count()**
@@ -536,9 +554,16 @@ GROUP BY role,Wheater;
 ```SELECT SUM(servlet) AS 'servlet的总成绩' FROM student;```
 ```SELECT COUNT(*) FROM student;```
 
+```sql
+-- 计算去除重复数据后的数据行数
+SELECT COUNT(DISTINCT product_type)
+ FROM product;
+```
+
 ```concat```将A和B按顺序连接在一起的字符串
 ```split(str, regex)```将string类型数据按regex提取，分隔后转换为array。
 ```substr（str,0,len) ```截取字符串从0位开始的长度为len个字符。
+`SUBSTRING_INDEX (原始字符串， 分隔符，n)`获取原始字符串按照分隔符分割后，第 n 个分隔符之前（或之后）的子字符串，支持正向和反向索引，索引起始值分别为 1 和 -1。
 ```LOCATE()```查找某字符在长字符中的位置
 ```LEFT()、RIGHT()```左边或者右边的字符
 ```LOWER()、UPPER()```转换为小写或者大写
@@ -547,13 +572,21 @@ GROUP BY role,Wheater;
 ```SOUNDEX()```转换为语音值
 其中， SOUNDEX() 可以将一个字符串转换为描述其语音表示的字母数字模式。
 
-```
+```sql
 SELECT *
 FROM mytable
 WHERE SOUNDEX(col1) = SOUNDEX('apple')
 ```
 
 常用的日期提取函数包括 ```year()/month()/day()/hour()/minute()/second()```
+
+CURRENT_DATE -- 获取当前日期
+CURRENT_TIME -- 当前时间
+CURRENT_TIMESTAMP -- 当前日期和时间
+EXTRACT(日期元素 FROM 日期)-- 截取日期元素
+```EXTRACT(YEAR   FROM CURRENT_TIMESTAMP) AS year```
+
+
 ```AddDate()```增加一个日期（天、周等）
 ```AddTime()```增加一个时间（时、分等）
 ```CurDate()```返回当前日期
@@ -562,12 +595,22 @@ WHERE SOUNDEX(col1) = SOUNDEX('apple')
 ```to_date("1970-01-01 00:00:00")```把时间的字符串形式转化为时间类型，再进行后续的计算；
 ```datediff(enddate,stratdate) ```计算两个时间的时间差（day)；
 ```date_sub(stratdate,days) ```返回开始日期startdate减少days天后的日期。
-```
+
+```sql
 SELECT ADDDATE("2017-06-15", INTERVAL 10 DAY);
 ```
 ```date_add(startdate,days) ```返回开始日期startdate增加days天后的日期。
 ```Date_Format()```返回一个格式化的日期或时间串
 ```date(paidTime).date_format(paidTime，%Y-%m-d%)```
+
+`CAST（转换前的值 AS 想要转换的数据类型）` -- 将NULL转换为其他值
+
+```
+SELECT CAST('0001' AS SIGNED INTEGER) AS int_col;
+```
+
+`COALESCE(数据1，数据2，数据3……)` -- 返回可变参数 A 中左侧开始第 1个不是NULL的值
+
 
 
 ```SIN()```正弦
@@ -584,40 +627,186 @@ SELECT ADDDATE("2017-06-15", INTERVAL 10 DAY);
 
 
 ## 分组查询：group by 
+
+使用COUNT等聚合函数时，**SELECT子句中如果出现列名，只能是GROUP BY子句中指定的列名**（也就是聚合键）。
+
+SELECT子句中可以通过AS来指定别名，但在**GROUP BY中不能使用别名**。因为在DBMS中 ,SELECT子句在GROUP BY子句后执行。
+
 **group by 后可加聚合函数，where 后不能加聚合函数**
 
-把统计函数和GROUP BY结合，那统计结果就是对分组内的数据统计了.
+```sql
+-- 按照商品种类统计数据行数
+SELECT product_type, COUNT(*)
+  FROM product
+ GROUP BY product_type;
+--- error
+SELECT product_name, COUNT(*)
+  FROM product
+ GROUP BY purchase_price;
+```
 
-```
-SELECT building,count(*) 
-FROM employees
-WHERE building!='null'
-GROUP BY building
-;
-```
 ## 分组后筛选： having 
- 查询总人数大于2的性别
--- 1) 查询男女的人数
--- 2）筛选出人数大于2的记录(having)
---- 注意： 分组之前条件使用where关键字，分组之前条件使用having关键字
-````SELECT gender,COUNT(*) FROM student WHERE GROUP BY gender HAVING COUNT(*)>2;````
 
+WHERE子句只能指定记录（行）的条件，而不能用来指定组的条件（例如，“数据行数为 2 行”或者“平均值为 500”等）。
+
+可以使用**数字、聚合函数和GROUP BY中指定的列名**（聚合键）。
+
+```sql
+SELECT product_type, COUNT(*)
+  FROM product
+ GROUP BY product_type
+HAVING COUNT(*) = 2;
+
+-- 错误形式（因为product_name不包含在GROUP BY聚合键中）
+SELECT product_type, COUNT(*)
+  FROM product
+ GROUP BY product_type
+HAVING product_name = '圆珠笔';
+```
 
 ## DISTINCT 唯一
+
+- 想要计算值的种类时，可以在COUNT函数的参数中使用DISTINCT。
+
 ```SELECT DISTINCT Director FROM movies ASC;```
+
 ## 分页查询：limit offset
 起始行,查询行数起始行从0开始
 把结果集分页，每页3条记录。要获取第1页的记录
 ```SELECT * FROM student LIMIT 3 OFFSET 0;```
 ## 排序： order by 
+
+- ORDER BY中列名可使用别名
+
 asc: 正序（默认）desc：反序
-按照id顺序排序
-```
+```sql
 SELECT * 
 FROM movies 
 ORDER BY Director ASC,Year DESC 
 LIMIT 10 OFFSET 0;
 ```
+
+# 视图
+
+视图是一个虚拟的表，不同于直接操作数据表，视图是依据SELECT语句来创建的
+
+那既然已经有数据表了，为什么还需要视图呢？主要有以下几点原因：
+
+1. 通过定义视图可以将频繁使用的SELECT语句保存以提高效率。
+2. 通过定义视图可以使用户看到的数据更加清晰。
+3. 通过定义视图可以不对外公开数据表全部字段，增强数据的保密性。
+4. 通过定义视图可以降低数据的冗余。
+
+创建视图的基本语法如下：
+
+```sql
+CREATE VIEW <视图名称>(<列名1>,<列名2>,...) AS <SELECT语句>
+```
+
+ 需要注意的是**视图名在数据库中需要是唯一的，不能与其他视图和表重名。在创建视图时也尽量使用限制不允许通过视图来修改表**
+
+视图不仅可以基于真实表，我们也可以在视图的基础上继续创建视图。虽然在视图上继续创建视图的语法没有错误，但是我们还是应该尽量避免这种操作。这是因为对多数 DBMS 来说， 多重视图会降低 SQL 的性能。
+
+- 注意事项
+
+需要注意的是在一般的DBMS中定义视图时不能使用ORDER BY语句。下面这样定义视图是错误的。
+
+```sql
+CREATE VIEW productsum (product_type, cnt_product)
+AS
+SELECT product_type, COUNT(*)
+  FROM product
+ GROUP BY product_type
+ ORDER BY product_type;
+```
+
+为什么不能使用 ORDER BY 子句呢？这是**因为视图和表一样，数据行都是没有顺序的**。
+
+*在 MySQL中视图的定义是允许使用 ORDER BY 语句的，但是若从特定视图进行选择，而该视图使用了自己的 ORDER BY 语句，则视图定义中的 ORDER BY 将被忽略。*
+
+## 修改视图结构
+
+```sql
+ALTER VIEW <视图名> AS <SELECT语句>
+
+ALTER VIEW productSum
+    AS
+        SELECT product_type, sale_price
+          FROM Product
+         WHERE regist_date > '2009-09-11';
+```
+
+其中视图名在数据库中需要是唯一的，不能与其他视图和表重名。 当然也可以通过将当前视图删除然后重新创建的方式达到修改的效果。（对于数据库底层是不是也是这样操作的呢，你可以自己探索一下。）
+
+因为视图是一个虚拟表，所以对视图的操作就是对底层基础表的操作，所以在修改时只有满足底层基本表的定义才能成功修改。
+
+对于一个视图来说，如果包含以下结构的任意一种都是不可以被更新的：
+
+- 聚合函数 SUM()、MIN()、MAX()、COUNT() 等。
+- DISTINCT 关键字。
+- GROUP BY 子句。
+- HAVING 子句。
+- UNION 或 UNION ALL 运算符。
+- FROM 子句中包含多个表。
+
+视图归根结底还是从表派生出来的，因此，如果原表可以更新，那么 视图中的数据也可以更新。反之亦然，如果视图发生了改变，而原表没有进行相应更新的话，就无法保证数据的一致性了。
+
+## 更新视图
+
+因为我们刚刚修改的productSum视图不包括以上的限制条件，我们来尝试更新一下视图
+
+```sql
+UPDATE productsum
+   SET sale_price = '5000'
+ WHERE product_type = '办公用品';
+```
+
+## 删除视图
+
+```sql
+DROP VIEW <视图名1> [ , <视图名2> …]
+
+DROP VIEW productSum;
+```
+
+注意：需要有相应的权限才能成功删除。
+
+
+
+## 子查询和视图的关系
+
+子查询就是将用来定义视图的 SELECT 语句直接用于 FROM 子句当中。其中AS studentSum可以看作是子查询的名称，而且由于子查询是一次性的，所以子查询不会像视图那样保存在存储介质中， 而是在 SELECT 语句执行之后就消失了。
+
+### 标量子查询
+
+标量就是单一的意思，那么标量子查询也就是单一的子查询，那什么叫做单一的子查询呢？
+
+所谓单一就是要求我们执行的SQL语句只能返回一个值，也就是要返回表中具体的**某一行的某一列**。
+
+### 关联子查询
+
+关联子查询就是通过一些标志将内外两层的查询连接起来起到过滤数据的目的
+
+`查询出销售单价高于平均销售单价的商品`，这个例子的SQL语句如下
+
+```sql
+SELECT product_id, product_name, sale_price
+  FROM product
+ WHERE sale_price > (SELECT AVG(sale_price) FROM product);
+```
+
+`选取出各商品种类中高于该商品种类的平均销售单价的商品`。SQL语句如下：
+
+```sql
+SELECT product_type, product_name, sale_price
+  FROM product AS p1
+ WHERE sale_price > (SELECT AVG(sale_price)
+   FROM product AS p2
+   WHERE p1.product_type = p2.product_type
+   GROUP BY product_type);
+```
+
+
 
 # 连接查询（多表查询）JOIN  ON
 把两个表中具有相同 主键ID的数据连接起来
