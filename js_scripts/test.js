@@ -1,154 +1,144 @@
-// 需要忽略的任务中包含的关键字
-var IGNORE_LIST = ['芭芭农场','下单','蚂蚁','淘特','小互动','点淘','充话费','参与合伙'];
-// 点击之后返回的任务
-const BACK_LIST = [];
-const GO_View = '去浏览';
-const GO_FINISH = '去完成';
-const GO_SEARCH = '去搜索';
-// 需要做的任务
-const FINISHED_TASK = ['任务完成','全部完成啦'];
-const VIEW_MOST = '去逛逛';
+// app名
+const appName = '饿了么';
+// 任务tab
+const taskList = ['真香', '我的'];
+// 需要点击的关键词
+const watchList = ['签到']
+const browseList = ['浏览', '去变美', '去搜索', '去观看', '去完成', '去逛逛']
+const activateList = ['完成']
+// 任务结束标志词
+const watchEnd = '明日'
+const browseEnd = '签到'
 
 init();
-function init() { 
+function init() {
     start();
-    while (true) {
-        enterActivity();
-        viewTask();
+    // 进入活动中心
+    // if (keyClick('真香') == 1) {
+    //     customSleep(getRandom(2, 4));
+    //     watchVideos();
+    // }
+    if (keyClick('我的') == 1) {
+        customSleep(getRandom(2, 4));
+        browseActivates();
     }
+
 }
 
-// 启动淘宝
-function start(){
+// 真香，看视频
+function watchVideos() {
+    if (classClick('android.widget.ImageView', 20, 2, 1, '真香签到') == 1) {
+        return 1;
+    }
+    // while (1) {
+    //     swipe(500,2000,500,500,1000)
+    //     customSleep(getRandom(6,10));
+    //     watchList.some(item => {
+    //         log(item)
+    //         if (keyClick(item) == 1) {
+    //             customSleep(getRandom(2,4));
+    //             return true;
+    //         }
+    //     })
+    //     swipe(500,2000,500,500,1000)
+    //     customSleep(getRandom(6,10));
+    //     if (keyClick(watchEnd) == 1) break;
+    // }
+}
+
+// 我的，去浏览
+function browseActivates() {
+    if (classClick('android.view.ViewGroup', 22, 1, 0, '赚吃货豆') == 1) {
+        customSleep(getRandom(3, 4));
+
+        while (1) {
+            let flag = browseList.some(item => {
+                if (keyClick(item) == 1) {
+                    // 等一会看看没有浏览计时直接返回
+                    customSleep(getRandom(4, 5));  
+                    if (currentPackage() != 'me.ele') {
+                        log("返回ele");
+                        launchApp('饿了么');
+                    }
+                    if (!textContains('浏览').exists()) {
+                        log("返回上层");
+                        back();
+                    } else {  // 有计时等待返回出现
+                        while (!textContains('返回').exists()) {
+                            customSleep(getRandom(2, 4));
+                        } 
+                        log("返回上层");
+                        back();
+                    }
+                    return true;
+                }
+            })
+            
+            if (!flag) {
+                if (textContains('领任务').exists()) {  // 循环一遍真的没任务了退出
+                    log('没任务了');
+                    break;
+                } else {  // 当前不在任务页
+                    back();
+                    continue;
+                }
+            }
+        }
+    }
+
+}
+
+// -------------------------------------------------
+// 启动饿了么
+function start() {
     auto.waitFor()
-    var appName = "手机淘宝";
     launchApp(appName);
     console.show();
+    customSleep(getRandom(3, 4));
 }
-
-// 进入活动中心
-function enterActivity(){
-    const GET_MIAO = '领喵币';
-    const SIGN_IN = '签到';
-    const GET_REWARD = '领取奖励';
-    const CUT_TEN_BILION = '瓜分10亿';
-    if (text(GET_MIAO).exists()){
-        text(GET_MIAO).findOne().click();
-    }
-
-    // 签到
-    if (text(SIGN_IN).exists()){
-        text(SIGN_IN).findOne().click();
-    }
-
-    //领取奖励
-    if (text(GET_REWARD).exists()){
-        text(GET_REWARD).findOne().click();
-    }
-
-    // 进入活动中心
-    if(text(CUT_TEN_BILION).exists()) {
-        text(CUT_TEN_BILION).findOnce().parent().click();
-    }
-}
-
-// 任务
-function viewTask(){
-    // 去完成
-    if(text(GO_FINISH).exists()) {
-        sleep(500);
-        // 获取多个'去完成' 或者 '去浏览'
-        var button = text(GO_FINISH).find();
-        for(index = 0;index < button.length;index++) {
-            var buttonParent = button[index].parent();
-            // 遍历'去完成'或者'去浏览'的父控件下面的子控件，判断是否存在IGNORE_LIST中包含的文字，如果存在，不执行该任务，否则执行
-            if(!recursionControl(buttonParent)) {
-                var isViewAndFollow = false;
-                // 判断是否直接返回
-                buttonParent.child(0).children().forEach(element => {
-                    print(element.text())
-                    for(i=0;i<BACK_LIST.length;i++) {
-                        if(element.text().indexOf(BACK_LIST[i]) >= 0) {
-                            isViewAndFollow = true;
-                        }
-                    }
-                });
-
-                log("正在进行任务:" + buttonParent.child(0).children()[0].text());
-                if(isViewAndFollow){
-                    viewAndFollow();
-                }
-
-                button[index].click();
-                sleep(500)
-                break;
+// 点击某词
+function keyClick(key) {
+    if (textContains(key).exists() || descContains(key).exists()) {
+        const element = textContains(key).findOne() || descContains(key).findOne();
+        if (element.clickable()) {
+            element.click();
+            log('clickable' + key);
+            return 1;
+        } else {
+            let b = element.bounds()
+            if (b) {
+                click(b.centerX(), b.centerY());
+                log('bounds' + key);
+                return 1;
+            } else {
+                log(key + '无坐标');
+                return -1;
             }
         }
-    }
-
-    // 去浏览
-    if(text(GO_View).exists()) {
-        sleep(500);
-        text(GO_View).findOne().click();
-        log("正在进行任务:" + text(GO_View).findOne().parent().child(0).children()[0].text());
-        sleep(2000);
-    }
-
-    // 去搜索
-    if(text(GO_SEARCH).exists()) {
-        sleep(500);
-        text(GO_SEARCH).findOne().click();
-        log("正在进行任务:" + text(GO_SEARCH).findOne().parent().child(0).children()[0].text());
-        sleep(2000);
-    }
-
-    // 去逛逛
-    if(textContains(VIEW_MOST).exists()){
-        textContains(VIEW_MOST).findOnce().click();
-        log("正在进行任务:" + textContains(VIEW_MOST).findOnce().parent().child(0).children()[0].text());
-        sleep(2000);
-    }
-    
-    isFinshed(FINISHED_TASK);
-
-}
-
-function customBack(){
-    while(back()) {
-        break;
+    } else {
+        return -1;
     }
 }
-
-// 判断是不是完成任务
-function isFinshed(uiName){
-    for(i = 0;i < uiName.length;i++) {
-        if(textContains(uiName[i]).exists() || descContains(uiName[i]).exists()) {
-            back();
-            sleep(500);
-        }
+// 无id、desc、text的点击
+function classClick(cN, d, dO, iIP, desc) {
+    let b = className(cN).depth(d).drawingOrder(dO).indexInParent(iIP).findOne().bounds();
+    if (b) {
+        click(b.centerX(), b.centerY());
+        log('点击' + desc);
+        return 1;
+    } else {
+        log(desc + '无坐标');
+        return -1;
     }
-    
-    
-    return false;
+}
+//    体眠函数
+function customSleep(time) {
+    sleep(time * 1000);
+}
+// 产生[min， max）之间的值
+function getRandom(min, max) {
+    var value = (random() + 1) * min;
+    return value > max ? max : value;
 }
 
-// 递归遍历控件是否包含忽略的关键词
-function recursionControl(parentControl){
-    var retFlag = false;
-    // 遍历子控件是否包含忽略关键词
-    parentControl.child(0).children().forEach(element => {
-        for(ignoreIndex = 0;ignoreIndex < IGNORE_LIST.length;ignoreIndex++) {
-            if(element.text().indexOf(IGNORE_LIST[ignoreIndex]) >= 0) {
-                retFlag = true;
-            }
-        }
-    });
-    return retFlag;
-}
 
-// 返回
-function viewAndFollow(){
-    sleep(1000);
-    back();
-    sleep(1000);
-}
