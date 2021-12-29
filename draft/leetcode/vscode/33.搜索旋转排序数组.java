@@ -1,5 +1,11 @@
-import javax.sound.sampled.SourceDataLine;
-
+/*
+ * @Author: your name
+ * @Date: 2021-12-20 11:15:03
+ * @LastEditTime: 2021-12-29 18:05:10
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: \vscode\33.搜索旋转排序数组.java
+ */
 /*
  * @lc app=leetcode.cn id=33 lang=java
  *

@@ -663,3 +663,36 @@ echo $?
 #### 修改root密码
 ubuntu中修改root账号的密码命令：```sudo passwd root```
 
+# 修改内核启动顺序
+
+```shell
+显示内核的启动顺序
+grep menuentry /boot/grub/grub.cfg
+修改内核配置文件
+sudo vim /etc/default/grub
+
+GRUB_DEFAULT=0 改为 GRUB_DEFAULT=6或者改为GRUB_DEFAULT=”Ubuntu，Linux 4.4.0-21-generic“ 报错根据提示信息修改
+
+更新
+sudo update-grub
+```
+# 清除旧版本内核
+
+```shell
+查看当前使用内核版本号
+uname -a
+查看所有的版本
+sudo dpkg --get-selections | grep linux
+删除
+sudo apt-get purge linux-headers-4.15.0-74 linux-headers-4.15.0-74-generic linux-image-4.15.0-74-generic linux-modules-4.15.0-74-generic linux-modules-extra-4.15.0-74-generic
+
+标记deinstall的内核文件进行删除
+sudo dpkg -P linux-image-4.4.0-138-generic
+
+更新引导
+sudo update-grub
+```
+
+
+
+

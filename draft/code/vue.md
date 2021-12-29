@@ -640,8 +640,6 @@ watch: {
 
 
 
-
-
 ## 父子组件的访问方式
 
 ### \$children
@@ -2209,5 +2207,60 @@ imgUrl:require('./assets/logo.png')
 
 
 
+# watch
 
+## 监听变量
+
+```kotlin
+  watch: {
+    name (val) {
+      this.watchName = val;
+    }
+  }
+```
+
+## 监听对象具体属性
+
+```jsx
+watch: {
+　　'queryData.name'(newValue, oldValue) {
+　　　　console.log(newValue)
+    }
+}
+
+也可以借助 computed 计算属性来完成。
+computed: {
+  getName: function() {
+    return this.queryData.name
+  }
+}
+```
+
+watch 的用法有个特点，就是当值第一次绑定的时候，不会执行监听函数，只有值发生改变才会执行。如果我们需要在最初绑定值得时候也执行函数，就需要用到 immediate 属性。
+
+当需要监听复杂的数据类型（对象）的改变时，普通的 watch 方法无法坚挺到对象内部属性的改变，只有 data 中的数据才能监听到变化，此时就需要使用 deep 属性对对象进行深度监听。
+
+```kotlin
+ name: {
+      handler (val) {
+        this.watchName = val;
+      },
+      immediate: true；
+      deep: true //当对象属性较多时，每个属性值得变化都会执行 handler 。如果只需要监听对象中一个属性的值，则可以使用字符串的形式监听对象属性
+}
+```
+
+# 恢复初始数据
+
+1. this.$options.data() 这个是vue原始的数据，就是你页面刚加载时的data
+
+2. this.$data 这个是现在阶段的vue数据，就是你改变data的数据
+
+   ```
+   this.base = this.$options.data().base
+   
+   Object.assign(this.$data, this.$options.data())
+   ```
+
+   
 

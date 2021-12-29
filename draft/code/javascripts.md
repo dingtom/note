@@ -90,6 +90,18 @@ console.log(18 === '18'); // false
 
 # 判断类型
 
+（1）数字 typeof(x) = "number"
+
+（2）字符串 typeof(x) = "string"
+
+（3）布尔值 typeof(x) = "boolean" 
+
+**（4）对象,数组和null   typeof(x) = "object" （不可以判断数组和对象）**
+
+（5）函数 typeof(x) = "function" 
+
+
+
 Object.prototype.toString.call(obj)。用Object原型上的toString方法作用在传入的obj的上下文中（通过call将this指向obj）
 
 它返回[object constructorName]的字符串格式，这里的constructorName就是call参数的函数名，内置类型分为null、string、boolean、number、undefined、array、function、object、date、math
@@ -285,7 +297,12 @@ console.log(arr.lastIndexOf('blue'));
 arr.includes(a)
 ```
 
+## 最大、小值
 
+```js
+Math.max(...[1,'2'])
+[1,'2','4',3].sort((a,b) => { return b-a })[0]  //b-a从大到小
+```
 
 # 字符
 
@@ -323,12 +340,7 @@ item.replace(RegExp('-', 'g'), '/'))  // g 替换所有，默认替换与i个
 var str2 = 'red, pink, blue';
 console.log(str2.split(','));
 ```
-## 最大、小值
 
-```js
-Math.max(...[1,'2'])
-[1,'2','4',3].sort((a,b) => { return b-a })[0]  //b-a从大到小
-```
 
 
 
@@ -482,8 +494,15 @@ console.log(total);
 当前项，索引，原始数组
 .map(item=>{});    有返回值，不改变
 .forEach((item, index, input)=>())  没有return，改变原数组   
-    
-    
+
+every()是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
+some()是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
+let arr1=[1,1,1,1,1]
+let arr2=[1,2,3,4,5]
+console.log(arr1.some(item => item == 1))
+console.log(arr2.some(item =>item == 1))
+console.log(arr1.every(item => item == 1))
+console.log(arr2.every(item =>item == 1))    
 ```
 
 
@@ -521,6 +540,28 @@ status
 ```js
 // 邮箱
 let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
+
+i - 修饰符是用来执行不区分大小写的匹配。
+g - 修饰符是用于执行全文的搜索（而不是在找到第一个就停止查找,而是找到所有的匹配）。
+
+content='sdsadas456sdas78asdas9879asdasda4s5'
+检索字符串中指定的值，并返回值（找不到返回null）
+/(\d){4}/gi.exec(content)   
+ 检索字符串中指定值，返回true或false
+/(\d){4}/gi.test(content)  
+
+找html中文件id
+const reg = RegExp('file/([\\d]*)', 'g')
+while (reg.exec(content)) {
+    if (thie.recorder.indexOf(RegExp.$1) === -1) this.recorder.push(RegExp.$1)
+}
+
+返回所要找的元素在字符串中的位置
+"abcdhuisd".search(/dhu/)
+replace 正则替换
+"abcd4564hui454s0ss4894d7937asda".replace(/(\d){4}/gi,"四个数字");
+split 分割成数组：
+"abcd4564hui454s0ss4894d7937asda".split(/(\d){4}/gi);
 ```
 
 
@@ -528,6 +569,27 @@ let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
 # 深拷贝
 
 ```..
-import lodash form lodash
-lodash.cloneDeep
+import _ from lodash
+_.cloneDeep
 ```
+
+
+
+# clearInterval()、setInterval() 
+
+定时执行操作
+
+```js
+var myVar = setInterval(function(){ myTimer() }, 1000);
+ 
+function myTimer() {
+    var d = new Date();
+    var t = d.toLocaleTimeString();
+    document.getElementById("demo").innerHTML = t;
+}
+ 
+function myStopFunction() {
+    clearInterval(myVar);
+}
+```
+
