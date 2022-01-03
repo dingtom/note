@@ -63,10 +63,13 @@ git init xx
 git add xx/ git add .
 # 第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
 git commit -m "xx"
+
+git commit --amend -m [message]  # 使用一次新的commit，替代上一次提交， 如果代码没有任何新变化，则用来改写上一次commit的提交信息
+$ git commit --amend [file1] [file2] ...  # 重做上一次commit，并包括指定文件的新变化
 ```
 
 # 工作区的状态
-```
+```js
 git status
 # 告诉你有文件被修改过，
 
@@ -238,17 +241,21 @@ git stash apply stash@{0} 
 
 
 
+# rebase
 
-# rebase把本地未push的分叉提交历史整理成直线；
+把本地未push的分叉提交历史整理成直线；
+
+```
+git rebase -i commit_id    
+```
+
+
 
 
 - rebase之前需要经master分支拉到最新
 
-- 切换分支到需要rebase的分支，这里是dev分支
-
-- git rebase 后再git merge
-
 - 执行git rebase master，有冲突就解决冲突，解决后直接git add . 再git - rebase --continue即可
+
 
 # 打标签
 首先，切换到需要打标签的分支上,敲命令```git tag <name>```就可以打一个新标签
