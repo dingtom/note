@@ -1,5 +1,7 @@
 
 
+# Git
+
 **Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。 Git管理的是修改，而不是文件**
 
 ![](https://i.loli.net/2021/06/23/fPtkTSNQoch6sd1.png)
@@ -25,7 +27,9 @@
 
 Linux
 
-```  sudo apt-get install git```
+```  js
+sudo apt-get install git
+```
 
 Windows
 
@@ -37,63 +41,86 @@ Windows
 
 
 
-#  自报家门
 
+# 查看配置信息
+
+```js
+git config --list --global
+git config -e [--global]  # 编辑Git配置文件
 ```
+
+##  自报家门
+
+```js
  git config --global user.name "dingtom" 
  git config --global user.email "2524370217@qq.com" 
 ```
+
 # 创建一个版本库 
-```
+```js
 git init xx
-第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区
+# 第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区
 git add xx/ git add .
-第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
+# 第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
 git commit -m "xx"
 ```
 
 # 工作区的状态
-如果```git status```告诉你有文件被修改过，
+```
+git status
+# 告诉你有文件被修改过，
 
-用```git diff```未commit前可看修改内容。
+git diff
+# 未commit前可看修改内容。
+```
 
 # 在版本的历史之间穿梭
+```js
+git log
+# 可以查看提交历史，以便确定要回退到哪个版本。
+# 退出查看按q
 
-* 穿梭前，用```git log```可以查看提交历史，以便确定要回退到哪个版本。退出查看按q
+git reflog
+# 查看命令历史，以便确定要回到未来的哪个版本
 
-* 要重返未来，用```git reflog```查看命令历史，以便确定要回到未来的哪个版本
-    如果嫌输出信息太多，加上--pretty=oneline
+git log 
+--graph 
+--oneline  # 简洁的观看历史
+--abbrev-commit 
+-n4 # 查看最近的4次提交，所有分支
+--all # 查看所有分支版本信息
 
-  ```git log --graph --pretty=oneline --abbrev-commit  ```
+
 - 穿梭
-  
-  ``` git reset --hard HEAD^  ```
-  
-  HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
+git reset --hard HEAD^  
+# HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
 
-​        ```git reset --hard commit_id```
-
-
-# 丢弃工作区的修改
+git reset --hard commit_id
 ```
+
+# 让工作区的文件恢复为和暂存区
+
+```js
 git checkout -- xx
 
---很重要，没有--，就变成了“切换到另一个分支”的命令
+# --很重要，没有--，就变成了“切换到另一个分支”的命令
 ```
 
-**当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改**
+**当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改, 让暂存区恢复成和HEAD的一样**
 
 分两步
 
-```
-第一步用命令git reset HEAD xx，就回到了场景1，用HEAD时，表示最新的版本。
+```js
+1.git reset HEAD -- 文件名
+# 就回到了场景1，用HEAD时，表示最新的版本。
 
-第二步按场景1操作。 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。 
+2.按场景1操作。 
+已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。 
 ```
 
-**从版本库中删除该文件**
+**从版本库中删除文件**
 
-```
+```js
 删错了，因为版本库里还有   
 git checkout -- filename 
 当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了
@@ -106,34 +133,30 @@ git rm --cached
 
 
 #  本地仓库推送到远程仓库
-```
-第1步：创建SSH Key：   
+```js
+1.创建SSH Key：   
 ssh-keygen -t rsa -C "2524370217@qq.com"
 
 在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
 
-第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+2.登陆GitHub，打开“Account settings”，“SSH Keys”页面：
 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘id_rsa.pub文件的内容：   
 首先，登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：  
 在本地关联的就是我的远程库：
 git remote add origin git@github.com:git名/库名.git   
 
-把本地库的master分支内容推送到远程库上：
+3.把本地库的master分支内容推送到远程库上：
 git push -u origin master
 
 由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。从现在起，只要本地作了提交，同步到远程仓库通过命令：
 git push  
 ```
 
-取消本地目录下关联的远程库：
-
-```
-git remote remove origin
-```
-
 当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。      
 
-```
+```js
+取消本地目录下关联的远程库：
+git remote remove origin
 查看远程库的信息，
 git remote -v
 
@@ -141,7 +164,6 @@ git remote -v
 git push origin master       
 新分支推送到远程
 git push -u origin dev        
-
 
 多人协作的工作模式通常是这样
 现在我们的小伙伴要在dev分支上做开发，就必须把远程的origin的dev分支到本地来，于是可以使用命令创建本地dev分支：
@@ -162,7 +184,7 @@ git branch --set-upstream-to=origin/dev dev
 
 # 分支管理
 
-```
+```js
 查看分支：
 git branch    
 创建分支：
@@ -197,24 +219,24 @@ git push origin --delete [branchname]
 
 等以后恢复现场后继续工作
 
-```
+```js
 git stash
-
-查看刚才的工作现场
+# 查看刚才的工作现场
 git stash list
+# 工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：   
+
+git stash apply
+# 恢复后，stash内容并不删除，你需要用git stash drop来删除； 
+
+git stash pop
+# 恢复的同时把stash内容也删了
+
+
+# 你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，
+git stash apply stash@{0} 
 ```
 
 
-
- 工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：   
-
-  一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；   另一种方式是用git stash pop，恢复的同时把stash内容也删了
-
-你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：git stash apply stash@{0} 
-
-修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；     
-
-当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。     
 
 
 # rebase把本地未push的分叉提交历史整理成直线；
