@@ -64,6 +64,7 @@ git add xx/ git add .
 # 第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
 git commit -m "xx"
 
+git commit -a  # 提交工作区自上次commit之后的变化，直接到仓库区
 git commit --amend -m [message]  # 使用一次新的commit，替代上一次提交， 如果代码没有任何新变化，则用来改写上一次commit的提交信息
 $ git commit --amend [file1] [file2] ...  # 重做上一次commit，并包括指定文件的新变化
 ```
@@ -258,47 +259,67 @@ git rebase -i commit_id
 
 
 # 打标签
-首先，切换到需要打标签的分支上,敲命令```git tag <name>```就可以打一个新标签
-查看所有标签:```git tag```
+```
+切换到需要打标签的分支上
+git tag <name>
 
-默认标签是打在最新提交的commit上的。有时候，如果忘了找到历史提交的commit id，然后打上就可以了：```git tag v0.9 f52c633```
+查看所有标签
+git tag
 
-注意，标签不是按时间顺序列出，而是按字母排序的。可以用```git show <tagname>```查看标签信息：
+默认标签是打在最新提交的commit上的。有时候，如果忘了找到历史提交的commit id，然后打上就可以了：
+git tag v0.9 f52c633
 
-创建带有说明的标签：```git tag -a v0.1 -m "version 0.1 released" 1094adb```
+注意，标签不是按时间顺序列出，而是按字母排序的。查看标签信息
+git show <tagname>
+
+创建带有说明的标签
+git tag -a v0.1 -m "version 0.1 released" 1094adb
 
 注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
 
-如果标签打错了，也可以删除：```git tag -d v0.1```
+删除：
+git tag -d v0.1
 
-因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+推送某个标签到远程，使用命令
+git push origin <tagname>
 
-如果要推送某个标签到远程，使用命令```git push origin <tagname>```
-或者，一次性推送全部尚未推送到远程的本地标签：```git push origin --tags```
-如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：```git tag -d v0.9```然后，从远程删除。删除命令也是push，但是格式如下：```git push origin :refs/tags/v0.9```
+或者，一次性推送全部尚未推送到远程的本地标签
+git push origin --tags
+
+如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
+git tag -d v0.9
+然后，从远程删除。删除命令也是push，但是格式如下：
+git push origin :refs/tags/v0.9
 要看看是否真的从远程库删除了标签，可以登陆GitHub查看。
-
+```
 # 忽略文件
-```touch .gitignore```
+```
+touch .gitignore
 
-所有配置文件可以直接在线浏览：[https://github.com/github/gitignore](https://github.com/github/gitignore)
 
-```.gitignore```只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。所以一定要养成在项目开始就创建.gitignore文件的习惯。
+所有配置文件可以直接在线浏览：https://github.com/github/gitignore
 
-**删除track的文件**
+.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。所以一定要养成在项目开始就创建.gitignore文件的习惯。
+```
 
+删除track的文件
+```
 - 把文件移走
 - git rm 文件
 - git commit  -m "删除不需要的文件"
 - 在.gitignore文件中添加忽略规则
-
+```
 
 文件被.gitignore忽略了：可以用-f强制添加到Git：```git add -f App.class```
 
 或者你发现，可能是.gitignore写得有问题，需要找出来到底哪个规则写错了，可以用git check-ignore命令检查：
-​```git check-ignore -v App.class ```
-​```.gitignore:3:*.class App.class```
+```
+git check-ignore -v App.class 
+
+.gitignore:3:*.class App.class
+```
 Git会告诉我们，.gitignore的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。
+
 ```
 glob模式
 所谓的 glob 模式是指 shell 所使用的简化了的正则表达式，匹配规则如下：
@@ -319,9 +340,11 @@ tmp/*.txt：只忽略tmp目录下的.txt文件
 # 命令简写
 很多人都用co表示checkout，ci表示commit，br表示branch：
 
-```git config --global alias.co checkout```
-​```git config --global alias.ci commit```
-​```git config --global alias.br branch```
+```
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+```
 
 --global参数是全局参数，也就是这些命令在这台电脑的所有Git仓库下都有用。
 
