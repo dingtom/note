@@ -73,8 +73,8 @@ grep 'temporary password' /var/log/mysqld.log
 
 登录 root 用户
 mysql -u root -p
-修改密码为"123456", 注意结尾要有分号, 表示语句的结束.
-ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+修改密码为"123", 注意结尾要有分号, 表示语句的结束.
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123';
 
 MySQL 完整的初始密码规则可以通过如下命令查看：
 SHOW VARIABLES LIKE 'validate_password%'
@@ -668,12 +668,18 @@ HAVING product_name = '圆珠笔';
 
 - 想要计算值的种类时，可以在COUNT函数的参数中使用DISTINCT。
 
-```SELECT DISTINCT Director FROM movies ASC;```
+```
+SELECT DISTINCT Director FROM movies ASC;
+```
 
 ## 分页查询：limit offset
 起始行,查询行数起始行从0开始
 把结果集分页，每页3条记录。要获取第1页的记录
-```SELECT * FROM student LIMIT 3 OFFSET 0;```
+
+```
+SELECT * FROM student LIMIT 3 OFFSET 0;
+```
+
 ## 排序： order by 
 
 - ORDER BY中列名可使用别名
