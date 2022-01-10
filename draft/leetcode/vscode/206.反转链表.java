@@ -14,16 +14,19 @@
  */
 
 // @lc code=start
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
+
+// Definition for singly-linked list.
+
+public class ListNode {
+    int val;
+    ListNode next;
+    ListNode() {}
+    ListNode(int val) { this.val = val; }
+    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+}
+
+
+ 
 class Solution {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
@@ -44,6 +47,20 @@ class Solution {
     //     head.next = null;
     //     return newHead;
     // }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        char[][] matrix1 = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
+        char[][] matrix2 = {};
+        char[][] matrix3 = {{'0'}};
+        char[][] matrix4 = {{'1'}};
+
+        System.out.println(solution.maximalRectangle(matrix1));
+        System.out.println(solution.maximalRectangle(matrix2));
+        System.out.println(solution.maximalRectangle(matrix3));
+        System.out.println(solution.maximalRectangle(matrix4));
+    }
 }
+
 // @lc code=end
 
