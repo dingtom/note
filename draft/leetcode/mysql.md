@@ -47,6 +47,38 @@ net stop mysql
 >![](https://upload-images.jianshu.io/upload_images/18339009-3b3965a4ecafa1f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 >
 
+绿色版
+
+```
+------------在D:\mysql\创建my.ini 
+
+-----------zip版本不带默认的数据库文件，需进行数据库初始化，使用CMD管理员打开并
+cd d:\mysql\bin
+mysqld --defaults-file=d:\mysql\my.ini --initialize --console
+！！！会创建默认数据库并设置默认的root密码，localhost：后面为默认的密码。
+
+-----------初始化完成之后，需要启动mysql服务，输入一下命令:
+"d:\mysql\bin\mysqld" --console    
+
+-----------现在如果关闭了窗口，mysql服务就停止了，不适用与服务器环境，所以需要将mysql作为windows服务进行开机启动。先停止mysql。
+"d:\mysql\bin\mysqld" -u root shutdown
+
+-----------安装为windows服务，可以在install后面指定服务名，如果涉及一个服务器安装多个服务，可以在后面写mysql5或者mysql8
+
+cd d:\mysql\bin
+mysqld  --install
+
+-----------将d:\mysql\bin 目录增加到系统环境变量path
+
+
+-----------允许所有计算机远程链接mysql服务器，执行下面命令后可以从其他服务器远程mysql啦，程序也可以链接了。
+use mysql
+update user set host = '%' where user = 'root';
+flush privileges;
+```
+
+
+
 
 ##  centos
 
@@ -186,6 +218,37 @@ tcp 0 0 localhost.localdomain:mysql *:* LISTEN -
 ```
 sudo /etc/init.d/mysql restart
 ```
+
+# 重置密码
+
+```
+net stop mysql，停止MySQL服务，
+
+开启跳过密码验证登录的MySQL服务
+ mysqld --console --skip-grant-tables --shared-memory 
+
+再打开一个新的cmd，无密码登录MySQL
+mysql -u root -p
+
+密码置为空
+    use mysql
+    update user set authentication_string='' where user='root';
+出mysql，执行命令：
+
+    quit
+
+关闭以-console --skip-grant-tables --shared-memory 启动的MySQL服务，
+
+打开命令框，输入：net start mysql  启动MySQL服务，一管理员的身份运行cmd。
+
+步骤4密码已经置空，所以无密码状态登录MySQL，输入登录命令：mysql -u root -p
+
+利用上一篇博客中更改密码的命令，成功修改密码
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123';
+```
+
+
 
 # DBMS的种类
 

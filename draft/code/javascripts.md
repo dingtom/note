@@ -492,8 +492,9 @@ console.log(total);
 
     
 当前项，索引，原始数组
-.map(item=>{});    有返回值，不改变
+.map((item, index, input)=>{});    有返回值，不改变
 .forEach((item, index, input)=>())  没有return，改变原数组   
+一般无法跳出循环可用every，some
 
 every()是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
 some()是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
@@ -566,11 +567,91 @@ split 分割成数组：
 
 
 
-# 深拷贝
+# lodash
 
-```..
+```js
+深拷贝
 import _ from lodash
 _.cloneDeep
+
+find()返回集合中满足查找条件的第一个元素
+let ary1 = [11, 12, 13, 14];
+_.find(ary1, item => item % 2 == 0);
+
+findIndex()返回集合中满足查找条件的第一个元素的下标。
+let ary1 = [11, 12, 13, 14];
+_.findIndex(ary1, item => item % 2 == 0);
+
+shuffle()用于打乱一个集合中所有元素的位置并返回一个新的集合。
+let ary = [11, 12, 13, 14, 15, 16];
+_.shuffle(ary);
+
+orderBy()按照指定规则对集合进行排序并返回一个新的集合。
+let ary = [
+    { x: 2, y: 3 },
+    { x: 1, y: 1 },
+    { x: 2, y: 2 }
+];
+_.orderBy(ary, ['x', 'y'], ['asc', 'desc']);
+
+uniq()对数组进行去重操作并返回一个新数组。
+let ary = [11, 11, '12', 12, 12, 13];
+_.uniq(ary);
+
+uniqBy（）根据指定规则去迭代数组中的每一个元素和属性来实现去重并返回一个新数组。
+let ary2 = [
+    { x: 2, y: 3 },
+    { x: 1, y: 1 },
+    { x: 2, y: 2 }
+];
+_.uniqBy(ary2, 'x');
+
+
+uniqWith()根据指定规则将数组中的每一个元素进行比较来实现去重并返回一个新数组。
+let ary = [
+    { x: 2, y: 3 },
+    { x: 1, y: 1 },
+    { x: 2, y: 3 }
+];
+_.uniqWith(ary, _.isEqual);
+
+
+remove()将满足条件的元素从原数组中删除，被
+删除元素组成新数组返回。
+let ary = [11, 12, 13, 14];
+let evens = _.remove(ary, item => item % 2 == 0);
+
+
+求多个数组的并集
+_.union([2], [1, 2], [3,4]); //[2, 1, 3, 4]
+
+
+求多个数组的交集
+_.intersection([2], [1, 2], [2, 3, 4]); // [2]
+
+
+_.chunk()将一个数组拆分成多个小数组，返回一个新的二维数组。
+let ary = [10, 11, 12, 13, 14, 15, 16];
+_.chunk(ary, 2);
+
+
+merge 合并两个对象
+   var obj1 = {
+     a: [{age: 2},{name:'张三'}]
+   }
+   var obj2 = {
+     a: [{height:175},{weight:120}]
+   }
+
+   var newObj = _.merge(obj1, obj2);
+
+
+random获取某个区间的随机数
+ var newObj = _.random(10, 20);
+
+sample获取数组中某个元素
+var arr = ['第一个', '第二个']
+var str = _.sample(arr);
 ```
 
 

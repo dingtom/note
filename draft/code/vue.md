@@ -2196,7 +2196,7 @@ npm i -S url-loader  file-loader
 
 # img的src属性绑定
 
-```
+```js
 <img :src="imgUrl">
 
 data() {
@@ -2256,11 +2256,64 @@ watch 的用法有个特点，就是当值第一次绑定的时候，不会执�
 
 2. this.$data 这个是现在阶段的vue数据，就是你改变data的数据
 
-   ```
+   ```js
    this.base = this.$options.data().base
    
    Object.assign(this.$data, this.$options.data())
    ```
 
    
+
+# 搜索，翻页用不同的表单
+```js
+if (type === 'search') {
+	this.refs.searchFrom.validate(valid =>{
+		if (valid) this.searchFormRecorder = _.cloneDeep(this。searchform)
+	}
+}
+
+querylistkeyword(this.searchFormRecorder).then(response=> {
+
+})
+```
+
+# 删完最后一页的数据后跳到上一页
+
+```js
+batchdeleteknowledge(this.selectedlist).then(response => {
+	if(response & response.status == 200){
+		this.ssuccesspop('成功')
+		//删掉最后一页的数据，页码减一
+		this.total -= this.deletetype = 'batch' ? this.selectedList.length: 1
+		const pageNum = Math.ceil(this.total / this.searchForm.pagesize)
+		// 当前页数大于实际页数，改当前页为最后一页
+		if (pageNum < this.searchForm.pageNum) this.searchForm.pageNum = pageNum
+		this.getData('search')
+}).finally(() => {
+	this.selectedList = []
+})
+
+
+```
+
+# 拖拽排序
+
+```js
+sortFile() {
+
+
+}
+const that = this
+const element = document.querySelectorall('file-list')[0]
+new Sortable(element,
+onend: function(event){
+	//入到新的位置
+	that.form.attachmentList.splice(event.newindex, 0, that.form.attachmentList.splice(event.oldlndex, 1)[0])
+	const attachmentList = that.form.attachmentList.slice(0)
+	that.$nextTick(() => {
+		that.form.attachmentList = attachmentList
+	}
+}
+
+```
 
