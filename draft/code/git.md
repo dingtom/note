@@ -6,11 +6,11 @@
 
 ![](https://i.loli.net/2021/06/23/fPtkTSNQoch6sd1.png)
 
-  ##### 工作区（Working Directory） 
+##### 工作区（Working Directory） 
 
   就是你在电脑里能看到的目录，比如我的learngit文件夹就是一个**工作区**： 
 
- ##### 版本库（Repository） 
+##### 版本库（Repository） 
 
   工作区有一个隐藏目录.git，这个不算工作区，而是Git的**版本库**。 
 
@@ -63,10 +63,16 @@ git init xx
 git add xx/ git add .
 # 第二步是用git commit提交更改，实际上就是**把暂存区的所有内容提交到当前分支**
 git commit -m "xx"
+```
 
-git commit -a  # 提交工作区自上次commit之后的变化，直接到仓库区
-git commit --amend -m [message]  # 使用一次新的commit，替代上一次提交， 如果代码没有任何新变化，则用来改写上一次commit的提交信息
-$ git commit --amend [file1] [file2] ...  # 重做上一次commit，并包括指定文件的新变化
+# 提交
+```js
+# 提交工作区自上次commit之后的变化，直接到仓库区
+git commit -a  
+# 使用一次新的commit，替代上一次提交， 如果代码没有任何新变化，则用来改写上一次commit的提交信息
+git commit --amend -m [message]  
+# 重做上一次commit，并包括指定文件的新变化
+git commit --amend [file1] [file2] ...  
 ```
 
 # 工作区的状态
@@ -94,25 +100,21 @@ git log
 -n4 # 查看最近的4次提交，所有分支
 --all # 查看所有分支版本信息
 
-
-- 穿梭
 git reset --hard HEAD^  
-# HEAD指向的版本就是当前版本。上一个版本就是HEAD\^，上上一个版本就是HEAD\^\^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
+# HEAD指向的版本就是当前版本。上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
 
 git reset --hard commit_id
 ```
 
-# 让工作区的文件恢复为和暂存区
+# 让工作区的文件恢复为暂存区
 
 ```js
 git checkout -- xx
 
-# --很重要，没有--，就变成了“切换到另一个分支”的命令
+// --很重要，没有--，就变成了“切换到另一个分支”的命令
 ```
 
 **当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改, 让暂存区恢复成和HEAD的一样**
-
-分两步
 
 ```js
 1.git reset HEAD -- 文件名
@@ -122,14 +124,16 @@ git checkout -- xx
 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。 
 ```
 
-**从版本库中删除文件**
+# 删除文件
 
 ```js
-删错了，因为版本库里还有   
+# 删错了，因为版本库里还有   
 git checkout -- filename 
-当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了
+
+# 当我们需要删除暂存区或分支上的文件, 同时工作区也不需要这个文件了
 git rm 
-当我们需要删除暂存区或分支上的文件, 但本地又需要使用, 只是不希望这个文件被版本控制, 可以使用
+
+# 当我们需要删除暂存区或分支上的文件, 但本地又需要使用, 只是不希望这个文件被版本控制, 可以使用
 git rm --cached
 ```
 
@@ -140,8 +144,7 @@ git rm --cached
 ```js
 1.创建SSH Key：   
 ssh-keygen -t rsa -C "2524370217@qq.com"
-
-在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
+// 在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。   
 
 2.登陆GitHub，打开“Account settings”，“SSH Keys”页面：
 然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘id_rsa.pub文件的内容：   
@@ -152,16 +155,19 @@ git remote add origin git@github.com:git名/库名.git   
 3.把本地库的master分支内容推送到远程库上：
 git push -u origin master
 
-由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。从现在起，只要本地作了提交，同步到远程仓库通过命令：
+由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+
+从现在起，只要本地作了提交，同步到远程仓库通过命令：
 git push  
 ```
 
 当你从远程仓库克隆时，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且，远程仓库的默认名称是origin。      
 
 ```js
-取消本地目录下关联的远程库：
+# 取消本地目录下关联的远程库：
 git remote remove origin
-查看远程库的信息，
+
+# 查看远程库的信息，
 git remote -v
 
 推送时，要指定本地分支，这样，Git就会把该分支推送到远程库对应的远程分支上
@@ -212,7 +218,7 @@ git push origin --delete [branchname]
 ```
 
 
-  ## 无法自动合并分支
+## 无法自动合并分支
 必须首先解决冲突。解决冲突后，再提交，合并完成。    
 
 解决冲突就是把Git合并失败的文件手动编辑为我们希望的内容，再提交。    
@@ -242,11 +248,9 @@ git stash apply stash@{0} 
 
 把本地未push的分叉提交历史整理成直线；
 
-```
+```js
 git rebase -i commit_id    
 ```
-
-
 
 
 - rebase之前需要经master分支拉到最新
@@ -255,7 +259,7 @@ git rebase -i commit_id
 
 
 # 打标签
-```
+```js
 切换到需要打标签的分支上
 git tag <name>
 
@@ -289,34 +293,48 @@ git push origin :refs/tags/v0.9
 要看看是否真的从远程库删除了标签，可以登陆GitHub查看。
 ```
 # 忽略文件
-```
+```js
 touch .gitignore
-
-
 所有配置文件可以直接在线浏览：https://github.com/github/gitignore
 
-.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。所以一定要养成在项目开始就创建.gitignore文件的习惯。
+# .gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。所以一定要养成在项目开始就创建.gitignore文件的习惯。
 ```
 
-删除track的文件
-```
-- 把文件移走
-- git rm 文件
-- git commit  -m "删除不需要的文件"
-- 在.gitignore文件中添加忽略规则
+## 忽略已经提交到github的文件
+
+```js
+方法一：
+1.先把项目备份，以防万一。
+2.git rm --cached app.iml 
+//从版本库中rm 文件，working dicrectory中仍然保留，如果要删除目录下所有文件包括子目录中的 git rm -r --cached directory_name
+3.在.gitignore中添加要忽略的文件
+4.把修改的文件commit并且push到服务端
+5.从git上重新拉取这个项目。
+
+方法二：
+1.直接在远程仓库上把这个文件删除
+2.先把本地文件备份一下，再把pull一下远程分支
+3.这时候本地要忽略文件已经被删除掉，再把原来备份文件拷过来
+4.这时候千万不要把刚拷贝过来的文件添加到git中
+5.把刚拷贝的文件添加到.gitignore文件中
+5.再推到远程仓库即可
 ```
 
-文件被.gitignore忽略了：可以用-f强制添加到Git：```git add -f App.class```
+文件被.gitignore忽略了：可以用-f强制添加到Git：
+
+```js
+git add -f App.class
+```
 
 或者你发现，可能是.gitignore写得有问题，需要找出来到底哪个规则写错了，可以用git check-ignore命令检查：
-```
+```js
 git check-ignore -v App.class 
 
 .gitignore:3:*.class App.class
 ```
 Git会告诉我们，.gitignore的第3行规则忽略了该文件，于是我们就可以知道应该修订哪个规则。
 
-```
+```js
 glob模式
 所谓的 glob 模式是指 shell 所使用的简化了的正则表达式，匹配规则如下：
 "*"：星号匹配零个或多个任意字符
@@ -336,7 +354,7 @@ tmp/*.txt：只忽略tmp目录下的.txt文件
 # 命令简写
 很多人都用co表示checkout，ci表示commit，br表示branch：
 
-```
+```js
 git config --global alias.co checkout
 git config --global alias.ci commit
 git config --global alias.br branch
