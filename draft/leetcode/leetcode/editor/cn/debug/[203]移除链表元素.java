@@ -40,33 +40,22 @@ class ListNode {
 }
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
+
+
+
+
+//        方法二：迭代
+        // 头指针可能被删除
         ListNode dummyHead = new ListNode(0);
         dummyHead.next = head;
-//        ListNode cur = head;
-//        while (cur != null) {
-//            if (cur.val == val) {
-//                cur.next = cur.next.next
-//            } else {
-//                cur = cur.next;
-//            }
-//        }
-
-        ListNode temp = dummyHead;
-        while (temp.next != null) {
-            if (temp.next.val == val) {
-                temp.next = temp.next.next;
+        ListNode cur = dummyHead;
+        while (cur.next != null) {
+            if (cur.next.val == val) {
+                cur.next = cur.next.next;
             } else {
-                temp = temp.next;
+                cur = cur.next;
             }
         }
-
-
-//        ListNode temp = dummyHead;
-//        while (temp.next != null) {
-//            temp.next.val == val ?temp.next = temp.next.next:temp = temp.next;
-//            }
-//        }
-
         return dummyHead.next;
     }
 
