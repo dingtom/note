@@ -306,9 +306,9 @@ Math.max(...[1,'2'])
 
 # 字符
 
-空格：`\xa0`
-
 ```js
+空格：\xa0
+原格式： `${this.name}-${this.age}`
 // 数组转换为字符串 
 var arr = [1, 2, 3];
 console.log(arr.toString()); // 1,2,3
