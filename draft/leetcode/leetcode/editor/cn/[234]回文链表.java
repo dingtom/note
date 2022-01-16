@@ -34,7 +34,11 @@ import java.util.List;
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-//        方法一：将值复制到数组中后用双指针法
+        /*
+        1.将值复制到数组中后用双指针法
+
+         */
+
 //        List<Integer> vals = new ArrayList<Integer>();
 //        ListNode cur = head;
 //        while (cur != null) {
@@ -50,7 +54,10 @@ class Solution {
 //        }
 //        return true;
 
-//        方法二：递归
+        /*
+        2.递归
+
+         */
 
     }
 }

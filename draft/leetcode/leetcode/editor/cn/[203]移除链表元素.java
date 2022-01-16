@@ -24,11 +24,20 @@
 // Definition for singly-linked list.
 
 class ListNode {
-     int val;
-     ListNode next;
-     ListNode() {}
-     ListNode(int val) { this.val = val; }
-     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    int val;
+    ListNode next;
+
+    ListNode() {
+    }
+
+    ListNode(int val) {
+        this.val = val;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
 
     @Override
     public String toString() {
@@ -38,19 +47,29 @@ class ListNode {
                 '}';
     }
 }
+
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
+        /*
+        1.递归
+递归的终止条件是 head 为空，此时直接返回 head。
+当 head 不为空时，递归地进行删除操作，然后判断 head 
+的节点值是否等于val 并决定是否要删除 head。
+         */
+
+//        if (head == null) {
+//            return head;
+//        }
+//        head.next = removeElements(head.next, val);
+//        return head.val == val ? head.next : head;
+
+
+        /*
+        2.迭代
+
+         */
         ListNode dummyHead = new ListNode(0);
         dummyHead.next = head;
-//        ListNode cur = head;
-//        while (cur != null) {
-//            if (cur.val == val) {
-//                cur.next = cur.next.next
-//            } else {
-//                cur = cur.next;
-//            }
-//        }
-
         ListNode temp = dummyHead;
         while (temp.next != null) {
             if (temp.next.val == val) {
@@ -59,13 +78,6 @@ class Solution {
                 temp = temp.next;
             }
         }
-
-
-//        ListNode temp = dummyHead;
-//        while (temp.next != null) {
-//            temp.next.val == val ?temp.next = temp.next.next:temp = temp.next;
-//            }
-//        }
 
         return dummyHead.next;
     }

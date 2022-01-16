@@ -56,18 +56,29 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode pre = null;
+        /*
+        1.迭代
+        将当前节点的 next 指针改为指向前一个节点。
+        由于节点没有引用其前一个节点，因此必须事先存储其前一个节点。newHead
+        在更改引用之前，还需要存储后一个节点。next
+        最后返回新的头引用。
+         */
+
+        ListNode newHead = null;
         ListNode next = null;
         while (head != null) {
             next = head.next;
-            head.next = pre;
-            pre = head;
+            head.next = newHead;
+            newHead = head;
             head = next;
         }
-        return pre;
+        return newHead;
     }
-    // public ListNode reverseList(ListNode head) {
-    //     if (head == null || head.next == null) return head;
+        /*
+        2.递归
+        
+         */
+
     //     ListNode newHead = reverseList(head.next);
     //     head.next.next = head;
     //     head.next = null;
@@ -75,11 +86,14 @@ class Solution {
     // }
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        char[][] matrix1 = {{'1','0','1','0','0'},{'1','0','1','1','1'},{'1','1','1','1','1'},{'1','0','0','1','0'}};
-        char[][] matrix2 = {};
-        char[][] matrix3 = {{'0'}};
-        char[][] matrix4 = {{'1'}};
+        ListNode ln = new ListNode(1,
+                new ListNode(2,
+                        new ListNode(3,
+                                new ListNode(4,
+                                        new ListNode(5)))));
+        Solution s = new Solution();
+        System.out.println(s.removeElements(ln, 4));
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
