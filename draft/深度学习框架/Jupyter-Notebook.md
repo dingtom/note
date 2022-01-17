@@ -3,7 +3,6 @@
 ```shell
 conda install ipython
 conda install jupyter
-
 ```
 # 换主题
 

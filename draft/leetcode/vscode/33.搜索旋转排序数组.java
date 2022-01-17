@@ -28,7 +28,8 @@
 
 // @lc code=start
 class Solution {
-    // 81题与之类似，本题保证了每个值唯一；总有一部分是有序的
+    //
+    //
     public int search(int[] nums, int target) {
         int len = nums.length;
         if (len == 0) return -1;
@@ -40,9 +41,8 @@ class Solution {
             if (nums[l] <= nums[mid]) {  // 左边是有序的
                 // 等号解决 [3, 1] 这种情况
                 if (nums[l] <= target && target < nums[mid]) {  // 在左边
-                   // target=nums[mid]之前已经判断过
                     r = mid - 1;
-                } else {  // 在右边
+                } else {
                     l = mid + 1;
                 }
             } else {
@@ -62,8 +62,6 @@ class Solution {
         int target = 0;
         Solution solution = new Solution();
         System.out.println(solution.search(nums, target));
-
-
     }
 }
 // @lc code=end

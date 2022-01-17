@@ -1,6 +1,3 @@
-查看显卡型号
-
-```lspci | grep -i nvidia```
 
 
 
@@ -10,15 +7,17 @@
 
 
 
+```
+
+查看显卡型号
+lspci | grep -i nvidia
+
 安装驱动
-
-```sudo bash NVIDIA-Linux-x86_64-455.23.04.run```
-
-
+sudo bash NVIDIA-Linux-x86_64-455.23.04.run
 
 查看显卡信息
-
-```nvidia-smi```
+nvidia-smi
+```
 
 # 卸载显卡驱动重新安装
 
@@ -54,7 +53,10 @@ sudo apt-get -y install cuda
 
 **查看cuda版本**
 
-```nvcc -V```
+
+```
+nvcc -V
+```
 不显示
 
 >首先，查看cuda的bin目录下是否有nvcc：
@@ -67,9 +69,11 @@ sudo apt-get -y install cuda
 然后更新配置文件：
 ```source ~/.bashrc```
 
-
 conda 安装cuda
-```conda install cudatoolkit=10.1 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/linux-64/```
+
+```
+conda install cudatoolkit=10.1 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/linux-64/
+```
 
 
 
