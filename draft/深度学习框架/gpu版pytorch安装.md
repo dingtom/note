@@ -128,8 +128,10 @@ conda安装cudnn
 
  关闭终端，然后再重启一个新的终端
 # 安装pytorch
-```conda create -n pytorch```
 
+```
+conda create -n pytorch
+```
 
 
 >3070环境安装
@@ -142,9 +144,9 @@ conda安装cudnn
 添加Anaconda的清华镜像
 
 ```shell
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 conda config --set show_channel_urls yes
 
 //删除清华源改回默认源
@@ -200,5 +202,7 @@ http://pypi.douban.com/simple/
 https://pypi.tuna.tsinghua.edu.cn/simple/
 中国科学技术大学 
 http://pypi.mirrors.ustc.edu.cn/simple/
+
+pip install -i https://pypi.douban.com/simple gensim
 ```
 

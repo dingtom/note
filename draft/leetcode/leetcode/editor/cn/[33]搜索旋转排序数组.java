@@ -45,7 +45,9 @@ class Solution {
         while (l <= r) {
             int mid = (l + r) / 2;
             if (nums[mid] == target) return mid;
-            if (nums[l] <= nums[mid]) {  // 左边是有序的
+            if (nums[l] <= nums[mid]) {
+                // 左边是有序的
+
                 // 等号解决 [3, 1] 这种情况
                 // target=nums[mid]之前已经判断过
                 // 在左边

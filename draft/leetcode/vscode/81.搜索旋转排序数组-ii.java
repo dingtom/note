@@ -60,7 +60,6 @@ public class Solution {
         int target1 = 3, target2 = 0;
         System.out.println(solution.search(nums1, target1));
         System.out.println(solution.search(nums2, target2));
-
     }
 }
 // @lc code=end

@@ -23,6 +23,9 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 // Definition for singly-linked list.
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 class ListNode {
     int val;
     ListNode next;
@@ -49,23 +52,51 @@ class ListNode {
 }
 
 class Solution {
-    public ListNode removeElements(ListNode head) {
-        if (head == null || head.next == null) return head;
-        ListNode newHead = removeElements(head.next);
-        head.next.next = head;
-        head.next = null;
-        return newHead;
+    int ptr;
+    p
+
+    public String decodeString(String s) {
+        LinkedList<String> stack = new LinkedList<>();
+        ptr = 0;
+        while (ptr < s.length()) {
+            char cur = s.charAt(ptr);
+            if (Character.isDigit(cur)) {
+                String digits = getDigits(s);
+                stack.addLast(digits);
+            } else if (Character.isLetter(cur) || cur == '[') {
+                stack.addLast(String.valueOf(s.charAt(ptr++)));
+            } else {
+                ++ptr;
+                LinkedList<String> sub = new LinkedList<>();
+                while (!"[".equals(stack.peekLast())) {
+                    sub.addLast(stack.removeLast());
+                }
+                Collection.reverse(sub);
+                stack.removeLast();
+                int time = Integer.parseInt(stack.removeLast());
+                StringBuffer sb = new StringBuffer();
+                String segment = getString(sub);
+                while (time-- > 0) {
+                    sb.append(segment);
+                }
+            }
+        }
+
     }
 
-    public static void main(String[] args) {
-        ListNode ln = new ListNode(1,
-                new ListNode(2,
-                        new ListNode(3,
-                                new ListNode(4,
-                                        new ListNode(5)))));
-        Solution s = new Solution();
-        System.out.println(s.removeElements(ln));
-
+    public String getDigits(String s) {
+        StringBuffer ret = new StringBuffer();
+        while (Character.isDigit(s.charAt(ptr))) {
+            ret.append(s.charAt(ptr++));
+        }
+        return ret.toString();
+    }
+    public String getString(LinkedList<String> ls) {
+        StringBuffer ret = new StringBuffer();
+        for (String s : ls) {
+            ret.append(s);
+        }
+        return ret.toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

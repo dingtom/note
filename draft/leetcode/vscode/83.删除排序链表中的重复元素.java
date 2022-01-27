@@ -31,11 +31,7 @@ public class Solution {
         ListNode cur = head;
 
         while (cur.next != null) {
-            if (cur.val == cur.next.val) {
-                cur.next = cur.next.next;
-            } else {
-                cur = cur.next;
-            }
+            (cur.val == cur.next.val ? cur.next = cur.next.next : cur = cur.next;
         }
         return head;
     }

@@ -63,9 +63,9 @@ pip install jupyter_contrib_nbextensions && jupyter contrib nbextension install 
 
 ```shell
 
-conda install  -n tensorflow ipykernel
+conda install  -n tomding ipykernel
 
-python -m ipykernel install --user --name tensorflow --display-name tensorflow
+python -m ipykernel install --user --name tomding --display-name tomding
 
 conda install -n pytorch ipykernel
 

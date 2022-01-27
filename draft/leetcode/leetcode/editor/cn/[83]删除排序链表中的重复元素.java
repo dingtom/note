@@ -43,8 +43,15 @@
  * }
  */
 class Solution {
+    // 每个元素只出现一次
     public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return head;
+        ListNode cur = head;
 
+        while (cur.next != null) {
+            (cur.val == cur.next.val ? cur.next = cur.next.next : cur = cur.next;
+        }
+        return head;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
