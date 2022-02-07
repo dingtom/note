@@ -441,6 +441,24 @@ methods和computed看起来都可以实现我们的功能，**计算属性会进
 ![image.png](https://pic.rmb.bdstatic.com/bjh/e34283bd8e91d2b21f07f37594ff5277.jpeg)
 
 
+
+```js
+计算属性传值
+
+{{计算属性名（xx）}}
+
+computed: {
+    计算属性名（）{
+        return val=> {
+            
+        }
+    }    
+}
+```
+
+
+
+
 # 组件
 
 ```css

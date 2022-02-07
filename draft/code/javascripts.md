@@ -126,7 +126,7 @@ console.log(Object.prototype.toString.call(new Person));//[object Object]
 
 # call 及 apply
 
-当一个object没有某个方法，但是其他的有，我们可以借助call或apply用其它对象的方法来操作。猫.吃鱼.call(狗，鱼)，狗就吃到鱼了
+**当一个object没有某个方法，但是其他的有，我们可以借助call或apply用其它对象的方法来操作**。猫.吃鱼.call(狗，鱼)，狗就吃到鱼了
 
 func1.call(this, arg1, arg2); 
 
@@ -137,6 +137,25 @@ func1.apply(this, [arg1, arg2]);
 var domNodes =  Array.prototype.slice.call(document.getElementsByTagName("*"));
 
 这样domNodes就可以应用Array下的所有方法了。
+
+![](https://www.runoob.com/wp-content/uploads/2018/08/1535346409-7922-20170316173631526-1279562612.png)
+
+```js
+obj.myFun.call(db,'成都','上海')；　　　　 // 德玛 年龄 99  来自 成都去往上海
+obj.myFun.apply(db,['成都','上海']);      // 德玛 年龄 99  来自 成都去往上海  
+obj.myFun.bind(db,'成都','上海')();       // 德玛 年龄 99  来自 成都去往上海
+obj.myFun.bind(db,['成都','上海'])();　　 // 德玛 年龄 99  来自 成都, 上海去往 undefined
+```
+
+call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：
+
+call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔，直接放到后面 **obj.myFun.call(db,'成都', ... ,'string' )**。
+
+apply 的所有参数都必须放在一个数组里面传进去 **obj.myFun.apply(db,['成都', ..., 'string' ])**。
+
+bind 除了返回是函数以外，它 的参数和 call 一样。
+
+
 
 # 三元运算符
 
