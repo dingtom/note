@@ -31,56 +31,66 @@
 		- [ 6、链接伪类选择器](#head31)
 	- [7、:focus 伪类选择器](#head32)
 		- [ 复合选择器总结](#head33)
-- [ css的显示模式](#head34)
-	- [ 什么是元素的显示模式](#head35)
-	- [ 块元素](#head36)
-	- [ 行内元素](#head37)
-	- [ 行内块元素](#head38)
-	- [ 元素显示模式总结](#head39)
-	- [ 元素显示模式的转换](#head40)
-		- [ 单行文字垂直居中的代码](#head41)
-- [ css的背景](#head42)
-	- [ 背景颜色](#head43)
-	- [ 背景图片](#head44)
-	- [ 背景平铺](#head45)
-	- [ 背景图片位置](#head46)
-	- [ 背景图片固定](#head47)
-	- [ 背景样式合写](#head48)
-	- [ 背景色半透明](#head49)
-- [ css三大特性](#head50)
-	- [ 层叠性](#head51)
-	- [ 继承性](#head52)
-	- [ 优先级](#head53)
-- [ 盒子模型](#head54)
-	- [ 网页布局的本质](#head55)
-	- [盒子模型（Box Model）组成](#head56)
-	- [ 边框（border）](#head57)
-	- [ 内边距（padding）](#head58)
-	- [ 外边距（margin）](#head59)
-- [ 其他样式	](#head60)
-	- [ 1、圆角边框](#head61)
-	- [ 2、盒子阴影](#head62)
-	- [ 3、文字阴影](#head63)
-- [ 浮动](#head64)
-	- [ 1、传统网页布局的三种方式](#head65)
-	- [ 2、标准流（普通流/文档流）](#head66)
-	- [ 3、为什么需要浮动？](#head67)
-	- [ 4、什么是浮动？](#head68)
-	- [ 5、浮动特性](#head69)
-	- [ 6、浮动元素经常和标准流父级搭配使用](#head70)
-- [ 清除浮动](#head71)
-	- [ 1、为什么需要清除浮动？](#head72)
-	- [ 2、清除浮动本质](#head73)
-	- [ 3、清除浮动样式](#head74)
-	- [ 4、清除浮动的多种方式](#head75)
-		- [ 4.1、额外标签法](#head76)
-		- [4.2、父级添加 overflow 属性](#head77)
-		- [ 4.3、父级添加after伪元素](#head78)
-		- [ 4.4、父级添加双伪元素](#head79)
-- [ flex](#head80)
-- [ position](#head81)
-- [ 居中](#head82)
-- [Media Query](#head83)
+	- [ 模糊选择](#head34)
+- [ css的显示模式](#head35)
+	- [ 什么是元素的显示模式](#head36)
+	- [ 块元素](#head37)
+	- [ 行内元素](#head38)
+	- [ 行内块元素](#head39)
+	- [ 元素显示模式总结](#head40)
+	- [ 元素显示模式的转换](#head41)
+		- [ 单行文字垂直居中的代码](#head42)
+- [ css的背景](#head43)
+	- [ 背景颜色](#head44)
+	- [ 背景图片](#head45)
+	- [ 背景平铺](#head46)
+	- [ 背景图片位置](#head47)
+	- [ 背景图片固定](#head48)
+	- [ 背景样式合写](#head49)
+	- [ 背景色半透明](#head50)
+- [ css三大特性](#head51)
+	- [ 层叠性](#head52)
+	- [ 继承性](#head53)
+	- [ 优先级](#head54)
+- [ 盒子模型](#head55)
+	- [ 网页布局的本质](#head56)
+	- [盒子模型（Box Model）组成](#head57)
+	- [ 边框（border）](#head58)
+	- [ 内边距（padding）](#head59)
+	- [ 外边距（margin）](#head60)
+- [ 其他样式	](#head61)
+	- [ 1、圆角边框](#head62)
+	- [ 2、盒子阴影](#head63)
+	- [ 3、文字阴影](#head64)
+- [ 浮动](#head65)
+	- [ 1、传统网页布局的三种方式](#head66)
+	- [ 2、标准流（普通流/文档流）](#head67)
+	- [ 3、为什么需要浮动？](#head68)
+	- [ 4、什么是浮动？](#head69)
+	- [ 5、浮动特性](#head70)
+	- [ 6、浮动元素经常和标准流父级搭配使用](#head71)
+- [ 清除浮动](#head72)
+	- [ 1、为什么需要清除浮动？](#head73)
+	- [ 2、清除浮动本质](#head74)
+	- [ 3、清除浮动样式](#head75)
+	- [ 4、清除浮动的多种方式](#head76)
+		- [ 4.1、额外标签法](#head77)
+		- [4.2、父级添加 overflow 属性](#head78)
+		- [ 4.3、父级添加after伪元素](#head79)
+		- [ 4.4、父级添加双伪元素](#head80)
+- [ flex](#head81)
+- [ position](#head82)
+- [ 居中](#head83)
+- [ 底部固定](#head84)
+- [Media Query](#head85)
+- [content ](#head86)
+- [ box-sizing](#head87)
+- [opacity ](#head88)
+- [ backface-visibility:hidden](#head89)
+- [transform ](#head90)
+- [ word-wrap](#head91)
+- [ word-break](#head92)
+- [ white-space](#head93)
 
 ​       CSS 是层叠样式表 ( Cascading Style Sheets ) 的简称.
 
@@ -351,6 +361,10 @@ Vscode  快速格式化代码:   shift+alt+f
 - 逗号可以理解为和的意思
 - 并集选择器通常用于集体声明
 
+
+
+
+
 ## <span id="head30"> 5、伪类选择器</span>
 
 ​		伪类选择器用于**向某些选择器添加特殊的效果**，比如给链接添加特殊效果，或选择第1个，第n个元素。
@@ -402,9 +416,24 @@ input: focus{
 
 ![](https://i.loli.net/2021/07/08/xUlBFwXmCKghfo8.png)
 
-# <span id="head34"> css的显示模式</span>
+## <span id="head34"> 模糊选择</span>
 
-## <span id="head35"> 什么是元素的显示模式</span>
+```html
+// class 属性值包含 "test" 的所有 div 元素
+div[class*="test"]
+.show-grid下的class属性值包含 "test" 
+.show-grid [class*="test"]
+// class属性值以 "test" 开头 
+div[class^="test"]
+// class属性值以 "test" 结尾
+div[class$="test"]
+```
+
+
+
+# <span id="head35"> css的显示模式</span>
+
+## <span id="head36"> 什么是元素的显示模式</span>
 
 **定义：**
 
@@ -414,7 +443,7 @@ input: focus{
 
 ​		网页的标签非常多，在不同地方会用到不同类型的标签，了解他们的特点可以更好的布局我们的网页。
 
-## <span id="head36"> 块元素</span>
+## <span id="head37"> 块元素</span>
 
 **常见的块元素**：
 
@@ -442,7 +471,7 @@ input: focus{
 
 
 
-## <span id="head37"> 行内元素</span>
+## <span id="head38"> 行内元素</span>
 
 **常见的行内元素：**
 
@@ -470,7 +499,7 @@ input: focus{
 
 
 
-## <span id="head38"> 行内块元素</span>
+## <span id="head39"> 行内块元素</span>
 
 **常见的行内块标签**：
 
@@ -487,13 +516,13 @@ input: focus{
 - 默认宽度就是它本身内容的宽度（行内元素特点）。
 - 高度，行高、外边距以及内边距都可以控制（块级元素特点）。
 
-## <span id="head39"> 元素显示模式总结</span>
+## <span id="head40"> 元素显示模式总结</span>
 
 ![1570870718415.png](https://i.loli.net/2021/07/12/YGDSukyfRTAKCWp.png)
 
 ​		学习元素显示模式的主要目的就是分清它们各自的特点，当我们网页布局的时候，在合适的地方用合适的标签元素。
 
-## <span id="head40"> 元素显示模式的转换</span>
+## <span id="head41"> 元素显示模式的转换</span>
 
 **简单理解**: 
 
@@ -506,7 +535,7 @@ input: focus{
 - 转换为行内元素：display:inline;
 - 转换为行内块：display: inline-block;
 
-### <span id="head41"> 单行文字垂直居中的代码</span>
+### <span id="head42"> 单行文字垂直居中的代码</span>
 
 **解决方案**:    
 
@@ -529,18 +558,18 @@ input: focus{
 
 ​		如果行高大于盒子高度,则文字偏下。
 
-# <span id="head42"> css的背景</span>
+# <span id="head43"> css的背景</span>
 
 通过 CSS 背景属性，可以给页面元素添加背景样式。
 背景属性可以设置背景颜色、背景图片、背景平铺、背景图片位置、背景图像固定等。
 
-## <span id="head43"> 背景颜色</span>
+## <span id="head44"> 背景颜色</span>
 
 ​		background-color: 颜色值
 
 ​		元素背景颜色默认值是 transparent（透明）
 
-## <span id="head44"> 背景图片</span>
+## <span id="head45"> 背景图片</span>
 
 ​		background-image: url(images/logo.png)
 
@@ -550,7 +579,7 @@ input: focus{
 
 
 
-## <span id="head45"> 背景平铺</span>
+## <span id="head46"> 背景平铺</span>
 
 ```
             /* 1.背景图片不平铺 */
@@ -563,7 +592,7 @@ input: focus{
             background-repeat: repeat-y;
 ```
 
-## <span id="head46"> 背景图片位置</span>
+## <span id="head47"> 背景图片位置</span>
 
 ```
 
@@ -571,12 +600,12 @@ input: focus{
 
 ​		如果指定的两个值是精确单位和方位名词混合使用，则第一个值是 x 坐标，第二个值是 y 坐标
 
-## <span id="head47"> 背景图片固定</span>
+## <span id="head48"> 背景图片固定</span>
 
 ​	background-attachment:scroll背景图像是随对象内容滚动
 ​	background-attachment:fixed背员图像固定
 
-## <span id="head48"> 背景样式合写</span>
+## <span id="head49"> 背景样式合写</span>
 
 ```
     /* background-image: url(images/bg.jpg);
@@ -589,7 +618,7 @@ input: focus{
 
 ```
 
-## <span id="head49"> 背景色半透明</span>
+## <span id="head50"> 背景色半透明</span>
 
 ```
             background: rgba(0, 0, 0, .3);
@@ -598,9 +627,9 @@ input: focus{
 - 最后一个参数是 alpha 透明度，取值范围在 0~1之间
 - 我们习惯把 0.3 的 0 省略掉，写为 background: rgba(0, 0, 0, .3);
 
-# <span id="head50"> css三大特性</span>
+# <span id="head51"> css三大特性</span>
 
-## <span id="head51"> 层叠性</span>
+## <span id="head52"> 层叠性</span>
 
 ​		相同选择器给设置相同的样式，此时一个样式就会覆盖（层叠）另一个冲突的样式。层叠性主要解决样式冲突的问题
 
@@ -621,7 +650,7 @@ input: focus{
 
 
 
-## <span id="head52"> 继承性</span>
+## <span id="head53"> 继承性</span>
 
 ​		CSS中的继承: 子标签会继承父标签的某些样式，如文本颜色和字号。恰当地使用继承可以简化代码，降低 CSS 样式的复杂性。
 
@@ -661,7 +690,7 @@ input: focus{
 - 此时子元素的行高是：当前子元素的文字大小 * 1.5
 - body 行高 1.5  这样写法最大的优势就是里面子元素可以根据自己文字大小自动调整行高
 
-## <span id="head53"> 优先级</span>
+## <span id="head54"> 优先级</span>
 
 当同一个元素指定多个选择器，就会有优先级的产生。
 
@@ -745,9 +774,9 @@ input: focus{
 
 
 
-# <span id="head54"> 盒子模型</span>
+# <span id="head55"> 盒子模型</span>
 
-## <span id="head55"> 网页布局的本质</span>
+## <span id="head56"> 网页布局的本质</span>
 
 网页布局的核心本质： 就是利用 CSS 摆盒子。
 
@@ -759,7 +788,7 @@ input: focus{
 2. 利用 CSS 设置好盒子样式，然后摆放到相应位置。
 3. 往盒子里面装内容
 
-## <span id="head56">盒子模型（Box Model）组成</span>
+## <span id="head57">盒子模型（Box Model）组成</span>
 
 ​		盒子模型：把 HTML 页面中的布局元素看作是一个矩形的盒子，也就是一个盛装内容的容器。
 
@@ -767,7 +796,7 @@ input: focus{
 
 ![1571492536942.png](https://i.loli.net/2021/07/12/zpE6AfXL9OqdlMB.png)
 
-## <span id="head57"> 边框（border）</span>
+## <span id="head58"> 边框（border）</span>
 
 **边框的使用**
 
@@ -810,7 +839,7 @@ border-collapse 属性控制浏览器绘制表格边框的方式。它控制相�
 - 测量盒子大小的时候,不量边框。
 - 如果测量的时候包含了边框,则需要 width/height 减去边框宽度
 
-## <span id="head58"> 内边距（padding）</span>
+## <span id="head59"> 内边距（padding）</span>
 
 **内边距的使用方式**
 
@@ -834,7 +863,7 @@ padding-bottom下内边距
 - 如何盒子本身没有指定width/height属性, 则此时padding不会撑开盒子大小。
 - 保证盒子跟效果图大小保持一致，则让 width/height 减去多出来的内边距大小即可。
 
-## <span id="head59"> 外边距（margin）</span>
+## <span id="head60"> 外边距（margin）</span>
 
 **外边距的使用方式**
 
@@ -902,9 +931,9 @@ margin: 0 auto;
 
 ​		注意：行内元素为了照顾兼容性，尽量只设置左右内外边距，不要设置上下内外边距。但是转换为块级和行内块元素就可以了
 
-# <span id="head60"> 其他样式	</span>
+# <span id="head61"> 其他样式	</span>
 
-## <span id="head61"> 1、圆角边框</span>
+## <span id="head62"> 1、圆角边框</span>
 
 ```
 width: 200px;
@@ -928,7 +957,7 @@ border-top-left-radius: 20px;
 - 该属性是一个简写属性，可以跟四个值，分别代表左上角、右上角、右下角、左下角
 - 分开写：border-top-left-radius、border-top-right-radius、border-bottom-right-radius 和border-bottom-left-radius
 
-## <span id="head62"> 2、盒子阴影</span>
+## <span id="head63"> 2、盒子阴影</span>
 
 
 
@@ -941,7 +970,7 @@ box-shadow: h-shadow v-shadow blur spread color inset;
 
 ![1571541874805.png](https://i.loli.net/2021/07/13/8iOLaDFPtj4S1zh.png)
 
-## <span id="head63"> 3、文字阴影</span>
+## <span id="head64"> 3、文字阴影</span>
 
 在 CSS3 中，我们可以使用 text-shadow 属性将阴影应用于文本。
 语法：
@@ -954,9 +983,9 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 
 
-# <span id="head64"> 浮动</span>
+# <span id="head65"> 浮动</span>
 
-## <span id="head65"> 1、传统网页布局的三种方式</span>
+## <span id="head66"> 1、传统网页布局的三种方式</span>
 
 ​	CSS 提供了三种传统布局方式(简单说,就是盒子如何进行排列顺序)：
 
@@ -966,7 +995,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 注意：实际开发中，一个页面基本都包含了这三种布局方式（后面移动端学习新的布局方式） 。
 
-## <span id="head66"> 2、标准流（普通流/文档流）</span>
+## <span id="head67"> 2、标准流（普通流/文档流）</span>
 
 所谓的标准流:  就是标签按照规定好默认方式排列
 
@@ -975,7 +1004,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 以上都是标准流布局，我们前面学习的就是标准流，标准流是最基本的布局方式。
 
-## <span id="head67"> 3、为什么需要浮动？</span>
+## <span id="head68"> 3、为什么需要浮动？</span>
 
 ​		总结： 有很多的布局效果，标准流没有办法完成，此时就可以利用浮动完成布局。 因为浮动可以改变元素标签默认的排列方式.
 
@@ -983,7 +1012,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 
 ​		网页布局第一准则：**多个块级元素纵向排列找标准流，多个块级元素横向排列找浮动**。
 
-## <span id="head68"> 4、什么是浮动？</span>
+## <span id="head69"> 4、什么是浮动？</span>
 
 ​		float 属性用于创建浮动框，将其移动到一边，直到左边缘或右边缘触及包含块或另一个浮动框的边缘。
 
@@ -993,7 +1022,7 @@ text-shadow: 5px 5px 6px rgba(0, 0, 0, .3);
 float: none/left/right(默认元素不浮动，元素向左浮动，元素向右浮动)
 ```
 
-## <span id="head69"> 5、浮动特性</span>
+## <span id="head70"> 5、浮动特性</span>
 
 加了浮动之后的元素,会具有很多特性,需要我们掌握的.
 
@@ -1012,7 +1041,7 @@ float: none/left/right(默认元素不浮动，元素向左浮动，元素向右
 ​	如果块级盒子没有设置宽度，默认宽度和父级一样宽，但是添加浮动后，它的大小根据内容来決定
 ​	浮动的盒子中间是没有缝隙的，是紧挨着一起的
 
-## <span id="head70"> 6、浮动元素经常和标准流父级搭配使用</span>
+## <span id="head71"> 6、浮动元素经常和标准流父级搭配使用</span>
 
 为了约束浮动元素位置, 我们网页布局一般采取的策略是:
 
@@ -1028,15 +1057,15 @@ float: none/left/right(默认元素不浮动，元素向左浮动，元素向右
 
 **浮动的盒子只会影响浮动盒子后面的标准流**,不会影响前面的标准流.
 
-# <span id="head71"> 清除浮动</span>
+# <span id="head72"> 清除浮动</span>
 
-## <span id="head72"> 1、为什么需要清除浮动？</span>
+## <span id="head73"> 1、为什么需要清除浮动？</span>
 
 ​		由于父级盒子很多情况下，不方便给高度，但是子盒子浮动又不占有位置，最后父级盒子高度为 0 时，就会影响下面的标准流盒子。
 
 ![1571555883628.png](https://i.loli.net/2021/07/18/S3qrI2TE9oLtZJu.png)
 
-## <span id="head73"> 2、清除浮动本质</span>
+## <span id="head74"> 2、清除浮动本质</span>
 
 清除浮动的本质是清除浮动元素造成的影响：浮动的子标签无法撑开父盒子的高度
 
@@ -1046,7 +1075,7 @@ float: none/left/right(默认元素不浮动，元素向左浮动，元素向右
 - 清除浮动之后，父级就会根据浮动的子盒子自动检测高度。
 - 父级有了高度，就不会影响下面的标准流了
 
-## <span id="head74"> 3、清除浮动样式</span>
+## <span id="head75"> 3、清除浮动样式</span>
 
 ```css
 clear:属性值;
@@ -1060,9 +1089,9 @@ both同时清除左右两侧浮动的影响
 
 
 
-## <span id="head75"> 4、清除浮动的多种方式</span>
+## <span id="head76"> 4、清除浮动的多种方式</span>
 
-### <span id="head76"> 4.1、额外标签法</span>
+### <span id="head77"> 4.1、额外标签法</span>
 
 额外标签法也称为隔墙法，是 W3C 推荐的做法。
 
@@ -1080,7 +1109,7 @@ both同时清除左右两侧浮动的影响
 
 ​		注意： 要求**这个新的空标签必须是块级元素。**
 
-### <span id="head77">4.2、父级添加 overflow 属性</span>
+### <span id="head78">4.2、父级添加 overflow 属性</span>
 
 可以给父级添加 overflow 属性，将其属性值设置为 hidden、 auto 或 scroll 。
 
@@ -1094,7 +1123,7 @@ overflow:hidden | auto | scroll;
 
 注意：是给父元素添加代码
 
-### <span id="head78"> 4.3、父级添加after伪元素</span>
+### <span id="head79"> 4.3、父级添加after伪元素</span>
 
 :after 方式是额外标签法的升级版。给父元素添加：
 
@@ -1117,7 +1146,7 @@ overflow:hidden | auto | scroll;
 
 代表网站： 百度、淘宝网、网易等
 
-### <span id="head79"> 4.4、父级添加双伪元素</span>
+### <span id="head80"> 4.4、父级添加双伪元素</span>
 
 给父元素添加
 
@@ -1140,13 +1169,13 @@ overflow:hidden | auto | scroll;
 
 代表网站：小米、腾讯等
 
-# <span id="head80"> flex</span>
+# <span id="head81"> flex</span>
 
 
 
 
 
-# <span id="head81"> position</span>
+# <span id="head82"> position</span>
 
 1.     Absolute：绝对定位，是相对于最近的且不是static定位的父元素来定位
 
@@ -1231,7 +1260,7 @@ Absolution：元素会脱离文档流，定位是相对于离它最近的且不�
 
 Relative：元素仍处于文档流中，定位是相对于原本自身的位置，若没有设置宽度，则宽度为父元素的宽度，该元素的大小会影响父元素的大小。
 
-# <span id="head82"> 居中</span>
+# <span id="head83"> 居中</span>
 
 文字居中
 
@@ -1239,7 +1268,7 @@ Relative：元素仍处于文档流中，定位是相对于原本自身的位置
 display: flex;
 align-items: center;
 text-align: center;
-vertical-align: middle;这个适用于行内元素的垂直居中，块元素不可以。
+vertical-align: middle;这个适用于行内元素的垂直居中，块元素不可以。不起作用设置‘行高’
 -----------
 hieght: 100px;  //子元素为单行文本
 lin-height: 100px
@@ -1257,6 +1286,42 @@ align-items: center;/*垂直居中*/
 
 
 
+# <span id="head84"> 底部固定</span>
+
+```html
+<template>
+  <div class="content">
+    <div class="main"></div>
+    <div class="footer"></div>
+  </div>
+</template>
+
+<style scoped>
+  .content {
+    /*相对定位*/
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #F4F5F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main {
+    width: 100%;
+    height: calc(100vh - 42px);
+  }
+
+  .footer {
+    /*绝对定位*/
+    position: absolute;
+    width: 100%;
+    height: 42px;
+    bottom: 0;
+    background-color: cornflowerblue;
+  }
+</style>
+```
 
 
 
@@ -1267,7 +1332,8 @@ align-items: center;/*垂直居中*/
 
 
 
-# <span id="head83">Media Query</span>
+
+# <span id="head85">Media Query</span>
 
 使用 @media 查询，你可以针对不同的媒体类型定义不同的样式。
 
@@ -1276,3 +1342,76 @@ align-items: center;/*垂直居中*/
 @media screen and ( max-width: 980px 
 ```
 
+
+
+# <span id="head86">content </span>
+
+```html
+// 每个链接后的括号内加上网址（href 属性）：
+a:after {
+  content: " (" attr(href) ")";
+}
+<p><a href="https://www.runoob.com">菜鸟教程</a> - 免费的编程学习网站。</p>
+
+// 加上字符
+content; '\e63a'
+font-family: "iconfont"!important
+```
+
+# <span id="head87"> box-sizing</span>
+
+ 元素的总高度和宽度包含内边距和边框(padding 与 border) :
+
+```html
+box-sizing: content-box (默认)高度和宽度只应用于元素的内容
+box-sizing: border-box:高度和宽度应用于元素的所有部分: 内容、内边距和边框
+
+```
+
+# <span id="head88">opacity </span>
+
+设置一个div元素的透明度级别
+
+
+
+
+# <span id="head89"> backface-visibility:hidden</span>
+
+隐藏旋转 div 元素的背面
+
+# <span id="head90">transform </span>
+
+旋转 div 元素
+
+```html
+matrix(n,n,n,n,n,n)	定义 2D 转换，使用六个值的矩阵。
+```
+
+# <span id="head91"> word-wrap</span>
+
+允许长的内容可以自动换行
+
+| normal     | 只在允许的断字点换行（浏览器保持默认处理）。 |
+| ---------- | -------------------------------------------- |
+| break-word | 在长单词或 URL 地址内部进行换行。            |
+
+# <span id="head92"> word-break</span>
+
+断行规则。
+
+| normal    | 使用浏览器默认的换行规则。     |
+| --------- | ------------------------------ |
+| break-all | 允许在单词内换行。             |
+| keep-all  | 只能在半角空格或连字符处换行。 |
+
+# <span id="head93"> white-space</span>
+
+元素内的空白怎样处理。
+
+| normal   | 默认。空白会被浏览器忽略。                                   |
+| -------- | ------------------------------------------------------------ |
+| pre      | 空白会被浏览器保留。其行为方式类似 HTML 中的 <pre> 标签。    |
+| nowrap   | 文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 |
+| pre-wrap | 保留空白符序列，但是正常地进行换行。                         |
+| pre-line | 合并空白符序列，但是保留换行符。                             |
+| inherit  | 规定应该从父元素继承 white-space 属性的值。                  |

@@ -4,25 +4,25 @@
 - [ 数据类型转换](#head4)
 - [ 前置\后置递增运算符](#head5)
 - [ ==\===](#head6)
-- [ 三元运算符](#head7)
-- [ 三元运算符](#head8)
-- [ js的作用域](#head9)
+- [ 判断类型](#head7)
+- [call 及 apply](#head8)
+- [ 三元运算符](#head9)
 - [ js的作用域](#head10)
 	- [ let/var](#head11)
 	- [ const](#head12)
 - [ Date](#head13)
 - [ 数组](#head14)
-- [ 字符](#head15)
-	- [ 最大、小值](#head16)
-- [ switch](#head17)
-	- [ 最大\小值](#head18)
-- [ switch](#head19)
-- [ 箭头函数](#head20)
-- [ 对象增强写法](#head21)
-- [ 高阶函数](#head22)
-- [ AJAX](#head23)
-- [ 正则](#head24)
-- [ 深拷贝](#head25)
+	- [ 最大、小值](#head15)
+- [ 字符](#head16)
+- [ 最大\小值](#head17)
+- [ switch](#head18)
+- [ 箭头函数](#head19)
+- [ 对象增强写法](#head20)
+- [ 高阶函数](#head21)
+- [ AJAX](#head22)
+- [ 正则](#head23)
+- [ lodash](#head24)
+- [clearInterval()、setInterval() ](#head25)
 # <span id="head1"> 输出</span>
 
 **这是一个输入框**
@@ -113,7 +113,76 @@ console.log(18 === 18);
 console.log(18 === '18'); // false 
 ```
 
-# <span id="head7"> 三元运算符</span>
+# <span id="head7"> 判断类型</span>
+
+（1）数字 typeof(x) = "number"
+
+（2）字符串 typeof(x) = "string"
+
+（3）布尔值 typeof(x) = "boolean" 
+
+**（4）对象,数组和null   typeof(x) = "object" （不可以判断数组和对象）**
+
+（5）函数 typeof(x) = "function" 
+
+
+
+Object.prototype.toString.call(obj)。用Object原型上的toString方法作用在传入的obj的上下文中（通过call将this指向obj）
+
+它返回[object constructorName]的字符串格式，这里的constructorName就是call参数的函数名，内置类型分为null、string、boolean、number、undefined、array、function、object、date、math
+
+利用对象的toString可以准确判断是什么类型，call()改变this指向，这里是借用Object的方法，然后有人可能会问为什么不直接用arr.toString而要借用Object的方法，
+
+因为toString为Object原型上的方法，而Array、Function都是Object的实例，实例重新改写了原型上的toString方法，不同的对象调用toString方法，调用的是改写之后的方法(转成各种类型的字符串），而不会调用Object原型上的toString()方法，因此直接调用不能判断对象类型。
+
+```js
+console.log(Object.prototype.toString.call("jerry"));//[object String]
+console.log(Object.prototype.toString.call(12));//[object Number]
+console.log(Object.prototype.toString.call(true));//[object Boolean]
+console.log(Object.prototype.toString.call(undefined));//[object Undefined]
+console.log(Object.prototype.toString.call(null));//[object Null]
+console.log(Object.prototype.toString.call({name: "jerry"}));//[object Object]
+console.log(Object.prototype.toString.call(function(){}));//[object Function]
+console.log(Object.prototype.toString.call([]));//[object Array]
+console.log(Object.prototype.toString.call(new Date));//[object Date]
+console.log(Object.prototype.toString.call(/\d/));//[object RegExp]
+console.log(Object.prototype.toString.call(new Person));//[object Object]
+```
+
+# <span id="head8">call 及 apply</span>
+
+**当一个object没有某个方法，但是其他的有，我们可以借助call或apply用其它对象的方法来操作**。猫.吃鱼.call(狗，鱼)，狗就吃到鱼了
+
+func1.call(this, arg1, arg2); 
+
+func1.apply(this, [arg1, arg2]); 
+
+用的比较多的，通过document.getElementsByTagName选择的dom 节点是一种类似array的array。它不能应用Array下的push,pop等方法。我们可以通过：
+
+var domNodes =  Array.prototype.slice.call(document.getElementsByTagName("*"));
+
+这样domNodes就可以应用Array下的所有方法了。
+
+![](https://www.runoob.com/wp-content/uploads/2018/08/1535346409-7922-20170316173631526-1279562612.png)
+
+```js
+obj.myFun.call(db,'成都','上海')；　　　　 // 德玛 年龄 99  来自 成都去往上海
+obj.myFun.apply(db,['成都','上海']);      // 德玛 年龄 99  来自 成都去往上海  
+obj.myFun.bind(db,'成都','上海')();       // 德玛 年龄 99  来自 成都去往上海
+obj.myFun.bind(db,['成都','上海'])();　　 // 德玛 年龄 99  来自 成都, 上海去往 undefined
+```
+
+call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：
+
+call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔，直接放到后面 **obj.myFun.call(db,'成都', ... ,'string' )**。
+
+apply 的所有参数都必须放在一个数组里面传进去 **obj.myFun.apply(db,['成都', ..., 'string' ])**。
+
+bind 除了返回是函数以外，它 的参数和 call 一样。
+
+
+
+# <span id="head9"> 三元运算符</span>
 
 ```js
  有三元运算符组成的式子我们称为三元表达式
@@ -121,18 +190,9 @@ console.log(18 === '18'); // false
  var result = num > 5 ? '是的' : '不是的'; // 我们知道表达式是有返回值的       
 ```
 
-# <span id="head8"> 三元运算符</span>
 
-```js
- 有三元运算符组成的式子我们称为三元表达式
- var num = 10;
- var result = num > 5 ? '是的' : '不是的'; // 我们知道表达式是有返回值的       
-```
 
-# <span id="head9"> js的作用域</span>
 
-（es6）之前 ： 全局作用域   局部作用域 
-全局作用域： 整个script标签 或者是一个单独的js文件
 
 
 # <span id="head10"> js的作用域</span>
@@ -281,13 +341,18 @@ console.log(arr.lastIndexOf('blue'));
 arr.includes(a)
 ```
 
-
-
-# <span id="head15"> 字符</span>
-
-空格：`\xa0`
+## <span id="head15"> 最大、小值</span>
 
 ```js
+Math.max(...[1,'2'])
+[1,'2','4',3].sort((a,b) => { return b-a })[0]  //b-a从大到小
+```
+
+# <span id="head16"> 字符</span>
+
+```js
+空格：\xa0
+原格式： `${this.name}-${this.age}`
 // 数组转换为字符串 
 var arr = [1, 2, 3];
 console.log(arr.toString()); // 1,2,3
@@ -310,34 +375,18 @@ console.log(str1.substr(2, 2)); // 从第几个开始,取几个
 // 替换字符 
 var str = 'andyandy';
 console.log(str.replace('a', 'b'));
-// 字符转换为数组   前面我们学过 join 把数组转换为字符串
-item.replace(RegExp('-', 'g'), '/'))
+
+item.replace(RegExp('-', 'g'), '/'))  // g 替换所有，默认替换与i个
+.replace(/<\/?[^>]*>/g, "")  // 替换html标签
+.replace(/\s*/g, "");  // 替换非空字符
+
 //正则全匹配
 var str2 = 'red, pink, blue';
 console.log(str2.split(','));
 ```
-## <span id="head16"> 最大、小值</span>
 
-```js
-Math.max(...[1,'2'])
-[1,'2','4',3].sort((a,b) => { return b-a })[0]  //b-a从大到小
-```
 
-# <span id="head17"> switch</span>
 
-```js
-switch (true) {
-    case max < 4 :
-        this.handoverActiveIndex = 0;
-        break;
-    case max < 7:
-        this.handoverActiveIndex = 1;
-        break;
-    default:
-        this.handoverActiveIndex = 2;
-        break;
-}
-```
 
 
 
@@ -409,7 +458,7 @@ arrayObject.splice(index,howmany,item1,.....,itemX)
 
 
 
-## <span id="head18"> 最大\小值</span>
+# <span id="head17"> 最大\小值</span>
 
 ```js
 Math.max(...[1,'2'])
@@ -420,7 +469,7 @@ Math.max(...[1,'2'])
 
 
 
-# <span id="head19"> switch</span>
+# <span id="head18"> switch</span>
 
 ```js
 switch (true) {
@@ -436,7 +485,7 @@ switch (true) {
 }
 ```
 
-# <span id="head20"> 箭头函数</span>
+# <span id="head19"> 箭头函数</span>
 
 ```js
 (param1, param2, …, paramN) => { statements }
@@ -453,7 +502,7 @@ singleParam => { statements }
 
 
 
-# <span id="head21"> 对象增强写法</span>
+# <span id="head20"> 对象增强写法</span>
 
 ```css
 for (let i in this.books){
@@ -465,7 +514,7 @@ for (let item of this.book){
 }
 ```
 
-# <span id="head22"> 高阶函数</span>
+# <span id="head21"> 高阶函数</span>
 
 ```css
 // 1.filter函数的使用
@@ -487,15 +536,23 @@ console.log(total);
 
     
 当前项，索引，原始数组
-.map(item=>{});    有返回值，不改变
+.map((item, index, input)=>{});    有返回值，不改变
 .forEach((item, index, input)=>())  没有return，改变原数组   
-    
-    
+一般无法跳出循环可用every，some
+
+every()是对数组中每一项运行给定函数，如果该函数对每一项返回true,则返回true。
+some()是对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true。
+let arr1=[1,1,1,1,1]
+let arr2=[1,2,3,4,5]
+console.log(arr1.some(item => item == 1))
+console.log(arr2.some(item =>item == 1))
+console.log(arr1.every(item => item == 1))
+console.log(arr2.every(item =>item == 1))    
 ```
 
 
 
-# <span id="head23"> AJAX</span>
+# <span id="head22"> AJAX</span>
 
 ```js
 AJAX是在不重新加载整个页面的情况下与服务器交换数据并更新部分网页内容
@@ -523,18 +580,141 @@ status
 
 
 
-# <span id="head24"> 正则</span>
+# <span id="head23"> 正则</span>
 
 ```js
 // 邮箱
 let reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+[-.])+[a-zA-Z]{2,5}$/
+
+i - 修饰符是用来执行不区分大小写的匹配。
+g - 修饰符是用于执行全文的搜索（而不是在找到第一个就停止查找,而是找到所有的匹配）。
+
+content='sdsadas456sdas78asdas9879asdasda4s5'
+检索字符串中指定的值，并返回值（找不到返回null）
+/(\d){4}/gi.exec(content)   
+ 检索字符串中指定值，返回true或false
+/(\d){4}/gi.test(content)  
+
+找html中文件id
+const reg = RegExp('file/([\\d]*)', 'g')
+while (reg.exec(content)) {
+    if (thie.recorder.indexOf(RegExp.$1) === -1) this.recorder.push(RegExp.$1)
+}
+
+返回所要找的元素在字符串中的位置
+"abcdhuisd".search(/dhu/)
+replace 正则替换
+"abcd4564hui454s0ss4894d7937asda".replace(/(\d){4}/gi,"四个数字");
+split 分割成数组：
+"abcd4564hui454s0ss4894d7937asda".split(/(\d){4}/gi);
 ```
 
 
 
-# <span id="head25"> 深拷贝</span>
+# <span id="head24"> lodash</span>
 
+```js
+深拷贝
+import _ from lodash
+_.cloneDeep
+
+find()返回集合中满足查找条件的第一个元素
+let ary1 = [11, 12, 13, 14];
+_.find(ary1, item => item % 2 == 0);
+
+findIndex()返回集合中满足查找条件的第一个元素的下标。
+let ary1 = [11, 12, 13, 14];
+_.findIndex(ary1, item => item % 2 == 0);
+
+shuffle()用于打乱一个集合中所有元素的位置并返回一个新的集合。
+let ary = [11, 12, 13, 14, 15, 16];
+_.shuffle(ary);
+
+orderBy()按照指定规则对集合进行排序并返回一个新的集合。
+let ary = [
+    { x: 2, y: 3 },
+    { x: 1, y: 1 },
+    { x: 2, y: 2 }
+];
+_.orderBy(ary, ['x', 'y'], ['asc', 'desc']);
+
+uniq()对数组进行去重操作并返回一个新数组。
+let ary = [11, 11, '12', 12, 12, 13];
+_.uniq(ary);
+
+uniqBy（）根据指定规则去迭代数组中的每一个元素和属性来实现去重并返回一个新数组。
+let ary2 = [
+    { x: 2, y: 3 },
+    { x: 1, y: 1 },
+    { x: 2, y: 2 }
+];
+_.uniqBy(ary2, 'x');
+
+
+uniqWith()根据指定规则将数组中的每一个元素进行比较来实现去重并返回一个新数组。
+let ary = [
+    { x: 2, y: 3 },
+    { x: 1, y: 1 },
+    { x: 2, y: 3 }
+];
+_.uniqWith(ary, _.isEqual);
+
+
+remove()将满足条件的元素从原数组中删除，被
+删除元素组成新数组返回。
+let ary = [11, 12, 13, 14];
+let evens = _.remove(ary, item => item % 2 == 0);
+
+
+求多个数组的并集
+_.union([2], [1, 2], [3,4]); //[2, 1, 3, 4]
+
+
+求多个数组的交集
+_.intersection([2], [1, 2], [2, 3, 4]); // [2]
+
+
+_.chunk()将一个数组拆分成多个小数组，返回一个新的二维数组。
+let ary = [10, 11, 12, 13, 14, 15, 16];
+_.chunk(ary, 2);
+
+
+merge 合并两个对象
+   var obj1 = {
+     a: [{age: 2},{name:'张三'}]
+   }
+   var obj2 = {
+     a: [{height:175},{weight:120}]
+   }
+
+   var newObj = _.merge(obj1, obj2);
+
+
+random获取某个区间的随机数
+ var newObj = _.random(10, 20);
+
+sample获取数组中某个元素
+var arr = ['第一个', '第二个']
+var str = _.sample(arr);
 ```
-import lodash form lodash
-lodash.cloneDeep
+
+
+
+# <span id="head25">clearInterval()、setInterval() </span>
+
+定时执行操作
+
+```js
+var myVar = setInterval(function(){ myTimer() }, 1000);
+ 
+function myTimer() {
+    var d = new Date();
+    var t = d.toLocaleTimeString();
+    document.getElementById("demo").innerHTML = t;
+}
+ 
+function myStopFunction() {
+    clearInterval(myVar);
+}
 ```
+
