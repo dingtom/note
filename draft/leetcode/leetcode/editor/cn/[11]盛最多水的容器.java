@@ -32,7 +32,16 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxArea(int[] height) {
-
+        /**
+         * 双指针，谁小移动谁，相等移动谁都行
+         * 时间复杂度:O(n)
+         * 空间复杂度:O(1)
+         */
+        int i = 0, j = height.length - 1, result = 0;
+        while(i < j) {
+            result = height[i] > height[j] ? Math.max(result, (j - i) * height[j--]) : Math.max(result, (j - i) * height[i++]);
+        }
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
