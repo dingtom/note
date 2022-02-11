@@ -1322,3 +1322,32 @@ matrix(n,n,n,n,n,n)	定义 2D 转换，使用六个值的矩阵。
 | pre-wrap | 保留空白符序列，但是正常地进行换行。                         |
 | pre-line | 合并空白符序列，但是保留换行符。                             |
 | inherit  | 规定应该从父元素继承 white-space 属性的值。                  |
+
+
+
+
+
+```caa
+文字太多时省略,,,
+word-break: keepp-all;
+white-spave: nowrap;
+overflow: hidden;
+text-overflow: ellipse;
+
+
+图片悬浮放大
+img {
+	transition: all 0.5s;
+}
+img:hover {
+	transform: scale(1.50);
+}
+
+图片设置为正方形
+img {
+width: 10ps;
+height: 10px;
+object-fit: cover;
+}
+```
+
