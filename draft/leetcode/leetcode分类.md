@@ -100,15 +100,13 @@
 
 
   - [链表基础知识](https://github.com/itcharge/LeetCode-Py/blob/main/Contents/02.Linked-List/01.Linked-List-Basic/01.Linked-List-Basic.md)
-- 第 01 天课程题目列表：
   - [0707. 设计链表](https://leetcode-cn.com/problems/design-linked-list/)
   - [0206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
   - [0203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)
-- 第 02 天课程题目列表：
   - [0328. 奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)
   - [0234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
   - [0138. 复制带随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)
-- [更多链表基础题目](https://github.com/itcharge/LeetCode-Py/blob/main/Contents/02.Linked-List/01.Linked-List-Basic/10.Linked-List-Basic-List.md)
+  - [更多链表基础题目](https://github.com/itcharge/LeetCode-Py/blob/main/Contents/02.Linked-List/01.Linked-List-Basic/10.Linked-List-Basic-List.md)
 
 #### 01-02 链表排序（1 天）
 
