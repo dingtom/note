@@ -3,14 +3,28 @@ python toc.py
 	    ::echo off将echo状态设置为off表示关闭其他所有命令(不包括本身这条命令)的回显%
                     ::@的作用就是关闭紧跟其后的一条命令的回显%
                     ::C:\Users\liang\Desktop> 就是echo off 命令的回显%
-git status
-git pull
-git add .
-git commit -m %date:~0,8%_%time:~1,1%:%time:~3,2%:%time:~6,2%
-::%date:~0,8%
-                  ::%time:~0,8%
-git push
+title GIT一键提交
+color 3
+echo 当前目录是：%cd%
+echo;
+ 
+echo 本地主分支拉取远程主分支：git pull origin master
+git pull origin master
+echo;
 
+echo 开始添加变更：git add .
+git add .
+echo;
+ 
+set /p declation=输入提交的commit信息:
+git commit -m "%declation%"
+echo;
+ 
+echo 将变更情况提交到远程自己分支：git push origin main
+git push
+echo;
+				
+echo 2分钟后关机
 shutdown -s -t 120
 
 
