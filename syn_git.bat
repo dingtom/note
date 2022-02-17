@@ -11,6 +11,6 @@ git commit -m %date:~0,8%_%time:~1,1%:%time:~3,2%:%time:~6,2%
                   ::%time:~0,8%
 git push
 
-shutdown -s -t 600
+shutdown -s -t 120
 
 
