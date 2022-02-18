@@ -60,8 +60,37 @@ public class Solution {
 //            }
 //            pos = pos.next;
 //        }
+
+        /**
+         * 头节点到入环节点长度为a; 入环节点到快慢指针相遇节点长度为b; 相遇节点到入环节点长度为c
+         * 快指针走的长度是慢指针的两倍 a+n(b+c)+b = 2(a+b) ->   (n-1)(b+c) + c = a
+         * 相遇点到入环点的距离加上 n−1 圈的环长，恰好等于从链表头部到入环点的距离。
+         * 因此，当发现 slow 与fast 相遇时，我们再额外使用一个指针 ptr。起始，它指向链表头部；
+         * 随后，它和 slow 每次向后移动一个位置。最终，它们会在入环点相遇。
+         * 时间复杂度：O(N)，其中 N 为链表中节点的数目。在最初判断快慢指针是否相遇时，slow 指针
+         * 走过的距离不会超过链表的总长度；随后寻找入环点时，走过的距离也不会超过链表的总长度。
+         * 因此，总的执行时间为 O(N)+O(N)=O(N)。
+         * 空间复杂度：O(1)。我们只使用了slow,fast,ptr 三个指针。
+         */
         if (head == null) {
-            return null
+            return null;
+        }
+        ListNode fast = head, slow = head;
+        while (fast != null) {
+            slow = slow.next;
+            if (fast.next != null) {
+                fast = fast.next.next;
+            } else {
+                return null;
+            }
+            if (fast == slow) {
+                ListNode ptr = head;
+                while (ptr != slow) {
+                    ptr = ptr.next;
+                    slow = slow.next;
+                }
+                return ptr;
+            }
         }
         return null;
         
