@@ -35,7 +35,32 @@
  */
 class Solution {
     public ListNode insertionSortList(ListNode head) {
-
+        /**
+         * 对于单向链表而言，只有指向后一个节点的指针，因此需要从链表的头节点开始往后遍历链表中的节点，寻找插入位置。
+         * 时间复杂度：O(n^2)，其中 n 是链表的长度。
+         * 空间复杂度：O(1)。
+         */
+        if (head == null) {
+            return head;
+        }
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+        ListNode lastSorted = head, cur = head.next;
+        while (cur != null) {
+            if (lastSorted.val <= cur.val) {
+                lastSorted = lastSorted.next;
+            } else {
+                ListNode pre = dummyHead;
+                while (pre.next.val <= cur.val) {
+                    pre = pre.next;
+                }
+                lastSorted.next = cur.next;
+                cur.next = pre.next;
+                pre.next = cur;
+            }
+            cur = lastSorted.next;
+        }
+        return dummyHead.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

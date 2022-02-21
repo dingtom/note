@@ -36,6 +36,14 @@ class Solution {
         return sortList(head, null);
     }
 
+    /**
+     * 时间复杂度是 O(nlogn) 的排序算法包括归并排序、堆排序和快速排序（快速排序的最差时间复杂度是 O(n^2)，
+     * 其中最适合链表的排序算法是归并排序。
+     * 归并排序基于分治算法。最容易想到的实现方式是自顶向下的递归实现，考虑到递归调用的栈空间，
+     * 自顶向下归并排序的空间复杂度是 O(logn)。
+     * 如果要达到 O(1) 的空间复杂度，则需要使用自底向上的实现方式。
+     *
+     */
     public ListNode sortList(ListNode head, ListNode tail) {
         if (head == null) {
             return head;
