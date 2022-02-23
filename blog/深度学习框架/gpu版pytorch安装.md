@@ -1,31 +1,31 @@
-- [To remove CUDA Toolkit:](#head1)
-- [To remove NVIDIA Drivers:](#head2)
-- [ 安装cudnn](#head3)
-- [ 安装pytorch](#head4)
-- [ 安装tensorflow](#head5)
-查看显卡型号
-
-```lspci | grep -i nvidia```
+- [ 驱动安装](#head1)
+- [ 卸载显卡驱动重新安装](#head2)
+- [ 安装cuda](#head3)
+- [ 安装anaconda](#head4)
+- [ 卸载](#head5)
+- [ 安装tensorflow](#head6)
 
 
 
-# 驱动安装
+# <span id="head1"> 驱动安装</span>
 
 [NVIDIA 驱动程序下载]([官方 GeForce 驱动程序 | NVIDIA](https://www.nvidia.cn/geforce/drivers/))
 
 
 
+```
+
+查看显卡型号
+lspci | grep -i nvidia
+
 安装驱动
-
-```sudo bash NVIDIA-Linux-x86_64-455.23.04.run```
-
-
+sudo bash NVIDIA-Linux-x86_64-455.23.04.run
 
 查看显卡信息
+nvidia-smi
+```
 
-```nvidia-smi```
-
-# 卸载显卡驱动重新安装
+# <span id="head2"> 卸载显卡驱动重新安装</span>
 
 命令行界面
 Ctrl+Alt+F1
@@ -33,13 +33,13 @@ Ctrl+Alt+F1
 ```shell
 sudo apt-get --purge remove nvidia*
 sudo apt autoremove
-# <span id="head1">To remove CUDA Toolkit:</span>
+# To remove CUDA Toolkit:
 sudo apt-get --purge remove "*cublas*" "cuda*"
-# <span id="head2">To remove NVIDIA Drivers:</span>
+# To remove NVIDIA Drivers:
 sudo apt-get --purge remove "*nvidia*"
 ```
 
-# 安装cuda
+# <span id="head3"> 安装cuda</span>
 
 [驱动和cuda对应版本](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
 
@@ -59,7 +59,10 @@ sudo apt-get -y install cuda
 
 **查看cuda版本**
 
-```nvcc -V```
+
+```
+nvcc -V
+```
 不显示
 
 >首先，查看cuda的bin目录下是否有nvcc：
@@ -72,13 +75,15 @@ sudo apt-get -y install cuda
 然后更新配置文件：
 ```source ~/.bashrc```
 
-
 conda 安装cuda
-```conda install cudatoolkit=10.1 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/linux-64/```
+
+```
+conda install cudatoolkit=10.1 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/linux-64/
+```
 
 
 
-# <span id="head3"> 安装cudnn</span>
+# 安装cudnn
 
 [cuda和cudnn对应版本](https://developer.nvidia.com/cudnn)
 
@@ -102,7 +107,7 @@ conda安装cudnn
 
 
 
-# 安装anaconda
+# <span id="head4"> 安装anaconda</span>
 在 [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)下载
 
 ```ls```
@@ -112,7 +117,7 @@ conda安装cudnn
 一路回车
 
 
-# 卸载
+# <span id="head5"> 卸载</span>
 ```rm -rf /home/txp/anaconda3```
 
 打开终端并输入：
@@ -128,9 +133,11 @@ conda安装cudnn
 ```source ~/.bashrc```
 
  关闭终端，然后再重启一个新的终端
-# <span id="head4"> 安装pytorch</span>
-```conda create -n pytorch```
+# 安装pytorch
 
+```
+conda create -n pytorch
+```
 
 
 >3070环境安装
@@ -143,9 +150,9 @@ conda安装cudnn
 添加Anaconda的清华镜像
 
 ```shell
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 conda config --set show_channel_urls yes
 
 //删除清华源改回默认源
@@ -165,7 +172,7 @@ print(torch.cuda.is_available())
 [手动下载安装具体步骤](https://codingchaozhang.blog.csdn.net/article/details/99688839?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
 
 
-# <span id="head5"> 安装tensorflow</span>
+# <span id="head6"> 安装tensorflow</span>
 
 1、创建虚拟环境：
 conda create -n tensorflow
@@ -201,5 +208,7 @@ http://pypi.douban.com/simple/
 https://pypi.tuna.tsinghua.edu.cn/simple/
 中国科学技术大学 
 http://pypi.mirrors.ustc.edu.cn/simple/
+
+pip install -i https://pypi.douban.com/simple gensim
 ```
 

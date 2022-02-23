@@ -109,7 +109,10 @@ if __name__=='__main__':
     
         #print(filename)
         with open(os.path.join(dirname, filename),'r',encoding='utf-8') as f:
-            insert_str=detectHeadLines(f)
+            try:
+                insert_str=detectHeadLines(f)
+            except:
+                pass
         
         dirname = dirname.replace('draft', 'blog')
         if not os.path.exists(dirname):
