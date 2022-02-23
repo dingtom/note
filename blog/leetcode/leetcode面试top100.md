@@ -490,7 +490,6 @@ class Solution:
         while head:  
         # head指向当前节点，一次循环后的下个节点是否为空？为空返回空节点的上一个节点
             # head->1->2->3->4->5  head指向当前节点
-
             next_index = head.next  # next 的指向
             head.next = pre_index   # head 的指向
             pre_index = head       #  pre 的指向
