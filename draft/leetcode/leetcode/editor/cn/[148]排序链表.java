@@ -32,10 +32,6 @@
  * }
  */
 class Solution {
-    public ListNode sortList(ListNode head) {
-        return sortList(head, null);
-    }
-
     /**
      * 方法一：自顶向下归并排序
      * 时间复杂度是 O(nlogn) 的排序算法包括归并排序、堆排序和快速排序（快速排序的最差时间复杂度是 O(n^2)，
@@ -47,6 +43,9 @@ class Solution {
      * 时间复杂度：O(nlogn)，其中 n 是链表的长度。
      * 空间复杂度：O(logn)，其中 n 是链表的长度。空间复杂度主要取决于递归调用的栈空间。
      */
+//    public ListNode sortList(ListNode head) {
+//        return sortList(head, null);
+//    }
 //    public ListNode sortList(ListNode head, ListNode tail) {
 //        if (head == null) {
 //            return head;
@@ -79,11 +78,54 @@ class Solution {
      * 按照每两个子链表一组进行合并，合并后即可得到若干个长度为 subLength×2 的有序子链表
      * （最后一个子链表的长度可以小于subLength×2）。合并两个子链表仍然使用「21. 合并两个有序链表」的做法。
      */
-
-
-
-
-
+    public ListNode sortList(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        // 1. 首先从头向后遍历,统计链表长度
+        int listLen = 0;
+        ListNode node = head;
+        while (node != null) {
+            listLen++;
+            node = node.next;
+        }
+        // 2. 初始化 引入dummynode
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+        // 3. 每次将链表拆分成若干个长度为subLen的子链表 , 并按照每两个子链表一组进行合并
+        for (int subLen = 1; subLen < listLen; subLen <<= 1) {// subLen每次左移一位（即sublen = sublen*2） PS:位运算对CPU来说效率更高
+            ListNode sorted = dummyHead;
+            ListNode curr = dummyHead.next; // curr用于记录拆分链表的位置
+            while(curr != null) { // 如果链表没有被拆完
+                // 3.1 拆分subLen长度的链表1
+                ListNode list1 = curr;
+                for (int i = 1; i < subLen && curr != null && curr.next != null; i++) {
+                    curr = curr.next;
+                }
+                // 3.2 拆分subLen长度的链表2
+                ListNode list2 = curr.next;  // 第二个链表的头  即 链表1尾部的下一个位置
+                curr.next = null;             // 断开第一个链表和第二个链表的链接
+                curr = list2;                // 第二个链表头 重新赋值给curr
+                for(int i = 1;i < subLen && curr != null && curr.next != null;i++){      // 再拆分出长度为subLen的链表2
+                    curr = curr.next;
+                }
+                // 3.3 再次断开 第二个链表和后面的链接
+                ListNode next = null;
+                if (curr != null){
+                    next = curr.next;   // next用于记录 拆分完两个链表的结束位置
+                    curr.next = null;   // 断开连接
+                }
+                // 3.4 合并两个subLen长度的有序链表
+                ListNode merged = merge(list1, list2);
+                sorted.next = merged;        // sorted.next 指向排好序链表的头
+                while(sorted.next != null){  // while循环 将sorted移动到 subLen*2 的位置后去
+                    sorted = sorted.next;
+                }
+                curr = next;              // next用于记录 拆分完两个链表的结束位置
+            }
+        }
+        return dummyHead.next;
+    }
 
 //    将两个排序后的子链表合并，得到完整的排序后的链表。可以使用「21. 合并两个有序链表」的做法，将两个有序的子链表进行合并。
     public ListNode merge(ListNode list1, ListNode list2) {
@@ -101,6 +143,17 @@ class Solution {
         }
         cur.next = list1 == null ? list2 : list1;
         return dummyNode.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode ln = new ListNode(1,
+                new ListNode(2,
+                        new ListNode(3,
+                                new ListNode(4,
+                                        new ListNode(5)))));
+        Solution s = new Solution();
+        System.out.println(s.sortList(ln));
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
