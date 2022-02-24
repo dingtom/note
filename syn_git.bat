@@ -8,8 +8,9 @@ color 3
 echo 当前目录是：%cd%
 echo;
 
-:: 输入提交内容
-set /p commit_msg=输入提交 commit:
+set /p declation=输入提交的commit信息:
+git commit -m "%declation%"
+echo;
 
 echo 本地主分支拉取远程主分支：git pull origin master
 git pull origin master
@@ -19,9 +20,7 @@ echo 开始添加变更：git add .
 git add .
 echo;
 
-set /p declation=输入提交的commit信息:
-git commit -m "%declation%"
-echo;
+
  
 echo 将变更情况提交到远程自己分支：git push
 git push
