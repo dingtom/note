@@ -43,21 +43,37 @@ class Solution {
          * 空间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。递归调用 mergeTwoLists 函数时需要消耗栈空间，
          * 栈空间的大小取决于递归调用的深度。结束递归调用时 mergeTwoLists 函数最多调用n+m 次，因此空间复杂度为 O(n+m)。
          */
-        if (list1 == null) {
-            return list2;
-        } else if (list2 == null) {
-            return list1;
-        } else if (list1.val < list2.val) {
-            list1.next = mergeTwoLists(list1.next, list2);
-            return list1;
-        } else {
-            list2.next = mergeTwoLists(list1, list2.next);
-            return list2;
-        }
+//        if (list1 == null) {
+//            return list2;
+//        } else if (list2 == null) {
+//            return list1;
+//        } else if (list1.val < list2.val) {
+//            list1.next = mergeTwoLists(list1.next, list2);
+//            return list1;
+//        } else {
+//            list2.next = mergeTwoLists(list1, list2.next);
+//            return list2;
+//        }
+
         /**
-         * 归并
-         *
+         * 迭代
+         * 时间复杂度：O(n+m)，其中 nn 和 mm 分别为两个链表的长度。
+         * 时间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。
          */
+        ListNode dummyNode = new ListNode(-1);
+        ListNode cur = dummyNode;
+        while(list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
+            } else {
+                cur.next = list2;
+                list2 = list2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = list1 == null ? list2 : list1;
+        return dummyNode.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
