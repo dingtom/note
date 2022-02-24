@@ -9,6 +9,7 @@
 - [参数叫做: spark.submit.pyFiles](#head9)
 - [参数的值可以是 单个.py文件,   也可以是.zip压缩包(有多个依赖文件的时候可以用zip压缩后上传)](#head10)
 	- [ Action算子](#head11)
+	- [ CheckPoint](#head12)
 
 
 # <span id="head1"> Spark</span>
@@ -329,6 +330,8 @@ rdd.right0 uterJoin(other_rdd)#右外
 
 - counts：计算RDD有多少条数据，返回值是一个数字
 
+- getNumPartitions：分区数
+
 - takeSample：随机抽样RDD的数据
 
 ```
@@ -355,3 +358,41 @@ rdd.take0 rdered(参数1，参数2)
 
 
 **foreach、saveAsTextFile这两个算子是分区(Executor)直接执行的跳过Driver**,.由分区所在的Executorj直接执行。其余的Action.算子都会将结果发送至Driver
+
+
+
+
+
+
+
+
+
+
+
+
+
+RDD是将自己分区的数据，每个**分区自行将其数据保存在其所在的Executor内存和硬盘上，这是分散存储**
+
+
+
+## <span id="head12"> CheckPoint</span>
+
+也是将RDD的数据，保存起来。但是它**仅支持硬盘存储**、它被设计认为是**安全的、不保留血缘关系，集中收集各个分区数据进行存储**。
+
+- CheckPoint不管分区数量多少，风险是一样的，缓存分区越多，风险越高
+-  CheckPoint支持写入HDFS,缓存不行，HDFS是高可靠存储，CheckPoint被认为是安全的。
+-  CheckPointz不支持内存，缓存可以，缓存如果写内存性能比CheckPoint要好一些
+-  CheckPoint因为设计认为是安全的，所以不保留血缘关系，而缓存因为设计上认为不安全，所以保留
+
+```
+#设置CheckPoint第一件事情，选择CP的保存路径
+#如果是Local模式，可以支持本地文件系统，如果在集群运行，千万要用HDFS
+sc.setCheckpointDir("hdfs://node1:8020/output/bj52ckp")
+#用的时候，直接调用checkpoint算子即可。
+rdd.checkpoint（）
+```
+
+CheckPoint是一种重量级的使用，也就是RDD的重新i计算成本很高的时候，我们采用CheckPointh比较合适。
+或者数据量很大，用CheckPointh比较合适.如果数据量小，或者RDD重新计算是非常快的，用CheckPointi没啥必要，直接缓存即可。
+
+Cachei和CheckPoint两个API都不是Action类型，想要它俩工作，必须在后面接上Action。接上Action的目的，是让RDD有数据，而不是为了让CheckPoint和Cache.工作
