@@ -1,6 +1,408 @@
 # leetcode 热题100
 
-[TOC]
+
+
+## **模拟**
+
+- [134. 加油站](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/gas-station/)
+- [146. LRU缓存机制](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lru-cache/)
+- [202. 快乐数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/happy-number/)
+- [289. 生命游戏](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/game-of-life/)
+- [371. 两整数之和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sum-of-two-integers/)
+- [412. Fizz Buzz](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/fizz-buzz/)
+
+
+
+- ## **数组**
+
+  - [152. 乘积最大子序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/maximum-product-subarray/)
+  - [169. 求众数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/majority-element/)
+  - [189. 旋转数组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/rotate-array/)
+  - [217. 存在重复元素](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/contains-duplicate/)
+  - [283. 移动零](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/move-zeroes/)
+  - [384. 打乱数组](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/shuffle-an-array/)
+  - [350. 两个数组的交集 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
+  - [334. 递增的三元子序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/increasing-triplet-subsequence/)
+  - [240. 搜索二维矩阵 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/search-a-2d-matrix-ii/)
+  - [238. 除自身以外数组的乘积](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/product-of-array-except-self/)
+
+  ## **链表**
+
+  - [138. 复制带随机指针的链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/copy-list-with-random-pointer/)
+  - [141. 环形链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/linked-list-cycle/)
+  - [148. 排序链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sort-list/)
+  - [160. 相交链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+  - [206. 反转链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-linked-list/)
+  - [234. 回文链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/palindrome-linked-list/)
+  - [328. 奇偶链表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/odd-even-linked-list/)
+  
+## **堆**
+  
+- [155. 最小栈](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/min-stack/)
+  - [215. 数组中的第K个最大元素](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/kth-largest-element-in-an-array/)
+  - [295. 数据流的中位数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/find-median-from-data-stream/)
+  - [378. 有序矩阵中第K小的元素](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/)
+  - [347. 前K个高频元素](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/top-k-frequent-elements/)
+  
+## **栈**
+  
+- [150. 逆波兰表达式求值](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/evaluate-reverse-polish-notation/)
+  - [227. 基本计算器 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/basic-calculator-ii/)
+  - [341. 扁平化嵌套列表迭代器](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/flatten-nested-list-iterator/)
+  
+## **哈希 / Map**
+  
+- [171. Excel表列序号](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/excel-sheet-column-number/)
+  - [454. 四数相加 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/4sum-ii/)
+  - [380. 常数时间插入、删除和获取随机元素](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/insert-delete-getrandom-o1/)
+  
+## **队列**
+  
+- [239. 滑动窗口最大值](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/sliding-window-maximum/)
+  
+## **树**
+  
+- [230. 二叉搜索树中第K小的元素](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/kth-smallest-element-in-a-bst/)
+  - [236. 二叉树的最近公共祖先](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+  - [297. 二叉树的序列化与反序列化](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
+  
+## **线段树**
+  
+- [218. 天际线问题](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/the-skyline-problem/)
+  
+## **排序**
+  
+- [179. 最大数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/largest-number/)
+  - [324. 摆动排序 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/wiggle-sort-ii/)
+  
+## **二分检索**
+  
+- [162. 寻找峰值](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/find-peak-element/)
+  - [287. 寻找重复数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/find-the-duplicate-number/)
+  - [315. 计算右侧小于当前元素的个数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/count-of-smaller-numbers-after-self/)
+  
+## **滑动窗口**
+  
+- [395. 至少有K个重复字符的最长子串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/)
+  
+## **动态规划**
+  
+- [124. 二叉树中的最大路径和](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
+  - [128. 最长连续序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-consecutive-sequence/)
+  - [198. 打家劫舍](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/house-robber/)
+  - [279. 完全平方数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/perfect-squares/)
+  - [300. 最长上升子序列](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-increasing-subsequence/)
+  - [322. 零钱兑换](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/coin-change/)
+  - [329. 矩阵中的最长递增路径](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/)
+  
+## **图论**
+  
+- [127. 单词接龙](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-ladder/)
+  - [200. 岛屿的个数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/number-of-islands/)
+  - [207. 课程表](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/course-schedule/)
+  - [210. 课程表 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/course-schedule-ii/)
+  
+## **数学 & 位运算**
+  
+- [136. 只出现一次的数字](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/single-number/)
+  - [149. 直线上最多的点数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/max-points-on-a-line/)
+  - [166. 分数到小数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/fraction-to-recurring-decimal/)
+  - [172. 阶乘后的零](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/factorial-trailing-zeroes/)
+  - [190. 颠倒二进制位](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-bits/)
+  - [191. 位1的个数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/number-of-1-bits/)
+  - [204. 计数质数](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/count-primes/)
+  - [268. 缺失数字](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/missing-number/)
+  - [326. 3的幂](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/power-of-three/)
+  
+## **字符串**
+  
+- [125. 验证回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-palindrome/)
+  - [131. 分割回文串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/palindrome-partitioning/)
+  - [139. 单词拆分](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break/)
+  - [140. 单词拆分 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-break-ii/)
+  - [208. 实现 Trie (前缀树)](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/implement-trie-prefix-tree/)
+  - [212. 单词搜索 II](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/word-search-ii/)
+  - [242. 有效的字母异位词](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/valid-anagram/)
+  - [387. 字符串中的第一个唯一字符](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/first-unique-character-in-a-string/)
+  - [344. 反转字符串](https://link.zhihu.com/?target=https%3A//leetcode-cn.com/problems/reverse-string/)
+  
+
+
+## **第一周，链表、栈、队列**
+
+### **第一天：链表（周三）**
+
+1、[链表的基础知识：单链表](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1070.html)
+
+2、[反转链表（ LeetCode 206 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/654.html)
+
+3、[相交链表（ LeetCode 160 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/693.html)
+
+4、[合并两个有序链表 （ LeetCode 21 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/658.html)
+
+5、[分隔链表 （ LeetCode 86 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/682.html)
+
+6、[环形链表 II （ LeetCode 142 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/746.html)
+
+7、[反转链表 II （ LeetCode 92 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/656.html)
+
+8、[复制带随机指针的链表（ LeetCode 138 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/708.html)
+
+### **第二天：直播 + 栈（周六）**
+
+1、[链表算法题直播答疑](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1086.html)
+
+2、[栈的基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1081.html)
+
+3、[有效的括号（ LeetCode 20 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/610.html)
+
+4、[基本计算器（ LeetCode 224 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1102.html)
+
+5、[最小栈（ LeetCode 155 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/608.html)
+
+6、[验证栈序列（ LeetCode 946 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1104.html)
+
+7、[每日温度（ LeetCode 739 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/620.html)
+
+8、[接雨水（ LeetCode 42 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/627.html)
+
+### **第三天：队列（周日）**
+
+1、[队列的基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1091.html)
+
+2、优先队列基础知识
+
+3、[用栈实现队列 （ LeetCode 232 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/612.html)
+
+4、[滑动窗口最大值（ LeetCode 239 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/635.html)
+
+5、设计循环双端队列（ LeetCode 641 ）
+
+### **补充内容**
+
+以下内容比较简单，学完队列还有余力的时候可以快速过一遍下面这些链表题。
+
+1、[移除链表元素（ LeetCode 203 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/660.html)
+
+2、[K 个一组翻转链表（ LeetCode 25 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/696.html)
+
+3、[回文链表（ LeetCode 234 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/687.html)
+
+4、[奇偶链表（ LeetCode 328 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/716.html)
+
+5、[从尾到头打印链表（ 剑指Offer 06 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/718.html)
+
+6、[链表中倒数第 k 个节点（ 剑指Offer 22 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/764.html)
+
+## **第二周，递归、排序、贪心**
+
+### **第一天：直播 + 递归 + 简单排序算法（周三）**
+
+1、[递归基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1115.html)
+
+2、[冒泡排序基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1118.html)
+
+3、[选择排序基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1120.html)
+
+4、[插入排序基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1122.html)
+
+5、[合并两个有序数组( LeetCode 88 )](https://link.zhihu.com/?target=https%3A//www.algomooc.com/555.html)
+
+6、[颜色分类( LeetCode 75 )](https://link.zhihu.com/?target=https%3A//www.algomooc.com/567.html)
+
+7、[部分排序 （面试题 16）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/569.html)
+
+8、[归并排序](https://www.zhihu.com/search?q=归并排序&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A649061966})基础知识(明天上传)
+
+9、计算右侧小于当前元素的个数 （ LeetCode 315 ）(明天上传)
+
+10、合并 K 个升序链表（ LeetCode 23 ）(明天上传)
+
+### **第二天：复杂排序算法（周六）**
+
+1、栈 + 队列问题答疑
+
+2、快速排序基础知识
+
+3、二叉堆基础知识
+
+4、堆排序基础知识
+
+5、计数排序基础知识
+
+6、基数排序基础知识
+
+7、桶排序基础知识
+
+### **第三天：贪心算法（周日）**
+
+1、贪心算法基础知识
+
+2、分发饼干（ LeetCode 455 ）
+
+3、柠檬水找零（ LeetCode 860 ）
+
+4、用最少数量的箭引爆气球（ LeetCode 452 ）
+
+5、移掉 K 位数字（ LeetCode 402 ）
+
+6、跳跃游戏（ LeetCode 55 ）
+
+7、摆动序列（ LeetCode 376 ）
+
+8、买卖股票的最佳时机 II（ LeetCode 122 ）
+
+## **第三周，搜索算法、回溯算法、位运算、二分查找**
+
+### **第一天：搜索 + 回溯（周三）**
+
+1、搜索基础知识
+
+2、回溯基础知识
+
+3、子集（ LeetCode 78 ）
+
+4、组合总和 II（ LeetCode 40 ）
+
+5、括号生成（ LeetCode 22 ）
+
+6、N 皇后（ LeetCode 51 ）
+
+7、火柴拼正方形（ LeetCode 473 ）
+
+8、岛屿数量（ LeetCode 200 ）
+
+9、接雨水 II（ LeetCode 407 ）
+
+### **第二天：直播 + 位运算（周六）**
+
+1、排序算法问题、贪心算法问题答疑
+
+2、位运算基础知识
+
+3、丢失的数字（ LeetCode 268 ）
+
+4、2 的幂（ LeetCode 231 ）
+
+5、比特位计数（ LeetCode 338 ）
+
+6、位 1 的个数（ LeetCode 268 ）
+
+7、4 的幂（ LeetCode 342 ）
+
+8、只出现一次的数字（ LeetCode 136 ）
+
+### **第三天：二分查找（周日）**
+
+1、二分查找基础知识
+
+2、搜索插入位置（ LeetCode 35 ）
+
+3、在排序数组中查找元素的第一个和最后一个位置（ LeetCode 34 ）
+
+4、搜索旋转排序数组（ LeetCode 33 ）
+
+5、搜索二维矩阵（ LeetCode 74 ）
+
+6、寻找两个正序数组的中位数（ LeetCode 4 ）
+
+## **第四周，二叉树、二叉查找树、线段树**
+
+### **第一天：二叉树（周三）**
+
+1、二叉树基础知识
+
+2、二叉树的前序遍历（ LeetCode 144 ）
+
+3、二叉树的中序遍历（ LeetCode 94 ）
+
+4、二叉树的后序遍历（ LeetCode 145 ）
+
+5、二叉树的层序遍历（ LeetCode 102 ）
+
+6、二叉树的锯齿形层序遍历（ LeetCode 103 ）
+
+7、从前序与中序遍历序列构造二叉树（ LeetCode 105 ）
+
+8、路径总和 II（ LeetCode 113 ）
+
+9、二叉树的最近公共祖先（ LeetCode 236 ）
+
+10、二叉树的右视图（ LeetCode 199 ）
+
+11、二叉树展开为链表（ LeetCode 114 ）
+
+### **第二天：直播 + 二叉查找树（周六）**
+
+1、回溯算法问题、位运算问题、二分查找问题直播答疑
+
+2、二叉查找树基础知识
+
+3、将有序数组转换为二叉搜索树（ LeetCode 108 ）
+
+4、把二叉搜索树转换为累加树（ LeetCode 538 ）
+
+5、删除二叉搜索树中的节点（ LeetCode 450 ）
+
+6、[序列化](https://www.zhihu.com/search?q=序列化&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A649061966})和反序列化二叉搜索树（ LeetCode 449 ）
+
+7、计算右侧小于当前元素的个数（ LeetCode 315 ）
+
+### **第三天：线段树（周日）**
+
+1、线段树基础知识
+
+2、区域和检索 - 数组可修改（ LeetCode 307 ）
+
+3、天际线问题（ LeetCode 218 ）
+
+## **第五周、动态规划、图算法**
+
+### **第一天：动态规划（周三）**
+
+1、动态规划基础知识
+
+2、爬楼梯（ LeetCode 70 ）
+
+3、打家劫舍（ LeetCode 198 ）
+
+4、[三角形](https://www.zhihu.com/search?q=三角形&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A649061966})最小路径和（ LeetCode 120 ）
+
+5、最大子序和（ LeetCode 53 ）
+
+6、零钱兑换（ LeetCode 322 ）
+
+7、最小路径和（ LeetCode 64 ）
+
+8、编辑距离（ LeetCode 72 ）
+
+9、地下城游戏（ LeetCode 174 ）
+
+### **第二天：二叉树直播 + 动态规划（周六）**
+
+1、二叉树算法问题直播答疑
+
+2、买卖股票的最佳时机（ LeetCode 121 ）
+
+3、买卖股票的最佳时机II（ LeetCode 122 ）
+
+4、买卖股票的最佳时机III（ LeetCode 123 ）
+
+5、买卖股票的最佳时机IV（ LeetCode 188 ）
+
+6、最长递增子序列（ LeetCode 300 ）
+
+7、分割等和子集（ LeetCode 416 ）
+
+8、完全平方数（ LeetCode 279 ）
+
+### **第三天：图算法（周日）**
+
+1、图基础知识
+
+2、省份数量（ LeetCode 547 ）
+
+3、课程表（ LeetCode 547 ）
 
 ## [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 

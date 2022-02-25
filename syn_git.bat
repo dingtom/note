@@ -9,8 +9,12 @@ echo 当前目录是：%cd%
 echo;
 
 set /p declation=输入提交的commit信息:
-git commit -m "%declation%"
 echo;
+
+
+set /p shutdownTime=设置多少秒后关机:
+echo;
+
 
 echo 本地主分支拉取远程主分支：git pull origin master
 git pull origin master
@@ -18,6 +22,7 @@ echo;
 
 echo 开始添加变更：git add .
 git add .
+git commit -m "%declation%"
 echo;
 
 
@@ -27,6 +32,6 @@ git push
 echo;
 				
 echo 2分钟后关机
-shutdown -s -t 120
+shutdown -s -t %shutdownTime%
 
 

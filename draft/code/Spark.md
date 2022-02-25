@@ -351,13 +351,46 @@ rdd.take0 rdered(参数1，参数2)
 
 
 
+# RDD的持久化
 
+**RDD 的数据是过程数据**
 
+RDD之间进行相互迭代计算(Transformation的转换)，当执行开启后，新RDD的生成，代表老RDD的消失。RDD的数据是过程数据，只在处理的过程中存在，一旦处理完成，就不见了。
 
+这个特性可以最大化的利用资源，老旧DD没用了就从内存中清理，给后续的计算腾出内存空间。
 
+![quicker_d043ad1c-b6ad-4a5c-83ef-55421fdc23bd.png](https://s2.loli.net/2022/02/25/ZLfS1mikEx6FJD8.png)
 
+对于，上述的场景，肯定要执行优化，优化就是：
+RDD3如果不消失，那么RDD1→RDD2→RDD3这个链条就不会执行2次，或者更多次
 
+## 缓存
 
+Spak提供了缓存API,可以让我们通过调用,将指定的RDD数据保留在内存或者硬盘上
+
+```python
+#RDD3被2次使用，可以加入缓存进行优化
+rdd3.cache（）#缓存到内存中，
+rdd3.persist(StorageLevel.MEMORY_ONLY) # 仅内存缓存
+rdd3.persist(StorageLevel.MEMORY_ONLY_2) # 仅内存缓存，2个副本
+rdd3.persist(StorageLevel.DISK_ONLY) # 仅缓存硬盘上
+rdd3.persist(StorageLevel.DISK_ONLY_2) # 仅缓存硬盘上，
+2个副本
+rdd3.persist(StorageLevel.DISK_ONLY_3)#仅缓存硬盘上，3个副本
+rdd3.persist(storageLevel.MEMORY_AND_DISK)#先放内存，不够放硬盘
+rdd3.persist(storageLevel.MEMORY_AND_DISK_2)#先放内存，不够放硬盘，2个副本
+rdd3.persist(StorageLevel.OFF_HEAP)#堆外内存（系统内存）
+
+#如上API,自行选择使用即可
+#建议使用rdd3.persist(StorageLevel.MEMORY_AND_DISK)
+#如果内存比较小的集群，建议使用rdd3.persist(StorageLevel.DISK_ONLY)或者就别用缓存了用CheckPoint
+#主动清理缓存的API
+rdd.unpersist（）
+```
+
+缓存技术可以将过程DD数据，持久化保存到内存或者硬盘上但是，这个保存在设定上是认为不安全的**。缓存的数据在设计上是认为有丢失风险的**。所以，缓存有一个特点就是：**其保留RDD之间的血缘（依赖）关系**。一旦缓存丢失，可以基于血缘关系的记录，重新计算这个RDD的数据
+
+![quicker_241c74b3-621a-4b69-8232-4e42749753fb.png](https://s2.loli.net/2022/02/25/zAUsrC3ENk5qhTn.png)
 
 RDD是将自己分区的数据，每个**分区自行将其数据保存在其所在的Executor内存和硬盘上，这是分散存储**
 
@@ -366,6 +399,8 @@ RDD是将自己分区的数据，每个**分区自行将其数据保存在其所
 ## CheckPoint
 
 也是将RDD的数据，保存起来。但是它**仅支持硬盘存储**、它被设计认为是**安全的、不保留血缘关系，集中收集各个分区数据进行存储**。
+
+![quicker_a810d31c-37ce-41eb-a6c7-85fd86579471.png](https://s2.loli.net/2022/02/25/hDcKR7LfmNwzIFl.png)
 
 - CheckPoint不管分区数量多少，风险是一样的，缓存分区越多，风险越高
 -  CheckPoint支持写入HDFS,缓存不行，HDFS是高可靠存储，CheckPoint被认为是安全的。
@@ -383,4 +418,10 @@ rdd.checkpoint（）
 CheckPoint是一种重量级的使用，也就是RDD的重新i计算成本很高的时候，我们采用CheckPointh比较合适。
 或者数据量很大，用CheckPointh比较合适.如果数据量小，或者RDD重新计算是非常快的，用CheckPointi没啥必要，直接缓存即可。
 
-Cachei和CheckPoint两个API都不是Action类型，想要它俩工作，必须在后面接上Action。接上Action的目的，是让RDD有数据，而不是为了让CheckPoint和Cache.工作
+Cache和CheckPoint两个API都不是Action类型，想要它俩工作，必须在后面接上Action。
+
+
+
+# SparkSQL
+
+SparkSQL 是Spark的一个模块, 用于处理海量结构化数据
