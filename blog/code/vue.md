@@ -2333,9 +2333,9 @@ imgUrl:require('./assets/logo.png')
 
 ```kotlin
   watch: {
-    name (val) {
-      this.watchName = val;
-    }
+   a(val, oldVal){//普通的watch监听a
+         console.log("a: "+val, oldVal);
+     }
   }
 ```
 

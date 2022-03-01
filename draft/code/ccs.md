@@ -82,55 +82,6 @@ last-child,nth-child(3),nth-last-child(3),
 
 ###### ![基础选择器总结.png](https://i.loli.net/2021/07/12/H5zkcC6NgxqtVvp.png)
 
-# css字体:
-
-font-family: '微软雅黑';
-
-## 字体大小： font-size: 20px; 
-
-​    1.px（像素）大小是我们网页的最常用的单位
-​    2.谷歌浏览器默认的文字大小为16px
-​    3.不同浏览器可能默认显示的字号大小不一致，我们尽量给一个明确值大小，不要默认大小
-​    4.可以给 body 指定整个页面文字的大小
-
-## 字体粗细：font-weight: bold; 
-
-​	normal:默认值（不加粗的）
-​	bold:定义粗体（加粗的）
-​	100-900:400等同于 normal,而700等同于bold注意这个数字后面不跟单位
-
-1.学会让加粗标签（比如 h 和 strong 等) 不加粗，或者其他标签加粗
-2.实际开发时，我们更喜欢用数字表示粗细
-
-## 文本的风格 font-style: normal/italic;
-
-
- body {   font: font-style  font-weight  font-size/line-height  font-family;}
-
-使用 font 属性时，必须按上面语法格式中的顺序书写，不能更换顺序，并且各个属性间以空格隔开 不需要设置的属性可以省略（取默认值），但必须保留 font-size 和 font-family 属性，否则 font 属性将不起作用
-
-## 文本颜色：color: red;
-
-​	预定义的颜色值red, green,blue,还有我们的御用色pink
-​	十六进制#FF0000,#FF6600,#29D794
-​	RGB代码rgb(255,0.0)或rgb(100%,09%,0%)
-
-## 文本对齐：text-align: center/left/right;
-
-## 修饰文本：text-decoration：underline；
-
-​	none默认。没有装饰线（最常用）
-​	underline下划线。链接a自带下划线（常用）
-​	overline上划线。（几乎不用）
-​	line-througl删除线。（不常用
-
-文本缩进:text-indent：20px/2em；
-
-    em 是一个相对单位，就是当前元素（font-size) 1 个文字的大小, 如果当前元素没有设置大小，则会按照父元素的 1 个文字大小。
-## 行间距：line-height: 26px;
-
-设置行间的距离（行高）。
-
 # css样式表：
 
 ## 行内样式表（行内式）
@@ -465,27 +416,6 @@ div[class$="test"]
 
 ​		如果行高大于盒子高度,则文字偏下。
 
-# css的背景
-
-通过 CSS 背景属性，可以给页面元素添加背景样式。
-背景属性可以设置背景颜色、背景图片、背景平铺、背景图片位置、背景图像固定等。
-
-## 背景颜色
-
-​		background-color: 颜色值
-
-​		元素背景颜色默认值是 transparent（透明）
-
-## 背景图片
-
-​		background-image: url(images/logo.png)
-
-​		实际开发常见于 logo 或者一些装饰性的小图片或者是超大的背景图片, 优点是非常便于控制位置. (精灵图也是一种运用场景)
-
-​		注意：背千万不要忘记加 URL， 同时里面的路径**不要加引号**。
-
-
-
 ## 背景平铺
 
 ```
@@ -703,34 +633,6 @@ div[class$="test"]
 
 ![1571492536942.png](https://i.loli.net/2021/07/12/zpE6AfXL9OqdlMB.png)
 
-## 边框（border）
-
-**边框的使用**
-
-border可以设置元素的边框。边框有三部分组成：边框宽度(粗细) 边框样式  边框颜色；
-
-```css
-        div {
-            width: 300px;
-            height: 200px;
-            /* border-width 边框的粗细  一般情况下都用 px */
-            border-width: 5px;
-            /* border-style 边框的样式  solid 实线边框   dashed 虚线边框  dotted 点线边框*/
-            border-style: solid;
-            /* border-color 边框的颜色  */
-            border-color: pink;
-        }
-```
-
-```css
-            /* 边框的复合写法 简写:  */
-            /* border: 5px solid pink; */
-            /* 上边框 */
-            border-top: 5px solid pink;
-            /* 下边框 */
-            border-bottom: 10px dashed purple;
-```
-
 **表格的细线边框**
 
 border-collapse 属性控制浏览器绘制表格边框的方式。它控制相邻单元格的边框。
@@ -748,21 +650,7 @@ border-collapse 属性控制浏览器绘制表格边框的方式。它控制相�
 
 ## 内边距（padding）
 
-**内边距的使用方式**
 
-padding 属性用于设置内边距，即边框与内容之间的距离。
-
-```
-padding: 5px 1个值，代表上下左右都有5像素内边距
-padding: 5px 10px 2个值，代表上下内边距是5像素左右内边距是10像素；
-padding: 5px 10px 20px 3个值，代表上内边距5像素左右内边距10像素下内边距20像素；
-padding: 5px10px20px30p× 4个值，上是5像素右10像素下20像素左是30像素！！！ 顺时针
-
-padding-left左内边距
-adding-right右内边距
-padding-top上内边距
-padding-bottom下内边距
-```
 
 **内边距会影响盒子实际大小**
 
@@ -771,17 +659,6 @@ padding-bottom下内边距
 - 保证盒子跟效果图大小保持一致，则让 width/height 减去多出来的内边距大小即可。
 
 ## 外边距（margin）
-
-**外边距的使用方式**
-
-margin 属性用于设置外边距，即控制盒子和盒子之间的距离。
-
-```
-margin-left左外边距
-margin-right右外边距
-margin-top上外边距
-margin-bottom下外边距
-```
 
 **外边距典型应用**
 
@@ -824,17 +701,6 @@ margin: 0 auto;
 - 可以为父元素定义上边框。
 - 可以为父元素定义上内边距。
 - 可以为父元素添加 overflow:hidden。
-
-**清除内外边距**
-
-​		网页元素很多都带有默认的内外边距，而且不同浏览器默认的也不一致。因此我们在布局前，首先要清除下网页元素的内外边距。
-
-```css
- * {
-    padding:0;   /* 清除内边距 */
-    margin:0;    /* 清除外边距 */
-  }
-```
 
 ​		注意：行内元素为了照顾兼容性，尽量只设置左右内外边距，不要设置上下内外边距。但是转换为块级和行内块元素就可以了
 
@@ -1096,11 +962,11 @@ overflow:hidden | auto | scroll;
 
    
 
-**首先设置4个div：**
+首先设置4个div：
 
 <img src="https://pic.rmb.bdstatic.com/bjh/1fbe092fc8e8033c3dba4057253c522a.jpeg" alt="image.png" title="image.png" />
 
-**给第二个div设置absolute:**
+给第二个div设置absolute:
 
 ```
 height:100px;
@@ -1113,9 +979,9 @@ top:50px;
 
 <img src="https://pic.rmb.bdstatic.com/bjh/5ecc8eb00774af44c4e43158214aa862.jpeg" alt="image.png" title="image.png" />
 
-第二个div设置了absolute,则该div的**宽度就由文本决定**，且**下面的div会上移占据之前第二个div的位置**，top和left是相对于**离它最近且不是static定位的父元素**来定位的，在此div2因为没有父元素，所以第二个div相对于根元素即html元素来定位。
+第二个div设置了absolute,则该div的宽度就由文本决定，且**下面的div会上移占据之前第二个div的位置**，top和left是相对于**离它最近且不是static定位的父元素**来定位的，在此div2因为没有父元素，所以第二个div相对于根元素即html元素来定位。
 
-**将第二个div设置为relative：**
+将第二个div设置为relative：
 
 ```
  height:100px;
@@ -1127,9 +993,9 @@ top:50px;
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/9e39778f1b401f4684afb445c923f527.jpeg)
 
-设置relative的div不会影响其他div的位置，且top和left是相对于它原本自身的位置来定位。
+设置**relative的div不会影响其他div的位置，且top和left是相对于它原本自身的位置来定位。**
 
-**给第二个div添加一个父div：**
+给第二个div添加一个父div：
 
 ```
 .container1{
@@ -1151,21 +1017,23 @@ div2的父div设置为absolute，下面的div3,div4会上移，div2也设置为a
 
 
 
-**若将div2即第二个div的absolute改为relative：**
+若将div2即第二个div的absolute改为relative：
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/370ff1f35e2fe76925133e02b56d0234.jpeg)
 
 注意，上面两个图的第二个div与父div的上边距是不同的，第一个是**absolute相对父div来定位**，第二个是**relative相对原来本身的位置来定位**。可能此时你会注意到两个图的第二个div的宽度不同，在没有给div设置宽度的情况下，第一个是设为**absolute，所以宽度为文本宽度**，第二个是**relative，所以宽度与父元素宽度相同**。
 
-**若保持上面的两种情况，都将第二个div的宽度设为500px，得到效果如下**
+若保持上面的两种情况，都将第二个div的宽度设为500px，得到效果如下
 
 ![image.png](https://pic.rmb.bdstatic.com/bjh/ee948091eeecc2477209511c6f3e560a.jpeg)
 
-由上图可以知道，absolute定位的子元素宽度不会影响父元素的宽，而relative定位的子元素会撑大父元素。
+由上图可以知道，**absolute定位的子元素宽度不会影响父元素的宽，而relative定位的子元素会撑大父元素**。
 
 Absolution：元素会脱离文档流，定位是相对于离它最近的且不是static定位的父元素而言，若该元素没有设置宽度，则宽度由元素里面的内容决定，且宽度不会影响父元素，定位为absolution后，原来的位置相当于是空的，下面的的元素会来占据。
 
-Relative：元素仍处于文档流中，定位是相对于原本自身的位置，若没有设置宽度，则宽度为父元素的宽度，该元素的大小会影响父元素的大小。
+Relative：元素仍处于文档流中
+
+，定位是相对于原本自身的位置，若没有设置宽度，则宽度为父元素的宽度，该元素的大小会影响父元素的大小。
 
 # 居中
 
