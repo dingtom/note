@@ -114,7 +114,7 @@ if __name__=='__main__':
             except:
                 pass
         
-        dirname = dirname.replace('draft', 'blog')
+        dirname = dirname.replace('draft', '_')
         if not os.path.exists(dirname):
             os.makedirs(dirname)
         with open(r'{}.md'.format(os.path.join(dirname, filename[:filename.find('.')])),'w',encoding='utf-8') as f:
