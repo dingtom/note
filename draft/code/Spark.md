@@ -1255,21 +1255,126 @@ print(single_partition_rdd.mapPartitions(process).collect())
 
 
 
+## SparkSQL的运行流程
 
 
 
+- RDD的运行会完全按照开发者的代码执行， 如果开发者水平有限，RDD的执行效率也会受到影响。
+
+- 而SparkSQL会对写完的代码，执行“自动优化”， 以提升代码运行效率，避免开发者水平影响到代码执行效率。
+
+- 为什么SparkSQL可以自动优化而RDD不可以？
+
+​      RDD：内含数据类型不限格式和结构
+
+​      DataFrame：100% 是二维表结构，可以被针对
+
+- SparkSQL的自动优化，依赖于：Catalyst优化器
 
 
 
+为了解决过多依赖Hive的问题，SparkSQL使用了一个新的SQL优化器替代Hive中的优化器，这个优化器就是Catalyst,.整个
+SparkSQL的架构大致如下：
+
+![quicker_b07a1325-9e59-4a0c-afba-140fc97781c6.png](https://s2.loli.net/2022/03/02/6uJdIHO8CqjZR4S.png)
 
 
 
+![quicker_f1977f58-1c16-47d0-aacc-118b086edf58.png](https://s2.loli.net/2022/03/02/THNICV93ZSPMwae.png)
+
+![quicker_c4104bcb-d353-463e-9cb1-28973c05df9e.png](https://s2.loli.net/2022/03/02/rGavj4XQfqEiY3P.png)
+
+![quicker_53076345-f6b1-408b-833e-0d71ff1b3491.png](https://s2.loli.net/2022/03/02/oE1fRmpl5aP6HuA.png)
 
 
 
+![quicker_2ac0ae6b-4bf7-456c-bc6b-d400721650c3.png](https://s2.loli.net/2022/03/02/LQsdebPEinUhxMH.png)
+
+catalyst的各种优化细节非常多，大方面的优化点有2个：
+
+- 谓词下推(Predicate Pushdown)\断言下推：将逻辑判断提前到前面，以减少shuffle阶段的数据量(行过滤，提前执行where)
+- 列值裁剪(Column Pruning):将加载的列进行裁剪，尽量减少被处理数据的宽度(列过滤，提前规划select的字段数量，非常合适的存储系统：parquet)
 
 
 
+## Spark On Hive
+
+
+
+对于Spark来说，自身是一个执行引擎，但是Spark自己没有元数据管理功能，Spark完全有能力将SQL变成RDD提交
+
+但是问题是，Person的数据在哪？Person有哪些字段？字段啥类型？Spark完全不知道了。不知道这些东西，如何翻译RDD运行。
+
+
+
+在SparkSQL代码中可以写SQL那是因为，表是来自DataFrame注册的。DataFrame中有数据，有字段，有类型，足够Spark用来翻译RDD用。如果以不写代码的角度来看，SELECT*FROM person WHERE age>10。 spark无法翻译，因为没有元数据
+
+
+
+![quicker_d86db96d-7abe-43ae-932f-97d6eacb6f23.png](https://s2.loli.net/2022/03/02/AaXZPsI1mk6Bf9i.png)
+
+
+
+Spark On Hive就是把Hive的MetaStore服务拿过来给Spark做元数据管理用而已。
+
+
+
+```python
+ spark = SparkSession.builder.\
+        appName("test").\
+        master("local[*]").\
+        config("spark.sql.shuffle.partitions", 2).\
+        config("spark.sql.warehouse.dir", "hdfs://n1:8020/user/hive/warehouse").\
+        config("hive.metastore.uris", "thrift://n1:9083").\
+        enableHiveSupport().\
+        getOrCreate()
+    sc = spark.sparkContext
+    
+    spark.sql("SELECT * FROM student").show()
+
+```
+
+## 分布式SQL执行引擎
+
+Spark中有一个服务叫做：ThriftServer服务，可以启动并监听在10000端口，这个服务对外提供功能，我们可以用数据库工具或者代码连接上来直接写SQL即可操作spark
+
+
+
+![quicker_68317947-afa8-4b40-abe3-2d0bef4e0b18.png](https://s2.loli.net/2022/03/03/Cg7LVHutzTpmYS3.png)
+
+```shell
+#如果是你们自己的虚拟机
+#直接在r00t账户下启动即可
+$SPARK_HOME/sbin/start-thriftserver.sh \
+--hiveconf hive.server2.thrift.port=10000 \
+--hiveconf hive.server2.thrift.bind.host=n1 \
+--master local[2]
+#masteri选择local,每一条sql都是local进程执行
+#master选择yarn,每一条sql都是在YARN集群中执行
+
+
+# 为了安装pyhive包需要安装一堆inux软件，执行如下命令进行linux:软件安装：
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel libffi-devel gcc make gcc-c++ python-devel cyrus-sasl-devel cyrus-sasl-plain cyrus-sasl-gssapi -y
+# 安装好前置依赖软件后，安装pyhive包
+/export/server/anaconda3/envs/pyspark/bin/python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyhive pymysql sasl thrift thrift_sasl
+```
+
+
+
+```python
+from pyhive import hive
+if __name__ == '__main__':
+    # 获取到Hive(Spark ThriftServer的链接)
+    conn = hive.Connection(host="n1", port=10000, username="hadoop")
+    # 获取一个游标对象
+    cursor = conn.cursor()
+    # 执行SQL
+    cursor.execute("SELECT * FROM student")
+    # 通过fetchall API 获得返回值
+    result = cursor.fetchall()
+    print(result)
+j
+```
 
 
 

@@ -1262,15 +1262,49 @@ INSERT INTO stu_course VALUES (NULL,1,1),(NULL,1,2),(NULL,2,1),(NULL,2,2);
 
 
 
-
 # 窗口函数
+
+开窗函数的引入是为了**既显示聚集前的数据又显示聚集后的数据**。即在每一行的最后一列添加聚合函数的结果。
+
 **应用：1、topN问题或者组内排序问题2、连续登录问题**
 **!!!!!!!!!!!!!窗口函数原则上只能写在select子句中**
 
-## 窗口函数order by与group by的区别
-窗口函数中的order by只是决定着**窗口里的数据的排序方式**，普通的order by决定**查询出的数据以什么样的方式整体排序**；
+- 原则上，窗口函数只能在SELECT子句中使用。 
+- 窗口函数OVER 中的ORDER BY 子句并不会影响最终结果的排序。其只是用来决定窗口函数按何种顺序计算。
 
-窗口函数可以在保留原表中的全部数据之后，对某些字段做分组排序或者计算，而group by只能保留与分组字段聚合的结果；
+```mysql
+-- 聚合类型SUM\MIN\MAX\AVG\COUNT
+sum() OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
+-- 排序类型：ROW_NUMBER\RANK\DENSE_RANK
+ROW_NUMBER() OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
+-- 分区类型：NTILE
+NTILE(number) OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
+
+
+
+
+-- PARTITON BY 是用来分组，即选择要看哪个窗口，类似于 GROUP BY 子句的分组功能，但是 PARTITION BY 子句并不具备 GROUP BY 子句的汇总功能，并不会改变原始表中记录的行数。
+
+-- ORDER BY 是用来排序，即决定窗口内，是按那种规则(字段)来排序的。
+```
+
+- 聚合函数和开窗函数
+
+  聚合函数是将多行变成一行，开窗函数是将一行变成多行；
+
+  聚合函数如果要显示其他的列必须将列加入到group by中，函数可以不使用group by,直接将所有信息显示出来
+
+- 开窗函数分类
+
+  - 聚合开窗函数
+
+    聚合函数（列）OVER（选项），这里的选项可以是PARTITION BY子句，但不可以是ORDER BY子包。
+
+  - 排序开窗函数
+
+    排序函数（列）OVER（选项），这里的选项可以是ORDER BY子句，也可以是OVER(PARTITION BY子句ORDER BY子句)，但不可以是PARTITION BY子句。
+
+  - 分区类型NTILE的窗口函数
 
 ## 执行顺序
 
@@ -1283,13 +1317,25 @@ INSERT INTO stu_course VALUES (NULL,1,1),(NULL,1,2),(NULL,2,1),(NULL,2,2);
 ```row_number()``` 则在排序相同时不重复，会根据顺序排序。
 
 
->![](https://upload-images.jianshu.io/upload_images/18339009-96223baa7e580bc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](https://upload-images.jianshu.io/upload_images/18339009-95bdd2e203a8310e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```mysql
+SELECT  product_id
+       ,product_name
+       ,sale_price
+       ,SUM(sale_price) OVER (ORDER BY product_id) AS current_sum
+       ,AVG(sale_price) OVER (ORDER BY product_id) AS current_avg  
+  FROM product;  
+```
+
+![quicker_203f8ccd-3534-4102-ac55-d8d8f48b90d6.png](https://s2.loli.net/2022/03/02/tEda1hNxDkmPYp4.png)
 从上面的例子可以看出，在没有partition by 的情况下，是把整个表作为一个大的窗口，SUM（）相当于向下累加，AVG（）相当于求从第一行到当前行的平均值，**其他的聚合函数均是如此**。
 
 注意点：
+
 1 、在使用专用的窗口函数时，例如rank、lag等，rank（）括号里是不需要指定任何字段的，直接空着就可以；
 2 、在使用聚合函数做窗口函数时，SUM（）括号里必须有字段，得指定对哪些字段执行聚合的操作。在学习的初期很容易弄混，不同函数括号里是否需写相应的字段名；
+
+
 
 
 ## 滑动窗口函数
@@ -1314,7 +1360,27 @@ Rows 2 following 中文意思是之后的两行，跟preceding正好相反，Pre
 
 
 
-## 备份与还原
+
+
+
+
+## ROLLUP - 计算合计及小计
+
+常规的GROUP BY 只能得到每个分类的小计，有时候还需要计算分类的合计，可以用 ROLLUP关键字。
+
+```mysql
+SELECT  product_type
+       ,regist_date
+       ,SUM(sale_price) AS sum_price
+FROM product
+GROUP BY product_type, regist_date WITH ROLLUP;  
+```
+
+![quicker_71be3383-3f87-4e5e-bc91-3cf92d194d7a.png](https://s2.loli.net/2022/03/02/VQFXiarmzDpNgh2.png)
+
+
+
+# 备份与还原
 
 ## 命令行方式
 
