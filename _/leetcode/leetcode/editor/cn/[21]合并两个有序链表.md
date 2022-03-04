@@ -57,7 +57,7 @@ class Solution {
 
         /**
          * 迭代
-         * 时间复杂度：O(n+m)，其中 nn 和 mm 分别为两个链表的长度。
+         * 时间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。
          * 时间复杂度：O(n+m)，其中 n 和 m 分别为两个链表的长度。
          */
         ListNode dummyNode = new ListNode(-1);
