@@ -78,46 +78,47 @@
 		- [ Preceding](#head78)
 		- [ Following](#head79)
 		- [ preceding跟following相结合](#head80)
-	- [ 备份与还原](#head81)
-	- [ 命令行方式](#head82)
-- [ 存储过程和函数](#head83)
-	- [ 存储过程语法](#head84)
-		- [ 变量](#head85)
-		- [ if](#head86)
-		- [ 输入参数](#head87)
-		- [ case](#head88)
-		- [ while](#head89)
-		- [ repeat](#head90)
-		- [ loop](#head91)
-		- [ 游标](#head92)
-	- [ 存储函数](#head93)
-- [ 触发器](#head94)
-	- [ 触发器演示](#head95)
-- [ 事务](#head96)
-	- [ 事务的四大特征(ACID)](#head97)
-	- [ 事务的隔离级别](#head98)
-		- [ 隔离级别的概念](#head99)
-		- [ 事务隔离级别演示](#head100)
-		- [ 隔离级别总结](#head101)
-- [ 索引](#head102)
-	- [ 索引的分类](#head103)
-	- [ 索引的实现原理](#head104)
-		- [ 磁盘存储](#head105)
-		- [ BTree](#head106)
-		- [ B+Tree](#head107)
-	- [ 索引的设计原则](#head108)
-- [ 锁](#head109)
-	- [ 锁的概念](#head110)
-	- [ 锁的分类](#head111)
-	- [ 演示InnoDB锁](#head112)
-	- [ 演示MyISAM锁](#head113)
-	- [ 演示悲观锁和乐观锁](#head114)
-	- [ 锁的总结](#head115)
-- [ 存储引擎](#head116)
-	- [ MySQL体系结构](#head117)
-	- [ MySQL存储引擎](#head118)
-	- [ 常用引擎的特性对比](#head119)
-		- [ 总结：引擎的选择](#head120)
+	- [ROLLUP - 计算合计及小计](#head81)
+- [ 备份与还原](#head82)
+	- [ 命令行方式](#head83)
+- [ 存储过程和函数](#head84)
+	- [ 存储过程语法](#head85)
+		- [ 变量](#head86)
+		- [ if](#head87)
+		- [ 输入参数](#head88)
+		- [ case](#head89)
+		- [ while](#head90)
+		- [ repeat](#head91)
+		- [ loop](#head92)
+		- [ 游标](#head93)
+	- [ 存储函数](#head94)
+- [ 触发器](#head95)
+	- [ 触发器演示](#head96)
+- [ 事务](#head97)
+	- [ 事务的四大特征(ACID)](#head98)
+	- [ 事务的隔离级别](#head99)
+		- [ 隔离级别的概念](#head100)
+		- [ 事务隔离级别演示](#head101)
+		- [ 隔离级别总结](#head102)
+- [ 索引](#head103)
+	- [ 索引的分类](#head104)
+	- [ 索引的实现原理](#head105)
+		- [ 磁盘存储](#head106)
+		- [ BTree](#head107)
+		- [ B+Tree](#head108)
+	- [ 索引的设计原则](#head109)
+- [ 锁](#head110)
+	- [ 锁的概念](#head111)
+	- [ 锁的分类](#head112)
+	- [ 演示InnoDB锁](#head113)
+	- [ 演示MyISAM锁](#head114)
+	- [ 演示悲观锁和乐观锁](#head115)
+	- [ 锁的总结](#head116)
+- [ 存储引擎](#head117)
+	- [ MySQL体系结构](#head118)
+	- [ MySQL存储引擎](#head119)
+	- [ 常用引擎的特性对比](#head120)
+		- [ 总结：引擎的选择](#head121)
 [TOC]
 # <span id="head1">安装 </span>
 ## <span id="head2"> win</span>
@@ -1382,15 +1383,49 @@ INSERT INTO stu_course VALUES (NULL,1,1),(NULL,1,2),(NULL,2,1),(NULL,2,2);
 
 
 
-
 # 窗口函数
+
+开窗函数的引入是为了**既显示聚集前的数据又显示聚集后的数据**。即在每一行的最后一列添加聚合函数的结果。
+
 **应用：1、topN问题或者组内排序问题2、连续登录问题**
 **!!!!!!!!!!!!!窗口函数原则上只能写在select子句中**
 
-## 窗口函数order by与group by的区别
-窗口函数中的order by只是决定着**窗口里的数据的排序方式**，普通的order by决定**查询出的数据以什么样的方式整体排序**；
+- 原则上，窗口函数只能在SELECT子句中使用。 
+- 窗口函数OVER 中的ORDER BY 子句并不会影响最终结果的排序。其只是用来决定窗口函数按何种顺序计算。
 
-窗口函数可以在保留原表中的全部数据之后，对某些字段做分组排序或者计算，而group by只能保留与分组字段聚合的结果；
+```mysql
+-- 聚合类型SUM\MIN\MAX\AVG\COUNT
+sum() OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
+-- 排序类型：ROW_NUMBER\RANK\DENSE_RANK
+ROW_NUMBER() OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
+-- 分区类型：NTILE
+NTILE(number) OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
+
+
+
+
+-- PARTITON BY 是用来分组，即选择要看哪个窗口，类似于 GROUP BY 子句的分组功能，但是 PARTITION BY 子句并不具备 GROUP BY 子句的汇总功能，并不会改变原始表中记录的行数。
+
+-- ORDER BY 是用来排序，即决定窗口内，是按那种规则(字段)来排序的。
+```
+
+- 聚合函数和开窗函数
+
+  聚合函数是将多行变成一行，开窗函数是将一行变成多行；
+
+  聚合函数如果要显示其他的列必须将列加入到group by中，函数可以不使用group by,直接将所有信息显示出来
+
+- 开窗函数分类
+
+  - 聚合开窗函数
+
+    聚合函数（列）OVER（选项），这里的选项可以是PARTITION BY子句，但不可以是ORDER BY子包。
+
+  - 排序开窗函数
+
+    排序函数（列）OVER（选项），这里的选项可以是ORDER BY子句，也可以是OVER(PARTITION BY子句ORDER BY子句)，但不可以是PARTITION BY子句。
+
+  - 分区类型NTILE的窗口函数
 
 ## 执行顺序
 
@@ -1403,13 +1438,25 @@ INSERT INTO stu_course VALUES (NULL,1,1),(NULL,1,2),(NULL,2,1),(NULL,2,2);
 ```row_number()``` 则在排序相同时不重复，会根据顺序排序。
 
 
->![](https://upload-images.jianshu.io/upload_images/18339009-96223baa7e580bc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](https://upload-images.jianshu.io/upload_images/18339009-95bdd2e203a8310e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```mysql
+SELECT  product_id
+       ,product_name
+       ,sale_price
+       ,SUM(sale_price) OVER (ORDER BY product_id) AS current_sum
+       ,AVG(sale_price) OVER (ORDER BY product_id) AS current_avg  
+  FROM product;  
+```
+
+![quicker_203f8ccd-3534-4102-ac55-d8d8f48b90d6.png](https://s2.loli.net/2022/03/02/tEda1hNxDkmPYp4.png)
 从上面的例子可以看出，在没有partition by 的情况下，是把整个表作为一个大的窗口，SUM（）相当于向下累加，AVG（）相当于求从第一行到当前行的平均值，**其他的聚合函数均是如此**。
 
 注意点：
+
 1 、在使用专用的窗口函数时，例如rank、lag等，rank（）括号里是不需要指定任何字段的，直接空着就可以；
 2 、在使用聚合函数做窗口函数时，SUM（）括号里必须有字段，得指定对哪些字段执行聚合的操作。在学习的初期很容易弄混，不同函数括号里是否需写相应的字段名；
+
+
 
 
 ## <span id="head77"> 滑动窗口函数</span>
@@ -1434,9 +1481,29 @@ Rows 2 following 中文意思是之后的两行，跟preceding正好相反，Pre
 
 
 
-## <span id="head81"> 备份与还原</span>
 
-## <span id="head82"> 命令行方式</span>
+
+
+
+## <span id="head81">ROLLUP - 计算合计及小计</span>
+
+常规的GROUP BY 只能得到每个分类的小计，有时候还需要计算分类的合计，可以用 ROLLUP关键字。
+
+```mysql
+SELECT  product_type
+       ,regist_date
+       ,SUM(sale_price) AS sum_price
+FROM product
+GROUP BY product_type, regist_date WITH ROLLUP;  
+```
+
+![quicker_71be3383-3f87-4e5e-bc91-3cf92d194d7a.png](https://s2.loli.net/2022/03/02/VQFXiarmzDpNgh2.png)
+
+
+
+# <span id="head82"> 备份与还原</span>
+
+## <span id="head83"> 命令行方式</span>
 
 ```shell
 # 备份(不需要登陆)
@@ -1449,7 +1516,7 @@ use 已备份数据库名;
 source 保存路径;
 ```
 
-# <span id="head83"> 存储过程和函数</span>
+# <span id="head84"> 存储过程和函数</span>
 
 存储过程和函数是  **事先经过编译并存储在数据库中的一段 SQL 语句的集合**
 
@@ -1487,9 +1554,9 @@ DROP PROCEDURE stu_group;
 
 ```
 
-## <span id="head84"> 存储过程语法</span>
+## <span id="head85"> 存储过程语法</span>
 
-### <span id="head85"> 变量</span>
+### <span id="head86"> 变量</span>
 
 ```mysql
 -- 定义变量
@@ -1517,7 +1584,7 @@ END$
 DELIMITER ;
 ```
 
-### <span id="head86"> if</span>
+### <span id="head87"> if</span>
 
 ```mysql
 -- IF
@@ -1562,7 +1629,7 @@ END$
 DELIMITER ;
 ```
 
-### <span id="head87"> 输入参数</span>
+### <span id="head88"> 输入参数</span>
 
 ```mysql
 DELIMITER $
@@ -1615,7 +1682,7 @@ CALL pro_test6(310,@dscription);
 SELECT @description;
 ```
 
-### <span id="head88"> case</span>
+### <span id="head89"> case</span>
 
 ```mysql
 -- 标准语法
@@ -1662,7 +1729,7 @@ CALL pro_test7(390);
 CALL pro_test7((SELECT SUM(score) FROM student));
 ```
 
-### <span id="head89"> while</span>
+### <span id="head90"> while</span>
 
 ```mysql
 -- 标准语法
@@ -1704,7 +1771,7 @@ DELIMITER ;
 CALL pro_test8();
 ```
 
-### <span id="head90"> repeat</span>
+### <span id="head91"> repeat</span>
 
 注意：repeat循环是条件满足则停止。while循环是条件满足则执行
 
@@ -1751,7 +1818,7 @@ CALL pro_test9();
 
 
 
-### <span id="head91"> loop</span>
+### <span id="head92"> loop</span>
 
 注意：loop可以实现简单的循环，但是退出循环需要使用其他的语句来定义。我们可以使用leave语句完成！
 **如果不加退出循环的语句，那么就变成了死循环。**
@@ -1804,7 +1871,7 @@ DELIMITER ;
 CALL pro_test10();
 ```
 
-### <span id="head92"> 游标</span>
+### <span id="head93"> 游标</span>
 
 - 游标可以遍历返回的多行结果，每次拿到一整行数据
 - 在存储过程和函数中可以使用游标对结果集进行循环的处理
@@ -1863,7 +1930,7 @@ CALL pro_test11();
 SELECT * FROM stu_score;
 ```
 
-## <span id="head93"> 存储函数</span>
+## <span id="head94"> 存储函数</span>
 
 存储函数有返回值，存储过程没有返回值(参数的out其实也相当于是返回数据了)
 
@@ -1908,7 +1975,7 @@ DELIMITER ;
 SELECT fun_test1();
 ```
 
-# <span id="head94"> 触发器</span>
+# <span id="head95"> 触发器</span>
 
 - 触发器是与表有关的数据库对象，可以**在 insert/update/delete 之前或之后，触发并执行触发器中定义的SQL语句**。触发器的这种特性可以协助应用**在数据库端确保数据的完整性 、日志记录 、数据校验等操作** 。
 - 使用别名 NEW 和 OLD 来引用触发器中发生变化的记录内容，这与其他的数据库是相似的。现在触发器还只支持行级触发，不支持语句级触发。
@@ -1933,7 +2000,7 @@ END$
 DELIMITER ;
 ```
 
-## <span id="head95"> 触发器演示</span>
+## <span id="head96"> 触发器演示</span>
 
 通过触发器记录账户表的数据变更日志。包含：增加、修改、删除
 
@@ -2054,7 +2121,7 @@ SHOW TRIGGERS;
 DROP TRIGGER account_delete;
 ```
 
-# <span id="head96"> 事务</span>
+# <span id="head97"> 事务</span>
 
 
 
@@ -2094,7 +2161,7 @@ SET @@AUTOCOMMIT=0;
 SELECT @@AUTOCOMMIT;  -- 1代表自动提交    0代表手动提交
 ```
 
-## <span id="head97"> 事务的四大特征(ACID)</span>
+## <span id="head98"> 事务的四大特征(ACID)</span>
 
 - 原子性(atomicity)
   - 原子性是指事务包含的所有操作**要么全部成功，要么全部失败回滚**，因此事务的操作如果成功就必须要完全应用到数据库，如果操作失败则不能对数据库有任何影响
@@ -2106,9 +2173,9 @@ SELECT @@AUTOCOMMIT;  -- 1代表自动提交    0代表手动提交
 - 持久性(durability)
   - **持久性是指一个事务一旦被提交了，那么对数据库中的数据的改变就是永久性的**，即便是在数据库系统遇到故障的情况下也不会丢失提交事务的操作
 
-## <span id="head98"> 事务的隔离级别</span>
+## <span id="head99"> 事务的隔离级别</span>
 
-### <span id="head99"> 隔离级别的概念</span>
+### <span id="head100"> 隔离级别的概念</span>
 
 - 多个客户端操作时 ,各个客户端的事务之间应该是隔离的，相互独立的 , 不受影响的。
 - 而如果**多个事务操作同一批数据时，则需要设置不同的隔离级别** , 否则就会产生问题 。
@@ -2137,7 +2204,7 @@ SET GLOBAL TRANSACTION ISOLATION LEVEL read uncommitted;
 SELECT @@TX_ISOLATION;   -- 修改后需要断开连接重新开
 ```
 
-### <span id="head100"> 事务隔离级别演示</span>
+### <span id="head101"> 事务隔离级别演示</span>
 
 - 脏读的问题
 
@@ -2339,7 +2406,7 @@ SELECT @@TX_ISOLATION;   -- 修改后需要断开连接重新开
   COMMIT;
   ```
 
-### <span id="head101"> 隔离级别总结</span>
+### <span id="head102"> 隔离级别总结</span>
 
 |      | 隔离级别             | 名称     | 出现脏读 | 出现不可重复读 | 出现幻读 | 数据库默认隔离级别  |
 | ---- | -------------------- | -------- | -------- | -------------- | -------- | ------------------- |
@@ -2350,7 +2417,7 @@ SELECT @@TX_ISOLATION;   -- 修改后需要断开连接重新开
 
 > 注意：隔离级别从小到大安全性越来越高，但是效率越来越低 , 所以不建议使用READ UNCOMMITTED 和 SERIALIZABLE 隔离级别.
 
-# <span id="head102"> 索引</span>
+# <span id="head103"> 索引</span>
 
 - MySQL数据库中的索引：是帮助MySQL高效获取数据的一种数据结构！所以，索引的本质就是数据结构。
 
@@ -2358,7 +2425,7 @@ SELECT @@TX_ISOLATION;   -- 修改后需要断开连接重新开
 
 - 一张数据表，用于保存数据。   一个索引配置文件，用于保存索引，每个索引都去指向了某一个数据(表格演示)
 
-## <span id="head103"> 索引的分类</span>
+## <span id="head104"> 索引的分类</span>
 
 - 功能分类 
   - 普通索引： 最基本的索引，它没有任何限制。
@@ -2416,19 +2483,19 @@ SHOW INDEX FROM student;
 
 ```
 
-## <span id="head104"> 索引的实现原理</span>
+## <span id="head105"> 索引的实现原理</span>
 
 - 索引是在MySQL的存储引擎中实现的，所以每种存储引擎的索引不一定完全相同，也不是所有的引擎支持所有的索引类型。这里我们主要介绍**InnoDB引擎的实现的B+Tree索引**。
 - B+Tree是一种树型数据结构，是B-Tree的变种。通常使用在数据库和操作系统中的文件系统，特点是能够**保持数据稳定有序**。我们逐步的来了解一下。
 
-### <span id="head105"> 磁盘存储</span>
+### <span id="head106"> 磁盘存储</span>
 
 - 系统从**磁盘读取数据到内存时是以磁盘块（block）为基本单位**
 - 位于**同一个磁盘块中的数据会被一次性读取出来**，而不是需要什么取什么。
 - InnoDB存储引擎中有页（Page）的概念，**页是其磁盘管理的最小单位**。InnoDB存储引擎中默认每个页的大小为16KB。
 - InnoDB引擎将若干个地址连接磁盘块，以此来达到页的大小16KB，在查询数据时如果一个页中的每条数据都能有助于定位数据记录的位置，这将会减少磁盘I/O次数，提高查询效率。
 
-### <span id="head106"> BTree</span>
+### <span id="head107"> BTree</span>
 
 - BTree结构的数据可以让系统高效的找到数据所在的磁盘块。为了描述BTree，首先定义一条记录为一个二元组[key, data] ，key为记录的键值，对应表中的主键值，data为一行记录中除主键外的数据。对于不同的记录，key值互不相同。BTree中的每个节点根据实际情况可以包含大量的关键字信息和分支，如下图所示为一个3阶的BTree： 
 
@@ -2450,7 +2517,7 @@ SHOW INDEX FROM student;
 -- 由于内存中的关键字是一个有序表结构，可以利用二分法查找提高效率。而3次磁盘I/O操作是影响整个BTree查找效率的决定因素。BTree使用较少的节点个数，使每次磁盘I/O取到内存的数据都发挥了作用，从而提高了查询效率。
 ```
 
-### <span id="head107"> B+Tree</span>
+### <span id="head108"> B+Tree</span>
 
 - B+Tree是在BTree基础上的一种优化，使其更适合实现外存储索引结构，InnoDB存储引擎就是用B+Tree实现其索引结构。
 - 从上一节中的BTree结构图中可以看到每个节点中不仅包含数据的key值，还有data值。而每一个页的存储空间是有限的，**如果data数据较大时将会导致每个节点（即一个页）能存储的key的数量很小，当存储的数据量很大时同样会导致B-Tree的深度较大，增大查询时的磁盘I/O次数**，进而影响查询效率。在B+Tree中，所有数据记录节点都是按照键值大小顺序存放在同一层的叶子节点上，而非叶子节点上只存储key值信息，这样可以大大加大每个节点存储的key值数量，降低B+Tree的高度。
@@ -2468,7 +2535,7 @@ SHOW INDEX FROM student;
 
 实际情况中每个节点可能不能填充满，因此在数据库中，**B+Tree的高度一般都在2\~4层**。MySQL的InnoDB存储引擎在设计时是将**根节点常驻内存的**，也就是说查找某一键值的行记录时**最多只需要1~3次磁盘I/O操作**。
 
-## <span id="head108"> 索引的设计原则</span>
+## <span id="head109"> 索引的设计原则</span>
 
 索引的设计可以遵循一些已有的原则，创建索引的时候请尽量考虑符合这些原则，便于提升索引的使用效率，更高效的使用索引。
 
@@ -2504,9 +2571,9 @@ SELECT * FROM user WHERE address = '北京' AND phone = '12345' AND name = '张�
 SELECT * FROM user WHERE address='北京' AND phone='12345';
 ```
 
-# <span id="head109"> 锁</span>
+# <span id="head110"> 锁</span>
 
-## <span id="head110"> 锁的概念</span>
+## <span id="head111"> 锁的概念</span>
 
 - 在我们学习事务的时候，讲解过事务的隔离性，可能会出现脏读、不可重复读、幻读的问题，当时我们的解决方式是通过修改事务的隔离级别来控制，**但是数据库的隔离级别我们并不推荐修改**。所以，锁的作用也可以解决掉之前的问题！
 
@@ -2525,7 +2592,7 @@ SELECT * FROM user WHERE address='北京' AND phone='12345';
 
 - 在数据库中，数据是一种供许多用户共享访问的资源，如何保证数据并发访问的一致性、有效性，是所有数据库必须解决的一个问题，MySQL由于自身架构的特点，在不同的存储引擎中，都设计了面对特定场景的锁定机制，所以引擎的差别，导致锁机制也是有很大差别的。
 
-## <span id="head111"> 锁的分类</span>
+## <span id="head112"> 锁的分类</span>
 
 - 按操作分类：
   - 共享锁：也叫读锁。**数据可以被多个事务查间，但是不能修改**
@@ -2551,7 +2618,7 @@ SELECT * FROM user WHERE address='北京' AND phone='12345';
 | MEMORY   | 支持   | 不支持   | 不支持   |
 | BDB      | 支持   | 不支持   | **支持** |
 
-## <span id="head112"> 演示InnoDB锁</span>
+## <span id="head113"> 演示InnoDB锁</span>
 
 ```mysql
 -- 共享锁
@@ -2661,7 +2728,7 @@ UPDATE student SET NAME='张三' WHERE id=1;
 COMMIT;
 ```
 
-## <span id="head113"> 演示MyISAM锁</span>
+## <span id="head114"> 演示MyISAM锁</span>
 
 ```mysql
 -- 读锁。加锁
@@ -2742,7 +2809,7 @@ SELECT * FROM product;
 UPDATE product SET price=2999 WHERE id=2;
 ```
 
-## <span id="head114"> 演示悲观锁和乐观锁</span>
+## <span id="head115"> 演示悲观锁和乐观锁</span>
 
 - 我们之前所学的行锁，表锁不论是读写锁都是悲观锁。
 
@@ -2787,7 +2854,7 @@ UPDATE product SET price=2999 WHERE id=2;
     - 读取数据时，将时间读取出来，在执行更新的时候，比较时间。
     - 如果相同则执行更新，如果不相同，说明此条数据已经发生了变化。
 
-## <span id="head115"> 锁的总结</span>
+## <span id="head116"> 锁的总结</span>
 
 - 表锁和行锁
 
@@ -2804,9 +2871,9 @@ UPDATE product SET price=2999 WHERE id=2;
   - 在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率。
   - 对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁的产生。
 
-# <span id="head116"> 存储引擎</span>
+# <span id="head117"> 存储引擎</span>
 
-### <span id="head117"> MySQL体系结构</span>
+### <span id="head118"> MySQL体系结构</span>
 
 - 体系结构的概念
 
@@ -2833,7 +2900,7 @@ UPDATE product SET price=2999 WHERE id=2;
   - 第四层：系统文件层
     - 文件系统：配置文件、数据文件、日志文件、错误文件、二进制文件等等的保存
 
-### <span id="head118"> MySQL存储引擎</span>
+### <span id="head119"> MySQL存储引擎</span>
 
 - 引擎的概念
 
@@ -2848,7 +2915,7 @@ UPDATE product SET price=2999 WHERE id=2;
   - MySQL5.7支持的引擎包括：InnoDB、MyISAM、MEMORY、Archive、Federate、CSV、BLACKHOLE等
   - 其中较为常用的有三种：InnoDB、MyISAM、MEMORY
 
-### <span id="head119"> 常用引擎的特性对比</span>
+### <span id="head120"> 常用引擎的特性对比</span>
 
 - 常用的存储引擎
   - MyISAM存储引擎
@@ -2909,7 +2976,7 @@ ALTER TABLE engine_test ENGINE = INNODB;
 SHOW TABLE STATUS FROM db11 WHERE NAME = 'engine_test';
 ```
 
-#### <span id="head120"> 总结：引擎的选择</span>
+#### <span id="head121"> 总结：引擎的选择</span>
 
 - MyISAM ：由于MyISAM不支持事务、不支持外键、支持全文检索和表级锁定，读写相互阻塞，读取速度快，节约资源，所以如果应用是以**查询操作和插入操作为主**，只有**很少的更新和删除**操作，并且**对事务的完整性、并发性要求不是很高**，那么选择这个存储引擎是非常合适的。
 - InnoDB : 是MySQL的默认存储引擎， 由于InnoDB支持事务、支持外键、行级锁定 ，支持所有辅助索引(5.5.5后不支持全文检索)，高缓存，所以用于对事务的完整性有比较高的要求，在并发条件下要求数据的一致性，读写频繁的操作，那么InnoDB存储引擎是比较合适的选择，比如BBS、计费系统、充值转账等

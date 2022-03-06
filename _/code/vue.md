@@ -1678,14 +1678,6 @@ router-view 也是一个组件，如果直接被包在 keep-alive 里面，所�
 </keep-alive>
 ```
 
-通过create声明周期函数来验证
-
-
-
-
-
-
-
 
 
 # <span id="head73"> Promise</span>
@@ -2341,9 +2333,9 @@ imgUrl:require('./assets/logo.png')
 
 ```kotlin
   watch: {
-    name (val) {
-      this.watchName = val;
-    }
+   a(val, oldVal){//普通的watch监听a
+         console.log("a: "+val, oldVal);
+     }
   }
 ```
 
