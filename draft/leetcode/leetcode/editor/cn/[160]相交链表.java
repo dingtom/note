@@ -84,17 +84,25 @@ public class Solution {
 //        }
 //        return null;
 
+//        /**
+//         * 双指针
+//         * 链表相交，相交节点后面的路程是一样的，
+//         * 1.遍历得到两个链表的长度，长的先走，然后一起走
+//         * 2.两个指针长的走完去走短的
+//         */
+
         /**
          * 双指针
          * 链表相交，相交节点后面的路程是一样的，
-         * 1.遍历得到两个链表的长度，长的先走，然后一起走
-         * 2.两个指针长的走完去走短的
+         * 走完自己的走别人的，两个路程一样
+         *
          */
         if (headA == null || headB == null) {
             return null;
         }
         ListNode a = headA, b = headB;
         while(a != b) {
+            // 中间没有相交的，到终点都为null
             a = a == null ? headB: a.next;
             b = b == null ? headA: b.next;
         }
