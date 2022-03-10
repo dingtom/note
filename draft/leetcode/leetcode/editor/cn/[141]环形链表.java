@@ -53,17 +53,19 @@ public class Solution {
         if (head == null || head.next == null) {
             return false;
         }
-        ListNode slow = head, fast = head.next;
-        while (slow != fast) {
-            if (fast == null || fast.next == null) {
+        ListNode slow = head, fast = head;
+        while (fast != null) {
+            slow = slow.next;
+            if (fast.next != null) {
+                fast = fast.next.next;
+            } else {
                 return false;
             }
-            slow = slow.next;
-            fast = fast.next.next;
+            if (fast == slow) {
+                return true;
+            }
         }
-        return true;
-
-        
+        return false;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

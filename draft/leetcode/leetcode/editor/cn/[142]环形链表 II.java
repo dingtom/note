@@ -75,7 +75,7 @@ public class Solution {
          * 因此，总的执行时间为 O(N)+O(N)=O(N)。
          * 空间复杂度：O(1)。我们只使用了slow,fast,ptr 三个指针。
          */
-        if (head == null) {
+        if (head == null || head.next == null) {
             return null;
         }
         ListNode fast = head, slow = head;
