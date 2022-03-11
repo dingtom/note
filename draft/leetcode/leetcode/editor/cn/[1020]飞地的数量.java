@@ -38,8 +38,7 @@ class Solution {
         int colLen = grid[0].length;
         for (int i = 0; i < rowLen; i++) {
             dfs(grid, i, 0);
-            dfs(grid, i,
-                    0);
+            dfs(grid, i, 0);
         }
         for (int i = 1; i < colLen - 1; i++) {
 

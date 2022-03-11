@@ -51,7 +51,7 @@ class Solution {
             if (lastSorted.val <= cur.val) {
                 lastSorted = lastSorted.next;
             } else {
-                ListNode pre = dummyHea d;
+                ListNode pre = dummyHead;
                 while (pre.next.val <= cur.val) {
                     pre = pre.next;
                 }
