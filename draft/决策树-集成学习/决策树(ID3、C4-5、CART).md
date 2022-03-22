@@ -2,8 +2,10 @@
 
 # 决策树
 
-整个决策树的学习过程就是一个递归地选择最优特征，并根据该特征对数据集进行划分，使得各个样本都得到一个最好的分类的过程。
-![决策树模型由内部结点和叶子节点构成，内部节点表示特征或者属性，叶子节点表示类标签](https://upload-images.jianshu.io/upload_images/18339009-14654252382d2fbf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+整个决策树的学习过程就是一个**递归地选择最优特征，并根据该特征对数据集进行划分**，使得各个样本都得到一个最好的分类的过程。
+![](https://upload-images.jianshu.io/upload_images/18339009-14654252382d2fbf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+决策树模型由内部结点和叶子节点构成，内部节点表示特征或者属性，叶子节点表示类标签
 
 **包括三个过程：特征选择、决策树生成和决策树剪枝 。**
 
@@ -129,6 +131,7 @@ C4.5 相对于 ID3 的缺点对应有以下改进方式：
 ## 划分
 ![](https://upload-images.jianshu.io/upload_images/18339009-996cc9dd2e7056ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ![信息增益g(D,A)与训练数据集D在特征A的划分下数据集本身的一个混乱程度(熵）](https://upload-images.jianshu.io/upload_images/18339009-195f71c64f005a58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 >![](https://upload-images.jianshu.io/upload_images/18339009-d41c3640a09e69ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 >$H_A(D) = - \frac{1}{7} \log \frac{1}{7} * 7 = -\log \frac{1}{7}$ 也就是说**类别越多，混乱程度越大，这时候信息增益比也会减小**
 >![](https://upload-images.jianshu.io/upload_images/18339009-dd420252adbc1345.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
