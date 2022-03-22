@@ -3,7 +3,7 @@
 ```
 function ClickConnect(){
 console.log(“Working”);
-document.querySelector(“colab-toolbar-button#connect”).click()
+document.querySelector(“colab-toolbar-button#connect”).shadowRoot.querySelector("#connect").click()
 }
 setInterval(ClickConnect,60000)
 ```
@@ -27,7 +27,7 @@ pynvml.nvmlInit()
 handle = pynvml.nvmlDeviceGetHandleByIndex(0)
 meminfo = pynvml.nvmlDeviceGetMemoryInfo(handle)
 print('GPU Memory-Usage total:{:.2f}(GiB) used:{:.2f}% free:{:.2f}(MiB)'.format(meminfo.total/(1024**3), meminfo.used/meminfo.total*100, meminfo.free/(1024**2))) #显卡剩余显存大小
-```
+ ```
 
 
 ```
@@ -39,42 +39,7 @@ RAM内存
 查看CPU
 ```!cat /proc/cpuinfo```
 
-指定工作目录
-```
-import os
-print(os.getcwd())
-# os.chdir("drive/") 
-```
-
-文件操作
-1.上传文件
-````
-from google.colab import files
- 
-uploaded = files.upload()
- 
-for fn in uploaded.keys():
-  print('User uploaded file "{name}" with length {length} bytes'.format(
-      name=fn, length=len(uploaded[fn])))
-# files.upload返回上传文件的字典。字典是由文件名键入的，值是上传的数据。
-````
-
-2.下载文件
-```
-from google.colab import files
- 
-with open('123.txt', 'w') as f:
-  f.write('some content')
- 
-files.download('123.txt')
-```
-3.下载文件
-```shell
-!wget https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/csv/datasets/Titanic.csv 
-!unzip 
-```
-4.使用TPU
-模型转换
+使用TPU\模型转换
 ```
 TPU_ADDRESS = TPU_WORKER = 'grpc://' + os.environ['COLAB_TPU_ADDR']
 tf.logging.set_verbosity(tf.logging.INFO)
@@ -85,14 +50,11 @@ strategy = tf.contrib.tpu.TPUDistributionStrategy(tpu)
 tpu_model = tf.contrib.tpu.keras_to_tpu_model(model, strategy=strategy)
 ```
 >1.TPU只兼容tensorflow.python.keras.XXX 格式的库，调用了标准keras的mode需要修改keras库的引用
-2.目前标准TPU对keras标准的优化器（keras.optimizers）支持有限，有时候可能使用tf.train.的优化器进行编译，如果没有特殊需求，建议还是使用keras自己的优化器
-3.batch_size=128 * 8，batch_size 设置为模型输入 batch_size 的八倍，这是为了使输入样本在 8 个 TPU 核心上均匀分布并运行。
+>2.目前标准TPU对keras标准的优化器（keras.optimizers）支持有限，有时候可能使用tf.train.的优化器进行编译，如果没有特殊需求，建议还是使用keras自己的优化器
+>3.batch_size=128 * 8，batch_size 设置为模型输入 batch_size 的八倍，这是为了使输入样本在 8 个 TPU 核心上均匀分布并运行。 
+>TPU模型的保存与恢复
+>保存之前需要先将其转换为CPU模型，可以保存在前面挂载的云盘的文件夹中：
 
-
-                        
-         
-TPU模型的保存与恢复
-保存之前需要先将其转换为CPU模型，可以保存在前面挂载的云盘的文件夹中：
 ```
 save_model =  model.sync_to_cpu()
 save_model.save('/content/best.hdf5')

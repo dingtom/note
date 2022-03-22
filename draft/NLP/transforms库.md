@@ -14,7 +14,7 @@ MODELS = [(BertModel,       BertTokenizer,       'bert-base-uncased'),
 # 要使用TensorFlow 2.0版本的模型，只需在类名前面加上“TF”，例如。“TFRobertaModel”是TF2.0版本的PyTorch模型“RobertaModel”
 ```
 
-```
+```python
 # 导入必要的库
 import torch
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
@@ -49,7 +49,7 @@ predicted_text = tokenizer.decode(indexed_tokens + [predicted_index])
 print(predicted_text)
 ```
 
-```
+```python
 import torch
 from transformers import *
 

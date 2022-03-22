@@ -377,8 +377,10 @@ Python中函数参数是**引用传递**（注意不是值传递）。对于不�
 
 
 
+
+
 ## 使用多进程提升cpu密集任务效率
-```
+```python
 import time
 import multiprocessing
 def muchjob(x):
@@ -386,6 +388,7 @@ def muchjob(x):
     return(x**2)
 if __name__ == '__main__':
     # 多进程任务
+    # 创建进程池必须要在main里，要不然每个进程都会创建自己的子多进程
     pool = multiprocessing.Pool(processes=8)
     result= []
     for i in range(8):
@@ -395,22 +398,13 @@ if __name__ == '__main__':
     ans = [res.get() for res in result]
     print(ans)
 ```
-## 使用多线程提升IO密集任务效率
-```
-import threading
-def writefile(i):
-    a = [x**2 for x in range(i)]
-# 多线程任务
-thread_list= []
-for i in range(300):
-    t = threading.Thread(target=writefile, args=(i,))
-    t.setDaemon(True)  # 设置为守护线程
-    thread_list.append(t)
-for t in thread_list:
-    t.start()  # 启动线程
-for t in thread_list:
-    t.join()  # 等待子线程结束
-```
+
+
+**进程是资源分配的最小单位,线程是CPU调度的最小单位**
+
+
+
+对Python虚拟机的访问由全局解释器锁（GIL）来控制，正是这个锁能保证同时只有一个线程在运行。python是假多线程
 
 ## 可变数据类型和不可变数据类型
 **不可变数据类型：数值型、字符串型string和元组tuple**
