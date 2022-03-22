@@ -1,121 +1,425 @@
 - [leetcode 热题100](#head1)
-	- [[1. 两数之和](https://leetcode-cn.com/problems/two-sum/)](#head2)
-	- [[2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)](#head3)
-	- [[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)](#head4)
-	- [[4. 寻找两个正序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/)](#head5)
-	- [[5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)](#head6)
-	- [[10. 正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)](#head7)
-	- [[11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)](#head8)
-	- [[15. 三数之和](https://leetcode-cn.com/problems/3sum/)](#head9)
-	- [[17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)](#head10)
-	- [[19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)](#head11)
-	- [[20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)](#head12)
-	- [[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)](#head13)
-	- [[22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/)](#head14)
-	- [[23. 合并K个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)](#head15)
-	- [[31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)](#head16)
-	- [[32. 最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)](#head17)
-	- [[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)](#head18)
-	- [[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)](#head19)
-	- [[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)](#head20)
-	- [ 42.接雨水](#head21)
-	- [ 46.全排列](#head22)
-	- [ 48.旋转图像](#head23)
-	- [[49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)](#head24)
-	- [[53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)](#head25)
-	- [[55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)](#head26)
-	- [[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)](#head27)
-	- [[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)](#head28)
-	- [[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)](#head29)
-	- [[70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)](#head30)
-	- [[72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)](#head31)
-	- [[75. 颜色分类](https://leetcode-cn.com/problems/sort-colors/)](#head32)
-	- [[76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)](#head33)
-	- [[78. 子集](https://leetcode-cn.com/problems/subsets/)](#head34)
-	- [[79. 单词搜索](https://leetcode-cn.com/problems/word-search/)](#head35)
-	- [[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)](#head36)
-		- [ 暴力](#head37)
-		- [ 单调栈](#head38)
-	- [[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)](#head39)
-	- [[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)](#head40)
-		- [ 递归版本](#head41)
-		- [ 迭代版本](#head42)
-	- [[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)](#head43)
-	- [[98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)](#head44)
-	- [[101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)](#head45)
-	- [[102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)](#head46)
-	- [[104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)](#head47)
-		- [ 递归](#head48)
-		- [ 迭代](#head49)
-			- [ BFS](#head50)
-			- [ DFS](#head51)
-	- [[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)](#head52)
-	- [[114. 二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)](#head53)
-	- [[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)](#head54)
-	- [[124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)](#head55)
-	- [[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)](#head56)
-	- [[136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/)](#head57)
-	- [[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)](#head58)
-	- [[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)](#head59)
-	- [[142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)](#head60)
-	- [[146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)](#head61)
-	- [[148. 排序链表](https://leetcode-cn.com/problems/sort-list/)](#head62)
-	- [[152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)](#head63)
-	- [[155. 最小栈](https://leetcode-cn.com/problems/min-stack/)](#head64)
-	- [[160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)](#head65)
-	- [[169. 多数元素](https://leetcode-cn.com/problems/majority-element/)](#head66)
-	- [[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)](#head67)
-	- [[200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)](#head68)
-	- [[206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)](#head69)
-	- [[207. 课程表](https://leetcode-cn.com/problems/course-schedule/)](#head70)
-	- [[208. 实现 Trie (前缀树)](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)](#head71)
-	- [[215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)](#head72)
-	- [[221. 最大正方形](https://leetcode-cn.com/problems/maximal-square/)](#head73)
-	- [[226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)](#head74)
-	- [[234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)](#head75)
-	- [[236. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)](#head76)
-	- [[238. 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)](#head77)
-	- [[239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)](#head78)
-	- [[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)](#head79)
-	- [[279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)](#head80)
-	- [[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)](#head81)
-	- [[283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)](#head82)
-	- [[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)](#head83)
-	- [[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)](#head84)
-	- [[300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)](#head85)
-	- [[301. 删除无效的括号](https://leetcode-cn.com/problems/remove-invalid-parentheses/)](#head86)
-	- [[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)](#head87)
-	- [[312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)](#head88)
-	- [[322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)](#head89)
-	- [[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)](#head90)
-	- [[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)](#head91)
-	- [[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)](#head92)
-	- [[394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)](#head93)
-	- [[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)](#head94)
-	- [[406. 根据身高重建队列](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)](#head95)
-	- [[416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)](#head96)
-	- [[437. 路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)](#head97)
-	- [[438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)](#head98)
-	- [[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)](#head99)
-	- [[461. 汉明距离](https://leetcode-cn.com/problems/hamming-distance/)](#head100)
-	- [[494. 目标和](https://leetcode-cn.com/problems/target-sum/)](#head101)
-	- [[538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/)](#head102)
-	- [[543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/)](#head103)
-	- [[560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)](#head104)
-	- [[581. 最短无序连续子数组](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)](#head105)
-	- [[617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)](#head106)
-	- [[621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)](#head107)
-	- [[647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)](#head108)
-	- [[739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)](#head109)
+	- [ **第一周，链表、栈、队列**](#head2)
+		- [ **第一天：链表（周三）**](#head3)
+		- [**第二天：直播 + 栈（周六）**](#head4)
+		- [ **第三天：队列（周日）**](#head5)
+		- [ **补充内容**](#head6)
+	- [ **第二周，递归、排序、贪心**](#head7)
+		- [**第一天：直播 + 递归 + 简单排序算法（周三）**](#head8)
+		- [ **第二天：复杂排序算法（周六）**](#head9)
+		- [ **第三天：贪心算法（周日）**](#head10)
+	- [ **第三周，搜索算法、回溯算法、位运算、二分查找**](#head11)
+		- [**第一天：搜索 + 回溯（周三）**](#head12)
+		- [**第二天：直播 + 位运算（周六）**](#head13)
+		- [ **第三天：二分查找（周日）**](#head14)
+	- [ **第四周，二叉树、二叉查找树、线段树**](#head15)
+		- [ **第一天：二叉树（周三）**](#head16)
+		- [**第二天：直播 + 二叉查找树（周六）**](#head17)
+		- [ **第三天：线段树（周日）**](#head18)
+	- [ **第五周、动态规划、图算法**](#head19)
+		- [ **第一天：动态规划（周三）**](#head20)
+		- [**第二天：二叉树直播 + 动态规划（周六）**](#head21)
+		- [ **第三天：图算法（周日）**](#head22)
+	- [[1. 两数之和](https://leetcode-cn.com/problems/two-sum/)](#head23)
+	- [[2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)](#head24)
+	- [[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)](#head25)
+	- [[4. 寻找两个正序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/)](#head26)
+	- [[5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)](#head27)
+	- [[10. 正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)](#head28)
+	- [[11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)](#head29)
+	- [[15. 三数之和](https://leetcode-cn.com/problems/3sum/)](#head30)
+	- [[17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)](#head31)
+	- [[19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)](#head32)
+	- [[20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)](#head33)
+	- [[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)](#head34)
+	- [[22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/)](#head35)
+	- [[23. 合并K个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)](#head36)
+	- [[31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)](#head37)
+	- [[32. 最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)](#head38)
+	- [[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)](#head39)
+	- [[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)](#head40)
+	- [[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)](#head41)
+	- [ 42.接雨水](#head42)
+	- [ 46.全排列](#head43)
+	- [ 48.旋转图像](#head44)
+	- [[49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)](#head45)
+	- [[53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)](#head46)
+	- [[55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)](#head47)
+	- [[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)](#head48)
+	- [[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)](#head49)
+	- [[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)](#head50)
+	- [[70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)](#head51)
+	- [[72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)](#head52)
+	- [[75. 颜色分类](https://leetcode-cn.com/problems/sort-colors/)](#head53)
+	- [[76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)](#head54)
+	- [[78. 子集](https://leetcode-cn.com/problems/subsets/)](#head55)
+	- [[79. 单词搜索](https://leetcode-cn.com/problems/word-search/)](#head56)
+	- [[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)](#head57)
+		- [ 暴力](#head58)
+		- [ 单调栈](#head59)
+	- [[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)](#head60)
+	- [[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)](#head61)
+		- [ 递归版本](#head62)
+		- [ 迭代版本](#head63)
+	- [[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)](#head64)
+	- [[98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)](#head65)
+	- [[101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)](#head66)
+	- [[102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)](#head67)
+	- [[104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)](#head68)
+		- [ 递归](#head69)
+		- [ 迭代](#head70)
+			- [ BFS](#head71)
+			- [ DFS](#head72)
+	- [[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)](#head73)
+	- [[114. 二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)](#head74)
+	- [[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)](#head75)
+	- [[124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)](#head76)
+	- [[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)](#head77)
+	- [[136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/)](#head78)
+	- [[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)](#head79)
+	- [[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)](#head80)
+	- [[142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)](#head81)
+	- [[146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)](#head82)
+	- [[148. 排序链表](https://leetcode-cn.com/problems/sort-list/)](#head83)
+	- [[152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)](#head84)
+	- [[155. 最小栈](https://leetcode-cn.com/problems/min-stack/)](#head85)
+	- [[160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)](#head86)
+	- [[169. 多数元素](https://leetcode-cn.com/problems/majority-element/)](#head87)
+	- [[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)](#head88)
+	- [[200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)](#head89)
+	- [[206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)](#head90)
+	- [[207. 课程表](https://leetcode-cn.com/problems/course-schedule/)](#head91)
+	- [[208. 实现 Trie (前缀树)](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)](#head92)
+	- [[215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)](#head93)
+	- [[221. 最大正方形](https://leetcode-cn.com/problems/maximal-square/)](#head94)
+	- [[226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)](#head95)
+	- [[234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)](#head96)
+	- [[236. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)](#head97)
+	- [[238. 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)](#head98)
+	- [[239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)](#head99)
+	- [[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)](#head100)
+	- [[279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)](#head101)
+	- [[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)](#head102)
+	- [[283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)](#head103)
+	- [[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)](#head104)
+	- [[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)](#head105)
+	- [[300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)](#head106)
+	- [[301. 删除无效的括号](https://leetcode-cn.com/problems/remove-invalid-parentheses/)](#head107)
+	- [[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)](#head108)
+	- [[312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)](#head109)
+	- [[322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)](#head110)
+	- [[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)](#head111)
+	- [[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)](#head112)
+	- [[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)](#head113)
+	- [[394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)](#head114)
+	- [[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)](#head115)
+	- [[406. 根据身高重建队列](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)](#head116)
+	- [[416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)](#head117)
+	- [[437. 路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)](#head118)
+	- [[438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)](#head119)
+	- [[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)](#head120)
+	- [[461. 汉明距离](https://leetcode-cn.com/problems/hamming-distance/)](#head121)
+	- [[494. 目标和](https://leetcode-cn.com/problems/target-sum/)](#head122)
+	- [[538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/)](#head123)
+	- [[543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/)](#head124)
+	- [[560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)](#head125)
+	- [[581. 最短无序连续子数组](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)](#head126)
+	- [[617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)](#head127)
+	- [[621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)](#head128)
+	- [[647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)](#head129)
+	- [[739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)](#head130)
 # <span id="head1">leetcode 热题100</span>
 
-[TOC]
 
-## <span id="head2">[1. 两数之和](https://leetcode-cn.com/problems/two-sum/)</span>
+## <span id="head2"> **第一周，链表、栈、队列**</span>
+
+### <span id="head3"> **第一天：链表（周三）**</span>
+
+1、[链表的基础知识：单链表](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1070.html)
+
+2、[反转链表（ LeetCode 206 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/654.html)
+
+3、[相交链表（ LeetCode 160 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/693.html)
+
+4、[合并两个有序链表 （ LeetCode 21 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/658.html)
+
+5、[分隔链表 （ LeetCode 86 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/682.html)
+
+6、[环形链表 II （ LeetCode 142 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/746.html)
+
+7、[反转链表 II （ LeetCode 92 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/656.html)
+
+8、[复制带随机指针的链表（ LeetCode 138 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/708.html)
+
+### <span id="head4">**第二天：直播 + 栈（周六）**</span>
+
+1、[链表算法题直播答疑](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1086.html)
+
+2、[栈的基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1081.html)
+
+3、[有效的括号（ LeetCode 20 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/610.html)
+
+4、[基本计算器（ LeetCode 224 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1102.html)
+
+5、[最小栈（ LeetCode 155 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/608.html)
+
+6、[验证栈序列（ LeetCode 946 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1104.html)
+
+7、[每日温度（ LeetCode 739 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/620.html)
+
+8、[接雨水（ LeetCode 42 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/627.html)
+
+### <span id="head5"> **第三天：队列（周日）**</span>
+
+1、[队列的基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1091.html)
+
+2、优先队列基础知识
+
+3、[用栈实现队列 （ LeetCode 232 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/612.html)
+
+4、[滑动窗口最大值（ LeetCode 239 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/635.html)
+
+5、设计循环双端队列（ LeetCode 641 ）
+
+### <span id="head6"> **补充内容**</span>
+
+以下内容比较简单，学完队列还有余力的时候可以快速过一遍下面这些链表题。
+
+1、[移除链表元素（ LeetCode 203 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/660.html)
+
+2、[K 个一组翻转链表（ LeetCode 25 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/696.html)
+
+3、[回文链表（ LeetCode 234 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/687.html)
+
+4、[奇偶链表（ LeetCode 328 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/716.html)
+
+5、[从尾到头打印链表（ 剑指Offer 06 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/718.html)
+
+6、[链表中倒数第 k 个节点（ 剑指Offer 22 ）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/764.html)
+
+## <span id="head7"> **第二周，递归、排序、贪心**</span>
+
+### <span id="head8">**第一天：直播 + 递归 + 简单排序算法（周三）**</span>
+
+1、[递归基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1115.html)
+
+2、[冒泡排序基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1118.html)
+
+3、[选择排序基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1120.html)
+
+4、[插入排序基础知识](https://link.zhihu.com/?target=https%3A//www.algomooc.com/1122.html)
+
+5、[合并两个有序数组( LeetCode 88 )](https://link.zhihu.com/?target=https%3A//www.algomooc.com/555.html)
+
+6、[颜色分类( LeetCode 75 )](https://link.zhihu.com/?target=https%3A//www.algomooc.com/567.html)
+
+7、[部分排序 （面试题 16）](https://link.zhihu.com/?target=https%3A//www.algomooc.com/569.html)
+
+8、[归并排序](https://www.zhihu.com/search?q=归并排序&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A649061966})基础知识(明天上传)
+
+9、计算右侧小于当前元素的个数 （ LeetCode 315 ）(明天上传)
+
+10、合并 K 个升序链表（ LeetCode 23 ）(明天上传)
+
+### <span id="head9"> **第二天：复杂排序算法（周六）**</span>
+
+1、栈 + 队列问题答疑
+
+2、快速排序基础知识
+
+3、二叉堆基础知识
+
+4、堆排序基础知识
+
+5、计数排序基础知识
+
+6、基数排序基础知识
+
+7、桶排序基础知识
+
+### <span id="head10"> **第三天：贪心算法（周日）**</span>
+
+1、贪心算法基础知识
+
+2、分发饼干（ LeetCode 455 ）
+
+3、柠檬水找零（ LeetCode 860 ）
+
+4、用最少数量的箭引爆气球（ LeetCode 452 ）
+
+5、移掉 K 位数字（ LeetCode 402 ）
+
+6、跳跃游戏（ LeetCode 55 ）
+
+7、摆动序列（ LeetCode 376 ）
+
+8、买卖股票的最佳时机 II（ LeetCode 122 ）
+
+## <span id="head11"> **第三周，搜索算法、回溯算法、位运算、二分查找**</span>
+
+### <span id="head12">**第一天：搜索 + 回溯（周三）**</span>
+
+1、搜索基础知识
+
+2、回溯基础知识
+
+3、子集（ LeetCode 78 ）
+
+4、组合总和 II（ LeetCode 40 ）
+
+5、括号生成（ LeetCode 22 ）
+
+6、N 皇后（ LeetCode 51 ）
+
+7、火柴拼正方形（ LeetCode 473 ）
+
+8、岛屿数量（ LeetCode 200 ）
+
+9、接雨水 II（ LeetCode 407 ）
+
+### <span id="head13">**第二天：直播 + 位运算（周六）**</span>
+
+1、排序算法问题、贪心算法问题答疑
+
+2、位运算基础知识
+
+3、丢失的数字（ LeetCode 268 ）
+
+4、2 的幂（ LeetCode 231 ）
+
+5、比特位计数（ LeetCode 338 ）
+
+6、位 1 的个数（ LeetCode 268 ）
+
+7、4 的幂（ LeetCode 342 ）
+
+8、只出现一次的数字（ LeetCode 136 ）
+
+### <span id="head14"> **第三天：二分查找（周日）**</span>
+
+1、二分查找基础知识
+
+2、搜索插入位置（ LeetCode 35 ）
+
+3、在排序数组中查找元素的第一个和最后一个位置（ LeetCode 34 ）
+
+4、搜索旋转排序数组（ LeetCode 33 ）
+
+5、搜索二维矩阵（ LeetCode 74 ）
+
+6、寻找两个正序数组的中位数（ LeetCode 4 ）
+
+## <span id="head15"> **第四周，二叉树、二叉查找树、线段树**</span>
+
+### <span id="head16"> **第一天：二叉树（周三）**</span>
+
+1、二叉树基础知识
+
+2、二叉树的前序遍历（ LeetCode 144 ）
+
+3、二叉树的中序遍历（ LeetCode 94 ）
+
+4、二叉树的后序遍历（ LeetCode 145 ）
+
+5、二叉树的层序遍历（ LeetCode 102 ）
+
+6、二叉树的锯齿形层序遍历（ LeetCode 103 ）
+
+7、从前序与中序遍历序列构造二叉树（ LeetCode 105 ）
+
+8、路径总和 II（ LeetCode 113 ）
+
+9、二叉树的最近公共祖先（ LeetCode 236 ）
+
+10、二叉树的右视图（ LeetCode 199 ）
+
+11、二叉树展开为链表（ LeetCode 114 ）
+
+### <span id="head17">**第二天：直播 + 二叉查找树（周六）**</span>
+
+1、回溯算法问题、位运算问题、二分查找问题直播答疑
+
+2、二叉查找树基础知识
+
+3、将有序数组转换为二叉搜索树（ LeetCode 108 ）
+
+4、把二叉搜索树转换为累加树（ LeetCode 538 ）
+
+5、删除二叉搜索树中的节点（ LeetCode 450 ）
+
+6、[序列化](https://www.zhihu.com/search?q=序列化&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A649061966})和反序列化二叉搜索树（ LeetCode 449 ）
+
+7、计算右侧小于当前元素的个数（ LeetCode 315 ）
+
+### <span id="head18"> **第三天：线段树（周日）**</span>
+
+1、线段树基础知识
+
+2、区域和检索 - 数组可修改（ LeetCode 307 ）
+
+3、天际线问题（ LeetCode 218 ）
+
+## <span id="head19"> **第五周、动态规划、图算法**</span>
+
+### <span id="head20"> **第一天：动态规划（周三）**</span>
+
+1、动态规划基础知识
+
+2、爬楼梯（ LeetCode 70 ）
+
+3、打家劫舍（ LeetCode 198 ）
+
+4、[三角形](https://www.zhihu.com/search?q=三角形&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A649061966})最小路径和（ LeetCode 120 ）
+
+5、最大子序和（ LeetCode 53 ）
+
+6、零钱兑换（ LeetCode 322 ）
+
+7、最小路径和（ LeetCode 64 ）
+
+8、编辑距离（ LeetCode 72 ）
+
+9、地下城游戏（ LeetCode 174 ）
+
+### <span id="head21">**第二天：二叉树直播 + 动态规划（周六）**</span>
+
+1、二叉树算法问题直播答疑
+
+2、买卖股票的最佳时机（ LeetCode 121 ）
+
+3、买卖股票的最佳时机II（ LeetCode 122 ）
+
+4、买卖股票的最佳时机III（ LeetCode 123 ）
+
+5、买卖股票的最佳时机IV（ LeetCode 188 ）
+
+6、最长递增子序列（ LeetCode 300 ）
+
+7、分割等和子集（ LeetCode 416 ）
+
+8、完全平方数（ LeetCode 279 ）
+
+### <span id="head22"> **第三天：图算法（周日）**</span>
+
+1、图基础知识
+
+2、省份数量（ LeetCode 547 ）
+
+3、课程表（ LeetCode 547 ）
 
 
 
-## <span id="head3">[2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)</span>
+
+
+
+
+
+
+## <span id="head23">[1. 两数之和](https://leetcode-cn.com/problems/two-sum/)</span>
+
+
+
+## <span id="head24">[2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)</span>
 
 难度中等4480
 
@@ -164,7 +468,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head4">[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)</span>
+## <span id="head25">[3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)</span>
 
 难度中等3815
 
@@ -242,7 +546,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head5">[4. 寻找两个正序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/)</span>
+## <span id="head26">[4. 寻找两个正序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/)</span>
 
 难度困难2787
 
@@ -297,7 +601,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head6">[5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)</span>
+## <span id="head27">[5. 最长回文子串](https://leetcode-cn.com/problems/longest-palindromic-substring/)</span>
 
 难度中等2333
 
@@ -383,7 +687,7 @@ public:
 };
 ~~~
 
-## <span id="head7">[10. 正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)</span>
+## <span id="head28">[10. 正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)</span>
 
 难度困难1316
 
@@ -483,7 +787,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head8">[11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)</span>
+## <span id="head29">[11. 盛最多水的容器](https://leetcode-cn.com/problems/container-with-most-water/)</span>
 
 难度中等1548
 
@@ -522,7 +826,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head9">[15. 三数之和](https://leetcode-cn.com/problems/3sum/)</span>
+## <span id="head30">[15. 三数之和](https://leetcode-cn.com/problems/3sum/)</span>
 
 难度中等2300
 
@@ -571,7 +875,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head10">[17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)</span>
+## <span id="head31">[17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/)</span>
 
 难度中等760
 
@@ -625,7 +929,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head11">[19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)</span>
+## <span id="head32">[19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)</span>
 
 难度中等861
 
@@ -708,7 +1012,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head12">[20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)</span>
+## <span id="head33">[20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)</span>
 
 难度简单1627
 
@@ -781,7 +1085,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head13">[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)</span>
+## <span id="head34">[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)</span>
 
 难度简单1115
 
@@ -818,7 +1122,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head14">[22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/)</span>
+## <span id="head35">[22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/)</span>
 
 难度中等1109
 
@@ -859,7 +1163,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head15">[23. 合并K个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)</span>
+## <span id="head36">[23. 合并K个排序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)</span>
 
 难度困难732
 
@@ -943,7 +1247,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head16">[31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)</span>
+## <span id="head37">[31. 下一个排列](https://leetcode-cn.com/problems/next-permutation/)</span>
 
 难度中等530
 
@@ -984,7 +1288,7 @@ class Solution {
 //leetcode submit region end(Prohibit modification and deletion)
 ~~~
 
-## <span id="head17">[32. 最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)</span>
+## <span id="head38">[32. 最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)</span>
 
 难度困难699
 
@@ -1057,7 +1361,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head18">[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)</span>
+## <span id="head39">[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)</span>
 
 难度中等788
 
@@ -1111,7 +1415,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head19">[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)</span>
+## <span id="head40">[34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)</span>
 
 难度中等466
 
@@ -1156,7 +1460,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head20">[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)</span>
+## <span id="head41">[39. 组合总和](https://leetcode-cn.com/problems/combination-sum/)</span>
 
 难度中等726
 
@@ -1220,7 +1524,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head21"> 42.接雨水</span>
+## <span id="head42"> 42.接雨水</span>
 
 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 
@@ -1261,7 +1565,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head22"> 46.全排列</span>
+## <span id="head43"> 46.全排列</span>
 
 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
 
@@ -1312,7 +1616,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head23"> 48.旋转图像</span>
+## <span id="head44"> 48.旋转图像</span>
 
 给定一个 n × n 的二维矩阵表示一个图像。
 
@@ -1394,7 +1698,7 @@ class Solution {
 
 
 
-## <span id="head24">[49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)</span>
+## <span id="head45">[49. 字母异位词分组](https://leetcode-cn.com/problems/group-anagrams/)</span>
 
 难度中等346
 
@@ -1442,7 +1746,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head25">[53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)</span>
+## <span id="head46">[53. 最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)</span>
 
 难度简单2092
 
@@ -1475,7 +1779,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head26">[55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)</span>
+## <span id="head47">[55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)</span>
 
 难度中等671
 
@@ -1514,7 +1818,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head27">[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)</span>
+## <span id="head48">[56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)</span>
 
 难度中等432
 
@@ -1562,7 +1866,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head28">[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)</span>
+## <span id="head49">[62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)</span>
 
 难度中等568
 
@@ -1649,7 +1953,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head29">[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)</span>
+## <span id="head50">[64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)</span>
 
 难度中等491
 
@@ -1694,7 +1998,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head30">[70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)</span>
+## <span id="head51">[70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)</span>
 
 难度简单1086
 
@@ -1741,7 +2045,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head31">[72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)</span>
+## <span id="head52">[72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)</span>
 
 难度困难882
 
@@ -1803,7 +2107,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head32">[75. 颜色分类](https://leetcode-cn.com/problems/sort-colors/)</span>
+## <span id="head53">[75. 颜色分类](https://leetcode-cn.com/problems/sort-colors/)</span>
 
 难度中等433
 
@@ -1858,7 +2162,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head33">[76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)</span>
+## <span id="head54">[76. 最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)</span>
 
 难度困难565
 
@@ -1914,7 +2218,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head34">[78. 子集](https://leetcode-cn.com/problems/subsets/)</span>
+## <span id="head55">[78. 子集](https://leetcode-cn.com/problems/subsets/)</span>
 
 难度中等582
 
@@ -1961,7 +2265,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head35">[79. 单词搜索](https://leetcode-cn.com/problems/word-search/)</span>
+## <span id="head56">[79. 单词搜索](https://leetcode-cn.com/problems/word-search/)</span>
 
 难度中等423
 
@@ -2044,7 +2348,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head36">[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)</span>
+## <span id="head57">[84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)</span>
 
 难度困难715
 
@@ -2073,7 +2377,7 @@ class Solution {
 输出: 10
 ```
 
-### <span id="head37"> 暴力</span>
+### <span id="head58"> 暴力</span>
 
 ~~~Java
 class Solution {
@@ -2095,7 +2399,7 @@ class Solution {
 }
 ~~~
 
-### <span id="head38"> 单调栈</span>
+### <span id="head59"> 单调栈</span>
 
 关键在于找到左右边界
 
@@ -2157,7 +2461,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head39">[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)</span>
+## <span id="head60">[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)</span>
 
 难度困难469
 
@@ -2218,7 +2522,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head40">[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)</span>
+## <span id="head61">[94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)</span>
 
 难度中等514
 
@@ -2239,7 +2543,7 @@ class Solution {
 
 **进阶:** 递归算法很简单，你可以通过迭代算法完成吗？
 
-### <span id="head41"> 递归版本</span>
+### <span id="head62"> 递归版本</span>
 
 ~~~Java
 /**
@@ -2268,7 +2572,7 @@ class Solution {
 }
 ~~~
 
-### <span id="head42"> 迭代版本</span>
+### <span id="head63"> 迭代版本</span>
 
 ~~~Java
 /**
@@ -2299,7 +2603,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head43">[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)</span>
+## <span id="head64">[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)</span>
 
 难度中等527
 
@@ -2358,7 +2662,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head44">[98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)</span>
+## <span id="head65">[98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)</span>
 
 难度中等596
 
@@ -2416,7 +2720,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head45">[101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)</span>
+## <span id="head66">[101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)</span>
 
 难度简单825
 
@@ -2474,7 +2778,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head46">[102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)</span>
+## <span id="head67">[102. 二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)</span>
 
 难度中等517
 
@@ -2536,7 +2840,7 @@ class Solution {
 
 ~~~
 
-## <span id="head47">[104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)</span>
+## <span id="head68">[104. 二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)</span>
 
 难度简单549
 
@@ -2559,7 +2863,7 @@ class Solution {
 
 返回它的最大深度 3 。
 
-### <span id="head48"> 递归</span>
+### <span id="head69"> 递归</span>
 
 ~~~Java
 /**
@@ -2581,9 +2885,9 @@ class Solution {
 }
 ~~~
 
-### <span id="head49"> 迭代</span>
+### <span id="head70"> 迭代</span>
 
-#### <span id="head50"> BFS</span>
+#### <span id="head71"> BFS</span>
 
 ~~~Java
 /**
@@ -2615,9 +2919,9 @@ class Solution {
 }
 ~~~
 
-#### <span id="head51"> DFS</span>
+#### <span id="head72"> DFS</span>
 
-## <span id="head52">[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)</span>
+## <span id="head73">[105. 从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)</span>
 
 难度中等515
 
@@ -2674,7 +2978,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head53">[114. 二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)</span>
+## <span id="head74">[114. 二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/)</span>
 
 难度中等357
 
@@ -2740,7 +3044,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head54">[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)</span>
+## <span id="head75">[121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)</span>
 
 难度简单1028
 
@@ -2784,7 +3088,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head55">[124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)</span>
+## <span id="head76">[124. 二叉树中的最大路径和](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)</span>
 
 难度困难446
 
@@ -2848,7 +3152,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head56">[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)</span>
+## <span id="head77">[128. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)</span>
 
 难度困难346
 
@@ -2890,7 +3194,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head57">[136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/)</span>
+## <span id="head78">[136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/)</span>
 
 难度简单1296
 
@@ -2928,7 +3232,7 @@ class Solution {
 
 
 
-## <span id="head58">[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)</span>
+## <span id="head79">[139. 单词拆分](https://leetcode-cn.com/problems/word-break/)</span>
 
 难度中等440
 
@@ -2984,7 +3288,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head59">[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)</span>
+## <span id="head80">[141. 环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)</span>
 
 难度简单623
 
@@ -3070,7 +3374,7 @@ public class Solution {
 
 
 
-## <span id="head60">[142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)</span>
+## <span id="head81">[142. 环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/)</span>
 
 难度中等490
 
@@ -3173,7 +3477,7 @@ public class Solution {
 }
 ~~~
 
-## <span id="head61">[146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)</span>
+## <span id="head82">[146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)</span>
 
 难度中等650
 
@@ -3226,7 +3530,7 @@ class LRUCache {
  */
 ~~~
 
-## <span id="head62">[148. 排序链表](https://leetcode-cn.com/problems/sort-list/)</span>
+## <span id="head83">[148. 排序链表](https://leetcode-cn.com/problems/sort-list/)</span>
 
 难度中等560
 
@@ -3294,7 +3598,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head63">[152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)</span>
+## <span id="head84">[152. 乘积最大子数组](https://leetcode-cn.com/problems/maximum-product-subarray/)</span>
 
 难度中等602
 
@@ -3350,7 +3654,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head64">[155. 最小栈](https://leetcode-cn.com/problems/min-stack/)</span>
+## <span id="head85">[155. 最小栈](https://leetcode-cn.com/problems/min-stack/)</span>
 
 难度简单547
 
@@ -3439,7 +3743,7 @@ class MinStack {
  */
 ~~~
 
-## <span id="head65">[160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)</span>
+## <span id="head86">[160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)</span>
 
 难度简单674
 
@@ -3522,7 +3826,7 @@ public class Solution {
 }
 ~~~
 
-## <span id="head66">[169. 多数元素](https://leetcode-cn.com/problems/majority-element/)</span>
+## <span id="head87">[169. 多数元素](https://leetcode-cn.com/problems/majority-element/)</span>
 
 难度简单616
 
@@ -3555,7 +3859,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head67">[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)</span>
+## <span id="head88">[198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)</span>
 
 难度简单868
 
@@ -3606,7 +3910,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head68">[200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)</span>
+## <span id="head89">[200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)</span>
 
 难度中等586
 
@@ -3672,7 +3976,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head69">[206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)</span>
+## <span id="head90">[206. 反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)</span>
 
 难度简单987
 
@@ -3723,7 +4027,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head70">[207. 课程表](https://leetcode-cn.com/problems/course-schedule/)</span>
+## <span id="head91">[207. 课程表](https://leetcode-cn.com/problems/course-schedule/)</span>
 
 难度中等351
 
@@ -3793,7 +4097,7 @@ class Solution {
 
 
 
-## <span id="head71">[208. 实现 Trie (前缀树)](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)</span>
+## <span id="head92">[208. 实现 Trie (前缀树)](https://leetcode-cn.com/problems/implement-trie-prefix-tree/)</span>
 
 难度中等320
 
@@ -3856,7 +4160,7 @@ class Trie {
  */
 ~~~
 
-## <span id="head72">[215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)</span>
+## <span id="head93">[215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)</span>
 
 难度中等517
 
@@ -3904,7 +4208,7 @@ class Solution {
 
 
 
-## <span id="head73">[221. 最大正方形](https://leetcode-cn.com/problems/maximal-square/)</span>
+## <span id="head94">[221. 最大正方形](https://leetcode-cn.com/problems/maximal-square/)</span>
 
 难度中等450
 
@@ -3944,7 +4248,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head74">[226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)</span>
+## <span id="head95">[226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)</span>
 
 翻转一棵二叉树。
 
@@ -4018,7 +4322,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head75">[234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)</span>
+## <span id="head96">[234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)</span>
 
 难度简单522
 
@@ -4079,7 +4383,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head76">[236. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)</span>
+## <span id="head97">[236. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)</span>
 
 难度中等598
 
@@ -4147,7 +4451,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head77">[238. 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)</span>
+## <span id="head98">[238. 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)</span>
 
 难度中等486
 
@@ -4189,7 +4493,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head78">[239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)</span>
+## <span id="head99">[239. 滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)</span>
 
 难度困难398
 
@@ -4256,7 +4560,7 @@ class Solution {
 
 
 
-## <span id="head79">[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)</span>
+## <span id="head100">[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)</span>
 
 难度中等327
 
@@ -4300,7 +4604,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head80">[279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)</span>
+## <span id="head101">[279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)</span>
 
 难度中等452
 
@@ -4349,7 +4653,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head81">[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)</span>
+## <span id="head102">[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)</span>
 
 难度中等163
 
@@ -4376,7 +4680,7 @@ queries(问题方程式) = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x
 
 
 
-## <span id="head82">[283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)</span>
+## <span id="head103">[283. 移动零](https://leetcode-cn.com/problems/move-zeroes/)</span>
 
 难度简单612
 
@@ -4412,7 +4716,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head83">[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)</span>
+## <span id="head104">[287. 寻找重复数](https://leetcode-cn.com/problems/find-the-duplicate-number/)</span>
 
 难度中等714
 
@@ -4468,7 +4772,7 @@ class Solution {
 }
 ~~~~~~
 
-## <span id="head84">[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)</span>
+## <span id="head105">[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)</span>
 
 难度困难208
 
@@ -4537,7 +4841,7 @@ public class Codec {
 
 
 
-## <span id="head85">[300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)</span>
+## <span id="head106">[300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)</span>
 
 难度中等757收藏分享切换为英文关注反馈
 
@@ -4580,7 +4884,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head86">[301. 删除无效的括号](https://leetcode-cn.com/problems/remove-invalid-parentheses/)</span>
+## <span id="head107">[301. 删除无效的括号](https://leetcode-cn.com/problems/remove-invalid-parentheses/)</span>
 
 难度困难186
 
@@ -4669,7 +4973,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head87">[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)</span>
+## <span id="head108">[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)</span>
 
 难度中等342
 
@@ -4735,7 +5039,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head88">[312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)</span>
+## <span id="head109">[312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)</span>
 
 难度困难313
 
@@ -4782,7 +5086,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head89">[322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)</span>
+## <span id="head110">[322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)</span>
 
 难度中等642
 
@@ -4832,7 +5136,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head90">[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)</span>
+## <span id="head111">[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)</span>
 
 难度中等377
 
@@ -4910,7 +5214,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head91">[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)</span>
+## <span id="head112">[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)</span>
 
 难度中等326
 
@@ -4950,7 +5254,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head92">[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)</span>
+## <span id="head113">[347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)</span>
 
 难度中等363
 
@@ -5006,7 +5310,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head93">[394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)</span>
+## <span id="head114">[394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)</span>
 
 难度中等383
 
@@ -5085,7 +5389,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head94">[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)</span>
+## <span id="head115">[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)</span>
 
 难度中等157
 
@@ -5110,7 +5414,7 @@ queries(问题方程式) = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x
 
 
 
-## <span id="head95">[406. 根据身高重建队列](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)</span>
+## <span id="head116">[406. 根据身高重建队列](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)</span>
 
 难度中等360
 
@@ -5149,7 +5453,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head96">[416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)</span>
+## <span id="head117">[416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)</span>
 
 难度中等301
 
@@ -5209,7 +5513,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head97">[437. 路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)</span>
+## <span id="head118">[437. 路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)</span>
 
 难度简单447收藏分享切换为英文关注反馈
 
@@ -5271,7 +5575,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head98">[438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)</span>
+## <span id="head119">[438. 找到字符串中所有字母异位词](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)</span>
 
 难度中等287
 
@@ -5348,7 +5652,7 @@ class Solution {
 
 
 
-## <span id="head99">[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)</span>
+## <span id="head120">[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)</span>
 
 难度简单364收藏分享切换为英文关注反馈
 
@@ -5387,7 +5691,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head100">[461. 汉明距离](https://leetcode-cn.com/problems/hamming-distance/)</span>
+## <span id="head121">[461. 汉明距离](https://leetcode-cn.com/problems/hamming-distance/)</span>
 
 难度简单288收藏分享切换为英文关注反馈
 
@@ -5427,7 +5731,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head101">[494. 目标和](https://leetcode-cn.com/problems/target-sum/)</span>
+## <span id="head122">[494. 目标和](https://leetcode-cn.com/problems/target-sum/)</span>
 
 难度中等288
 
@@ -5484,7 +5788,7 @@ class Solution {
 
 
 
-## <span id="head102">[538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/)</span>
+## <span id="head123">[538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/)</span>
 
 难度简单263收藏分享切换为英文关注反馈
 
@@ -5539,7 +5843,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head103">[543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/)</span>
+## <span id="head124">[543. 二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/)</span>
 
 难度简单378收藏分享切换为英文关注反馈
 
@@ -5592,7 +5896,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head104">[560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)</span>
+## <span id="head125">[560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)</span>
 
 难度中等467
 
@@ -5652,7 +5956,7 @@ class Solution {
 
 
 
-## <span id="head105">[581. 最短无序连续子数组](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)</span>
+## <span id="head126">[581. 最短无序连续子数组](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)</span>
 
 难度简单318收藏分享切换为英文关注反馈
 
@@ -5707,7 +6011,7 @@ class Solution {
 
 
 
-## <span id="head106">[617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)</span>
+## <span id="head127">[617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)</span>
 
 难度简单392收藏分享切换为英文关注反馈
 
@@ -5766,7 +6070,7 @@ class Solution {
 }
 ~~~
 
-## <span id="head107">[621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)</span>
+## <span id="head128">[621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)</span>
 
 难度中等290
 
@@ -5798,7 +6102,7 @@ class Solution {
 
 
 
-## <span id="head108">[647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)</span>
+## <span id="head129">[647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)</span>
 
 
 
@@ -5812,7 +6116,7 @@ class Solution {
 
 
 
-## <span id="head109">[739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)</span>
+## <span id="head130">[739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)</span>
 
 
 

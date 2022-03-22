@@ -1,7 +1,5 @@
 //给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。 
-//
-//
-// 示例 1： 
+// 示例 1：
 //输入：head = [1,2,2,1]
 //输出：true
 // 示例 2：
@@ -37,6 +35,11 @@ class Solution {
         /*
         1.将值复制到数组中后用双指针法
 
+        时间复杂度：O(n)，其中 n 指的是链表的元素个数。
+        第一步： 遍历链表并将值复制到数组中，O(n)。
+        第二步：双指针判断是否为回文，执行了 O(n/2) 次的判断，即 O(n)。
+        总的时间复杂度：O(2n) = O(n)O。
+
          */
 
 //        List<Integer> vals = new ArrayList<Integer>();
@@ -55,10 +58,48 @@ class Solution {
 //        return true;
 
         /*
-        2.递归
-
+        2. 快慢指针找到中点，反转后面一半，头、中一起向后走比较
+        时间复杂度：O(n)，其中 n 指的是链表的大小。
+        空间复杂度：O(1)。我们只会修改原本链表中节点的指向，而在堆栈上的堆栈帧不超过 O(1)。
          */
+        if (head == null) {
+            return true;
+        }
+        ListNode endOfFirst = endOfFirstHalf(head);
+        ListNode secondHalfStart = reverseList(endOfFirst.next);
+        ListNode first = head, second = secondHalfStart;
+        while (second != null) {
+            // 长度为奇数,前面一半长一个  second 先到终点
+            if (first.val != second.val) {
+                endOfFirst.next = reverseList(secondHalfStart);
+                return false;
+            }
+            first = first.next;
+            second = second.next;
+        }
+        endOfFirst.next = reverseList(secondHalfStart);
+        return true;
 
+    }
+
+    private ListNode reverseList(ListNode head) {
+        ListNode next = null, newHead = null;
+        while (head != null) {
+            next = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = next;
+        }
+        return newHead;
+    }
+
+    private ListNode endOfFirstHalf(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

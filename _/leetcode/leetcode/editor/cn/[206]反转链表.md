@@ -55,45 +55,40 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) return head;
         /*
         1.迭代
-        将当前节点的 next 指针改为指向前一个节点。
-        由于节点没有引用其前一个节点，因此必须事先存储其前一个节点。newHead
-        在更改引用之前，还需要存储后一个节点。next
-        最后返回新的头引用。
          */
-
-        ListNode newHead = null;
-        ListNode next = null;
-        while (head != null) {
-            next = head.next;
-            head.next = newHead;
-            newHead = head;
-            head = next;
-        }
-        return newHead;
-    }
+//        if (head == null || head.next == null) return head;
+//        ListNode newHead = null;
+//        ListNode next = null;
+//        while (head != null) {
+//            next = head.next;  // 存储后一个节点
+//            head.next = newHead;  // 将当前节点的 next 指针改为指向前一个节点
+//            newHead = head;  // 往后移动
+//            head = next;
+//        }
+//        return newHead;  // 返回新的头引用
+//    }
         /*
         2.递归
         
          */
+         if (head == null || head.next == null) return head;
+         ListNode newHead = reverseList(head.next);  // 递归到最后一个，头节点为最后一个
+         head.next.next = head;  // 当前节点后一个指向当前节点
+         head.next = null;       // 当前节点指向空
+         return newHead;
+     }
 
-    //     ListNode newHead = reverseList(head.next);
-    //     head.next.next = head;
-    //     head.next = null;
-    //     return newHead;
-    // }
-
-    public static void main(String[] args) {
-        ListNode ln = new ListNode(1,
-                new ListNode(2,
-                        new ListNode(3,
-                                new ListNode(4,
-                                        new ListNode(5)))));
-        Solution s = new Solution();
-        System.out.println(s.removeElements(ln, 4));
-
-    }
+//    public static void main(String[] args) {
+//        ListNode ln = new ListNode(1,
+//                new ListNode(2,
+//                        new ListNode(3,
+//                                new ListNode(4,
+//                                        new ListNode(5)))));
+//        Solution s = new Solution();
+//        System.out.println(s.removeElements(ln, 4));
+//
+//    }
 }
 //leetcode submit region end(Prohibit modification and deletion)

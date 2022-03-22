@@ -4,5 +4,5 @@ draft/leetcode/leetcode/editor/cn/all.json
 draft/leetcode/leetcode/editor/cn/translation.json
 **/.idea
 **/.vscode
-draft/leetcode/leetcode/editor/cn/*.json
-draft/leetcode/leetcode/editor/cn/*.iml
+!draft/leetcode/leetcode/editor/cn/*.java
+draft/leetcode/leetcode/editor/cn/*
