@@ -57,13 +57,6 @@ RNN网络的**激活函数一般选用双曲正切**，而不是sigmod函数，�
 LSTM是一种拥有三个“门”的特殊网络结构，包括遗忘门、输入门、输出门。**所谓“门”结构就是一个使用sigmoid神经网络和一个按位做乘法的操作**，这两个操作合在一起就是一个“门”结构。
 
 
-![*********g=候选记忆细胞**************](https://upload-images.jianshu.io/upload_images/18339009-5f9497c349807058.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-
-
-
-
-
 
 # LSTM与GRU的区别
 
@@ -72,7 +65,7 @@ LSTM与GRU二者结构十分相似，**不同在于**：
 1. **新的记忆都是根据之前状态及输入进行计算**，但是**GRU中有一个重置门控制之前状态的进入量**，而在LSTM里没有类似门；
 2. **产生新的状态方式不同**，LSTM有两个不同的门，分别是遗忘门(forget gate)和输入门(input gate)，而GRU只有一种更新门(update gate)；
 3. **LSTM对新产生的状态可以通过输出门(output gate)进行调节**，而GRU对输出无任何调节。
-4. **GRU的优点是这是个更加简单的模型**，所以更容易创建一个更大的网络，而且它只有两个门，在计算性上也运行得更快，然后它可以扩大模型的规模。 
+4. **GRU的优点更加简单**，所以更容易创建一个更大的网络，而且它只有两个门，在计算性上也运行得更快，然后它可以扩大模型的规模。 
 5. LSTM更加强大和灵活，因为它有三个门而不是两个。
 
 
@@ -128,7 +121,7 @@ GRU是LSTM网络的一种效果很好的变体，它较LSTM网络的结构更加
 
 
 # tensorflow lstm预测正弦函数
-```python
+```+python
 import numpy as np
 import tensorflow as tf
 from tensorflow.contrib.learn.python.learn.estimators.estimator import SKCompat

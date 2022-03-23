@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，该算法由多棵决策树组成。GBDT 是被公认的泛化能力较强的算法。
 
 # 思想
