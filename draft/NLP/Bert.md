@@ -10,7 +10,7 @@ BERT的全称是: Bidirectional Encoder Representations from Transformers, 如�
 
 箭头指示从一层到下一层的信息流。顶部的绿色框表示每个输入单词的最终上下文表示。
 
-
+![quicker_b1057878-3443-4148-a283-d94bf174b11f.png](https://s2.loli.net/2022/03/26/FUKpz5Z6QJHw1gI.png)
 
 每个输入的Embedding是3个嵌入的组合
 

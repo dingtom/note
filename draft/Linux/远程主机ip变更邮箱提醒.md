@@ -1,5 +1,6 @@
-```pip install PyEmail```
-```easy_install email```
+
+
+
 ```python
 import socket
 import smtplib
@@ -73,3 +74,81 @@ if __name__ == "__main__":
 
 ```sudo chmod +x send_ip_to_mailbox.py```
 使用到linux的排程工具crond将任务排期自动执行，这里配置的是每隔1分钟执行一次ipv6地址检查。
+
+
+
+# 企业微信消息
+
+```python
+import requests
+class SendWeiXinWork:
+    def __init__(self):
+        self.CORP_ID = "ww1f8de63d33f2ea65"  # 企业号的标识
+        self.SECRET = "0y3EgnN3AgjGawbH3dg-zv9im7yGZunNrcscNfxm4ag"  # 管理组凭证密钥
+        self.AGENT_ID = 1000002  # 应用ID
+        self.token = self.get_token()
+
+    def get_token(self):
+        url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
+        data = {
+            "corpid": self.CORP_ID,
+            "corpsecret": self.SECRET
+        }
+        req = requests.get(url=url, params=data)
+        res = req.json()
+        if res["errmsg"] == "ok":
+            return res["access_token"]
+        else:
+            return res
+
+    def send_message(self, to_user, content):
+        url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s" % self.token
+        data = {
+            "touser": '@all',  # 发送个人就填用户账号
+            # "toparty": to_user,  # 发送组内成员就填部门ID
+            "msgtype": "text",
+            "agentid": self.AGENT_ID,
+            "text": {"content": content},
+            "safe": "0"
+        }
+
+        req = requests.post(url=url, json=data)
+        res = req.json()
+        if res["errmsg"] == "ok":
+            print("send message sucessed")
+        else:
+            print(res["errmsg"])
+```
+
+# selenium
+
+```python
+ # 第一步：导入selenium
+    from selenium import webdriver
+    import time
+
+    option = webdriver.ChromeOptions()
+
+    option.add_argument('--user-data-dir=C:/Users/WENCHAO/AppData/Local/Google/Chrome/User Data1')
+    
+    # 第二步：打开谷歌浏览器
+    # driver = webdriver.Chrome(executable_path="./chromedriver.exe")
+    driver = webdriver.Chrome(chrome_options=option)
+    driver.maximize_window()  # 屏幕最大化
+
+    # 第三步：打开百度
+    driver.get("https://www.google.com/")
+
+    # 第四步：输入搜索关键字
+    element1 = driver.find_element_by_id("kw")
+    element1.send_keys("hello selenium!")
+    time.sleep(3)
+
+    # 第五步： 点击搜索按钮
+    element2 = driver.find_element_by_id("su")
+    element2.click()
+
+    # 最后一步: 结束测试
+    driver.quit()
+```
+

@@ -1,6 +1,4 @@
-
-
-# transformer编码器(理论部分):
+transformer编码器(理论部分):
 
 ## transformer模型的直觉, 建立直观认识;
 首先来说一下**transformer**和**LSTM**的最大区别, 就是LSTM的训练是迭代的, 是一个接一个字的来, 当前这个字过完LSTM单元, 才可以进下一个字, 而**transformer的训练是并行**, 就是所有字是全部同时训练的, 这样就大大加快了计算效率, **transformer使用了位置嵌入positional encoding来理解语言的顺序, 使用自注意力机制和全连接层来进行计算**

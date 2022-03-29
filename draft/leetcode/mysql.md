@@ -1254,19 +1254,12 @@ CREATE TABLE stu_course(
 INSERT INTO stu_course VALUES (NULL,1,1),(NULL,1,2),(NULL,2,1),(NULL,2,2);
 ```
 
-
-
-
-
-
-
-
-
 # 窗口函数
 
-开窗函数的引入是为了**既显示聚集前的数据又显示聚集后的数据**。即在每一行的最后一列添加聚合函数的结果。
+开窗函数的引入是为了**既显示聚合前的数据又显示聚合后的数据**。即在每一行的最后一列添加聚合函数的结果。
 
 **应用：1、topN问题或者组内排序问题2、连续登录问题**
+
 **!!!!!!!!!!!!!窗口函数原则上只能写在select子句中**
 
 - 原则上，窗口函数只能在SELECT子句中使用。 
@@ -1280,31 +1273,10 @@ ROW_NUMBER() OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
 -- 分区类型：NTILE
 NTILE(number) OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
 
-
-
-
 -- PARTITON BY 是用来分组，即选择要看哪个窗口，类似于 GROUP BY 子句的分组功能，但是 PARTITION BY 子句并不具备 GROUP BY 子句的汇总功能，并不会改变原始表中记录的行数。
 
 -- ORDER BY 是用来排序，即决定窗口内，是按那种规则(字段)来排序的。
 ```
-
-- 聚合函数和开窗函数
-
-  聚合函数是将多行变成一行，开窗函数是将一行变成多行；
-
-  聚合函数如果要显示其他的列必须将列加入到group by中，函数可以不使用group by,直接将所有信息显示出来
-
-- 开窗函数分类
-
-  - 聚合开窗函数
-
-    聚合函数（列）OVER（选项），这里的选项可以是PARTITION BY子句，但不可以是ORDER BY子包。
-
-  - 排序开窗函数
-
-    排序函数（列）OVER（选项），这里的选项可以是ORDER BY子句，也可以是OVER(PARTITION BY子句ORDER BY子句)，但不可以是PARTITION BY子句。
-
-  - 分区类型NTILE的窗口函数
 
 ## 执行顺序
 
@@ -1315,8 +1287,6 @@ NTILE(number) OVER([PARTITION BY xxx][ORDER BY xxx [DESC]])
 ```rank()```排序相同时会重复，总数不会变 ，意思是会出现1、1、3这样的排序结果；
 ```dense_rank()``` 排序相同时会重复，总数会减少，意思是会出现1、1、2这样的排序结果。
 ```row_number()``` 则在排序相同时不重复，会根据顺序排序。
-
-
 
 ```mysql
 SELECT  product_id
