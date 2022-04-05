@@ -11,6 +11,24 @@
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-06a800d974c5405f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+
+
+softmax函数，又称**归一化指数函数。**它是二分类函数sigmoid在多分类上的推广，目的是将多分类的结果以概率的形式展现出来。
+
+![quicker_1e145ffb-4693-445d-83d2-0749d3c79577.png](https://s2.loli.net/2022/03/31/Yi8bm2W5VItC3dj.png)
+
+![quicker_c969cfe7-5b1e-403b-b34f-b1b3795ab285.png](https://s2.loli.net/2022/03/31/qnK9sCagE3V5Dct.png)
+
+
+
+
+
+
+
+
+
+
+
 # 范数
 ![](https://upload-images.jianshu.io/upload_images/15873283-f0bb69bddf469915.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
