@@ -38,7 +38,7 @@ wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-
 
 # 添加伪装
 
-1.[谷歌登录，申请域名]([www.freenom.com](https://www.freenom.com/zh/index.html?lang=zh))
+1.[谷歌登录，申请域名](https://www.freenom.com/zh/index.html?lang=zh)
 
 2.services->mydomains->manage domain->management tools->nameservers
 

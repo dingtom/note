@@ -26,8 +26,14 @@ screen -d -r yourname -> 结束当前session并回到yourname这个session
 screen -X -S yourname quit  -> 清除Detached会话
 screen -wipe      ->清除Dead会话
 ```
+ssh –p 3068 root@91.134.238.131
+
 # ssh
+
 ```ssh tomding@192.168.1.104 -L 127.0.0.1:12345:127.0.0.1:1111```
+
+`ssh –p 22 root@91.134.238.131`
+
 首先输入这个命令，user_name就是你的服务器的你的个人的用户名， server_ip就是你的服务器的独有ip
 
 127.0.0.1:12345为本地的地址 127.0.0.1:1111为服务器端的地址

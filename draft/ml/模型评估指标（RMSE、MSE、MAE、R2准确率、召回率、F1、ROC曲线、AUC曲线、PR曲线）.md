@@ -484,3 +484,322 @@ plot＿confusion_matrix(title, y_true,y_pred, labels)
 
 
 
+# 图像
+
+
+
+![quicker_a44be6fb-20d3-40fa-9159-8216b432de21.png](https://s2.loli.net/2022/04/13/O41uKwk9roFP7jN.png)
+
+
+
+## IOU（交并比）
+
+它是模型所**预测**的检测框(bbox)和**真实**的检测框(ground truth)的**交集和并集**之间的比例。用于比较有限样本集之间的相似性与差异性。**Jaccard值越大，样本相似度越高**。
+
+![quicker_981e58bd-cd83-4bcb-97d3-b59e6a823416.png](https://s2.loli.net/2022/03/31/YXvqJbEAxoIruaf.png)
+
+```python
+def iou_score(output, target):
+    '''计算IoU指标'''
+	  intersection = np.logical_and(target, output) 
+    union = np.logical_or(target, output) 
+    return np.sum(intersection) / np.sum(union)
+
+# 生成随机两个矩阵测试
+target = np.random.randint(0, 2, (3, 3))
+output = np.random.randint(0, 2, (3, 3))
+
+d = iou_score(output, target)
+# ----------------------------
+target = array([[1, 0, 0],
+       			[0, 1, 1],
+			    [0, 0, 1]])
+output = array([[1, 0, 1],
+       			[0, 1, 0],
+       			[0, 0, 0]])
+d = 0.4
+```
+
+## Dice系数
+
+一种集合相似度度量指标,通常用于**计算两个样本的相似度**,值的范围0~1 ,分割结果最好时值为1 ,最差时值为0 。**Dice相似系数对mask的内部填充比较敏感**。
+
+![quicker_ac9f04ae-c215-40f7-bffd-bf9bbfec8003.png](https://s2.loli.net/2022/03/31/JmXVnbEeHgiPsCK.png)
+
+
+
+Dice系数与分类评价指标中的F1 score很相似
+
+![quicker_8d5bd778-0023-4880-b554-309808a8581e.png](https://s2.loli.net/2022/04/13/7iv3pCDURLOaxqV.png)
+
+所以，Dice系数不仅在直观上体现了target与prediction的相似程度，同时其本质上还隐含了精确率和召回率两个重要指标。
+
+![quicker_e2a97b9b-e737-4043-93d0-76a00e22716e.png](https://s2.loli.net/2022/03/31/TwyK6WUlzjRfvu1.png)
+
+```python
+import numpy as np
+
+def dice(output, target):
+    '''计算Dice系数'''
+    smooth = 1e-6 # 避免0为除数
+    intersection = (output * target).sum()
+    return (2. * intersection + smooth) / (output.sum() + target.sum() + smooth)
+
+# 生成随机两个矩阵测试
+target = np.random.randint(0, 2, (3, 3))
+output = np.random.randint(0, 2, (3, 3))
+
+d = dice(output, target)
+# ----------------------------
+target = array([[1, 0, 0],
+       			[0, 1, 1],
+			    [0, 0, 1]])
+output = array([[1, 0, 1],
+       			[0, 1, 0],
+       			[0, 0, 0]])
+d = 0.5714286326530524
+```
+
+## BCE损失函数
+
+BCE损失函数（Binary Cross-Entropy Loss）是交叉熵损失函数（Cross-Entropy Loss）的一种特例，BCE Loss只应用在二分类任务中。针对分类问题，单样本的交叉熵损失为：
+
+![quicker_46e51217-3a10-40a0-a80b-a74c7eb0ee93.png](https://s2.loli.net/2022/04/01/hbuasvVTqPFCcop.png)
+
+```python
+import torch
+import torch.nn as nn
+
+bce = nn.BCELoss()
+bce_sig = nn.BCEWithLogitsLoss()
+
+input = torch.randn(5, 1, requires_grad=True)
+target = torch.empty(5, 1).random_(2)
+pre = nn.Sigmoid()(input)
+
+loss_bce = bce(pre, target)
+loss_bce_sig = bce_sig(input, target)
+
+# 同时，pytorch还提供了已经结合了Sigmoid函数的BCE损失：torch.nn.BCEWithLogitsLoss()，相当于免去了实现进行Sigmoid激活的操作。
+
+
+input = tensor([[-0.2296],
+        		[-0.6389],
+        		[-0.2405],
+        		[ 1.3451],
+        		[ 0.7580]], requires_grad=True)
+output = tensor([[1.],
+        		 [0.],
+        		 [0.],
+        		 [1.],
+        		 [1.]])
+pre = tensor([[0.4428],
+        	  [0.3455],
+        	  [0.4402],
+        	  [0.7933],
+        	  [0.6809]], grad_fn=<SigmoidBackward>)
+
+print(loss_bce)
+tensor(0.4869, grad_fn=<BinaryCrossEntropyBackward>)
+
+print(loss_bce_sig)
+tensor(0.4869, grad_fn=<BinaryCrossEntropyWithLogitsBackward>)
+```
+
+## Focal Loss
+
+Focal loss最初是出现在目标检测领域，主要是为了解决正负样本比例失调的问题。那么对于分割任务来说，如果存**在数据不均衡的情况，也可以借用focal loss来进行缓解**。Focal loss函数公式如下所示：
+
+![quicker_b30327b2-4641-40a9-b9d2-53e0ed7c1ad2.png](https://s2.loli.net/2022/04/01/96vqcofAp4JxL71.png)
+
+
+
+```python
+import torch.nn as nn
+import torch
+import torch.nn.functional as F
+
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=1, gamma=2, logits=False, reduce=True):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+        self.logits = logits    # 如果BEC带logits则损失函数在计算BECloss之前会自动计算softmax/sigmoid将其映射到[0,1]
+        self.reduce = reduce
+
+    def forward(self, inputs, targets):
+        if self.logits:
+            BCE_loss = F.binary_cross_entropy_with_logits(inputs, targets, reduce=False)
+        else:
+            BCE_loss = F.binary_cross_entropy(inputs, targets, reduce=False)
+        pt = torch.exp(-BCE_loss)
+        F_loss = self.alpha * (1-pt)**self.gamma * BCE_loss
+
+        if self.reduce:
+            return torch.mean(F_loss)
+        else:
+            return F_loss
+
+
+FL1 = FocalLoss(logits=False)
+FL2 = FocalLoss(logits=True)
+
+inputs = torch.randn(5, 1, requires_grad=True)
+targets = torch.empty(5, 1).random_(2)
+pre = nn.Sigmoid()(inputs)
+
+f_loss_1 = FL1(pre, targets)
+f_loss_2 = FL2(inputs, targets)
+
+
+print('inputs:', inputs)
+inputs: tensor([[-1.3521],
+        [ 0.4975],
+        [-1.0178],
+        [-0.3859],
+        [-0.2923]], requires_grad=True)
+
+print('targets:', targets)
+targets: tensor([[1.],
+        [1.],
+        [0.],
+        [1.],
+        [1.]])
+
+print('pre:', pre)
+pre: tensor([[0.2055],
+        [0.6219],
+        [0.2655],
+        [0.4047],
+        [0.4274]], grad_fn=<SigmoidBackward>)
+
+print('f_loss_1:', f_loss_1)
+f_loss_1: tensor(0.3375, grad_fn=<MeanBackward0>)
+
+print('f_loss_2', f_loss_2)
+f_loss_2 tensor(0.3375, grad_fn=<MeanBackward0>)
+```
+
+
+
+
+
+## Lovász-Softmax
+
+IoU是评价分割模型分割结果质量的重要指标，因此很自然想到能否用1−IoU（即Jaccard loss）来做损失函数，但是它是一个离散的loss，不能直接求导，所以无法直接用来作为损失函数。为了克服这个离散的问题，可以采用**Lovász extension将离散的Jaccard loss 变得连续，从而可以直接求导，使得其作为分割网络的loss function**。Lovász-Softmax相比于交叉熵函数具有更好的效果。
+
+
+
+![quicker_b818041f-ffa0-4458-b1b3-988c1d4b3dd6.png](https://s2.loli.net/2022/04/01/JwYkyMQp19mqhRa.png)
+
+```python
+import torch
+from torch.autograd import Variable
+import torch.nn.functional as F
+import numpy as np
+try:
+    from itertools import  ifilterfalse
+except ImportError: # py3k
+    from itertools import  filterfalse as ifilterfalse
+    
+# --------------------------- MULTICLASS LOSSES ---------------------------
+def lovasz_softmax(probas, labels, classes='present', per_image=False, ignore=None):
+    """
+    Multi-class Lovasz-Softmax loss
+      probas: [B, C, H, W] Variable, class probabilities at each prediction (between 0 and 1).
+              Interpreted as binary (sigmoid) output with outputs of size [B, H, W].
+      labels: [B, H, W] Tensor, ground truth labels (between 0 and C - 1)
+      classes: 'all' for all, 'present' for classes present in labels, or a list of classes to average.
+      per_image: compute the loss per image instead of per batch
+      ignore: void class labels
+    """
+    if per_image:
+        loss = mean(lovasz_softmax_flat(*flatten_probas(prob.unsqueeze(0), lab.unsqueeze(0), ignore), classes=classes)
+                          for prob, lab in zip(probas, labels))
+    else:
+        loss = lovasz_softmax_flat(*flatten_probas(probas, labels, ignore), classes=classes)
+    return loss
+
+
+def lovasz_softmax_flat(probas, labels, classes='present'):
+    """
+    Multi-class Lovasz-Softmax loss
+      probas: [P, C] Variable, class probabilities at each prediction (between 0 and 1)
+      labels: [P] Tensor, ground truth labels (between 0 and C - 1)
+      classes: 'all' for all, 'present' for classes present in labels, or a list of classes to average.
+    """
+    if probas.numel() == 0:
+        # only void pixels, the gradients should be 0
+        return probas * 0.
+    C = probas.size(1)
+    losses = []
+    class_to_sum = list(range(C)) if classes in ['all', 'present'] else classes
+    for c in class_to_sum:
+        fg = (labels == c).float() # foreground for class c
+        if (classes is 'present' and fg.sum() == 0):
+            continue
+        if C == 1:
+            if len(classes) > 1:
+                raise ValueError('Sigmoid output possible only with 1 class')
+            class_pred = probas[:, 0]
+        else:
+            class_pred = probas[:, c]
+        errors = (Variable(fg) - class_pred).abs()
+        errors_sorted, perm = torch.sort(errors, 0, descending=True)
+        perm = perm.data
+        fg_sorted = fg[perm]
+        losses.append(torch.dot(errors_sorted, Variable(lovasz_grad(fg_sorted))))
+    return mean(losses)
+
+
+def flatten_probas(probas, labels, ignore=None):
+    """
+    Flattens predictions in the batch
+    """
+    if probas.dim() == 3:
+        # assumes output of a sigmoid layer
+        B, H, W = probas.size()
+        probas = probas.view(B, 1, H, W)
+    B, C, H, W = probas.size()
+    probas = probas.permute(0, 2, 3, 1).contiguous().view(-1, C)  # B * H * W, C = P, C
+    labels = labels.view(-1)
+    if ignore is None:
+        return probas, labels
+    valid = (labels != ignore)
+    vprobas = probas[valid.nonzero().squeeze()]
+    vlabels = labels[valid]
+    return vprobas, vlabels
+
+
+def xloss(logits, labels, ignore=None):
+    """
+    Cross entropy loss
+    """
+    return F.cross_entropy(logits, Variable(labels), ignore_index=255)
+
+# --------------------------- HELPER FUNCTIONS ---------------------------
+def isnan(x):
+    return x != x
+    
+def mean(l, ignore_nan=False, empty=0):
+    """
+    nanmean compatible with generators.
+    """
+    l = iter(l)
+    if ignore_nan:
+        l = ifilterfalse(isnan, l)
+    try:
+        n = 1
+        acc = next(l)
+    except StopIteration:
+        if empty == 'raise':
+            raise ValueError('Empty mean')
+        return empty
+    for n, v in enumerate(l, 2):
+        acc += v
+    if n == 1:
+        return acc
+    return acc / n
+```
+
+# 
