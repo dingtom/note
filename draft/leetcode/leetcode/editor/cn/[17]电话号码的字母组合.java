@@ -23,8 +23,37 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public List<String> letterCombinations(String digits) {
+    private String[] map = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    private StringBuilder sb = new StringBuilder();
+    private List<String> result = new ArrayList<String>();
+    /*
+    回溯
+    时间复杂度：O(3^m \times 4^n)，其中 m 是输入中对应 3 个字母的数字个数，
+    n是输入中对应 4 个字母的数字个数，，需要遍历每一种字母组合。
 
+    空间复杂度：O(m+n)，其中 m 是输入中对应 3 个字母的数字个数，n 是输入中对应 4 个字母的数字个数
+    空间复杂度主要取决于哈希表以及回溯过程中的递归调用层数，
+    哈希表的大小与输入无关，可以看成常数，递归调用层数最大为 m+n。
+     */
+    public List<String> letterCombinations(String digits) {
+        if (digits == null ||digits.length() == 0) {
+            return result;
+        }
+        backtrack(digits, 0);
+        return result;
+    }
+    private void backtrack(String digits, int index) {
+        if (sb.length() == digits.length()) {
+            result.add(sb.toString());
+            return;
+        }
+        String cs = map[digits.charAt(index) - '2'];
+        for (char c: cs.toCharArray) {
+            sb.append(c);
+            backtrack(digits, index + 1);
+            sb.deleteCharAt(sb.length() - 1);
+
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

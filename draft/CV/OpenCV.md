@@ -1,3 +1,5 @@
+**图像处理中的坐标系，水平向右为x轴正方向，竖直向下为y轴正方向**。
+
 
 
 安装OpenCV-Python,
@@ -29,6 +31,23 @@ core、highgui、imgproc是最基础的模块，该课程主要是围绕这几�
 - **video模块**针对视频处理，如背景分离，前景检测、对象跟踪等。
 - **calib3d模块**即Calibration（校准）3D，这个模块主要是相机校准和三维重建相关的内容。包含了基本的多视角几何算法，单个立体摄像头标定，物体姿态估计，立体相似性算法，3D信息的重建等等。
 - **G-API模块**包含超高效的图像处理pipeline引擎
+
+
+
+
+
+ opencv 的接口使用BGR模式，而 matplotlib.pyplot 接口使用的是RGB模式
+
+```PYTHON
+b, g, r = cv2.split(srcImage)
+srcImage_new = cv2.merge([r, g, b])
+plt.imshow(srcImage_new)
+# 通道变换之后对灰度图进行输出的图片颜色仍然为绿色,这是因为我们还是直接使用plt显示图像，它默认使用三通道显示图像
+grayImage = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)  # 灰度变换
+plt.imshow(grayImage, cmap="gray")
+```
+
+
 
 # 图像处理
 
@@ -106,7 +125,9 @@ img3 = cv.addWeighted(img1,α,img2,β,γ)
 
 
 
-仿射变换
+### 仿射变换
+
+变换前后满足**平直性**（变换前是直线变换后还是直线）和**平行性**（变换前平行的线变换后依旧平行）
 
 ![quicker_f637ed85-6bd2-48b6-9c3c-b1c33325db57.png](https://s2.loli.net/2022/04/28/hTgPDuieE3BClxt.png)
 
@@ -141,10 +162,11 @@ cv2.INTER_CUBIC 双三次插值
 
 # 图像平移
 M = np.float32([[1,0,100],[0,1,50]])# 将图像的像素点移动(50,100)的距离：
-dst = cv.warpAffine(img1,M,(cols,rows))
+dst = cv.warpAffine(img1,M,dsize=(cols,rows)，borderValue=(0,0,0))
 img: 输入图像
 M： 2*∗3移动矩阵
 dsize: 输出图像的大小，它应该是(宽度，高度)的形式。请记住,width=列数，height=行数。
+borderValue为边界填充颜色（注意是BGR顺序，( 0 , 0 , 0 ) (0,0,0)(0,0,0)代表黑色）:
 
 
 #  图像旋转

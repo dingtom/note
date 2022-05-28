@@ -4,6 +4,8 @@
 
 
 
+
+
 ![](https://upload-images.jianshu.io/upload_images/18339009-61f9cf3c7b3600d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 # 回归
@@ -51,7 +53,7 @@ Error反映的是整个模型的准确度，Bias反映的是模型在样本上�
 
 
 ![](https://upload-images.jianshu.io/upload_images/18339009-7de651cf33176560.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-第一个字母T或F，代表这个分类结果是否正确，第二个字母P或N，代表分类器认为是正例还是负例。
+**第一个字母T或F，代表这个分类结果是否正确，第二个字母P或N，代表分类器认为是正例还是负例。**
 
 
 # 1.准确率（accuracy）
@@ -64,7 +66,7 @@ accuracy = accuracy_score(y_test, y_predict)
 
 # 2.查准率（precision)
 **预测为正的样本中有多少是真的正样本**。两种可能，一种就是把正类预测为正类(TP)，另一种就是把负类预测为正类(FP)
-$TPR = \frac{TP}{TP+FP}$
+$P = \frac{TP}{TP+FP}$
 
 ```
 from sklearn.metrics import precision_score
@@ -72,14 +74,27 @@ precision = precision_score(y_test, y_predict)
 ```
 # 3.查全率/召回率(recall)
 **样本中的正样本有多少被预测正确了**。两种可能，一种是把原来的正类预测成正类(TP)，另一种就是把原来的正类预测为负类(FN)：
-$FPR = \frac{TP}{TP+FN}$
+$R = \frac{TP}{TP+FN}$
 
 ```
 from sklearn.metrics import recall_score
-recall = recall_score(y_test, y_predict)
-#recall得到的是一个list，是每一类的召回率
+recall = recall_score(y_test, y_predict)#recall得到的是一个list，是每一类的召回率
 ```
 # 4.F1
+recall 和 precision是负相关的
+
+置信度提高→TP↓，FN↑，FP↓↓→precision↑，recall↓
+
+置信度降低→TP↑，FN↓，FP↑↑→precision↓，recall↑
+
+
+
+对于搜索应用，在保证召回率的条件下，尽量提升精确率。即**减少假阳性率**、搜索出无关的信息。
+
+对于癌症检测、地震检测、金融欺诈等，则在保证精确率的条件下，尽量提升召回率。**减少假阴性率、**漏检
+
+
+
 是**准确率和召回率**的调和平均
 $$
 F_{1}=2 \cdot \frac{\text { precision } \cdot \text {recall}}{\text {precision}+\text {recall}}
@@ -107,6 +122,10 @@ F1 为18/19
 
 PR曲线是准确率和召回率的点连成的线。
 ![曲线越靠近右上角性能越好](https://upload-images.jianshu.io/upload_images/18339009-354497cc47a449f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+PR曲线下的面积就定义为AP，**均精度均值(mAP)**：只是把每个类别的AP都算了一遍，再取平均值
+
+
 
 PR曲线与ROC曲线的相同点是都采用了TPR (Recall)，都可以用AUC来衡量分类器的效果。不同点是ROC曲线使用了FPR，而PR曲线使用了Precision，
 **因此PR曲线的两个指标都聚焦于正例。类别不平衡问题中由于主要关心正例**，所以在此情况下PR曲线被广泛认为优于ROC曲线。

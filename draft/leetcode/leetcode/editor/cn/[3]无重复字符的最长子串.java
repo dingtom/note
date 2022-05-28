@@ -23,6 +23,7 @@
 // 👍 6996 👎 0
 
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,25 +32,25 @@ class Solution {
     public int lengthOfLongestSubstring(String s) {
         /**
          * 使用双指针做滑动窗口，使用哈希表记录出现过的字符
+         * 时间复杂度：O(N)，其中 N 是字符串的长度。左指针和右指针分别会遍历整个字符串一次。
+         * 空间复杂度：O(min(m,n))，m字符集大小，n长度
          */
-        Set<Character> recorder = new HashSet<Character>();
         int len = s.length();
-        // right 滑动窗口右侧,初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
-        int right = -1, maxLen = 0;
-        for (int i = 0; i < len; i++) {
-            if (i != 0) {
-                // 左指针向右移动一格，移除一个字符
-                recorder.remove(s.charAt(i - 1));
+        int left = 0, right = 0, maxLen = 0;
+        Set<Character> recorder = new HashSet<Character>();
+        while (left < len && right < len) {
+            if (!recorder.contains(s.charAt(right))) {
+                recorder.add(s.charAt(right++));
+                maxLen = Math.max(maxLen, right - left);
+            } else {  // right已经有了就移除left，然后重试
+                recorder.remove(s.charAt(left++));
             }
-            while (right + 1 < len && !recorder.contains(s.charAt(right + 1))) {
-                // 不断地移动右指针直到遇到重复字符
-                recorder.add(s.charAt(right + 1));
-                right++;
-            }
-            // 滑动窗口内为无重复字符子串
-            maxLen = Math.max(maxLen, right - i + 1);
         }
-        return maxLen;
+
+    public static void main(String[] args) {
+        String str = new String("abcabc");
+        Solution s = new Solution();
+        System.out.println(s.lengthOfLongestSubstring(str));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
