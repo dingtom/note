@@ -23,8 +23,11 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
+    // 数字到号码的映射
     private String[] map = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    private StringBuilder sb = new StringBuilder();
+    // 路径
+    private StringBuilder path = new StringBuilder();
+    // 结果集
     private List<String> result = new ArrayList<String>();
     /*
     回溯
@@ -39,20 +42,20 @@ class Solution {
         if (digits == null ||digits.length() == 0) {
             return result;
         }
-        backtrack(digits, 0);
+        backtrack(digits, 0); // index计数器
         return result;
     }
     private void backtrack(String digits, int index) {
-        if (sb.length() == digits.length()) {
-            result.add(sb.toString());
+        //             递归边界
+        if (path.length() == digits.length()) {
+            result.add(path.toString());
             return;
         }
-        String cs = map[digits.charAt(index) - '2'];
-        for (char c: cs.toCharArray) {
-            sb.append(c);
-            backtrack(digits, index + 1);
-            sb.deleteCharAt(sb.length() - 1);
-
+        String characters = map[digits.charAt(index) - '2'];
+        for (char c: characters.toCharArray()) {
+            path.append(c);
+            backtrack(digits,index + 1);
+            path.deleteCharAt(path.length() - 1);//回溯，恢复现场
         }
     }
 }

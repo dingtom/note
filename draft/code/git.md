@@ -106,14 +106,22 @@ git reset --hard HEAD^  
 # HEAD指向的版本就是当前版本。上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。 
 
 git reset --hard commit_id
+
+
+# 文件回退到某一版本
+git checkout 版本号 文件名
 ```
 
 # 让工作区的文件恢复为暂存区
 
 ```js
 git checkout -- xx
-
 // --很重要，没有--，就变成了“切换到另一个分支”的命令
+
+git clean -df
+//从工作目录中移除没有track的文件.-d表示同时移除目录,-f表示force
+
+git checkout . && git clean -df
 ```
 
 **当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改, 让暂存区恢复成和HEAD的一样**
@@ -125,6 +133,10 @@ git checkout -- xx
 2.按场景1操作。 
 已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。 
 ```
+
+
+
+
 
 # 删除文件
 
@@ -637,8 +649,6 @@ name=your name
 #重置当前HEAD 为指定提交,但保持暂存区和工作区不变 git reset --keep commitid
 
 #新建一个提交用来撤销指定提交后者的所有变化都将被前者抵消,并且应用到当前分支 git revert commitid
-
-#暂时将未提交的变化移除,稍后再移入 git stash  git stash pop
 
 #生成一个可共发布的压缩包 git archive
 

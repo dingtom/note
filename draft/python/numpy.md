@@ -28,11 +28,17 @@ permutation产生新数组，shuffle则打乱原始数组
 
 
 
-#矩阵点乘
+# 矩阵点乘
 
-元素乘法：np.multiply(a,b)
-矩阵乘法：np.dot(a,b) 或 np.matmul(a,b) 或 a.dot(b) 或直接用 a @ b !
-唯独注意：*，在 np.array 中重载为元素乘法，在 np.matrix 中重载为矩阵乘法!
+`*`： 根据数据类型的不同，在 np.array 中重载为元素乘法，在 np.matrix 中重载为矩阵乘法!
+`@`：  只做**矩阵乘法**运算
+`.dot`： 只做**矩阵乘法**运算
+
+np.matmul(a,b) **矩阵乘法**运算
+
+`np.mutiply`：只做**点乘**运算
+
+
 
 在numpy和tensorflow中都是
 y = w * x    **

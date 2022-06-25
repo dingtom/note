@@ -51,34 +51,70 @@ plt.imshow(grayImage, cmap="gray")
 
 # 图像处理
 
+## 二值化
+
+```python
+# 全局阈值
+thresh, dst = cv2.threshold(src, thresh, maxVal, type)
+type: cv2.THRESH_BINARY 大于阈值的为maxVal,小于的为0  cv2.THRESH_BINARY_INV
+# 自适应阈值
+dst = cv2.adaptiveThreshold(src, maxVal, adaptiveMethod, type, blockSize, C)
+#type:cv2.THRESH_BINARY
+#adapttiveMethod:cv2.ADAPTIVE_THRESH_MEAN_C 
+#thresh=blockSize*blockSize矩阵平均值灰度-C，大于thresh的为maxValue
+```
+
+# 寻找轮廓
+
+```python
+contours, hierarchy = cv2.findContours(image, mode, method)
+# 轮廓检索模式
+# Cv2.RETR_EXTERNAL检测外轮廓
+# Cv2.RETR_TREE等级树结构的轮廓
+# 轮廓近似方法
+# Cv2.CHAIN_APPROX_NONE所有点
+# Cv2.CHAIN_APPROX_SIMPLE直线两端点
+# contours：list结构，列表中每个元素代表一个边沿信息。每个元素是(x,1,2)的三维向量，x表示该条边沿里共有多少个像素点，第三维的那个“2”表示每个点的横、纵坐标；
+# 注意：如果输入选择cv2.CHAIN_APPROX_SIMPLE，则contours中一个list元素所包含的x点之间应该用直线连接起来，这个可以用cv2.drawContours()函数观察一下效果。
+# hierarchy：返回类型是(x,4)的二维ndarray。x和contours里的x是一样的意思。如果输入选择cv2.RETR_TREE，则以树形结构组织输出，hierarchy的四列分别对应下一个轮廓编号、上一个轮廓编号、父轮廓编号、子轮廓编号，该值为负数表示没有对应项。
+iamge = cv2.drawContours(image, contours, i, color, thickness)
+# i：列表中第几个轮廓，-1所有；color：绘制颜色；thickness：线条粗细，-1填充
+```
+
+
+
+
+
+
+
 ## 几何变换
 
 ```python
 # 读取图像
-img = cv.imread('messi5.jpg',0)
+img = cv2.imread('messi5.jpg',0)
 参数：要读取的图像；读取方式的标志
-cv.IMREAD*COLOR：以彩色模式加载图像，任何图像的透明度都将被忽略。这是默认参数。
-cv.IMREAD*GRAYSCALE：以灰度模式加载图像
-cv.IMREAD_UNCHANGED：包括alpha通道的加载图像模式。
+cv2.IMREAD*COLOR：以彩色模式加载图像，任何图像的透明度都将被忽略。这是默认参数。
+cv2.IMREAD*GRAYSCALE：以灰度模式加载图像
+cv2.IMREAD_UNCHANGED：包括alpha通道的加载图像模式。
 可以使用1、0或者-1来替代上面三个标志
 
 
 # 显示图像
 # opencv中显示
-cv.imshow('image',img)
-cv.waitKey(0)
+cv2.imshow('image',img)
+cv2.waitKey(0)
 # matplotlib中展示
 plt.imshow(img[:,:,::-1])
 
 参数：显示图像的窗口名称，以字符串类型表示，要加载的图像
-注意：在调用显示图像的API后，要调用cv.waitKey()给图像绘留下时间，否则窗口会出现无响应情况，并且图像无法显示出来
+注意：在调用显示图像的API后，要调用cv2.waitKey()给图像绘留下时间，否则窗口会出现无响应情况，并且图像无法显示出来
 
 # 保存图像
-cv.imwrite('messigray.png',img)
+cv2.imwrite('messigray.png',img)
 参数：文件名，要保存在哪里；要保存的图像
 
 # 向图像中添加文字
-cv.putText(img,text,station, font, fontsize,color,thickness,cv.LINE_AA)
+cv2.putText(img,text,station, font, fontsize,color,thickness,cv2.LINE_AA)
 参数：
 img: 图像
 text：要写入的文本数据
@@ -88,7 +124,7 @@ Fontsize :字体大小
 
     
 通过行和列的坐标值获取该像素点的像素值。对于BGR图像，它返回一个蓝，绿，红值的数组。对于灰度图像，仅返回相应的强度值。使用相同的方法对像素值进行修改。   
-img = cv.imread('messi5.jpg')
+img = cv2.imread('messi5.jpg')
 # 获取某个像素点的值
 px = img[100,100]
 # 仅获取蓝色通道的强度值
@@ -96,24 +132,24 @@ blue = img[100,100,0]
 # 修改某个位置的像素值
 img[100,100] = [255,255,255]
 # 通道拆分
-b,g,r = cv.split(img)
+b,g,r = cv2.split(img)
 # 通道合并
-img = cv.merge((b,g,r))
+img = cv2.merge((b,g,r))
 # 色彩空间的改变
-cv.cvtColor(image，flag)
-cv.COLOR_BGR2GRAY : BGR↔Gray
-cv.COLOR_BGR2HSV: BGR→HSV
+cv2.cvtColor(image，flag)
+cv2.COLOR_BGR2GRAY : BGR↔Gray
+cv2.COLOR_BGR2HSV: BGR→HSV
 # 图像的加法
 OpenCV加法和Numpy加法之间存在差异。OpenCV的加法是饱和操作，而Numpy添加是模运算。
 尽量使用 OpenCV 中的函数。
 >>> x = np.uint8([250])
 >>> y = np.uint8([10])
->>> print( cv.add(x,y) ) # 250+10 = 260 => 255
+>>> print( cv2.add(x,y) ) # 250+10 = 260 => 255
 >>> print( x+y )          # 250+10 = 260 % 256 = 4
 
 # 图像的混合
 这其实也是加法，但是不同的是两幅图像的权重不同，这就会给人一种混合或者透明的感觉。图像混合的计算公式如下：dst = α⋅img1 + β⋅img2 + γ
-img3 = cv.addWeighted(img1,α,img2,β,γ)
+img3 = cv2.addWeighted(img1,α,img2,β,γ)
 
     
    
@@ -162,7 +198,7 @@ cv2.INTER_CUBIC 双三次插值
 
 # 图像平移
 M = np.float32([[1,0,100],[0,1,50]])# 将图像的像素点移动(50,100)的距离：
-dst = cv.warpAffine(img1,M,dsize=(cols,rows)，borderValue=(0,0,0))
+dst = cv2.warpAffine(img1,M,dsize=(cols,rows)，borderValue=(0,0,0))
 img: 输入图像
 M： 2*∗3移动矩阵
 dsize: 输出图像的大小，它应该是(宽度，高度)的形式。请记住,width=列数，height=行数。
@@ -172,10 +208,10 @@ borderValue为边界填充颜色（注意是BGR顺序，( 0 , 0 , 0 ) (0,0,0)(0,
 #  图像旋转
 旋转中图像仍保持这原始尺寸。图像旋转后图像的水平对称轴、垂直对称轴及中心坐标原点都可能会发生变换，因此需要对图像旋转中的坐标进行相应转换。
 # 生成旋转矩阵
-M = cv.getRotationMatrix2D((cols/2,rows/2),90,1)
+M = cv2.getRotationMatrix2D((cols/2,rows/2),90,1)
 # center：旋转中心；angle：旋转角度；scale：缩放比例
 # 进行旋转变换
-dst = cv.warpAffine(img,M,(cols,rows))
+dst = cv2.warpAffine(img,M,(cols,rows))
 
 
 # 仿射变换
@@ -183,21 +219,21 @@ dst = cv.warpAffine(img,M,(cols,rows))
 
 pts1 = np.float32([[50,50],[200,50],[50,200]])# 2.1 创建变换矩阵
 pts2 = np.float32([[100,100],[200,50],[100,250]])
-M = cv.getAffineTransform(pts1,pts2)
-dst = cv.warpAffine(img,M,(cols,rows))# 2.2 完成仿射变换
+M = cv2.getAffineTransform(pts1,pts2)
+dst = cv2.warpAffine(img,M,(cols,rows))# 2.2 完成仿射变换
 
 # 透射变换
 
 pts1 = np.float32([[56,65],[368,52],[28,387],[389,390]]) # 2.1 创建变换矩阵
 pts2 = np.float32([[100,145],[300,100],[80,290],[310,300]])
-T = cv.getPerspectiveTransform(pts1,pts2)
+T = cv2.getPerspectiveTransform(pts1,pts2)
 # 2.2 进行变换
-dst = cv.warpPerspective(img,T,(cols,rows))
+dst = cv2.warpPerspective(img,T,(cols,rows))
 
 
 # 图像金字塔
-cv.pyrUp(img)      #对图像进行上采样
-cv.pyrDown(img)        #对图像进行下采样
+cv2.pyrUp(img)      #对图像进行上采样
+cv2.pyrDown(img)        #对图像进行下采样
 
 ```
 
@@ -231,24 +267,28 @@ cv.pyrDown(img)        #对图像进行下采样
 
 礼帽和黑帽
 
+礼帽：噪音提取
+
+黑帽：空洞提取
+
 ![quicker_e0e407cf-b766-48e8-9661-db5b0dcd19b8.png](https://s2.loli.net/2022/04/29/3C5dLUcVKSgHjsq.png)
 
-![](https://s2.loli.net/2022/04/29/4UMjsOuJkdRpfD8.png )
+![quicker_758b62e3-23d8-40d4-a7b1-a0c95a19af9d.png](https://s2.loli.net/2022/06/22/iDaXEGzA9Z3wSuR.png)
 
 
 
 ```python
 # 腐蚀、膨胀
-cv.erode(img,kernel,iterations)
-cv.dilate(img,kernel,iterations)
+cv2.erode(img,kernel,iterations)
+cv2.dilate(img,kernel,iterations)
 
 # 开闭运算# 礼帽和黑帽
 
 kernel = np.ones((10, 10), np.uint8)# 2 创建核结构
-cvOpen = cv.morphologyEx(img1,cv.MORPH_OPEN,kernel) # 开运算
-cvClose = cv.morphologyEx(img2,cv.MORPH_CLOSE,kernel)# 闭运算
-cvOpen = cv.morphologyEx(img1,cv.MORPH_TOPHAT,kernel) # 礼帽运算
-cvClose = cv.morphologyEx(img2,cv.MORPH_BLACKHAT,kernel)# 黑帽运算
+cvOpen = cv2.morphologyEx(img1,cv2.MORPH_OPEN,kernel) # 开运算
+cvClose = cv2.morphologyEx(img2,cv2.MORPH_CLOSE,kernel)# 闭运算
+cvOpen = cv2.morphologyEx(img1,cv2.MORPH_TOPHAT,kernel) # 礼帽运算
+cvClose = cv2.morphologyEx(img2,cv2.MORPH_BLACKHAT,kernel)# 黑帽运算
 
 
 
@@ -306,7 +346,7 @@ cvClose = cv.morphologyEx(img2,cv.MORPH_BLACKHAT,kernel)# 黑帽运算
 
 ```python
 # 均值滤波
-cv.blur(src, ksize, anchor, borderType)
+cv2.blur(src, ksize, anchor, borderType)
 src：输入图像
 ksize：卷积核的大小
 anchor：默认值 (-1,-1) ，表示核中心
@@ -319,7 +359,7 @@ sigmaX: 水平方向的标准差
 sigmaY: 垂直方向的标准差，默认值为0，表示与sigmaX相同
 borderType:填充边界类型
 # 中值滤波
-cv.medianBlur(src, ksize )
+cv2.medianBlur(src, ksize )
 src：输入图像
 ksize：卷积核的大小
 ```
@@ -353,14 +393,14 @@ ranges: 像素值范围，通常为 [0，256]
 
 mask = np.zeros(img.shape[:2], np.uint8)# 2. 创建蒙版
 mask[400:650, 200:500] = 255 # 查找直方图的区域上创建一个白色的掩膜图像，否则创建黑色
-masked_img = cv.bitwise_and(img,img,mask = mask)# 3.掩模
-mask_histr = cv.calcHist([img],[0],mask,[256],[1,256])    # 4. 统计掩膜后图像的灰度图
+masked_img = cv2.bitwise_and(img,img,mask = mask)# 3.掩模
+mask_histr = cv2.calcHist([img],[0],mask,[256],[1,256])    # 4. 统计掩膜后图像的灰度图
 
 # 直方图均衡化
-dst = cv.equalizeHist(img)
+dst = cv2.equalizeHist(img)
 
 # 自适应的直方图均衡化
-cv.createCLAHE(clipLimit, tileGridSize)
+cv2.createCLAHE(clipLimit, tileGridSize)
 clipLimit: 对比度限制，默认是40
 tileGridSize: 分块的大小，默认为8*88∗8
 ```
@@ -403,11 +443,11 @@ borderType：图像边界的模式，默认值为cv2.BORDER_DEFAULT。
 
 Sobel函数求完导数后会有负值，还有会大于255的值。而原图像是uint8，即8位无符号数，所以Sobel建立的图像位数不够，会有截断。因此要使用16位有符号的数据类型，即cv2.CV_16S。处理完图像后，再使用cv2.convertScaleAbs()函数将其转回原来的uint8格式，否则图像无法显示。Sobel算子是在两个方向计算的，最后还需要用cv2.addWeighted( )函数将其组合起来
 
-x = cv.Sobel(img, cv.CV_16S, 1, 0)# 2 计算Sobel卷积结果
-y = cv.Sobel(img, cv.CV_16S, 0, 1)
-Scale_absX = cv.convertScaleAbs(x)  # convert 转换  scale 缩放
-Scale_absY = cv.convertScaleAbs(y)
-result = cv.addWeighted(Scale_absX, 0.5, Scale_absY, 0.5, 0)# 4 结果合成
+x = cv2.Sobel(img, cv2.CV_16S, 1, 0)# 2 计算Sobel卷积结果
+y = cv2.Sobel(img, cv2.CV_16S, 0, 1)
+Scale_absX = cv2.convertScaleAbs(x)  # convert 转换  scale 缩放
+Scale_absY = cv2.convertScaleAbs(y)
+result = cv2.addWeighted(Scale_absX, 0.5, Scale_absY, 0.5, 0)# 4 结果合成
 
 # laplacian算子
 cv2.Laplacian(src, ddepth[, dst[, ksize[, scale[, delta[, borderType]]]]])
@@ -415,8 +455,8 @@ Src: 需要处理的图像，
 Ddepth: 图像的深度，-1表示采用的是原图像相同的深度，目标图像的深度必须大于等于原图像的深度；
 ksize：算子的大小，即卷积核的大小，必须为1,3,5,7。
 
-result = cv.Laplacian(img,cv.CV_16S)
-Scale_abs = cv.convertScaleAbs(result)
+result = cv2.Laplacian(img,cv2.CV_16S)
+Scale_abs = cv2.convertScaleAbs(result)
 
 
 # canny检测
@@ -427,7 +467,7 @@ threshold2: maxval，较大的阈值检测图像中明显的边缘
 
 lowThreshold = 0
 max_lowThreshold = 100
-canny = cv.Canny(img, lowThreshold, max_lowThreshold) 
+canny = cv2.Canny(img, lowThreshold, max_lowThreshold) 
 
     
 ```
@@ -445,35 +485,34 @@ canny = cv.Canny(img, lowThreshold, max_lowThreshold)
 霍夫变换常用来提取图像中的直线和圆等几何形状
 
 ```python
-res = cv.matchTemplate(img,template,method)
+res = cv2.matchTemplate(img,template,method)
 img: 要进行模板匹配的图像
 Template ：模板
 method：实现模板匹配的算法，主要有：
 平方差匹配(CV_TM_SQDIFF)：利用模板与图像之间的平方差进行匹配，最好的匹配是0，匹配越差，匹配的值越大。
 相关匹配(CV_TM_CCORR)：利用模板与图像间的乘法进行匹配，数值越大表示匹配程度较高，越小表示匹配效果差。
 利用相关系数匹配(CV_TM_CCOEFF)：利用模板与图像间的相关系数匹配，1表示完美的匹配，-1表示最差的匹配。
-完成匹配后，使用cv.minMaxLoc()方法查找最大值所在的位置即可。如果使用平方差作为比较方法，则最小值位置是最佳匹配位置。
+完成匹配后，使用cv2.minMaxLoc()方法查找最大值所在的位置即可。如果使用平方差作为比较方法，则最小值位置是最佳匹配位置。
 
-
-res = cv.matchTemplate(img, template, cv.TM_CCORR)# 2.1 模板匹配
-min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)# 2.2 返回图像中最匹配的位置，确定左上角的坐标，并将匹配位置绘制在图像上
+res = cv2.matchTemplate(img, template, cv2.TM_CCORR)# 2.1 模板匹配
+min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)# 2.2 返回图像中最匹配的位置，确定左上角的坐标，并将匹配位置绘制在图像上
 # top_left = min_loc# 使用平方差时最小值为最佳匹配位置
 top_left = max_loc
 bottom_right = (top_left[0] + w, top_left[1] + h)
-cv.rectangle(img, top_left, bottom_right, (0,255,0), 2)
+cv2.rectangle(img, top_left, bottom_right, (0,255,0), 2)
 
 
 
 # 霍夫线检测
-cv.HoughLines(img, rho, theta, threshold)
+cv2..HoughLines(img, rho, theta, threshold)
 img: 检测的图像，要求是二值化的图像，所以在调用霍夫变换之前首先要进行二值化，或者进行Canny边缘检测
 rho、theta: \rhoρ 和\thetaθ的精确度
 threshold: 阈值，只有累加器中的值高于该阈值时才被认为是直线。
     
-img = cv.imread('./image/rili.jpg')# 1.加载图片，转为二值图
-gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-edges = cv.Canny(gray, 50, 150)
-lines = cv.HoughLines(edges, 0.8, np.pi / 180, 150)# 2.霍夫直线变换
+img =cv2..imread('./image/rili.jpg')# 1.加载图片，转为二值图
+gray =cv2..cvtColor(img,cv2..COLOR_BGR2GRAY)
+edges =cv2..Canny(gray, 50, 150)
+lines =cv2..HoughLines(edges, 0.8, np.pi / 180, 150)# 2.霍夫直线变换
 for line in lines:# 3.将检测的线绘制在图像上（注意是极坐标噢）
     rho, theta = line[0]
     a = np.cos(theta)
@@ -484,7 +523,7 @@ for line in lines:# 3.将检测的线绘制在图像上（注意是极坐标噢�
     y1 = int(y0 + 1000 * (a))
     x2 = int(x0 - 1000 * (-b))
     y2 = int(y0 - 1000 * (a))
-    cv.line(img, (x1, y1), (x2, y2), (0, 255, 0))
+   cv2..line(img, (x1, y1), (x2, y2), (0, 255, 0))
 plt.figure(figsize=(10,8),dpi=100)
 plt.imshow(img[:,:,::-1]),plt.title('霍夫变换线检测')
 plt.xticks([]), plt.yticks([])
@@ -539,7 +578,7 @@ plt.show()
 
 ```python
 #Hariis检测使用的API是：
-dst=cv.cornerHarris(src, blockSize, ksize, k)
+dstcv2..cornerHarris(src, blockSize, ksize, k)
 img：数据类型为 ﬂoat32 的输入图像。
 blockSize：角点检测中要考虑的邻域大小。
 ksize：sobel求导使用的核大小
@@ -547,13 +586,13 @@ k ：角点检测方程中的自由参数，取值参数为 [0.04，0.06].
 
 
 # 1 读取图像，并转换成灰度图像
-img = cv.imread('./image/chessboard.jpg')
-gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+img =cv2..imread('./image/chessboard.jpg')
+gray =cv2..cvtColor(img,cv2..COLOR_BGR2GRAY)
 # 2 角点检测
 # 2.1 输入图像必须是 float32
 gray = np.float32(gray)
 # 2.2 最后一个参数在 0.04 到 0.05 之间
-dst = cv.cornerHarris(gray,2,3,0.04)
+dst =cv2..cornerHarris(gray,2,3,0.04)
 # 3 设置阈值，将角点绘制出来，阈值根据图像进行选择
 img[dst>0.001*dst.max()] = [0,0,255]
 # 4 图像显示
@@ -575,14 +614,14 @@ import numpy as np
 import cv2 as cv
 import matplotlib.pyplot as plt
 # 1 读取图像
-img = cv.imread('./image/tv.jpg') 
-gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+img =cv2..imread('./image/tv.jpg') 
+gray =cv2..cvtColor(imgcv2..COLOR_BGR2GRAY)
 # 2 角点检测
-corners = cv.goodFeaturesToTrack(gray,1000,0.01,10)  
+corners =cv2..goodFeaturesToTrack(gray,1000,0.01,10)  
 # 3 绘制角点
 for i in corners:
     x,y = i.ravel()
-    cv.circle(img,(x,y),2,(0,0,255),-1)
+   cv2..circle(img,(x,y),2,(0,0,255),-1)
 # 4 图像展示
 plt.figure(figsize=(10,8),dpi=100)
 plt.imshow(img[:,:,::-1]),plt.title('shi-tomasi角点检测')
@@ -619,7 +658,7 @@ SIFT原理：
 
 ```python
 # 实例化sift
-sift = cv.xfeatures2d.SIFT_create()
+sift =cv2..xfeatures2d.SIFT_create()
 # 利用sift.detectAndCompute()检测关键点并计算
 kp,des = sift.detectAndCompute(gray,None)
 gray: 进行关键点检测的图像，注意是灰度图像
@@ -627,7 +666,7 @@ kp,des = sift.detectAndCompute(gray,None)
 kp: 关键点信息，包括位置，尺度，方向信息
 des: 关键点描述符，每个关键点对应128个梯度信息的特征向量
 # 将关键点检测结果绘制在图像上
-cv.drawKeypoints(image, keypoints, outputimage, color, flags)
+cv2..drawKeypoints(image, keypoints, outputimage, color, flags)
 image: 原始图像
 keypoints：关键点信息，将其绘制在图像上
 outputimage：输出图片，可以是原始图像
@@ -640,15 +679,15 @@ cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS：单点的特征点不被绘制
 
 
 # 1 读取图像
-img = cv.imread('./image/tv.jpg')
-gray= cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+img =cv2..imread('./image/tv.jpg')
+gray=cv2..cvtColor(imgcv2..COLOR_BGR2GRAY)
 # 2 sift关键点检测
 # 2.1 实例化sift对象
-sift = cv.xfeatures2d.SIFT_create()
+sift =cv2..xfeatures2d.SIFT_create()
 # 2.2 关键点检测：kp关键点信息包括方向，尺度，位置信息，des是关键点的描述符
 kp,des=sift.detectAndCompute(gray,None)
 # 2.3 在图像上绘制关键点的检测结果
-cv.drawKeypoints(img,kp,img,flags=cv.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+cv2..drawKeypoints(img,kp,img,flagscv2..DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 # 3 图像显示
 plt.figure(figsize=(8,6),dpi=100)
 plt.imshow(img[:,:,::-1]),plt.title('sift检测')
@@ -667,7 +706,7 @@ plt.show()
 import numpy as np
 import cv2 as cv
 # 1.获取视频对象
-cap = cv.VideoCapture('DOG.wmv')
+cap =cv2..VideoCapture('DOG.wmv')
 # 获取视频属性
 # retval = cap.get(propId)
 #0.cv2.CAP_PROP POS MSEC视频文件的当前位置(ms)
@@ -689,22 +728,22 @@ while(cap.isOpened()):
 	#Frame: 获取到的某一帧的图像
     # 4. 获取成功显示图像
     if ret == True:
-        cv.imshow('frame',frame)
+       cv2..imshow('frame',frame)
     # 5.每一帧间隔为25ms
-    if cv.waitKey(25) & 0xFF == ord('q'):
+    ifcv2..waitKey(25) & 0xFF == ord('q'):
         break
 # 6.释放视频对象
 cap.release()
-cv.destoryAllwindows()
+cv2..destoryAllwindows()
 
 
 
 
 # 1. 读取视频
-cap = cv.VideoCapture("DOG.wmv")
+cap =cv2..VideoCapture("DOG.wmv")
 
 # 3. 创建保存视频的对象，设置编码格式，帧率，图像的宽高等
-out = cv.VideoWriter('outpy.avi',cv.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+out =cv2..VideoWriter('outpy.avi'cv2..VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
 #ilename：视频保存的位置
 #fourcc：指定视频编解码器的4字节代码cv2.VideoWriter_fourcc( c1, c2, c3, c4 ) c1,c2,c3,c4: 是视频编解码器的4字节代码，在fourcc.org中找到可用代码列表，与平台紧密相关
@@ -724,7 +763,7 @@ while(True):
 # 6.释放资源
 cap.release()
 out.release()
-cv.destroyAllWindows()
+cv2..destroyAllWindows()
 ```
 
 ## 视频追踪
@@ -760,7 +799,7 @@ cv.destroyAllWindows()
 import numpy as np
 import cv2 as cv
 # 1.获取图像
-cap = cv.VideoCapture('DOG.wmv')
+cap =cv2..VideoCapture('DOG.wmv')
 
 # 2.获取第一帧图像，并指定目标位置
 ret,frame = cap.read()
@@ -772,41 +811,41 @@ roi = frame[r:r+h, c:c+w]
 
 # 3. 计算直方图
 # 3.1 转换色彩空间（HSV）
-hsv_roi =  cv.cvtColor(roi, cv.COLOR_BGR2HSV)
+hsv_roi = cv2..cvtColor(roi,cv2..COLOR_BGR2HSV)
 # 3.2 去除低亮度的值
-# mask = cv.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
+# mask =cv2..inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
 # 3.3 计算直方图
-roi_hist = cv.calcHist([hsv_roi],[0],None,[180],[0,180])
+roi_hist =cv2..calcHist([hsv_roi],[0],None,[180],[0,180])
 # 3.4 归一化
-cv.normalize(roi_hist,roi_hist,0,255,cv.NORM_MINMAX)
+cv2..normalize(roi_hist,roi_hist,0,255cv2..NORM_MINMAX)
 
 # 4. 目标追踪
 # 4.1 设置窗口搜索终止条件：最大迭代次数，窗口中心漂移最小值
-term_crit = ( cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 1 )
+term_crit = (cv2..TERM_CRITERIA_EPS |cv2..TERM_CRITERIA_COUNT, 10, 1 )
 
 while(True):
     # 4.2 获取每一帧图像
     ret ,frame = cap.read()
     if ret == True:
         # 4.3 计算直方图的反向投影
-        hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-        dst = cv.calcBackProject([hsv],[0],roi_hist,[0,180],1)
+        hsv =cv2..cvtColor(frame,cv2..COLOR_BGR2HSV)
+        dst =cv2..calcBackProject([hsv],[0],roi_hist,[0,180],1)
 
         # 4.4 进行meanshift追踪
-        ret, track_window = cv.meanShift(dst, track_window, term_crit)
+        ret, track_window =cv2..meanShift(dst, track_window, term_crit)
 
         # 4.5 将追踪的位置绘制在视频上，并进行显示
         x,y,w,h = track_window
-        img2 = cv.rectangle(frame, (x,y), (x+w,y+h), 255,2)
-        cv.imshow('frame',img2)
+        img2 =cv2..rectangle(frame, (x,y), (x+w,y+h), 255,2)
+       cv2..imshow('frame',img2)
 
-        if cv.waitKey(60) & 0xFF == ord('q'):
+        ifcv2..waitKey(60) & 0xFF == ord('q'):
             break        
     else:
         break
 # 5. 资源释放        
 cap.release()
-cv.destroyAllWindows()
+cv2..destroyAllWindows()
 ```
 
 ## 视频追踪
@@ -842,7 +881,7 @@ meanshift算法除了应用在视频追踪当中，在聚类，平滑等等各�
 
 ```python
 # Meanshift的API是：
-cv.meanShift(probImage, window, criteria)
+cv2..meanShift(probImage, window, criteria)
 probImage: ROI区域，即目标的直方图的反向投影
 window： 初始搜索窗口，就是定义ROI的rect
 criteria: 确定窗口搜索停止的准则，主要有迭代次数达到设置的最大值，窗口中心的漂移值大于某个设定的限值等。
@@ -850,7 +889,7 @@ criteria: 确定窗口搜索停止的准则，主要有迭代次数达到设置�
 import numpy as np
 import cv2 as cv
 # 1.获取图像
-cap = cv.VideoCapture('DOG.wmv')
+cap =cv2..VideoCapture('DOG.wmv')
 
 # 2.获取第一帧图像，并指定目标位置
 ret,frame = cap.read()
@@ -862,35 +901,35 @@ roi = frame[r:r+h, c:c+w]
 
 # 3. 计算直方图
 # 3.1 转换色彩空间（HSV）
-hsv_roi =  cv.cvtColor(roi, cv.COLOR_BGR2HSV)
+hsv_roi = cv2..cvtColor(roi,cv2..COLOR_BGR2HSV)
 # 3.2 去除低亮度的值
-# mask = cv.inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
+# mask =cv2..inRange(hsv_roi, np.array((0., 60.,32.)), np.array((180.,255.,255.)))
 # 3.3 计算直方图
-roi_hist = cv.calcHist([hsv_roi],[0],None,[180],[0,180])
+roi_hist =cv2..calcHist([hsv_roi],[0],None,[180],[0,180])
 # 3.4 归一化
-cv.normalize(roi_hist,roi_hist,0,255,cv.NORM_MINMAX)
+cv2..normalize(roi_hist,roi_hist,0,255cv2..NORM_MINMAX)
 
 # 4. 目标追踪
 # 4.1 设置窗口搜索终止条件：最大迭代次数，窗口中心漂移最小值
-term_crit = ( cv.TERM_CRITERIA_EPS | cv.TERM_CRITERIA_COUNT, 10, 1 )
+term_crit = (cv2..TERM_CRITERIA_EPS |cv2..TERM_CRITERIA_COUNT, 10, 1 )
 
 while(True):
     # 4.2 获取每一帧图像
     ret ,frame = cap.read()
     if ret == True:
         # 4.3 计算直方图的反向投影
-        hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
-        dst = cv.calcBackProject([hsv],[0],roi_hist,[0,180],1)
+        hsv =cv2..cvtColor(frame,cv2..COLOR_BGR2HSV)
+        dst =cv2..calcBackProject([hsv],[0],roi_hist,[0,180],1)
 
         # 4.4 进行meanshift追踪
-        ret, track_window = cv.meanShift(dst, track_window, term_crit)
+        ret, track_window =cv2..meanShift(dst, track_window, term_crit)
 
         # 4.5 将追踪的位置绘制在视频上，并进行显示
         x,y,w,h = track_window
-        img2 = cv.rectangle(frame, (x,y), (x+w,y+h), 255,2)
-        cv.imshow('frame',img2)
+        img2 =cv2..rectangle(frame, (x,y), (x+w,y+h), 255,2)
+       cv2..imshow('frame',img2)
 
-        if cv.waitKey(60) & 0xFF == ord('q'):
+        ifcv2..waitKey(60) & 0xFF == ord('q'):
             # cv2.waitKey(1)在有按键按下的时候返回按键的ASCII值，否则返回-1
 		   # & 0xFF的按位与操作只取cv2.waitKey(1)返回值最后八位，因为有些系统cv2.waitKey(1)的返回值不止八位
             # ord(‘q’)表示q的ASCII值
@@ -899,7 +938,7 @@ while(True):
         break
 # 5. 资源释放        
 cap.release()
-cv.destroyAllWindows()
+cv2..destroyAllWindows()
 ```
 
 meanshift检测的窗口的大小是固定的，而狗狗由近及远是一个逐渐变小的过程，固定的窗口是不合适的。所以我们需要根据目标的大小和角度来对窗口的大小和角度进行修正。CamShift可以帮我们解决这个问题。
@@ -910,12 +949,12 @@ Camshift算法首先**应用meanshift，一旦meanshift收敛，它就会更新�
 
 ```python
 #进行camshift追踪
-ret, track_window = cv.CamShift(dst, track_window, term_crit)
+ret, track_window =cv2..CamShift(dst, track_window, term_crit)
 
 # 绘制追踪结果
-pts = cv.boxPoints(ret)
+pts =cv2..boxPoints(ret)
 pts = np.int0(pts)
-img2 = cv.polylines(frame,[pts],True, 255,2)
+img2 =cv2..polylines(frame,[pts],True, 255,2)
 ```
 
 # 人脸识别
@@ -931,11 +970,11 @@ Haar特征可用于于图像任意位置，大小也可以任意改变，所以�
 ```python
 # 训练好的检测器，包括面部，眼睛，猫脸等，都保存在XML文件中，我们可以通过以下程序找到他们：
 import cv2 as cv
-print(cv.__file__)
+printcv2..__file__)
 
 # 实例化人脸和眼睛检测的分类器对象
 # 实例化级联分类器
-classifier =cv.CascadeClassifier( "haarcascade_frontalface_default.xml" ) 
+classifier cv2..CascadeClassifier( "haarcascade_frontalface_default.xml" ) 
 # 加载分类器
 classifier.load('haarcascade_frontalface_default.xml')
 # 进行人脸和眼睛的检测
@@ -949,14 +988,14 @@ minsize和maxsize: 目标的最小尺寸和最大尺寸
 import cv2 as cv
 import matplotlib.pyplot as plt
 # 1.以灰度图的形式读取图片
-img = cv.imread("16.jpg")
-gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+img =cv2..imread("16.jpg")
+gray =cv2..cvtColor(imgcv2..COLOR_BGR2GRAY)
 
 # 2.实例化OpenCV人脸和眼睛识别的分类器 
-face_cas = cv.CascadeClassifier( "haarcascade_frontalface_default.xml" ) 
+face_cas =cv2..CascadeClassifier( "haarcascade_frontalface_default.xml" ) 
 face_cas.load('haarcascade_frontalface_default.xml')
 
-eyes_cas = cv.CascadeClassifier("haarcascade_eye.xml")
+eyes_cas =cv2..CascadeClassifier("haarcascade_eye.xml")
 eyes_cas.load("haarcascade_eye.xml")
 
 # 3.调用识别人脸 
@@ -964,13 +1003,13 @@ faceRects = face_cas.detectMultiScale( gray, scaleFactor=1.2, minNeighbors=3, mi
 for faceRect in faceRects: 
     x, y, w, h = faceRect 
     # 框出人脸 
-    cv.rectangle(img, (x, y), (x + h, y + w),(0,255,0), 3) 
+   cv2..rectangle(img, (x, y), (x + h, y + w),(0,255,0), 3) 
     # 4.在识别出的人脸中进行眼睛的检测
     roi_color = img[y:y+h, x:x+w]
     roi_gray = gray[y:y+h, x:x+w]
     eyes = eyes_cas.detectMultiScale(roi_gray) 
     for (ex,ey,ew,eh) in eyes:
-        cv.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+       cv2..rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
 # 5. 检测结果的绘制
 plt.figure(figsize=(8,6),dpi=100)
 plt.imshow(img[:,:,::-1]),plt.title('检测结果')
@@ -984,26 +1023,26 @@ plt.show()
 import cv2 as cv
 import matplotlib.pyplot as plt
 # 1.读取视频
-cap = cv.VideoCapture("movie.mp4")
+cap =cv2..VideoCapture("movie.mp4")
 # 2.在每一帧数据中进行人脸识别
 while(cap.isOpened()):
     ret, frame = cap.read()
     if ret==True:
-        gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+        gray =cv2..cvtColor(frame,cv2..COLOR_BGR2GRAY)
         # 3.实例化OpenCV人脸识别的分类器 
-        face_cas = cv.CascadeClassifier( "haarcascade_frontalface_default.xml" ) 
+        face_cas =cv2..CascadeClassifier( "haarcascade_frontalface_default.xml" ) 
         face_cas.load('haarcascade_frontalface_default.xml')
         # 4.调用识别人脸 
         faceRects = face_cas.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32)) 
         for faceRect in faceRects: 
             x, y, w, h = faceRect 
             # 框出人脸 
-            cv.rectangle(frame, (x, y), (x + h, y + w),(0,255,0), 3) 
-        cv.imshow("frame",frame)
-        if cv.waitKey(1) & 0xFF == ord('q'):
+           cv2..rectangle(frame, (x, y), (x + h, y + w),(0,255,0), 3) 
+       cv2..imshow("frame",frame)
+        ifcv2..waitKey(1) & 0xFF == ord('q'):
             break
 # 5. 释放资源
 cap.release()  
-cv.destroyAllWindows()
+cv2..destroyAllWindows()
 ```
 

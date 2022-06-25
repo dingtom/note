@@ -1,4 +1,12 @@
 /*
+ * @Author: dingtom 2524370217@qq.com
+ * @Date: 2021-12-20 11:15:03
+ * @LastEditors: dingtom 2524370217@qq.com
+ * @LastEditTime: 2022-06-06 16:54:06
+ * @FilePath: \undefinedc:\myFile\note\draft\leetcode\vscode\84.柱状图中最大的矩形.java
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+/*
  * @lc app=leetcode.cn id=84 lang=java
  *
  * [84] 柱状图中最大的矩形
@@ -69,7 +77,8 @@ public class Solution {
         
         int area = 0;
         for (int i = 1;  i < len; i++) {
-            // 到了当前柱形的高度比它上一个柱形的高度严格小的时候，一定可以确定它之前的某些柱形的最大宽度，并且确定的柱形宽度的顺序是从右边向左边。
+            // 到了当前柱形的高度比它上一个柱形的高度严格小的时候，
+            // 一定可以确定它之前的某些柱形的最大宽度，并且确定的柱形宽度的顺序是从右边向左边。
             while(heights[i] < heights[stack.peekLast()]) {
                 area = Math.max(area, heights[stack.pollLast()] * (i - stack.peekLast() - 1));
             }
